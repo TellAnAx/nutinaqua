@@ -1,0 +1,10 @@
+
+```{r Load packages}
+library(here)
+library(tidyverse)
+library(NADA)
+library(rlang)
+```
+
+# Introduction
+It is usually stated that fish  feeds are the main input of nutrients in aquaponics. However, this statement is not backed by an extensive review of the true sources of nutrients. 
