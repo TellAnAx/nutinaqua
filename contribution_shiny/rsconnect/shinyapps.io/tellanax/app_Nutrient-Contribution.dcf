@@ -1,0 +1,13 @@
+name: app_Nutrient-Contribution
+title: app_Nutrient-Contribution
+username:
+account: tellanax
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7742109
+bundleId: 6559845
+url: https://tellanax.shinyapps.io/app_Nutrient-Contribution/
+when: 1669577393.04688
+lastSyncTime: 1669577393.0469
+asMultiple: FALSE
+asStatic: FALSE
