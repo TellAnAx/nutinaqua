@@ -1,0 +1,11 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+apo-sub-2.Rproj
+
+# LaTeX
+*.tex
+*.log
+*.aux
+*.out
