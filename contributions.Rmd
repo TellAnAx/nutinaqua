@@ -1,10 +1,455 @@
+---
+title: "Nutrient Contribution"
+subtitle: "Assessment of contributions based on estimated assumptions"
+author: "Anıl A. Tellbüscher"
+date: '2022-06-08'
+output: html_document
+---
 
-```{r Load packages}
+```{r setup, include=FALSE}
+# Load packages
 library(here)
+library(readxl)
 library(tidyverse)
 library(NADA)
 library(rlang)
 ```
 
-# Introduction
-It is usually stated that fish  feeds are the main input of nutrients in aquaponics. However, this statement is not backed by an extensive review of the true sources of nutrients. 
+
+
+# Initial assumptions
+
+```{r input_variables}
+ER <- 3    # Daily water exchange rate (%/V/day)
+SD <- 25  # Fish density (kg/m^3)
+FR <- 2    # Daily feeding rate per biomass unit (%/kg/day)
+rearingV <- 10   # Volume of the rearing compartment (m^3)
+totalV <- 15   # Total volume of the aquaculture unit (m^3)
+```
+
+We assume a recirculation aquaculture system (RAS) has a total volume of `r print(totalV)` \si{\cubicm} of which `r print(rearingV)` \si{\cubicm} are used as rearing volume for the stock. Furthermore, we assume a stocking density of `r print(SD)` \si{\kg\per\cubicm}, referred to the rearing volume of the system. The feeding rate shall be set to `r print(FR)` \si{\p\per\d} of the total biomass and a water exchange rate of `r print(ER)` \si{\p\per\d} of the total system volume shall be maintained.
+
+```{r echo=TRUE, results=FALSE}
+# Calculate outputs
+BM <- rearingV * SD       # Total biomass of stock (kg)
+dailyFeed <- BM * (FR / 100)             # Total mass of feed per day (kg/day)
+dailyFreshwater <- totalV * (ER / 100)   # Total volume of freshwater per day (m^3/day)
+waterEx_perFeed <- (dailyFreshwater * 1e3) / dailyFeed   # Water exchange per feed unit (L/kg/day)
+```
+
+Based on these inputs, a biomass of `r print(BM)` \si{\kg}, a total weight of `r print(dailyFeed)` \si{\kg} feed fed per day, a daily exchanged volume of `r print(dailyFreshwater)` \si{\cubicm\per\d} freshwater and `r print(waterEx_perFeed)` \si{\L\per\kg} exchanged water per weight unit feed fed is calculated.
+
+
+
+
+```{r include=FALSE}
+results <- data.frame(Values = c(SD, FR, BM, dailyFeed, rearingV, totalV, ER, dailyFreshwater, waterEx_perFeed))
+
+rownames(results) <- c(
+  'Stocking density (kg/m^3)'
+  ,'Feeding rate (%)'
+  ,'Total biomass (kg)'
+  ,'Daily feed fed (kg/day)'
+  ,'Rearing unit volume (m^3)'
+  ,'Total volume (m^3)'
+  ,'Daily water exchange rate (%/m^3/day)'
+  ,'Daily freshwater volume (m^3/day)'
+  ,'Freshwater per feed (L/kg)'
+)
+```
+
+
+
+
+
+```{r table_assumptions}
+knitr::kable(results)
+```
+
+
+
+
+
+# Average contribution
+To estimate the mass contribution of source water and feed to the total amount of nutrients that are entering the system, it is assumed that the RAS operator is using tap water as freshwater source and analysis results from water treatment plants are thus taken as data input. Furthermore, the average of the nutrient profile of a number of commercial fish feeds is used.
+
+
+## Load data
+
+```{r include=FALSE}
+# Load nutrient data
+data <- read.csv2("data/nutrient_contribution.csv")
+
+# Convert classes
+data[,1] <- factor(data[,1], levels = c('N', 'P', 'K', 'Ca', 'Mg', 'S', 'B', 'Fe', 'Mn', 'Zn', 'Cu', 'Mo', 'Ni'))
+data[,2:5] <- apply(data[,2:5], 2, as.numeric)
+```
+
+
+
+```{r echo=FALSE}
+print(data)
+```
+
+**To Do**
+- Check average water quality data
+- Check for more commercial feeds
+- Group commercial feeds by fish species (is there a pattern?)
+
+
+
+
+## Total contribution not considering digestibility
+Given the data about average plant nutrient loadings per unit of water and feed and the initial assumptions about the daily exchanged volume of water and feed fed, it is possible to calculate the total mass of nutrients that are introduced into the system every day.
+
+
+
+### Create plot dataset
+
+```{r echo=FALSE}
+# Plot - Contribution
+plotdata <- data %>%
+  
+  # Calculate the total mass contribution of nutrients originating from different sources
+  mutate(
+    WaterContribution = dailyFreshwater * concWater_g.m3,
+    FeedContribution = dailyFeed * feedComp_g.kg
+    ) %>%
+  select(c(compound, WaterContribution, FeedContribution)) %>%
+  pivot_longer(
+    cols = c(WaterContribution, FeedContribution), 
+    names_to = 'Contribution', 
+    names_pattern = '(.*)Contribution',
+    values_to = 'Total'
+    ) %>% 
+  print()
+```
+
+
+
+A visual presentation of the data based on the percentage contribution of both sources to the total introduced nutrients gives a picture that differs from the consensus that the majority of nutrients is introduced into the system via feed. 
+
+
+
+### Create plot
+```{r echo=FALSE}
+plotdata %>%
+ggplot(aes(x = compound, y = Total, fill = Contribution)) + 
+  geom_col(position = 'fill') + 
+  geom_hline(yintercept = c(0.25, 0.5, 0.75)) + 
+  labs(
+    title = "The source of plant nutrients in Aquaponics"
+    ,subtitle = paste(waterExchange, "% water exchange, digestibility not considered", sep = "")
+    ,x = ""
+    ,y = "Nutrient contribution (%)"
+    ,fill = "Source"
+  )
+```
+
+Even though the most important plant nutrients (N, P, K) and all micronutrients, excluding boron, are mostly originating from the feed, source water is providing a significant proportion of calcium, sulfur and boron. 
+
+
+
+## Total contribution considering digestibility
+An important aspect that should not be forgotten is that the lifestock in the RAS has to be considered a nutrient sink. When thinking about the total nutrient contribution to the system, it is, as showed, scenario-dependently true that feed is introducing the highest share of nutrients to the system. However, it must be taken into account that the animal feed is only partly excreted. If we want to fertilize the plants, it is thus of importance to consider only the nutrients that are leaving the RAS unit. To do so, the digestibility is taken into account in the next step.
+
+
+
+### Create plot dataset
+
+```{r include=FALSE}
+# Plot - Contribution
+plotdata <- data %>%
+  
+  # Calculate the total mass contribution of nutrients originating from different sources
+  mutate(
+    WaterContribution = dailyFreshwater * concWater_g.m3,
+    FeedContribution = dailyFeed * feedComp_g.kg * digestibility
+    ) %>%
+  select(c(compound, WaterContribution, FeedContribution)) %>%
+  pivot_longer(
+    cols = c(WaterContribution, FeedContribution), 
+    names_to = 'Contribution', 
+    names_pattern = '(.*)Contribution',
+    values_to = 'Total'
+    ) 
+```
+
+
+
+### Plot data
+
+```{r echo=FALSE}
+plotdata %>%
+ggplot(aes(x = compound, y = Total, fill = Contribution)) + 
+  geom_col(position = 'fill') + 
+  geom_hline(yintercept = c(0.25, 0.5, 0.75)) + 
+  labs(
+    title = "The source of plant nutrients in Aquaponics"
+    ,subtitle = paste(waterExchange, "% water exchange, digestibility considered", sep = "")
+    ,x = ""
+    ,y = "Nutrient contribution (%)"
+    ,fill = "Source"
+  )
+```
+
+As shown, taking the digestibility into consideration increases the share that source water has of the total amount of nutrients present in the system. However, the absolute amount decreases as it is now part of the fish in form of biomass and thus not available for plant growth any longer.
+
+
+
+
+
+## Molar contribution
+An aspect to evaluate besides the mass contribution is the molar contribution and the total molar mass originating from the nutrient inputs because it has direct implications with respect to the dissolution and precipitation of the nutrients in the water.
+
+
+
+### Import data
+
+```{r include=FALSE}
+# Molar weight data
+molarWeight <- readr::read_delim("data/molarWeight.csv", 
+    delim = ";", escape_double = FALSE, col_types = cols(g_per_mol = col_number()), 
+    trim_ws = TRUE)
+
+# Nutrient classification data
+nutrientClass <- read.csv2('data/nutrientClassification.csv')
+
+# Theoretical solubility data
+nutrientSolubility <- read.csv('data/solubilityCalculated.csv')
+```
+
+
+
+### Create plot dataset
+
+```{r echo=FALSE}
+plotdata <- data %>% 
+  left_join(molarWeight, by = c("compound" = "element")) %>% 
+  # Calculate the molar contribution of nutrients originating from different sources 
+  # Final unit: mol/L
+  mutate(
+    WaterContribution = dailyFreshwater * concWater_g.m3 / (g_per_mol * totalV *1e3),
+    FeedContribution = dailyFeed * feedComp_g.kg / (g_per_mol * totalV * 1e3)
+    ) %>%
+  select(c(compound, WaterContribution, FeedContribution)) %>%
+  pivot_longer(
+    cols = c(WaterContribution, FeedContribution), 
+    names_to = 'Contribution', 
+    names_pattern = '(.*)Contribution',
+    values_to = 'Total (mol/L)'
+    ) 
+
+print(plotdata)
+```
+
+
+
+### Plot data
+
+```{r echo=FALSE}
+plotdata %>%
+  left_join(nutrientClass, by = c("compound" = "nutrient")) %>%
+  #filter(compound != "N") %>% 
+  mutate(`Total (mmol/L)` = `Total (mol/L)` * 1e3) %>% 
+  ggplot(aes(x = compound, y = `Total (mmol/L)`, fill = Contribution)) + 
+  geom_col(position = "dodge") + 
+  facet_wrap(facets = vars(compound), scales = 'free')
+```
+
+
+
+
+
+# Range of total contribution
+To estimate the mass contribution of source water and feed to the total amount of nutrients that are entering the system, it is assumed that the RAS operator is using tap water as freshwater source. Analysis results from different water treatment plants are thus taken as data input. 
+
+
+
+## Load data
+
+```{r include=FALSE}
+#water_quality <- loadWorkbook('/Users/anil/Library/CloudStorage/OneDrive-JihočeskáuniverzitavČeskýchBudějovicích/General/Aquaponics - Water Quality.xlsx')
+
+#water_data <- readWorksheet(water_quality, sheet = 'municipalTap', startRow = 2)
+
+water_data <- gdata::read.xls("data/Aquaponics - Water Quality.xlsx", sheet = "municipalTap",skip = 1)
+
+water_data[,grep("belowLimit", colnames(water_data))] <- apply(water_data[,grep("belowLimit", colnames(water_data))], 2, as.logical)
+```
+
+```{r echo=FALSE}
+print(water_data)
+```
+
+
+
+
+## Total contribution not considering digestibility
+Due to the fact that certain nutrients in tap water are below detection limits, values were estimated using the Maximum Likelihood Estimation (MLE) method (Statistics for Censored Environmental Data, Helsel 2012). Eventually, 
+Furthermore, the average of the nutrient profile of a number of commercial fish feeds is used. 
+
+
+
+### Create plot dataset
+
+```{r}
+plotdata <- water_data %>% 
+  select(-c(1:9)) %>% 
+  pivot_longer(
+    everything(),
+  names_to = c("nutrient", ".value"),
+  names_pattern = "(.+)_(.+)*"
+    ) %>% 
+  mutate(nutrient = as.factor(nutrient)) %>% 
+  print()
+```
+
+
+
+### Calculate MLE values
+
+Calculation of Maximum Likelihood estimates and 95% confidence interval for censored tap water quality data
+
+```{r}
+# Extract nutrients for looping
+object <- levels(plotdata$nutrient)
+
+# Create results data frame
+results <- data.frame(nutrient = vector(mode = "character"), lconf = vector(mode = "numeric"), hconf = vector(mode = "numeric"))
+
+for (number in 1:length(object)) {
+  
+  # Create subset for each nutrient
+  temp <- filter(plotdata, nutrient == object[number]) %>%
+    drop_na()
+  
+  # Create results dataframe with 95% confInts
+  results[number,1] <- object[number]
+  results[number,2] <- mean(cenmle(temp$mgL, temp$belowLimit, dist = 'gaussian'))[c(3)]
+  results[number,3] <- mean(cenmle(temp$mgL, temp$belowLimit, dist = 'gaussian'))[c(4)]
+  }
+```
+
+
+
+```{r}
+# Following code is in case that the mean instead of the confidence interval is relevant.
+
+#source('R/MLE_average.R')
+```
+
+
+
+
+
+### Adjust plot dataset
+
+```{r}
+plotdata <- results %>% 
+  left_join(data, by = c('nutrient' = 'compound')) %>% 
+  drop_na(feedComp_g.kg) %>% 
+  mutate(
+    `Water 5% Contribution` = dailyFreshwater * lconf,
+    `Water 95% Contribution` = dailyFreshwater * hconf,
+    FeedContribution = dailyFeed * feedComp_g.kg
+  ) %>% 
+  select(c(nutrient, `Water 5% Contribution`, `Water 95% Contribution`, FeedContribution)) %>% 
+  pivot_longer(cols = c(`Water 5% Contribution`, `Water 95% Contribution`, FeedContribution),
+               names_to = 'Contribution',
+               names_pattern = '(.*)Contribution',
+               values_to = 'Total')
+
+plotdata$Total <- if_else(plotdata$Total > 0, plotdata$Total, 0)
+
+print(plotdata)
+```
+
+
+
+### Create plot 
+
+```{r}
+plotdata %>%
+    mutate(Contribution = factor(Contribution, 
+                            levels = c('Feed', 'Water 95% ', 'Water 5% '),
+                            labels = c('Feed', 'Water 95%', 'Water 5%')),
+         nutrient = factor(nutrient,
+                           levels = c('N', 'P', 'K', 'Ca', 'Mg', 'S', 'B', 'Fe', 'Mn', 'Zn', 'Cu', 'Mo', 'Ni'))
+         ) %>% 
+ggplot(aes(x = nutrient, y = Total, fill = Contribution)) + 
+  geom_col(position = 'fill') + 
+  geom_hline(yintercept = c(0, 0.25, 0.5, 0.75, 1)) + 
+  labs(
+    title = "90% confidence interval of water contribution to total nutrient input"
+    ,subtitle = paste(waterExchange, "% water exchange, digestibility not considered", sep = "")
+    ,x = ""
+    ,y = "Nutrient contribution (%)"
+    ,fill = "Source"
+  ) +
+  theme_minimal() + 
+  scale_fill_manual(values=c("brown",
+                             "lightblue",
+                             "darkblue"))
+```
+
+
+
+
+
+## Total contribution considering digestibility
+If we are interested in plant nutrients, we have to consider that the nutrient input via feed is first passing the fish which is retaining a part of the nutrients.
+
+
+
+### Create plot
+
+```{r}
+plot <- plotdata %>% 
+  pivot_wider(
+    names_from = Contribution,
+    values_from = Total
+  ) %>% 
+  left_join(data, by = c('nutrient' = 'compound')) %>% 
+  select(c(nutrient, `Water 5% `, `Water 95% `, Feed, digestibility)) %>% 
+  mutate(
+    Feed = Feed * digestibility
+  ) %>% 
+  select(-digestibility) %>% 
+  pivot_longer(
+    `Water 5% `:Feed,
+    names_to = 'Contribution',
+    values_to = 'Total'
+  ) %>% 
+  mutate(Contribution = factor(Contribution, 
+                          levels = c('Feed', 'Water 95% ', 'Water 5% '),
+                          labels = c('Feed', 'Water 95%', 'Water 5%')),
+         nutrient = factor(nutrient,
+                           levels = c('N', 'P', 'K', 'Ca', 'Mg', 'S', 'B', 'Fe', 'Mn', 'Zn', 'Cu', 'Mo', 'Ni'))
+         ) %>% 
+ggplot(aes(x = nutrient, y = Total, fill = Contribution)) + 
+  geom_col(position = 'fill') + 
+  geom_hline(yintercept = c(0, 0.25, 0.5, 0.75, 1)) + 
+  labs(
+    title = "90% confidence interval of water contribution to total nutrient input"
+    ,subtitle = paste(waterExchange, "% water exchange, digestibility considered", sep = "")
+    ,x = ""
+    ,y = "Nutrient contribution (%)"
+    ,fill = "Source"
+  ) + 
+  theme_minimal() + 
+  scale_fill_manual(values=c("brown",
+                             "lightblue",
+                             "darkblue"))
+
+png(filename = '../3 - Nutrient Discharge/plots/nutrientContribution.png')
+plot
+dev.off()
+
+png(filename = 'plots/nutrientContribution.png')
+plot
+dev.off()
+
+plot
+```
+
