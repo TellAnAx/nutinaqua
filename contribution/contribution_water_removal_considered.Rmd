@@ -1,0 +1,233 @@
+---
+title: "Asymptotic nutrient input"
+author: "Anıl A. Tellbüscher"
+date: '2022-06-20'
+output: html_document
+toc: TRUE
+toc_float: TRUE
+---
+
+# General
+When thinking about daily nutrient inputs via the exchange water, it has to be considered that a part of the nutrients that was already present in the system is removed by the outflow. 
+
+The question could now be raised how much water would have to be exchanged to minimise or maximise the nutrient contribution of the source water. The logic behind this can be presented in three scenarios:
+
+**Scenario 1: No water exchange**
+If only the evaporating water is exchanged, we would have no water exchange in theory. This would mean that all nutrients that are entering a system would also remain there.
+1. The system might have been built up in a region with low water availability.
+
+
+**Scenario 2: Low water exchange**
+Low water exchange could be beneficial out of a number of reasons. 
+1. The system might have been built up in a region with low water availability.
+2. Source water is a cost driver.
+3. The water exchange might be so low that an on-demand coupled aquaponic system can handle the daily outflow for irrigation of plants or remineralization purposes.
+
+Drawbacks of low water exchange rates, on the other hand, might be
+1. Accumulation of certain nutrients up to toxic levels due to insufficient dilution.
+2. System might not be feasible for certain fish species that require high water exchange rates, e.g. becuase of high oxygen demand.
+
+
+**Scenario 3: High water exchange**
+One might think that increasing the water exchange rate is increasing the nutrient concentration. However, what is increased is the influx, but at the same time the efflux is increased as well. Thus, a high daily water exchange rate would require the application of certain methods to extract nutrients from the water.
+
+
+
+```{r include=FALSE}
+# Load packages
+library(XLConnect)
+library(tidyverse)
+library(NADA)
+```
+
+
+
+# 1 Creation of a dataset
+
+## 1.1 Create initial assumptions
+
+We assume a recirculation aquaculture system (RAS) has a total volume of \SI{15}{\cubic\meter} of which \SI{10}{\cubic\meter} are used as rearing volume for the stock. Furthermore, we assume a stocking density of \SI{100}{\kilo\gram\per\cubic\meter}, referred to the rearing volume of the system. The feeding rate shall be set to \SI{2}{\percent\per\day} of the total biomass.
+
+
+
+```{r}
+# Define input variables - theoretical
+waterExchange     <- 10    # Daily water exchange rate (%/V/day)
+stockingDensity   <- 100  # Fish density (kg/m^3)
+FR                <- 2    # Daily feeding rate per biomass unit (%/kg/day)
+rearingV          <- 10   # Volume of the rearing compartment (m^3)
+totalV            <- 15   # Total volume of the aquaculture unit (m^3)
+```
+
+
+
+Based on these inputs, the biomass, the total weight of feed fed per day, the total volume of freshwater per day and the exchanged amount of water per weight unit of feed fed can now be calculated.
+
+
+
+```{r echo=TRUE, results=FALSE}
+# Calculate outputs
+biomass           <- rearingV * stockingDensity       # Total biomass of stock (kg)
+dailyFeed         <- biomass * (FR / 100)             # Total mass of feed per day (kg/day)
+dailyFreshwater   <- totalV * (waterExchange / 100)   # Total volume of freshwater per day (m^3/day)
+waterEx_perFeed   <- (dailyFreshwater * 1e3) / dailyFeed   # Water exchange per feed unit (L/kg/day)
+```
+
+
+
+
+
+```{r include=FALSE}
+assumptions <- data.frame(Values = c(stockingDensity, FR, biomass, dailyFeed, rearingV, totalV, waterExchange, dailyFreshwater, waterEx_perFeed))
+
+rownames(assumptions) <- c(
+  'Stocking density (kg/m^3)'
+  ,'Feeding rate (%)'
+  ,'Total biomass (kg)'
+  ,'Daily feed fed (kg/day)'
+  ,'Rearing unit volume (m^3)'
+  ,'Total volume (m^3)'
+  ,'Daily water exchange rate (%/m^3/day)'
+  ,'Daily freshwater volume (m^3/day)'
+  ,'Daily freshwater per feed (L/kg/day)'
+)
+```
+
+
+
+```{r}
+print(assumptions)
+```
+
+
+
+## 1.2 Water data
+
+### 1.2.1 Load data
+
+```{r}
+water_data <- read.csv2(file = 'data/water_data.csv')
+
+print(water_data)
+```
+
+
+
+### 1.2.2 MLE replacement values for censored data
+
+Calculation of Maximum Likelihood estimates and 95% confidence interval for censored tap water quality data
+
+```{r include=FALSE}
+# Extract nutrients for looping
+object <- levels(as.factor(water_data$nutrient))
+
+# Create results data frame
+results <- data.frame(nutrient = vector(mode = "character"), meanConc = vector(mode = "numeric"))
+
+for (number in 1:length(object)) {
+  
+  # Create subset for each nutrient
+  temp <- filter(water_data, nutrient == object[number]) %>%
+    drop_na()
+  
+  # Create results dataframe with arithmetic mean
+  results[number,1] <- object[number]
+  results[number,2] <- mean(cenmle(temp$mgL, temp$belowLimit, dist = 'gaussian'))[1]
+}
+```
+
+
+
+## 1.3 Feed data
+
+### 1.3.1 Load data
+
+```{r}
+# Feed and digestibility data
+feed_data <- read.csv2("data/nutrient_contribution.csv")
+```
+
+
+
+
+# 2. Scenario 1: No water exchange
+
+## 2.1 Create plotdataset
+
+```{r include=FALSE}
+procdata <- results %>% 
+  mutate(
+    nutrient = factor(nutrient,
+                      levels = c('TIN', 'PO4', 'K', 'Ca', 'Mg', 'SO4', 'B', 'Fe', 'Mn', 'Zn', 'Cu', 'Mo', 'Ni', 'Na', 'NH4', 'NO2', 'NO3'),
+                      labels = c('N', 'P', 'K', 'Ca', 'Mg', 'S', 'B', 'Fe', 'Mn', 'Zn', 'Cu', 'Mo', 'Ni', 'Na','NH4', 'NO2', 'NO3'))) %>% 
+  left_join(feed_data, by = c('nutrient' = 'compound')) %>% 
+  drop_na(feedComp_g.kg) %>% 
+  mutate(
+    feedComp = as.numeric(feedComp_g.kg),
+    digestibility = as.numeric(digestibility)
+    ) %>% 
+  select(c(nutrient, meanConc, feedComp, digestibility))
+```
+
+
+
+## 2.2 Calculate data series for plot
+
+```{r}
+# Calculations of data with increasing water exchange rates
+results <- list()
+
+for(seq_dailyFreshwater in 0:50){
+  
+  percWaterEx <- rep(seq_dailyFreshwater, times = nrow(procdata))
+  
+  WaterContribution = seq_dailyFreshwater * procdata$meanConc
+  FeedContribution = dailyFeed * procdata$feedComp * procdata$digestibility
+  percWaterCont <- WaterContribution/(WaterContribution + FeedContribution) * 100
+  
+  temp <- data.frame(procdata$nutrient, percWaterEx, percWaterCont)
+  results[[seq_dailyFreshwater + 1]] <- temp
+}
+```
+
+
+
+
+
+## 2.3 Plots
+
+```{r}
+results %>%
+  map_dfr(as.data.frame) %>%
+  ggplot(aes(x = percWaterEx, y = percWaterCont)) +
+  #geom_point(pch = 20) +
+  geom_line() +
+  facet_wrap(facets = vars(procdata.nutrient), ncol = 3) + 
+  labs(
+    title = "The source of plant nutrients in Aquaponics"
+    ,subtitle = "Dependence of total water contribution on water exchange rate"
+    ,x = "Water exchange (%)"
+    ,y = "Nutrient contribution (%)"
+    ) + 
+  theme_minimal()
+```
+
+
+
+
+
+
+
+
+# 3. Scenario 2: Low water exchange
+
+
+```{r}
+results <- list()
+
+data.frame(
+  day = rep(currentDay, times = nrow(procdata)),
+  initial = procdata$meanConc
+)
+```
+
