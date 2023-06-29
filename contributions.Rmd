@@ -39,9 +39,6 @@ waterEx_perFeed <- (dailyFreshwater * 1e3) / dailyFeed   # Water exchange per fe
 
 Based on these inputs, a biomass of `r print(BM)` \si{\kg}, a total weight of `r print(dailyFeed)` \si{\kg} feed fed per day, a daily exchanged volume of `r print(dailyFreshwater)` \si{\cubicm\per\d} freshwater and `r print(waterEx_perFeed)` \si{\L\per\kg} exchanged water per weight unit feed fed is calculated.
 
-
-
-
 ```{r include=FALSE}
 results <- data.frame(Values = c(SD, FR, BM, dailyFeed, rearingV, totalV, ER, dailyFreshwater, waterEx_perFeed))
 
@@ -58,10 +55,6 @@ rownames(results) <- c(
 )
 ```
 
-
-
-
-
 ```{r table_assumptions}
 knitr::kable(results)
 ```
@@ -75,6 +68,24 @@ To estimate the mass contribution of source water and feed to the total amount o
 
 
 ## Load data
+
+```{r}
+assumption_data_feed <- read_excel(
+  here("data", "AP-masterfile_nutrients.xlsx"), 
+  sheet = 'feedIN', skip = 1) %>% 
+  mutate(FR = as.numeric(sub("%","",FR)) / 100,
+         CP = as.numeric(sub("%","",CP)) / 100) %>% 
+  filter(!is.na(CP) & 
+           !is.na(FR) &
+           feed_name != "") %>% 
+  group_by(feed_name) %>% 
+  summarise(
+    #Reference_ID = Reference_ID,
+    FR = mean(FR),
+    CP = mean(CP)) 
+
+head(assumption_data_feed)
+```
 
 ```{r include=FALSE}
 # Load nutrient data
