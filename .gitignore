@@ -5,7 +5,6 @@
 apo-sub-2.Rproj
 
 # LaTeX
-*.tex
 *.log
 *.aux
 *.out
