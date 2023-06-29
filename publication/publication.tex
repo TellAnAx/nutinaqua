@@ -1,0 +1,674 @@
+\documentclass[preprint, 3p,
+authoryear]{elsarticle} %review=doublespace preprint=single 5p=2 column
+%%% Begin My package additions %%%%%%%%%%%%%%%%%%%
+
+\usepackage[hyphens]{url}
+
+  \journal{An awesome journal} % Sets Journal name
+
+\usepackage{graphicx}
+%%%%%%%%%%%%%%%% end my additions to header
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+% TODO: Currently lineno needs to be loaded after amsmath because of conflict
+% https://github.com/latex-lineno/lineno/issues/5
+\usepackage{lineno} % add
+  \linenumbers % turns line numbering on
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \usepackage{fontspec}
+  \ifxetex
+    \usepackage{xltxtra,xunicode}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use microtype if available
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={},
+            pdftitle={Unraveling the sources of nutrients and their contributions to the total input in aquaponic systems},
+            colorlinks=false,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+
+\setcounter{secnumdepth}{5}
+% Pandoc toggle for numbering sections (defaults to be off)
+
+
+% tightlist command for lists without linebreak
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+
+
+
+
+\begin{document}
+
+
+\begin{frontmatter}
+
+  \title{Unraveling the sources of nutrients and their contributions to
+the total input in aquaponic systems}
+    \author[Some Institute of Technology]{Alice Anonymous%
+  \corref{cor1}%
+  \fnref{1}}
+   \ead{alice@example.com} 
+    \author[Another University]{Bob Security%
+  %
+  }
+   \ead{bob@example.com} 
+    \author[Another University]{Cat Memes%
+  %
+  \fnref{2}}
+   \ead{cat@example.com} 
+    \author[Some Institute of Technology]{Derek Zoolander%
+  %
+  \fnref{2}}
+   \ead{derek@example.com} 
+      \affiliation[Some Institute of Technology]{
+    organization={Big Wig University},addressline={1 main
+street},city={Gotham},postcode={123456},state={State},country={United
+States},}
+    \affiliation[Another University]{
+    organization={Department},addressline={A street
+29},city={Manchester,},postcode={2054 NX},country={The Netherlands},}
+    \cortext[cor1]{Corresponding author}
+    \fntext[1]{This is the first author footnote.}
+    \fntext[2]{Another author footnote.}
+  
+  \begin{abstract}
+  This is the abstract.
+
+  It consists of two paragraphs.
+  \end{abstract}
+    \begin{keyword}
+    tap water \sep minerals \sep fish feed \sep 
+    alkalinity supplements
+  \end{keyword}
+  
+ \end{frontmatter}
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+Nutrients enter aquaponic systems through the source water, alkalinity
+supplements used for pH control, and the daily ration of feed for the
+aquatic livestock, hereinafter denoted as aquafeed (Rakocy et al.~2006,
+Eck et al.~2019, Robaina et al.~2019).
+
+The importance of water as nutrient source is usually seen as negligible
+(Schmautz et al.~2016). However, it was found that it can introduce
+large amounts of some plant nutrients such as Ca, Mg and S (Delaide et
+al.~2017). Though, water can vary in its composition, depending on its
+origin. A glimpse of the extent of variability of terrestrial waters in
+their chemical composition is provided in Figure 1.1. Weathering of
+rock, ion exchange, redox reactions and the buildup of biomass are the
+main processes that are affecting concentrations of the shown compounds
+(Stumm 1981). The highest variability can be found in anionic compounds
+such as nitrate (\{\mathrm{NO}\}\_3\^{}-) and sulfate
+(\{\mathrm{SO}\}\_4\^{}\{2-\}) and the cationic alkaline earth metals
+\{\mathrm{Ca}\}\^{}\{2+\} and \{\mathrm{Mg}\}\^{}\{2+\} that are
+covering a concentration range of approximately two orders of magnitude.
+
+The term alkalinity supplements summarizes several alkaline substances
+that are used to maintain a stable pH in the water (Timmons 2010).
+Nitrification decreases the pH over time and, consequently, also the
+activity of nitrifyers (Ward et al.~2011). Thus, a stable pH has to be
+maintained to ensure both high nitrification performance and animal
+welfare. For this purpose, several Na-based substances such as sodium
+hydrogen carbonate (baking soda, \{\mathrm{NaHCO}\}\_3) are commonly
+used in aquaculture due to their high and rapid solubility at a
+comparably cheap price. However, high sodium (Na) concentrations must be
+avoided in aquaponic systems due to its phytotoxicity (Maathuis et
+al.~2014). Na is therefore replaced with several other supplements based
+on K or Ca that come with the benefit of providing an additional source
+of nutrients besides increasing the pH.
+
+Aquafeeds are considered to be the most important source of nutrients,
+providing a large and continuous nutrient input into the system.
+Formulating a specific aquaponics feed was thus thought to be the most
+suitable approach to develop an ``off-the-shelf'' nutrient delivery
+system (Lennard 2017, Eck et al.~2019). When discussing aquafeeds as
+nutrient input route, it is important to consider pathways of diet
+utilization, as shown in Figure 1.2. Uneaten feed and the indigestible
+mass fraction of ingested feed make up the solid wastes. The digestible
+mass fraction is meanwhile utilized to sustain the animals' basal
+metabolism, somatic growth and reproductive activity. Metabolic end
+products are then excreted via the gills and the urinary system in form
+of dissolved matter (Hardy 2003, Evans et al.~2005). Only the dissolved
+fraction of the nutrients is immediately available for plant uptake via
+the root system.
+
+The availability of digestibility, retentiton and excretion data for
+individual nutrients, with the former expressed with apparent
+digestibility coefficients (ADC), depends on whether the nutrient is
+essential and has to be considered for feed formulation. N that is, for
+the most part, present as crude protein (CP) in aquafeeds, is generally
+well-digestible, with ADCs usually being above 70\% and on average
+approximately 90\% (Guillaume et al.~2001, International Aquaculture
+Feed Formulation Database (IAFFD) 2021). The excretion of N as end
+product of the protein and amino acid catabolism takes place in form of
+ammonia (\{\mathrm{NH}\}\_3) and, to a small extent, urea. The
+predominant excretory site are the gills, followed by renal excretion
+(Dabrowski \& Guderley 2003). A less digestible nutrient is P with ADC
+ranging from 70\% to only 40\% and a resulting excretion of 30\% to 60\%
+of the supply (Lall 2003, Sugiura 2018). Especially plant ingredients in
+aquafeeds can cause low ADC if they are rich in phytic acid. Phytic acid
+is poorly digestible and can furthermore reduce the digestibility of
+minerals in the feed. This might also explain contradictory information
+in literature with reported renal excretion rates of 90\% of the total
+excreta (Lall 2003) in contrast to estimates of 28\% of excretion taking
+place in dissolved form and 30\% to 64\% excreted as particulate P
+(Dabrowski \& Guderley 2003). Studies about ADCs of the remaining plant
+nutrients are scarce. Variability of ADC among different feed
+ingredients was shown in Atlantic salmon (Salmo salar) for Ca, Mg, Fe,
+Mn and Zn, with ADCs ranging between 30\% to 50\% (Sugiura et al.~1998).
+Excretion of the earth alkaline metals Ca and Mg primarily occurs in
+dissolved form via the gills and urine (Oikari \& Rankin 1985, Lall
+2003). Mn, in contrast, is mostly excreted in solid form as feces, while
+renal excretion was found to be negligible (Lall 2003). Cu is
+predominantly excreted via the bile (Bury et al.~2003). Excess dietary
+Cu is not taken up but excreted as feces. Cu inclusion rates in
+aquafeeds are thus reduced to minimize its release into the environment
+(Lall 2003). Excretion of Zn mostly takes place renally and via the
+gills (Lall 2003). Given the above-stated information, an animal
+nutritionist's approach to develop a tailor-made aquafeed for aquaponics
+might follow the paradigm that a target concentration of nutrients, for
+instance given by commonly used hydroponic nutrient solutions in
+hydroponics such as Hoaglands solution (Resh 2016) is taken as template.
+Inclusion rates of the respective nutrients might eventually be
+back-calculated using nutrient digestibility and retention data. Within
+this context, it is necessary to ensure those nutrients can be supplied
+without facing the risk of over- or undersupply. Therefore, it is
+necessary to have profound knowledge about the variability of nutrient
+concentrations within their respective nutrient sources. Furthermore, it
+needs to be considered that physico-chemical constraints might limit the
+concentration of a substance in solution. Accordingly, previous studies
+found that the concentrations of some nutrients were not responsive to
+elevated inclusion rates in aquafeeds. It is thus worth to extend the
+nutritionist's approach, illuminating the ``aquaponic dark room'' with
+respect to the chemical fate and behavior of nutrients.
+
+\hypertarget{objectives}{%
+\subsection{Objectives}\label{objectives}}
+
+This study reviews aquaponics studies in an attempt to exemplary
+identify the average contribution of different nutrient sources and
+their variability with respect to the total daily nutrient inputs.
+Recommendations with regards to the potential formulation of tailored
+aquafeeds and nutrient management in aquaponics shall eventually be
+developed to enhance the overall performance and profitability of
+aquaponic systems.
+
+\hypertarget{methodology}{%
+\section{Methodology}\label{methodology}}
+
+\hypertarget{data-acquisition-and-wrangling}{%
+\subsection{Data acquisition and
+wrangling}\label{data-acquisition-and-wrangling}}
+
+The data acquisition and processing steps are graphically summarised in
+Figure 2.1. Literature was screened for studies that focussed on
+nutrient dynamics in aquaponic systems, resulting in an initial dataset
+(IDS) of 117 individual observations originating from 39 publications.
+Selected literature comprised studies about permanently and on-demand
+coupled freshwater aquaponics, sludge remineralisation studies and
+hydroponic growth trials with water originating from aquaculture
+systems. The cultivated species, location of the experimental site, pH,
+volume of the system parts, daily water exchange rate, initial and final
+bodyweight, stocking density, daily feeding rate, feed name, and the
+concentrations of all essential plant nutrients in the source water,
+feed, and system water were collected.
+
+To calculate the proportion contribution of the source water, feed and
+alkalinity supplements to the total daily nutrient input in the reviewed
+studies, their average daily inputs per volume unit had to be
+calculated. For this purpose, statistics describing the average
+experimental system, system parameters and nutrient inputs were derived
+from the IDS and merged with external data sources in a four-stage
+process. The first step comprised the generation of system assumptions.
+For this purpose, a filter was applied to the IDS, only including
+studies that made use of an aquaculture unit, reported the total system
+volume and the final bodyweight of the livestock at the end of the
+experiment. The resulting filtered dataset (FDS1) held 39 observations
+originating from 10 publications. FDS1 was used to calculate the average
+system volume (\mathrm{V}\emph{\{tot\}; \mathrm{m}\^{}3), average
+bodyweight (ABW; g), average number of livestock (AN), average livestock
+density (AD; kg \mathrm{m}\^{}\{-3\}), and average water exchange rate
+(AWE; \mathrm{m}\textsuperscript{3\{\mathrm{\ d}\}}\{-1\}). ABW was
+defined as the mean bodyweight during the duration of experiment and was
+calculated as the arithmetic mean of the initial and final bodyweight.
+For the calculation of AD, AN and AWE, NA values were removed.
+Eventually, the average biomass (ABM; kg) was computed by multiplication
+of ABW with AN and unit conversion or, if only AD was given, by
+multiplication of AD with \mathrm{V}}\{tot\}. Vice versa, in case AD was
+not reported, it was calculated by dividing ABM by
+\mathrm{V}\emph{\{tot\}. The average daily water exchange volume by
+multiplication of \mathrm{V}}\{tot\} with AWE. The second step was
+estimating the daily nutrient input via source water. For this purpose,
+gathered location information in the FDS was used to search for water
+analysis reports provided by the closest water treatment plant. Only
+official reports provided by local authorities and water utilities in
+the corresponding municipalities were used to ensure that analyses were
+conducted according to internationally accepted laboratory standards.
+Both literature data and collected water analysis reports originated
+from a total of 12 countries, with 39 literature studies and 37 analysis
+reports. The country distribution of the literature data compared with
+gathered water analysis reports is shown in Figure 2.2. It was not
+possible to obtain water analysis reports from Finland, Iran, Israel and
+The Netherlands. Thus, reports from Austria, France, Portugal and Turkey
+were included instead.
+
+In water analysis, it is common practice to report the value of the
+detection limit instead of the measured value in case that the analyte
+concentration found was below the sensitivity of the instrument used for
+measurement (Deutsches Institut für Normung e.V. 2008). Figure 2.3 shows
+the proportion of data for all considered analytes in the water analysis
+reports that were found to be below the detection limit. Retaining the
+detection limits in the dataset leads to mean concentration estimates
+that are too high. Therefore, concentration data was recalculated using
+the cenmle() function from the R package NADA by maximum likelihood
+estimation (MLE) (Helsel 2011). This ensured that the estimates for
+nutrient concentrations in tap water were reliable. The output was
+eventually used to calculate the two-sided 90\% confidence interval for
+the arithmetic mean of the concentration of each nutrient to describe
+the concentration range that will be found in 90\% of all cases where
+tap water is used. Finally, multiplying the obtained concentrations with
+AWE yielded the upper and lower limits of the 90\% confidence interval
+of total daily individual plant nutrient inputs via source water.
+
+In the third step, daily nutrient inputs via aquafeeds were estimated.
+The IDS was filtered for studies reporting the name of the commercial
+aquafeed used (if not selfmade), the CP inclusion rate and the feeding
+rate. From the resulting FDS2, the average feeding rate (\mathrm{FR};
+\%), CP inclusion rate (ACP) and the averages of all plant nutrients
+were calculated. Due to lacking nutrient composition data, supplier
+datasheets were used and amended by literature data in case of
+utilization of commercial aquafeeds. Incomplete observations with
+respect to experimental feeds were handled in the same way, merging data
+from multiple publications if the same feed was used. NA values were
+removed for the computation of averages. Eventually, the average daily
+feed input (\mathrm{FI}; kg \mathrm{d}\^{}\{-1\}) was calculated by
+multiplying ABM from the generated system assumptions with . By
+multiplying \mathrm{FI} with the average plant nutrient inclusion rates
+in the aquafeeds, the uncorrected total daily input of individual plant
+nutrients via aquafeeds could be calculated. Obtained values were then
+corrected by multiplication with apparent digestibility coefficients
+(ADC), accounting for the digestibility of aquafeeds by fish. An ADC of
+90\% was assumed for N whereas the ADC of all other nutrients was
+assumed to be 50\% (Lall Fish Nutrition The Minerals, 2002). Finally, it
+was assumed that 50\% of the digestible fraction is retained while the
+remaining 50\% is excreted in dissolved form (Halver \& Hardy 2003). The
+indigestible part of the feed is excreted as solid feces and was thus
+assumed not to participate in chemical reactions in solution. Lastly, an
+estimate for the daily input of alkalinity supplements was derived from
+\mathrm{AFI}. First, the daily CP input was calculated by multiplying
+\mathrm{AFI} with the percentage of \mathrm{CP} on dry matter basis in
+the feed.
+
+m\_\{\mathrm{CP}\}=\mathrm{FI}\cdot\mathrm{CP}  2.1 Eventually,
+digestibility and retention were considered and \mathrm{CP} converted
+into the mass of non-retained N by division through the Kjeldahl factor
+f\_K=6.25.
+m\left(\mathrm{N}\right)=\frac{m_{\mathrm{CP}}\cdot\mathrm{ADC} -r\cdot m_{\mathrm{CP}}\cdot\mathrm{ADC} }{f_K}  2.2
+The activity of nitrifying bacteria in the biofilter follows the overall
+simplified reaction equation (2.3) (Timmons 2010).
+\{\mathrm{NH}\}\_4\^{}++2\{\mathrm{\ O}\}\_2\rightarrow{\mathrm{NO}}\_3\textsuperscript{-+2\{\mathrm{\ H}\}}++\{\mathrm{\ H}\}\_2\mathrm{O}  2.3
+Per mole of ammonium (\{\mathrm{NH}\}\_4\^{}+) that is converted to
+nitrate (\{\mathrm{NO}\}\_3\^{}-), two moles of protons (H+) are
+released. Furthermore, it can be derived from equation (2.3) that
+n\left(\{\mathrm{NH}\}\_4\^{}+\right)=n\left(N\right) and
+2n\left(N\right)=n\left(\mathrm{H}\^{}+\right). Thus, the amount of
+moles that have to be neutralized based on \mathrm{AFI} can be
+calculated as
+n\left(\mathrm{H}\^{}+\right)=2\cdot\frac{m\left(\mathrm{N}\right)}{M\left(\mathrm{N}\right)}  2.4
+with the molar mass
+M\left(\mathrm{N}\right)=14.007\{\mathrm{\ g\ mol}\}\^{}\{-1\}. The
+chemical reaction with bases such as \{\mathrm{NaHCO}\}\_3, \mathrm{KOH}
+or \{\mathrm{Ca(OH)}\}\_2 is eventually a simple neutralization reaction
+of the pattern
+\mathrm{H}\textsuperscript{++\{\mathrm{OH}\}}-\rightarrow\mathrm{H}\_2\mathrm{O}  2.5
+The mass of Na, K or Ca can consequently be calculated by rearranging
+equation (2.4) and using the correct stoichiometric conversion factor.
+The daily cost per compound was finally computed by multiplication of
+the necessary inputs of alkalinity supplement with market prices
+gathered from www.alibaba.com.
+
+\hypertarget{software}{%
+\subsection{Software}\label{software}}
+
+All calculations were conducted using R (v4.2.2) with RStudio (``Spotted
+Wakerobin'' Release) as graphical user interface.
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+\hypertarget{derived-rearing-assumptions}{%
+\subsection{Derived rearing
+assumptions}\label{derived-rearing-assumptions}}
+
+Assumptions were derived from literature studies about aquaponics to
+calculate average contributions of different nutrient sources, namely
+the source water, aquafeeds and alkalinity supplements to total daily
+nutrient inputs into the system. Analysis of the data presented in the
+reviewed aquaponics studies revealed that the average total water volume
+of the aquaculture systems was 4.53 \mathrm{m}\^{}3 with an average
+volume of the rearing compartment of 2.81 \mathrm{m}\^{}3. An average
+bodyweight, calculated as the average of the initial and final
+bodyweight, of 311.18 \mathrm{g} and an average biomass of 40.98
+\mathrm{kg} were found, resulting in an average stocking density of 7.69
+\{\mathrm{kg\ m}\}\^{}\{-3\}. The average feeding rate was 2\%, which
+yielded a daily feed input of 0.67 \{\mathrm{kg\ d}\}\^{}\{-1\} with an
+average CP content of 41\% on dry matter basis. This gives a daily N
+input of 43.952 \{\mathrm{g\ d}\}\^{}\{-1\}. Based on the average water
+exchange rate of 3\%, a daily freshwater input of 0.1
+\mathrm{m}\textsuperscript{3\{\mathrm{\ d}\}}\{-1\} was computed.
+
+\hypertarget{water-feed-and-alkalinity-supplements}{%
+\subsection{Water, feed, and alkalinity
+supplements}\label{water-feed-and-alkalinity-supplements}}
+
+The average nutrient composition of both aquafeeds and source water and
+the lower and upper limits of the 90\% confidence interval for source
+water are shown in Table 3.1. Figure 3.2 provides an additional
+graphical presentation of the findings with emphasis on the variability
+of nutrient contributions by source water. The highest daily nutrient
+inputs with respect to the macronutrients N and P in the reviewed
+studies likely originated from aquafeeds, being on average 99.2\% and
+99.3\%, respectively. The overall amounts of these two nutrients
+contributed by source water are negligible. Aquafeeds can also be
+assumed being the main source of the micronutrients Fe, Mn, Cu, Zn, and
+Mo, with an average contribution of 96.2\%, 97.2\%, 79.8\%, 93.9\% and
+76.3\%, respectively. Among these nutrients, Cu and Mo showed the
+highest variability with respect to the contribution of source water
+between locations (Cu 90\% CI: 8\%, 29.7\%; Mo 90\% CI: 14.7\%, 29.3\%),
+with up to almost a third of the daily inputs possibly entering the
+system via the water. Meanwhile, source water likely had a comparably
+high contribution to Mg and S. With 76.5\% for Mg (90\% CI: 72.1\%,
+79.7\%) and 68.8\% for S (90\% CI: 58.9\%, 74.8\%), an average delivery
+of more than half of the daily input was found. Also, a considerable
+contribution to daily B (63.1\%; 90\% CI: 48.5\%, 48.5\%) and Ni
+(56.2\%; 90\% CI: 33.3\%, 67.4\%) inputs probably originated from the
+source water.
+
+Inputs of the remaining two nutrients, K and Ca, were found to be
+heavily depending on the alkalinity supplement used. In absence of the
+alkalinity supplement, aquafeeds were found to have the greatest impact
+on K with a contribution of 81.16\%, while a higher proportion of Ca
+(69.62\%; 90\% CI: 65.51\%, 72.86\%) would enter the system on average
+via the water, compared with an average of30.38\% of feed contribution.
+The difference is more pronounced with respect to Na: 82.25\% (90\% CI:
+73.11\%, 86.76\%) of the total input was calculated to originate from
+water while only 17.75\% were found to enter the system via daily
+feeding. However, the calculated quantities of alkalinity supplements
+necessary to maintain a constant pH were found to dominate each input
+scenario, resulting in a contribution of more than 80\% of the total
+input of K, Ca, or Na in any case. Table 3.2 summarizes some
+supplements, their properties and prices. Using one of these substances
+would result in the supplement contributing 98.7\%, 86.5\% or 96.3\% of
+the total K, Ca or Na input, respectively. Regarding the costs for
+alkalinity supplements, Na based substances are the cheapest, with
+prices of between 0.01 and 0.03 EUR d-1, followed by Ca based
+supplements ranging in the same price class. The most expensive
+supplements to be used are those based on K. These substances would
+cause costs between 0.10 and 0.14 EUR d-1, thus being on average 6 times
+more expensive than Ca or Na based substances.
+
+\hypertarget{discussion}{%
+\section{Discussion}\label{discussion}}
+
+The contribution of different nutrient sources to the total daily
+nutrient inputs into an aquaponic system were compared based on
+assumptions derived from literature. It could overall be confirmed by
+the current input scenario that aquafeeds serve as major nutrient input
+route for N, P, K, Fe, Mn, Cu, Zn, and Mo after consideration of
+digestibility and nutrient retention by fish. These results confirm
+prior findings (Delaide et al.~2017). Considering variability among
+locations, it could furthermore be confirmed that Ca, Mg, S, B and Na
+originate from source water. However, the variability found in the case
+of Ca \left(min\left(\mathrm{Ca}\right)=70\%\cdot m a
+x\left(\mathrm{Ca}\right)\right) does not reflect the usual
+concentration range of approximately two orders of magnitude found in
+terrestrial waters (Stumm 1981). A study reviewing the Ca concentration
+in tap waters from the USA and Canada found a range from 1 to 135
+\{\mathrm{mg\ L}\}\^{}\{-1\} (Morr et al.~2006). Considering that the
+obtained results were obtained making use of assumptions, these initial
+assumptions need to be discussed. The species distribution with strong
+emphasis on Tilapia (Oreochromis spp.) and African catfish (Clarias
+gariepinus) matches with survey results obtained in Europe (Villarroel
+et al.~2016), even though approximately half of the studies included in
+the dataset were conducted in the USA. However, surveys conducted in the
+USA also revealed that the species mostly cultivated in aquaponic
+systems are Tilapia (Love et al.~2015, Pattillo et al.~2022). On the
+other hand, the average stocking density of 7.69 kg m-3 that was used
+for the nutrient contribution calculations can neither be considered
+representative for the intensive cultivation of Tilapia nor for African
+catfish. While densities between 10 and 50 kg m-3 are reported as
+acceptable for cultivation in RAS systems (El-Sayed 2019), densities of
+120 kg m-3 were reported to be tolerated by the latter species without
+any adverse effects on fish health (Nieuwegiessen et al.~2009). Even
+though salmonids such as Rainbow trout (Oncorhynchus mykiss) are seldom
+reared in aquaponic systems, they can tolerate stocking densities up to
+137 kg m-3. Though, normal stocking densities range between 10 and 20 kg
+m-3. The assumptions are rather on the lower end for salmonids (Pennell
+\& McLean 1996). Common carp (Cyprinus carpio) is irrelevant for
+aquaponic systems due to its low market price. Though, it was found that
+fish welfare can be guaranteed at a stocking density of around 28 kg
+m-3, which is \approx4 times higher than the assumed density (Ruane et
+al.~2002). Consequently, it can be expected that the contribution of
+aquafeeds to the total daily nutrient input under intensive rearing
+conditions for the mentioned fish species is considerably higher than
+assumed in this study. Though, the presented nutrient contribution
+scenario might be representative for the cultivation of Pikeperch due to
+the comparably low stocking densities (\textasciitilde5 kg m-3)
+recommended for its cultivation (Kestemont et al.~2015). The average FR
+of 2\% is in line with recommendations for the husbandry of Tilapia,
+Channel catfish (Ictalurus punctatus) and Common carp (Lovell 2003).
+Another aspect with respect to the contribution of feeds is that the
+feed composition is, in adaptation to the species to be reared,
+variable. For instance, crude protein inclusion rates in commercial
+aquafeeds for the mentioned species range from 32\% for O. spp. (Wilson
+2003, El-Sayed 2019) to 50\% for Pikeperch (Geay \& Kestemont 2015).
+Further variation in the nutrient composition is introduced by feed
+manufacturers due to changes in its raw material composition made
+because of fluctuations in feed ingredient availability and market
+prices. While changes in the mass concentrations of crucial nutrients
+such as the crude protein (CP) inclusion rate are acceptable only within
+tight limits, this might not be the case for other nutrients that are
+disregarded in the formulation process. Overall, data about the
+inclusion rates of nutrients relevant for plants in commercial aquafeeds
+can be considered scarce because these compounds are either not
+essential for aquatic animals or can be taken up from water via the
+gills in sufficient quantities. These nutrients are thus usually not
+considered during feed formulation (Lall 2003). However, a comprehensive
+review about the range of plant nutrient mass concentrations in
+commercial aquafeeds has not yet been conducted to the best of the
+authors knowledge. The mean water exchange rate of 3\% can be considered
+at the lower end of commonly reported water exchange rates for RAS and
+within the range recommended for aquaponic systems (Timmons 2010). Using
+analysis reports from municipal water suppliers can be considered as
+valid approach with respect to the acquisition of nutrient concentration
+data in source water as it was found by a prior survey that educators,
+including research institutions, usually use tap water (Love et
+al.~2015). It could be further argued that, due to its low water demand,
+aquaponics is generally seen as food production system suitable for
+urban areas or arid regions (Kloas et al.~2015, Joyce et al.~2019).
+Establishing an aquaponic system in these regions comes with limited
+access to water sources such as well water or rivers and lakes.
+Rainwater, on the other hand, would require large storage capacities.
+Tap water is thus assumed to be the most important water source.
+Recalculation of nutrient concentrations as response to high proportions
+of censored data where only the limit of detection is reported is a
+rather uncommon approach. However, removing the affected observations
+would have resulted in a loss of a large proportion of data and, in
+addition, would have led to an average value that is higher than the
+estimates obtained by recalculation because the remaining data consisted
+only of concentration values that are high enough to be determined. A
+similar result would have arisen from using the reported detection
+limits for the calculation of nutrient concentration means. The results
+of the nutrient concentration recalculation via MLE procedure can thus
+be considered closer to the true concentration means than the outcome of
+the other mentioned approaches. The daily quantity of alkalinity
+supplements to be added might be overestimated. In biofilters, both
+nitrification and denitrification processes usually occur due to
+partially anoxic conditions, for instance within biofilms.
+Denitrification yields alkalinity (Timmons 2010). However, the
+contribution of alkalinity supplements will likely still exceed 50\% of
+the total daily nutrient inputs. Furthermore, the calculations assumed
+that the supplements would have a purity of 100\%. In practice a lower
+purity, corresponding to a food grade certification, can be expected.
+
+\hypertarget{implications-for-the-formulation-of-tailored-aquaponics-feeds}{%
+\subsection{Implications for the formulation of tailored aquaponics
+feeds}\label{implications-for-the-formulation-of-tailored-aquaponics-feeds}}
+
+The development of a dedicated aquaponics feed is seen as potentially
+user-friendly and rapid way of adding nutrients to the system, resulting
+in close-to optimum concentrations for the plants. However, the results
+of this study imply several limitations for feed formulation. Firstly,
+considering potential precipitation, target nutrients for an increased
+delivery could include N, K, Mg, S, B, and Zn. This suggestion is partly
+confirmed by prior empirical studies. One of those found K, Mg, and Zn
+to accumulate out of the mentioned nutrients, with additional
+accumulation of P, Mn and Zn (Seawright et al.~1998). Another study
+reported N, K, and Mg accumulation alongside P and Cu (Shaw et
+al.~2022). The focus on K and Mg can thus be considered ``safe'',
+considering the generally high solubility of both compounds (Lide 2007)
+and reported deficiencies for both in aquaponics (Lunda et al.~2019).
+Natural feed ingredients rich in K are soy lecithin (13.0\% K on dry
+matter basis), vinasse (3.6\% K on dry matter basis) and some protein
+feedstuffs such as poultry by-product meal (3.5\% K on dry matter basis)
+and hydrolyzed fish solubles (2.4\%-2.9\% K on dry matter basis). Mg can
+be introduced to aquafeeds mostly via the use of seaweed (3.9\% Mg on
+dry matter basis) (International Aquaculture Feed Formulation Database
+(IAFFD) 2021). The drawback of the use of some of the above-stated feed
+ingredients is that the target nutrient is usually accompanied by
+comparably high amounts of Na. Even though this study shows that
+aquafeeds were not the main input route of Na in the reviewed
+literature, it is nevertheless reasonable to attempt to decrease Na
+inclusion rates during feed formulation because the initial assumptions
+leading to the nutrient input scenarios are not representative for
+commercial systems, as described above. This could be done for instance
+by replacement of feed ingredients with high Na inclusion rates such as
+fish meal originating from marine fish by other protein feedstuffs.
+Another possibility is given by using food-grade salts of the desired
+nutrients. However, considering the nutrient input via feed (1.1\%) in
+comparison with that of alkalinity supplements containing K (98.7\%) in
+this study, it depends on target concentrations and costs whether it is
+reasonable or not to increase the inclusion rate of K in a tailored
+aquafeed versus using the respective alkalinity supplements.
+Furthermore, it remains questionable whether it is more meaningful to
+include, for instance, salts into the feed or to add them directly into
+the system. Inclusion rates of nutrients that are confirmed to be
+affected by precipitation (Ca, Fe) are, in turn, recommended to be
+decreased in case the nutrient is not essential for the livestock and a
+change in feed formulation economically viable. Reducing the amount of
+precipitated nutrients increases the overall nutrient use efficiency.
+This also accounts for P, Mn, Cu, and Zn. No clear recommendation can be
+given in terms of inclusion rates in aquafeeds tailored for aquaponics.
+More research is needed to gain a better understanding of the behavior
+of these compounds under aquaculture and aquaponic conditions.
+
+\hypertarget{implications-for-the-management-of-aquaponic-systems}{%
+\subsection{Implications for the management of aquaponic
+systems}\label{implications-for-the-management-of-aquaponic-systems}}
+
+The findings of this study can be generalised in terms of
+recommendations for nutrient management and system design in aquaponic
+systems. The idea behind the design of on-demand coupled aquaponic
+systems as alternative to permanently coupled systems was to be able to
+maintain optimum conditions for both livestock and plants with respect
+to pH. Though, increasing the pH induces new problems by increasing the
+concentration of \{\mathrm{PO}\}\_4\^{}\{3-\} and \{\mathrm{OH}\}\^{}-,
+thus lowering the saturation concentration of other dissolved cations
+such as \{\mathrm{Fe}\}\^{}\{3+\}. The consequence is uncontrolled
+precipitation of affected nutrients within the aquaculture unit.
+Avoiding this could be achieved by decreasing the pH, thus leading to a
+shift in \{\mathrm{PO}\}\_4\^{}\{3-\} and \{\mathrm{OH}\}\^{}-
+equilibrium concentrations, in permanently coupled systems. The impaired
+nitrification performance, meanwhile, could be counteracted by creation
+of microenvironments within the biofilter (Gieseke et al.~2006).
+Meanwhile, nutrients might be more efficiently utilized in on-demand
+coupled systems by means of ``nutrient harvesting'' from the aquaculture
+unit: controlled precipitation of nutrients could be induced, for
+instance in a settler, so that the sludge/precipitate mix can be used
+for consequent remineralisation at lower pH. This could be done via
+flocculation/coagulation (Ebeling et al.~2003). The best way to avoid
+precipitation of nutrients is, however, their application as foliar
+sprays. Good results were achieved with this technique (Roosta \&
+Hamidpour 2013, Roosta 2014). A further discussion of the pros and cons
+in terms of efficiency are out of scope of this study.
+
+\hypertarget{future-research-needs}{%
+\subsection{Future research needs}\label{future-research-needs}}
+
+Aquaponics is an interdisciplinary field, combining both aquaculture and
+horticulture but also aquatic chemistry. Implications arising from
+chemistry are, however, not closer examined and data is largely lacking.
+It is crucial for a thorough modeling of chemical equilibria that pH and
+water temperature are reported. Furthermore, many studies were found to
+report averaged nutrient concentrations. However, due to reaction
+kinetics, time series data would help to gain a better understanding of
+the nutrient dynamics within the system. Largely lacking are furthermore
+studies assessing the effects of DOM as one of the key differences
+between aquaponics and hydroponics, with only one in-silico study
+published to the best of the authors knowledge (Silva Cerozi 2020). It
+is long known that DOM is the main chelating agent in natural waters and
+heavily affecting metals mobility (Stumm 1981). It was furthermore found
+that the type and source of DOM dictates the microbial community
+composition in different aquatic environments (van Hannen et al.~1999,
+Landa et al.~2013). These results were recently expanded within a plant
+context by the findings that the rhizosphere microbial community
+composition might be the result of an active selection process exerted
+by the plants (Lobanov et al.~2022). Lastly, it needs to be assessed
+whether the total concentration of nutrients is actually of importance
+for plants. Aquaponic plant growth studies usually compare plant
+nutrient concentrations in aquaponics with commonly used hydroponic
+nutrient solutions such as Hoagland's solution (Resh 2016). However, it
+was reported that a reduction of macronutrient concentrations down to
+50\% of the control level does not have adverse effects on growth, fruit
+yield and fruit quality in tomato (Siddiqi et al.~1998). The
+stoichiometry of nutrient solutions might thus play a more vital role
+for plants, which needs to be closer examined.
+
+\hypertarget{conclusion}{%
+\subsection{Conclusion}\label{conclusion}}
+
+Nutrient imbalances in aquaponics appear to be a result of chemical
+constraints rather than imbalanced nutrient inputs. Aquaponic systems
+differ from hydroponics in terms of pH and DOM concentrations.
+Understanding the chemistry of aquaponics is thus of major importance to
+improve nutrient cycling within the system. When trying to improve
+system performance via formulation of a tailored aquafeed, reducing
+inclusion rates of nutrients affected by precipitation (Ca, Fe) appears
+to be more meaningful than increasing inclusion rates of well-soluble
+nutrients (K, Mg). These can instead be supplied via alkalinity
+supplements.
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
+
+\end{document}
