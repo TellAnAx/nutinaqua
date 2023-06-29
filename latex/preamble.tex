@@ -1,4 +1,35 @@
-\usepackage{mhchem}
+\usepackage[utf8]{inputenc}
 
-% SI-UNITS
+\usepackage{setspace}
+\doublespacing
+
+\usepackage[version = 4]{mhchem}
+
+\usepackage{rotating}
+
+\usepackage{tabularx}
+
+\usepackage{booktabs}
+
+% SIUNITX
 \usepackage{siunitx}
+
+\sisetup{separate-uncertainty, multi-part-units = repeat}
+
+\DeclareSIUnit[number-unit-product = {}]\degC{\degreeCelsius}
+\DeclareSIUnit[number-unit-product = {}]\p{\percent}
+\DeclareSIUnit[number-unit-product = \;]\s{\second}
+\DeclareSIUnit[number-unit-product = \;]\min{\minute}
+\DeclareSIUnit[number-unit-product = \;]\h{\hour}
+\DeclareSIUnit[number-unit-product = \;]\mm{\milli\meter}
+\DeclareSIUnit[number-unit-product = \;]\mL{\milli\liter}
+\DeclareSIUnit[number-unit-product = \;]\L{\liter}
+\DeclareSIUnit[number-unit-product = \;]\cubicm{\cubic\meter}
+\DeclareSIUnit[number-unit-product = \;]\kg{\kilo\gram}
+\DeclareSIUnit[number-unit-product = \;]\mg{\milli\gram}
+\DeclareSIUnit[number-unit-product = \;]\mgL{\milli\gram\per\liter}
+\DeclareSIUnit[number-unit-product = \;]\ug{\micro\gram}
+\DeclareSIUnit[number-unit-product = \;]\ugL{\micro\gram\per\liter}
+\DeclareSIUnit[number-unit-product = \;]\molL{\mole\per\liter}
+\DeclareSIUnit[number-unit-product = \;]\mmolL{\milli\mole\per\liter}
+\DeclareSIUnit[number-unit-product = \;]\gmol{\gram\per\mole}
