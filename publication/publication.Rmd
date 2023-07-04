@@ -47,22 +47,30 @@ output:
     citation_package: default
 ---
 
-```{r message=FALSE, warning=FALSE, include=FALSE}
+```{r setup}
 # Knitr options
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(
+  echo = FALSE,
+  include = FALSE,
+  warning = FALSE,
+  message = FALSE
+  )
 
 options(digits = 1)
 
 # Load packages
 library(here)
-library(XLConnect)
 library(readxl)
 library(tidyverse)
+library(ggmap)
 library(gdata)
 library(viridis)
 library(RColorBrewer)
 library(bookdown)
 library(png)
+
+# Load functions
+source(here("R", "plot_functions.R"))
 ```
 
 # Introduction
@@ -96,14 +104,25 @@ This study reviews aquaponics studies in an attempt to exemplary identify the av
 
 # Methodology
 
+```{r import_data}
+source(here("R", "import_data.R"))
+```
+
+
 ## Data acquisition and wrangling
 Literature was screened for studies that focussed on nutrient dynamics in aquaponic systems, resulting in an initial dataset (IDS) of 117 individual observations originating from 39 publications. Selected literature comprised studies about permanently and on-demand coupled freshwater aquaponics, sludge remineralisation studies and hydroponic growth trials with water originating from aquaculture systems. The cultivated species, location of the experimental site, pH, volume of the system parts, daily water exchange rate, initial and final bodyweight, stocking density, daily feeding rate, feed name, and the concentrations of all essential plant nutrients in the source water, feed, and system water were collected.
 The data acquisition and processing steps are graphically summarised in Figure 2.1. 
+
+```{r data_wrangling}
+source(here("R", "data_wrangling.R"))
+```
+
 
 
 ## Rearing assumptions
 
 To calculate the proportion contribution of the source water, feed and alkalinity supplements to the total daily nutrient input in the reviewed studies, their average daily inputs per volume unit had to be calculated. For this purpose, several initial assumptions were made, as shown in Table \ref{tab:assumptions}. 
+
 ```{r}
 source(here("R", "assumptions.R"))
 ```
@@ -128,6 +147,14 @@ All calculations were conducted using R (v4.2.2) with RStudio (“Spotted Wakero
 
 # Results
 
+## Data
+
+```{r plot_water_sources, include=TRUE}
+#
+plot_google_map(data = gps_coordinates, longitude = gps_coordinates$longitude, latitude = gps_coordinates$latitude, zoom_factor = 5, map_source = "google")
+
+# zoom_factor: an integer from 3 (continent) to 21 (building), default value 10 (city). openstreetmaps limits a zoom of 18, and the limit on stamen maps depends on the maptype. "auto" automatically determines the zoom for bounding box specifications
+```
 
 
 
