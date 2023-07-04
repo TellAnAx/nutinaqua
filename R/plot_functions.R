@@ -2,10 +2,11 @@
 plot_google_map <- function(data,
                             longitude,
                             latitude,
+                            center = NULL,
                             maptype = "terrain",
                             scale_factor = 2,
                             zoom_factor = 2,
-                            map_source = "stamen") {
+                            map_source = "google") {
 
   # Connect with API
   register_google(
@@ -14,13 +15,15 @@ plot_google_map <- function(data,
   )
 
   # Download map
-  map <- get_map(location = c(lon = mean(longitude), lat = mean(latitude)), zoom = zoom_factor,
-                 maptype = maptype, scale = scale_factor, source = map_source)
+  map <- get_map(location = if(is.null(center)) {
+                              center <-  c(lon = mean(longitude), lat = mean(latitude))
+                              } else {center <- center},
+                 zoom = zoom_factor, maptype = maptype, scale = scale_factor, source = map_source)
 
   ggmap(map) + # Plot map
     geom_point(data = data,
       aes(x = longitude, y = latitude,
-          fill = "red", alpha = 0.8), size = 5, shape = 21) +
+          fill = "red", alpha = 0.8), size = 3, shape = 21) +
     guides(fill = FALSE, alpha = FALSE, size = FALSE)
 
 }
