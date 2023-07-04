@@ -8,3 +8,5 @@ apo-sub-2.Rproj
 *.log
 *.aux
 *.out
+publication/publication.tex
+publication/publication.pdf
