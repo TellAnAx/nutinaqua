@@ -4,9 +4,13 @@
 .Ruserdata
 apo-sub-2.Rproj
 
+# MacOS
+.DS_Store
+
 # LaTeX
 *.log
 *.aux
 *.out
 publication/publication.tex
 publication/publication.pdf
+publication/publication_files/
