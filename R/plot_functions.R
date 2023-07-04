@@ -24,6 +24,7 @@ plot_google_map <- function(data,
     geom_point(data = data,
       aes(x = longitude, y = latitude,
           fill = "red", alpha = 0.8), size = 3, shape = 21) +
-    guides(fill = FALSE, alpha = FALSE, size = FALSE)
+    guides(fill = FALSE, alpha = FALSE, size = FALSE) +
+    labs(x = "longitude", y = "latitude")
 
 }
