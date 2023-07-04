@@ -151,7 +151,13 @@ All calculations were conducted using R (v4.2.2) with RStudio (“Spotted Wakero
 
 ```{r plot_water_sources, include=TRUE}
 #
-plot_google_map(data = gps_coordinates, longitude = gps_coordinates$longitude, latitude = gps_coordinates$latitude, zoom_factor = 5, map_source = "google")
+plot_google_map(data = gps_coordinates, 
+                longitude = gps_coordinates$longitude, 
+                latitude = gps_coordinates$latitude, 
+                center = c(10.08415861471605, 49.905624997321596),
+                zoom_factor = 4, map_source = "google")
+
+ggsave(plot = last_plot(), filename = here("plots", "map_big.png"))
 
 # zoom_factor: an integer from 3 (continent) to 21 (building), default value 10 (city). openstreetmaps limits a zoom of 18, and the limit on stamen maps depends on the maptype. "auto" automatically determines the zoom for bounding box specifications
 ```
