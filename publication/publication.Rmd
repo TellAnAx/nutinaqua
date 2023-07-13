@@ -1,5 +1,5 @@
 ---
-title: "Unraveling the sources of nutrients and their contributions to the total input in aquaponic systems"
+title: "Sources of nutrients, their variability and contribution to the total input into aquaponic systems"
 author:
   - name: Anıl Axel Tellbüscher
     email: atellbuscher@frov.jcu.cz
@@ -25,7 +25,7 @@ footnote:
   - code: 2
     text: "Another author footnote."
 abstract: |
-  While input routes of nutrients into aquaculture and aquaponic systems are known, their contribution to the total nutrient input remains unclear.
+  Input routes of nutrients into aquaculture and aquaponic systems are known, but their contribution to the total nutrient input and the variability between locations remains unclear.
 keywords: 
   - aquaponics
   - minerals
@@ -74,8 +74,6 @@ source(here("R", "plot_functions.R"))
 ```
 
 # Introduction
-
-
 Nutrients enter aquaculture, and consequently also aquaponics systems through the source water, alkalinity supplements used for pH control, and the daily ration of feed for the aquatic livestock, hereinafter denoted as aquafeed [@Rakocy2006; @Eck2019; @Robaina2019].
 
 The importance of water as nutrient source is usually seen as negligible [@Schmautz2016]. However, it was found that it can introduce large amounts of essentil plant nutrients such as calcium (Ca), magnesium (Mg) and sulfur (S) [@Delaide2017]. Though, water can vary in its composition, depending on its origin. A glimpse of the extent of variability of terrestrial waters in their chemical composition is provided in Figure 1.1. Weathering of rock, ion exchange, redox reactions and the buildup of biomass are the main processes that are affecting concentrations of the shown compounds [@Stumm1981]. The highest variability can be found in anionic compounds such as nitrate (\ce{NO3-}) and sulfate (\ce{SO4^2-}) and the cationic alkaline earth metals \ce{Ca^2+} and \ce{Mg^2+} that are covering a concentration range of approximately two orders of magnitude.
