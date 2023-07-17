@@ -3,6 +3,8 @@ plot_google_map <- function(data,
                             longitude,
                             latitude,
                             center = NULL,
+                            shape_variable = NULL,
+                            fill_variable = NULL,
                             maptype = "terrain",
                             scale_factor = 2,
                             zoom_factor = 2,
@@ -23,7 +25,9 @@ plot_google_map <- function(data,
   ggmap(map) + # Plot map
     geom_point(data = data,
       aes(x = longitude, y = latitude,
-          fill = "red", alpha = 0.8), size = 3, shape = 21) +
+          fill = as.factor(fill_variable), alpha = 0.8), size = 3, shape = ifelse(is.null(shape_variable),
+                                                                                   21,
+                                                                                   as.factor(shape_variable))) +
     guides(fill = FALSE, alpha = FALSE, size = FALSE) +
     labs(x = "longitude", y = "latitude")
 

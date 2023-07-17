@@ -127,10 +127,11 @@ All calculations were conducted using R (v4.2.2) with RStudio (“Spotted Wakero
 ## Data
 
 ```{r plot_water_sources, include=TRUE}
-#
 plot_google_map(data = gps_coordinates, 
                 longitude = gps_coordinates$longitude, 
                 latitude = gps_coordinates$latitude, 
+                #shape_variable = gps_coordinates$country,
+                fill_variable = gps_coordinates$country,
                 center = c(10.08415861471605, 49.905624997321596),
                 zoom_factor = 4, map_source = "google")
 
