@@ -74,8 +74,22 @@ source(here("R", "plot_functions.R"))
 ```
 
 # Introduction
-One of the obstacles in the wider adoption of aquaponic systems, the combination of aquaculture and soilless plant production, is stated to be the rather complex management of plant nutrients within the system. Simplifying and optimizing the nutrient supply thus appears to be a reasonable way to boost aquaponics.
-Nutrients enter aquaculture, and consequently also aquaponics systems through the source water, alkalinity supplements used for pH control, and the daily ration of feed for the aquatic livestock, hereinafter denoted as aquafeed [@Rakocy2006; @Eck2019; @Robaina2019]. The formulation of a specific animal feed for aquaponic systems or alkalinity supplements that add deficient plant nutrients to the system is seen as a useful approach as these substances are added to the systems on a daily base. Though, to ensure that the developed products fullfil their purpose as good as possible, it is necessary to have detailed information about average supply rates of the individual nutrients and their variability. Interestingly, information concerning this topic is largely lacking or contradictory. Thus, this study reviews the average nutrient concentrations in different nutrient sources and their variability in an attempt to exemplary identify their average contribution with respect to the total daily nutrient inputs. 
+One of the obstacles in the wider adoption of aquaponic systems, the combination of aquaculture and hydroponics (soilless plant production), is stated to be the rather complex management of plant nutrients within the system. While a wide range of simple "off-the-shelf" fertilizer is available for hydroponics, this is not the case for aquaponic systems. Simplifying the nutrient management thus appears to be an obvious opportunity to boost aquaponics.
+
+From a practical viewpoint, an easy solution must always be one that does not add an additional task such as the determination of the concentration of a specific nutrient, weighing of mineral salts, preparation of stock solutions and alike to the tight schedule. It is thus more meaningful to optimize an existing nutrient input so that it delivers the desired nutrient spectrum rather than introducing additional input routes. In aquaculture and aquaponics, nutrients enter the system through the daily ration of feed for the aquatic livestock, hereinafter denoted as aquafeed, alkalinity supplements used for pH control, and the source water [@Rakocy2006; @Eck2019; @Robaina2019]. 
+
+The formulation of a specific animal feed for aquaponic systems or alkalinity supplements that add deficient plant nutrients to the system is seen as a useful approach as these substances are added to the systems on a daily base. 
+
+
+Surprisingly, little is known about the mass flows of nutrients in aquaponic systems until now, although the concept of aquaponics is already several decades old.
+
+
+
+The amount of alkalinity supplement to be added to the system is directly proportional to the amount of aquafeed introduced into the system. This is because 
+
+
+
+Though, to ensure that the developed products fullfil their purpose as good as possible, it is necessary to have detailed information about average supply rates of the individual nutrients and their variability. Interestingly, information concerning this topic is largely lacking or contradictory. Thus, this study reviews the average nutrient concentrations in different nutrient sources and their variability in an attempt to exemplary identify their average contribution with respect to the total daily nutrient inputs. 
 
 
 
