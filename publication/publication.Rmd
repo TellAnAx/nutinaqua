@@ -47,15 +47,14 @@ output:
     citation_package: default
 ---
 
-```{r setup}
+```{r setup, include=FALSE}
 # Knitr options
 knitr::opts_chunk$set(
-  echo = FALSE,
-  include = FALSE,
-  warning = FALSE,
-  message = FALSE
-  )
-
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	include = FALSE
+)
 options(digits = 1)
 
 # Load packages
@@ -76,33 +75,9 @@ source(here("R", "plot_functions.R"))
 # Introduction
 One of the obstacles in the wider adoption of aquaponic systems, the combination of aquaculture and hydroponics (soilless plant production), is stated to be the rather complex management of plant nutrients within the system. While a wide range of "off-the-shelf" fertilizer is available for hydroponics, this is not the case for aquaponic systems. Developing more efficient and simple nutrient management practices thus appears to be an opportunity to boost aquaponics.
 
-The most efficient solution for nutrient management would be to monitor each plant nutrients individually and add missing nutrients to achieve the desired concentrations. However, this is not practical, as it requires expensive equipment and a large amount of manual labor. In contrast to an efficient solution, simple solutions are characterized by a more straightforward approach that is easy to implement, understand, and maintain, without adding additional tasks to the working schedule. It is thus more meaningful to optimize an existing nutrient input so that it delivers the nutrients in the desired amounts rather than introducing additional input routes. 
+The most efficient solution for nutrient management would be to monitor each plant nutrients individually. This would ensure that each individual nutrient can be supplied in the necessary amount to reach target concentrations. However, a full-spectrum monitoring is not practical, as it requires expensive equipment and qualified workforce. Instead, it would be more meaningful to develop a simple solution that is easily implementable without adding additional tasks to the working schedule. Optimizing an existing nutrient input is thus considered as best solution. Though, when optimizing one nutrient input while not controlling for the others, it is important to consider the variability that is expected to be introduced by the other sources. Awareness about the nutrients that run the risk of under- or oversupply under "non-average" conditions is crucial, as this might have adverse effects on the livestock or plants. Hence, the variability of nutrients originating from different sources ultimately determines which nutrients to focus on when optimizing nutrient inputs.
 
-Optimizing inputs comes with finding the right balance 
-
-In aquaculture and aquaponics, nutrients enter the system through the daily ration of feed for the aquatic livestock, hereinafter denoted as aquafeed, alkalinity supplements used for pH control, and the source water [@Rakocy2006; @Eck2019; @Robaina2019]. Among these, aquafeeds are considered to be the most important source of nutrients, providing a large and continuous nutrient input into the system [@Schmautz2016]. Along with the aquafeeds, the amount of alkalinity supplement to be added to the system is directly proportional to the amount of aquafeed introduced into the system because it is need
-
-
-
-
-
-
-Optimization involves the consideration of ranges 
-
-
-
-
-The formulation of a specific animal feed for aquaponic systems or alkalinity supplements that add deficient plant nutrients to the system is seen as a useful approach as these substances are added to the systems on a daily base. 
-
-
-Surprisingly, little is known about the mass flows of nutrients in aquaponic systems until now, although the concept of aquaponics is already several decades old.
-
-
-
-
-
-
-Though, to ensure that the developed products fullfil their purpose as good as possible, it is necessary to have detailed information about average supply rates of the individual nutrients and their variability. Interestingly, information concerning this topic is largely lacking or contradictory. Thus, this study reviews the average nutrient concentrations in different nutrient sources and their variability in an attempt to exemplary identify their average contribution with respect to the total daily nutrient inputs. 
+In aquaculture and aquaponics, nutrients enter the system through the daily ration of feed for the aquatic livestock (hereinafter denoted as aquafeed), alkalinity supplements used for pH control, and the source water [@Rakocy2006; @Eck2019; @Robaina2019]. However, even though it is usually stated that aquafeeds are the most important nutrient source, this claim was never closer examined and surprisingly little is known about the mass flows of nutrients in aquaponic systems, although the concept of aquaponics is already several decades old. The objective of this study is thus to review the average nutrient concentrations in aquafeeds, alkalinity supplements, and the source water and assess their variability. 
 
 
 
@@ -110,31 +85,53 @@ Though, to ensure that the developed products fullfil their purpose as good as p
 
 # Methodology
 
+## Data collection
+
 ```{r import_data}
 source(here("R", "import_data.R"))
 ```
-
-## Data acquisition and wrangling
-Literature was screened for studies that focussed on nutrient dynamics in aquaponic systems, resulting in an initial dataset (IDS) of 117 individual observations originating from 39 publications. Selected literature comprised studies about permanently and on-demand coupled freshwater aquaponics, sludge remineralisation studies and hydroponic growth trials with water originating from aquaculture systems. The cultivated species, location of the experimental site, pH, volume of the system parts, daily water exchange rate, initial and final bodyweight, stocking density, daily feeding rate, feed name, and the concentrations of all essential plant nutrients in the source water, feed, and system water were collected.
-The data acquisition and processing steps are graphically summarised in Figure 2.1. 
 
 ```{r data_wrangling}
 source(here("R", "data_wrangling.R"))
 ```
 
+```{r plot_functions}
+source(here("R", "plot_functions.R"))
+```
+
+```{r plot_water_sources}
+plot_google_map(data = gps_coordinates, 
+                longitude = gps_coordinates$longitude, 
+                latitude = gps_coordinates$latitude, 
+                #shape_variable = gps_coordinates$country,
+                fill_variable = gps_coordinates$country,
+                center = c(10.08415861471605, 49.905624997321596),
+                zoom_factor = 4, map_source = "google")
+
+ggsave(plot = last_plot(), filename = here("plots", "map.png"))
+
+# zoom_factor: an integer from 3 (continent) to 21 (building), default value 10 (city). openstreetmaps limits a zoom of 18, and the limit on stamen maps depends on the maptype. "auto" automatically determines the zoom for bounding box specifications
+```
+
+\begin{figure}
+\centering
+  \includegraphics{../plots/map.png}
+  \caption{Origin of water analysis reports included in the source water dataset.}
+  \label{fig:map_water}
+\end{figure}
 
 
 ## Rearing assumptions
-
 To calculate the proportion contribution of the source water, feed and alkalinity supplements to the total daily nutrient input in the reviewed studies, their average daily inputs per volume unit had to be calculated. For this purpose, several initial assumptions were made, as shown in Table \ref{tab:assumptions}. 
 
 ```{r}
 source(here("R", "assumptions.R"))
 ```
 
-\include{"table_assumptions.tex"}
+\include{table_assumptions.tex}
 
 The first step comprised the generation of system assumptions. For this purpose, a filter was applied to the IDS, only including studies that made use of an aquaculture unit, reported the total system volume and the final bodyweight of the livestock at the end of the experiment. The resulting filtered dataset (FDS1) held 39 observations originating from 10 publications. FDS1 was used to calculate the average system volume ($V_{tot}$; \si{\cubicm}), average bodyweight ($\text{ABW}$; \si{\g}), average number of livestock ($\text{AN}$), average livestock density ($\text{AD}$; \si{\kg\per\cubicm}), and average water exchange rate ($\text{AWE}$; \si{\cubicm\per\d}). ABW was defined as the mean bodyweight during the duration of experiment and was calculated as the arithmetic mean of the initial and final bodyweight. For the calculation of AD, AN and AWE, NA values were removed. Eventually, the average biomass (ABM; kg) was computed by multiplication of ABW with AN and unit conversion or, if only AD was given, by multiplication of AD with $V_{tot}$. Vice versa, in case AD was not reported, it was calculated by dividing ABM by $V_{tot}$. The average daily water exchange volume by multiplication of $V_{tot}$ with AWE.
+
 The second step was estimating the daily nutrient input via source water. For this purpose, gathered location information in the FDS was used to search for water analysis reports provided by the closest water treatment plant. Only official reports provided by local authorities and water utilities in the corresponding municipalities were used to ensure that analyses were conducted according to internationally accepted laboratory standards. Both literature data and collected water analysis reports originated from a total of 12 countries, with 39 literature studies and 37 analysis reports. The country distribution of the literature data compared with gathered water analysis reports is shown in Figure 2.2. It was not possible to obtain water analysis reports from Finland, Iran, Israel and The Netherlands. Thus, reports from Austria, France, Portugal and Turkey were included instead.
 
 In water analysis, it is common practice to report the value of the detection limit instead of the measured value in case that the analyte concentration found was below the sensitivity of the instrument used for measurement (Deutsches Institut für Normung e.V. 2008). Figure 2.3 shows the proportion of data for all considered analytes in the water analysis reports that were found to be below the detection limit. Retaining the detection limits in the dataset leads to mean concentration estimates that are too high. Therefore, concentration data was recalculated using the \emph{cenmle()} function from the R package NADA by maximum likelihood estimation (MLE) [@Helsel2011]. This ensured that the estimates for nutrient concentrations in tap water were reliable. The output was eventually used to calculate the two-sided \SI{90}{\p} confidence interval for the arithmetic mean of the concentration of each nutrient to describe the concentration range that will be found in \SI{90}{\p} of all cases where tap water is used. Finally, multiplying the obtained concentrations with AWE yielded the upper and lower limits of the \SI{90}{\p} confidence interval of total daily individual plant nutrient inputs via source water.
@@ -147,25 +144,6 @@ By multiplying $FI$ with the average plant nutrient inclusion rates in the aquaf
 All calculations were conducted using R (v4.2.2) with RStudio (“Spotted Wakerobin” Release) as graphical user interface.
 
 
-
-
-
-
-## Data
-
-```{r plot_water_sources, include=TRUE}
-plot_google_map(data = gps_coordinates, 
-                longitude = gps_coordinates$longitude, 
-                latitude = gps_coordinates$latitude, 
-                #shape_variable = gps_coordinates$country,
-                fill_variable = gps_coordinates$country,
-                center = c(10.08415861471605, 49.905624997321596),
-                zoom_factor = 4, map_source = "google")
-
-ggsave(plot = last_plot(), filename = here("plots", "map_big.png"))
-
-# zoom_factor: an integer from 3 (continent) to 21 (building), default value 10 (city). openstreetmaps limits a zoom of 18, and the limit on stamen maps depends on the maptype. "auto" automatically determines the zoom for bounding box specifications
-```
 
 
 
