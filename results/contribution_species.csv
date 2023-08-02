@@ -1,0 +1,107 @@
+Reference_ID,Treatment_ID,experiment,coupling,water_source,fish_species,plant_species,pH_Na,pH_K,pH_Ca,remineralization,fertilizer,chelator,plant_cultivation,group
+Monsees2017,Exp2_aerated,remineralisation,-,0,Nile tilapia,0,0,0,0,aerobic,-,0,-,Percids
+Monsees2017,Exp2_unaerated,remineralisation,-,0,Nile tilapia,0,0,0,0,anaerobic,-,0,-,Percids
+Delaide2018,AER,remineralisation,-,0,Nile tilapia,0,0,0,0,aerobic,-,0,-,Percids
+Goddek2018,pH+,remineralisation,-,0,African catfish,0,0,0,0,anaerobic,-,0,-,Silurids
+Goddek2018,pH-,remineralisation,-,0,African catfish,0,0,0,0,anaerobic,-,0,-,Silurids
+Goddek2018,Uliege_aerobic,remineralisation,-,0,Nile tilapia,0,0,0,0,aerobic,-,0,-,Percids
+Seawright1998,1,aquaponics,permanent,0,Nile tilapia,Lactuca sativa longifolia,TRUE,FALSE,FALSE,0,Fertilizer,TRUE,0,Percids
+Seawright1998,2,aquaponics,permanent,0,Nile tilapia,Lactuca sativa longifolia,TRUE,FALSE,FALSE,0,Fertilizer,TRUE,0,Percids
+Seawright1998,3,aquaponics,permanent,0,Nile tilapia,Lactuca sativa longifolia,TRUE,FALSE,FALSE,0,Fertilizer,TRUE,0,Percids
+Seawright1998,4,aquaponics,permanent,0,Nile tilapia,Lactuca sativa longifolia,TRUE,FALSE,FALSE,0,Fertilizer,TRUE,0,Percids
+Shaw2022a,FM,aquaculture,-,0,Nile tilapia,0,0,0,0,0,-,0,-,Percids
+Shaw2022a,BSF,aquaculture,-,0,Nile tilapia,0,0,0,0,0,-,0,-,Percids
+Shaw2022a,PBM,aquaculture,-,0,Nile tilapia,0,0,0,0,0,-,0,-,Percids
+Shaw2022a,PM,aquaculture,-,0,Nile tilapia,0,0,0,0,0,-,0,-,Percids
+Panana2021,pH-Natural,remineralisation,-,well,Pikeperch,0,0,0,0,aerobic,0,0,-,Percids
+Panana2021,pH-Induced,remineralisation,-,well,Pikeperch,0,0,0,0,aerobic,0,0,-,Percids
+Goddek2016,AER,hydroponics,-,0,Nile tilapia,0,0,0,0,aerobic,0,0,-,Percids
+Goddek2016,ANA,hydroponics,-,0,Nile tilapia,0,0,0,0,anaerobic,0,0,-,Percids
+Monsees2017b,RAS A,aquaculture,-,0,Nile tilapia,0,FALSE,FALSE,TRUE,0,0,0,-,Percids
+Monsees2017b,RAS C+Hydro C,aquaponics,permanent,0,Nile tilapia,0,FALSE,FALSE,TRUE,0,0,0,Nutrient film technique,Percids
+Monsees2017b,RAS D/Hydro D,aquaponics,on-demand,0,Nile tilapia,Lactuca sativa,FALSE,FALSE,TRUE,0,0,0,Nutrient film technique,Percids
+Tetreault2021,AER1,remineralisation,-,0,Nile tilapia,0,FALSE,TRUE,FALSE,aerobic,0,0,-,Percids
+Tetreault2021b,ANA1,remineralisation,-,0,Nile tilapia,0,0,0,0,anaerobic,0,0,-,Percids
+Siqwepu2020,FeSO4-20,aquaculture,0,0,African catfish,0,0,0,0,0,0,0,0,Silurids
+Siqwepu2020,FeSO4-30,aquaculture,0,0,African catfish,0,0,0,0,0,0,0,0,Silurids
+Siqwepu2020,FeSO4-60,aquaculture,0,0,African catfish,0,0,0,0,0,0,0,0,Silurids
+Siqwepu2020,FeAA-5,aquaculture,0,0,African catfish,0,0,0,0,0,0,0,0,Silurids
+Siqwepu2020,FeAA-10,aquaculture,0,0,African catfish,0,0,0,0,0,0,0,0,Silurids
+Siqwepu2020,FeAA-20,aquaculture,0,0,African catfish,0,0,0,0,0,0,0,0,Silurids
+Siqwepu2020,Control,aquaculture,0,0,African catfish,0,0,0,0,0,0,0,0,Silurids
+Delaide2021,AE,hydroponics,-,rain,Pikeperch,Lactuca sativa,FALSE,FALSE,FALSE,aerobic,-,0,Deep flow technique,Percids
+Delaide2021,AEC,hydroponics,-,rain,Pikeperch,Lactuca sativa,FALSE,FALSE,FALSE,anaerobic,-,0,Deep flow technique,Percids
+Delaide2021,Std_E1,hydroponics,-,rain,Pikeperch,Lactuca sativa,FALSE,FALSE,FALSE,0,Fertilizer,0,Deep flow technique,Percids
+Delaide2021,AE-NPK,hydroponics,-,rain,Pikeperch,0,FALSE,FALSE,FALSE,aerobic,Fertilizer,0,Deep flow technique,Percids
+Delaide2021,AN-NPK,hydroponics,-,rain,Pikeperch,0,FALSE,FALSE,FALSE,anaerobic,Fertilizer,0,Deep flow technique,Percids
+Delaide2021,Std_E2,hydroponics,-,rain,Pikeperch,0,FALSE,FALSE,FALSE,0,Fertilizer,0,Deep flow technique,Percids
+Atique2022,RAS,aquaculture,-,tap,Rainbow trout,0,0,0,0,0,0,0,-,Salmonids
+Atique2022,Aquaponic,aquaponics,permanent,tap,Rainbow trout,0,0,0,0,0,0,0,0,Salmonids
+Atique2022,Hydroponic,hydroponics,-,tap,Rainbow trout,0,0,0,0,0,0,0,-,Salmonids
+Zhu2022,Aquaponic,aquaponics,permanent,0,African catfish,0,0,0,0,anaerobic,0,0,0,Silurids
+Zhu2022,Hydroponic,hydroponics,-,0,African catfish,0,0,0,0,anaerobic,0,0,-,Silurids
+Delaide2019,AP,remineralisation,-,well,Pikeperch,Solanum lycopersicum,0,0,0,0,Fertilizer,0,Drip irrigation,Percids
+Delaide2019,Control,remineralisation,-,well,Pikeperch,Solanum lycopersicum,0,0,0,0,Fertilizer,0,Drip irrigation,Percids
+Knaus2022,EbbFlow,aquaponics,on-demand,0,African catfish,Mentha spicata,0,0,0,0,0,0,Ebb-Flow,Silurids
+Knaus2022,FloatingRaft,aquaponics,on-demand,0,African catfish,Mentha spicata,0,0,0,0,0,0,Floating Raft,Silurids
+Knaus2022,GrowPipe,aquaponics,on-demand,0,African catfish,Mentha spicata,0,0,0,0,0,0,Grow Pipe,Silurids
+Suhl2016,Aquaponic,aquaponics,on-demand,0,Nile tilapia,Solanum lycopersicum,0,0,0,0,Fertilizer,0,0,Percids
+Suhl2016,Hydroponic,hydroponics,-,0,Nile tilapia,Solanum lycopersicum,0,0,0,0,Fertilizer,0,0,Percids
+Medina2016,Control,aquaponics,permanent,0,Blue tilapia,Amaranthus tricolor,0,0,0,0,0,0,Clay gravel,Percids
+Medina2016,Alternative,aquaponics,permanent,0,Blue tilapia,Amaranthus tricolor,0,0,0,0,0,0,Clay gravel,Percids
+Schmautz2016,NFT,aquaponics,permanent,0,Nile tilapia,Solanum lycopersicum,0,0,0,0,0,0,Nutrient film technique,Percids
+Schmautz2016,Raft,aquaponics,permanent,0,Nile tilapia,Solanum lycopersicum,0,0,0,0,0,0,Floating Raft,Percids
+Schmautz2016,Drip,aquaponics,permanent,0,Nile tilapia,Solanum lycopersicum,0,0,0,0,0,0,Drip irrigation,Percids
+Knaus2020,GrowPipe,aquaponics,on-demand,0,African catfish,Ocium basalicum,0,0,0,0,0,0,Grow Pipe,Silurids
+Knaus2020,Raft,aquaponics,on-demand,0,African catfish,Ocium basalicum,0,0,0,0,0,0,Floating Raft,Silurids
+Knaus2020,Gravel,aquaponics,on-demand,0,African catfish,Ocium basalicum,0,0,0,0,0,0,Gravel Substrate,Silurids
+Pasch2021,Aeroponics,aquaponics,on-demand,0,African catfish,Ocium basalicum,0,0,0,0,0,0,Aeroponics,Silurids
+Pasch2021,DRF,aquaponics,on-demand,0,African catfish,Ocium basalicum,0,0,0,0,0,0,Dynamic Root Floating,Silurids
+Pasch2021,Raft,aquaponics,on-demand,0,African catfish,Ocium basalicum,0,0,0,0,0,0,Floating Raft,Silurids
+Pasch2021a,DRF,aquaponics,on-demand,0,African catfish,Ocium basalicum,0,0,0,0,0,0,Dynamic Root Floating,Silurids
+Pasch2021a,Raft,aquaponics,on-demand,0,African catfish,Ocium basalicum,0,0,0,0,0,0,Floating Raft,Silurids
+Pasch2021a,GrowPipe,aquaponics,on-demand,0,African catfish,Ocium basalicum,0,0,0,0,0,0,Grow Pipe,Silurids
+Delaide2017,Lettuce,aquaponics,permanent,0,Nile tilapia,Latuca sativa,0,0,0,0,0,0,Deep flow technique,Percids
+Delaide2017,Basil,aquaponics,permanent,0,Nile tilapia,Ocium basalicum,0,0,0,0,0,0,Deep flow technique,Percids
+Knaus2017,Unit I,aquaponics,permanent,0,Nile tilapia,0,0,0,0,0,0,0,0,Percids
+Knaus2017,Unit I,aquaponics,permanent,0,Nile tilapia,0,0,0,0,0,0,0,0,Percids
+Knaus2017,Unit II,aquaponics,permanent,0,African catfish,0,0,0,0,0,0,0,0,Silurids
+Knaus2017,Unit II,aquaponics,permanent,0,African catfish,0,0,0,0,0,0,0,0,Silurids
+Knaus2017a,Unit I,aquaponics,permanent,0,Nile tilapia,0,0,0,0,0,0,0,0,Percids
+Knaus2017a,Unit II,aquaponics,permanent,0,Common Carp,0,0,0,0,0,0,0,0,Cyprinids
+Monsees2019,Control,hydroponics,-,0,Nile tilapia,Lactuca sativa,FALSE,FALSE,TRUE,0,Fertilizer,0,Nutrient film technique,Percids
+Monsees2019,APunt,hydroponics,-,0,Nile tilapia,Lactuca sativa,FALSE,FALSE,TRUE,0,-,0,Nutrient film technique,Percids
+Monsees2019,APdis,hydroponics,-,0,Nile tilapia,Lactuca sativa,FALSE,FALSE,TRUE,0,Fertilizer,0,Nutrient film technique,Percids
+Rodgers2022,CON,hydroponics,-,0,Koi carp,Ocimum basalicum,0,0,0,0,Fertilizer,0,Dutch bucket,Cyprinids
+Rodgers2022,DAP,aquaponics,on-demand,0,Koi carp,Ocimum basalicum,0,0,0,aerobic,-,0,Dutch bucket,Cyprinids
+Rodgers2022,DAP+,aquaponics,on-demand,0,Koi carp,Ocimum basalicum,0,0,0,aerobic,Fertilizer,0,Dutch bucket,Cyprinids
+Cerozi2020,System,aquaponics,-,0,Blue tilapia,0,0,0,0,0,-,0,-,Percids
+Khiari2019,30_5.5,remineralisation,-,0,Nile tilapia,0,0,0,0,aerobic,0,0,-,Percids
+Khiari2019,30_6.0,remineralisation,-,0,Nile tilapia,0,0,0,0,aerobic,0,0,-,Percids
+Khiari2019,30_6.5,remineralisation,-,0,Nile tilapia,0,0,0,0,aerobic,0,0,-,Percids
+Khiari2019,35_5.5,remineralisation,-,0,Nile tilapia,0,0,0,0,aerobic,0,0,-,Percids
+Khiari2019,35_6.0,remineralisation,-,0,Nile tilapia,0,0,0,0,aerobic,0,0,-,Percids
+Khiari2019,35_6.5,remineralisation,-,0,Nile tilapia,0,0,0,0,aerobic,0,0,-,Percids
+Khiari2019,40_5.5,remineralisation,-,0,Nile tilapia,0,0,0,0,aerobic,0,0,-,Percids
+Khiari2019,40_6.0,remineralisation,-,0,Nile tilapia,0,0,0,0,aerobic,0,0,-,Percids
+Khiari2019,40_6.5,remineralisation,-,0,Nile tilapia,0,0,0,0,aerobic,0,0,-,Percids
+Delaide2018,ANR,remineralisation,-,0,Nile tilapia,0,0,0,0,anaerobic,0,0,-,Percids
+Monsees2017,Exp1_anaerobic,remineralisation,-,0,Nile tilapia,0,0,0,0,anaerobic,0,0,-,Percids
+Roosta2013,Rep1,aquaponics,permanent,tap,Common Carp,0,0,0,0,0,0,0,0,Cyprinids
+Roosta2013,Rep2,aquaponics,permanent,tap,Grass carp,0,0,0,0,0,Fertilizer,0,0,Cyprinids
+Roosta2013,Rep3,aquaponics,permanent,tap,Silver carp,0,0,0,0,0,0,0,0,Cyprinids
+Roosta2014,Rep1,aquaponics,permanent,tap,Common Carp,Ocimum basalicum,0,0,0,0,-,0,0,Cyprinids
+Roosta2014,Rep2,aquaponics,permanent,tap,Grass carp,Ocimum basalicum,0,0,0,0,Fertilizer,0,0,Cyprinids
+Roosta2014,Rep3,aquaponics,permanent,tap,Silver carp,Ocimum basalicum,0,0,0,0,0,0,0,Cyprinids
+Yang2020,AP_Tomato,aquaponics,permanent,osmosis,Nile tilapia,Solanum lycopersicum,TRUE,TRUE,TRUE,0, ,0,0,Percids
+Yang2020,AP_Basil,aquaponics,permanent,osmosis,Nile tilapia,Ocimum basalicum,TRUE,TRUE,TRUE,0,0,0,0,Percids
+Yang2020,AP_Lettuce,aquaponics,permanent,osmosis,Nile tilapia,Latuca sativa,TRUE,TRUE,TRUE,0,0,0,0,Percids
+Anderson2017,A7,hydroponics,permanent,tap,Koi carp,Latuca sativa,0,0,0,0,0,0,0,Cyprinids
+Blanchard2020,pH7,hydroponics,on-demand,0,Nile tilapia,Latuca sativa,FALSE,FALSE,TRUE,0,0,0,Dutch bucket,Percids
+Blanchard2020,pH6.5,hydroponics,on-demand,0,Nile tilapia,Latuca sativa,FALSE,FALSE,TRUE,0,0,0,Dutch bucket,Percids
+Blanchard2020,pH5.8,hydroponics,on-demand,0,Nile tilapia,Latuca sativa,FALSE,FALSE,TRUE,0,0,0,Dutch bucket,Percids
+Blanchard2020,pH5,hydroponics,on-demand,0,Nile tilapia,Latuca sativa,FALSE,FALSE,TRUE,0,0,0,Dutch bucket,Percids
+Pinero2020,100S,hydroponics,0,0,Nile tilapia,Latuca sativa,0,0,0,0,Fertilizer,FALSE,0,Percids
+Pinero2021,50F50D,hydroponics,0,0,Nile tilapia,Latuca sativa,0,0,0,0,0,FALSE,0,Percids
+Pinero2022,50F50D+S,hydroponics,0,0,Nile tilapia,Latuca sativa,0,0,0,0,Fertilizer,FALSE,0,Percids
+Pinero2023,50F50D+F,hydroponics,0,0,Nile tilapia,Latuca sativa,0,0,0,0,0,FALSE,0,Percids
