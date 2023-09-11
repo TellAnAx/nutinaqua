@@ -14,7 +14,7 @@ plot_google_map <- function(data,
 
   # Connect with API
   register_google(
-    key = Sys.getenv("GGMAP_GOOGLE_API_KEY"),
+    key = Sys.getenv("GOOGLE_MAPS_API_KEY"),
     account_type = "standard"
   )
 
@@ -28,12 +28,12 @@ plot_google_map <- function(data,
     geom_point(data = data,
       aes(x = longitude, y = latitude,
           fill = fill_variable,
-          alpha = 0.8), 
-      size = 3, 
+          alpha = 0.8),
+      size = 3,
       shape = shape_variable) +
     guides(fill = FALSE, alpha = FALSE, size = FALSE) +
-    labs(x = "longitude", y = "latitude") + 
-    scale_x_continuous(limits = longitude_limits, expand = c(0,0)) + 
+    labs(x = "longitude", y = "latitude") +
+    scale_x_continuous(limits = longitude_limits, expand = c(0,0)) +
     scale_y_continuous(limits = latitude_limits, expand = c(0,0))
 
 }
