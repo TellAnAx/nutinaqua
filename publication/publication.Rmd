@@ -73,11 +73,13 @@ source(here("R", "plot_functions.R"))
 ```
 
 # Introduction
-One of the obstacles in the wider adoption of aquaponic systems, the combination of aquaculture and hydroponics (soilless plant production), is stated to be the rather complex management of plant nutrients within the system. While a wide range of "off-the-shelf" fertilizer is available for hydroponics, this is not the case for aquaponic systems. Developing more efficient and simple nutrient management practices thus appears to be an opportunity to boost aquaponics.
+One of the obstacles in the wider adoption of aquaponic systems, the combination of aquaculture and hydroponics (soilless plant production), is stated to be the rather complex management of plant nutrients within the system. While a wide range of "off-the-shelf" fertilizer is available for hydroponics, this is not the case for aquaponic systems. Developing more efficient and simple nutrient management practices thus appears to be an opportunity to facilitate systems management. Within this context, nutrient management refers to guaranteeing that optimum plant nutrient concentrations are met by controlling the inputs.
 
-The most efficient solution for nutrient management would be to monitor each plant nutrients individually. This would ensure that each individual nutrient can be supplied in the necessary amount to reach target concentrations. However, a full-spectrum monitoring of all plant nutrients is not practical, as it requires expensive equipment and qualified workforce. Instead, it would be more meaningful to develop a simple solution that is easily implementable without adding additional tasks to the working schedule. Optimizing an existing nutrient input is thus considered as best solution. Though, when optimizing one nutrient input while not controlling for the others, it is important to consider the variability that is expected to be introduced by the other sources. Awareness about the nutrients that run the risk of under- or oversupply under "non-average" conditions is crucial, as this might have adverse effects on the livestock or plants. Hence, the variability of nutrients originating from different sources ultimately determines which nutrients to focus on when optimizing nutrient inputs.
+In aquaculture and aquaponics, nutrients enter the system through the daily ration of feed for the aquatic livestock (hereinafter denoted as aquafeed), alkalinity supplements used for pH control, and the source water [@Rakocy2006; @Eck2019; @Robaina2019].
 
-In aquaculture and aquaponics, nutrients enter the system through the daily ration of feed for the aquatic livestock (hereinafter denoted as aquafeed), alkalinity supplements used for pH control, and the source water [@Rakocy2006; @Eck2019; @Robaina2019]. However, even though it is usually stated that aquafeeds are the most important nutrient source, this claim was never closer examined and surprisingly little is known about the mass flows of nutrients in aquaponic systems, although the concept of aquaponics is already several decades old. The objective of this study is thus to review the average nutrient concentrations in aquafeeds, alkalinity supplements, and the source water and assess their variability. 
+When focussing on the efficiency aspect of nutrient management, the most efficient solution would be to monitor each plant nutrient individually. This would ensure that each individual nutrient can be supplied in the necessary amount to reach target concentrations, for instance as pure salts. However, a full-spectrum monitoring of all plant nutrients is not practical, as it requires expensive equipment and qualified workforce. Instead, it would be more meaningful to focus on the simplicity aspect and develop a management practice that is easily implementable without introducing additional tasks to the working schedule. Against this background, optimizing an existing nutrient input can be considered as more feasible solution.
+
+An approach to optimize nutrient inputs that is followed is the development of aquafeeds that are formulated in a way that the excreta of the livestock meet plant nutrient demands. Though, when optimizing one nutrient input while not controlling for the others, it is important to consider the range of nutrient input that can be expected by other sources of nutrients. Awareness about the nutrients that run the risk of under- or oversupply under "non-average" conditions is crucial, as this might have adverse effects on the livestock or plants. Hence, the variability of nutrients originating from different sources ultimately determines which nutrients to focus on when optimizing nutrient inputs. However,little is known about the variability of plant nutrient mass flows in aquaculture, which is crucial for the development of a nutrient management solution that is optimized with regards to its simplicity of use, such as a dedicated aquafeed. The objective of this study is thus to assess the nutrient budget of aquaculture systems with regards to the contribution and variability of aquafeeds, alkalinity supplements, and the source water. Special emphasis is given to aquaponics as this knowledge is expected to contribute to the development of simple means of nutrient management in this food production system.
 
 
 
@@ -85,13 +87,13 @@ In aquaculture and aquaponics, nutrients enter the system through the daily rati
 
 # Methodology
 
-## Rearing assumptions
+## Model system
 
 ```{r}
 source(here("R", "assumptions.R"))
 ```
 
-To calculate the proportion contribution of the source water, feed and alkalinity supplements to the total daily nutrient input in the reviewed studies, their average daily inputs per volume unit had to be calculated. For this purpose, initial assumptions with respect to the husbandry system and rearing conditions were made, as shown in table \ref{tab:assumptions}. The ASTAF-PRO system [@Kloas2015] was chosen as model because its sizing is close to reality when comparing it with results from a recent survey targeting aquaponics production sites and is well-described in terms of the system components while detailed information was not provided by the survey results [@Pattillo2022]. Consequently, it was assumed that an average \gls{ras} as part of an aquaponic system would have a total volume of `r totalV` \si{\cubicm}, of which `r rearingV` \si{\cubicm} corresponds to the effective volume of the rearing tanks. The total daily water exchange rate was reported to be `r ER` \si{\p\per\d}. A stocking density of `r SD` \si{\kg\per\cubicm} was maintained, resulting in an average biomass of `r rearingV * SD` \si{\kg}. The feeding rate was `r FR` \si{\p\per\d}.
+The inputs of aquafeeds, alkalinity supplements and source water was based on an exemplary \gls{ras}: The ASTAF-PRO system [@Kloas2015] was chosen as model because its sizing is close to reality when comparing it with results from a recent survey targeting aquaponics production sites [@Pattillo2020] and its system components are well-described. All model data are summarized in table \ref{tab:assumptions}. 
 
 \include{table_assumptions.tex}
 
@@ -131,13 +133,7 @@ ggsave(plot = last_plot(), filename = here("plots", "map.png"))
 # zoom_factor: an integer from 3 (continent) to 21 (building), default value 10 (city). openstreetmaps limits a zoom of 18, and the limit on stamen maps depends on the maptype. "auto" automatically determines the zoom for bounding box specifications
 ```
 
-The daily volume of freshwater introduced into the system (`r totalV * ER` \si{\p\per\d}) was calculated based on the rearing assumptions. Daily nutrient inputs via source water were assessed by gathering water analysis reports from locations all over Europe, covering . 
-
-Official reports provided by local authorities and water utilities in the corresponding municipalities were used to ensure that analyses were conducted according to accepted laboratory standards. 
-
-Collected water analysis reports originated from a total of `r length(unique(gps_coordinates$country))` countries with `r nrow(gps_coordinates)` analysis reports. The spatial distribution of the analysis reports is shown in Figure \@ref(fig:map_water). 
-
-country distribution of the literature data compared with gathered water analysis reports is shown in Figure 2.2. 
+The total daily volume of freshwater introduced into the system (`r totalV * ER` \si{\L\per\d}) was calculated based on the model system. Daily plant nutrient inputs via source water were calculated by gathering water analysis reports from locations all over Europe. Here, official reports provided by local authorities and water utilities in the corresponding municipalities were used to ensure that analyses were conducted according to accepted laboratory standards. The collected `r nrow(gps_coordinates)` water analysis reports originated from a total of `r length(unique(gps_coordinates$country))` countries, with their spatial distribution being shown in Figure \@ref(fig:map_water). 
 
 \begin{figure}
 \centering
@@ -146,19 +142,29 @@ country distribution of the literature data compared with gathered water analysi
   \label{fig:map_water}
 \end{figure}
 
-
-It is common practice to report the value of the detection limit instead of the measured value in case that the analyte concentration found was below the sensitivity of the instrument used for measurement (Deutsches Institut für Normung e.V. 2008). Figure 2.3 shows the proportion of data for all considered analytes in the water analysis reports that were found to be below the detection limit. Retaining the detection limits in the dataset leads to mean concentration estimates that are too high. Therefore, concentration data was recalculated using the \emph{cenmle()} function from the R package NADA by \gls{mle} [@Helsel2011]. This ensured that the estimates for nutrient concentrations in tap water were reliable. The output was eventually used to calculate the two-sided \SI{90}{\p} confidence interval for the arithmetic mean of the concentration of each nutrient to describe the concentration range that will be found in \SI{90}{\p} of all cases where tap water is used. Finally, multiplying the obtained concentrations with AWE yielded the upper and lower limits of the \SI{90}{\p} confidence interval of total daily individual plant nutrient inputs via source water.
-
-
+In water analysis, it is common practice to report the value of the instrument detection limit instead of the measured value in case that the analyte concentration found was below the sensitivity of the measurement instrument (ISO 11843, 2020). This practice is known as data censoring and used to ensure that the analyte signal can be distinguished from the instruments signal noise with satisfying confidence. However, retaining these data points in the dataset leads to incorrect results as the true concentration is within the interval from zero to the detection limit. To avoid an overestimation of plant nutrient concentrations within the tap water, censored data were recalculated by \gls{mle}, using the \emph{cenmle()} function from the R package NADA [@Helsel2011]. 
 
 
 
 ### Aquafeeds
-The daily feed input resulting from the rearing assumptions was `r rearingV * SD * FR` \si{\kg\per\d}. 
+The total daily feed input $m_{in,total}$ (`r rearingV * SD * (FR/100)` \si{\kg\per\d}) was calculated based on the model system. Eventually, daily nutrient inputs via aquafeeds were calculated by multiplying the total daily feed input with the inclusion rates of the corresponding nutrient $\gamma_{X}$. As the study focusses on plant nutrients in aquaponic systems, nutrient retention by the livestock was considered, because it renders nutrients inaccessible for plants. This was done by multiplication of the total daily nutrient input with an \gls{adc} for each nutrient, yielding the true daily plant nutrient input via aquafeed. It was assumed that \gls{cp} digestibility would be on average \SI{90}{\p}, while the \gls{adc} for all other plant nutrients were assumed to be \SI{50}{\p} [@Lall2002]. Finally, due to the fact that solid substances are not accessible for plant uptake, it was assumed that \SI{50}{\p} of the digestible fraction is retained while the remaining \SI{50}{\p} is excreted in dissolved form [@Halver2003]. The calculation is described by equation \ref{eq:feed_input}.
 
-In the third step, daily nutrient inputs via aquafeeds were estimated. The IDS was filtered for studies reporting the name of the commercial aquafeed used (if not selfmade), the CP inclusion rate and the feeding rate. From the resulting FDS2, the average feeding rate ($FR$; \si{\p}), CP inclusion rate (ACP) and the averages of all plant nutrients were calculated. Due to lacking nutrient composition data, supplier datasheets were used and amended by literature data in case of utilization of commercial aquafeeds. Incomplete observations with respect to experimental feeds were handled in the same way, merging data from multiple publications if the same feed was used. NA values were removed for the computation of averages. Eventually, the average daily feed input ($FI$; \si{\kg\per\d}) was calculated by multiplying ABM from the generated system assumptions with XXXXX. 
-By multiplying $FI$ with the average plant nutrient inclusion rates in the aquafeeds, the uncorrected total daily input of individual plant nutrients via aquafeeds could be calculated. Obtained values were then corrected by multiplication with apparent digestibility coefficients (ADC), accounting for the digestibility of aquafeeds by fish. An ADC of \SI{90}{\p} was assumed for N whereas the ADC of all other nutrients was assumed to be \SI{50}{\p} [@Lall2002]. Finally, it was assumed that \SI{50}{\p} of the digestible fraction is retained while the remaining \SI{50}{\p} is excreted in dissolved form [@Halver2003]. The indigestible part of the feed is excreted as solid feces and was thus assumed not to participate in chemical reactions in solution. Lastly, an estimate for the daily input of alkalinity supplements was derived from $AFI$. First, the daily CP input was calculated by multiplying $AFI$ with the percentage of $CP$ on dry matter basis in the feed.
+\begin{equation}
+  m_{in,true} = m_{in,total} \cdot r_{feed} \cdot \gamma_{X} \cdot \text{ADC}_{X} \cdot r_{ex,diss}
+  \label{eq:feed_input}
+\end{equation}
 
+
+
+### Alkalinity supplements
+An estimate for the total daily input of alkalinity supplements was derived from the total daily feed input. First, the daily \gls{cp} input was calculated by multiplying the total daily feed input with the \gls{cp} inclusion rate of the feed. 
+...
+
+
+
+
+## Statistics
+\SI{90}{\p} confidence intervals were calculated for the nutrient contribution of aquafeeds and tap water.
 
 ## Software
 All calculations were conducted using R (v4.2.2) with RStudio (“Spotted Wakerobin” Release) as graphical user interface.
@@ -168,7 +174,27 @@ All calculations were conducted using R (v4.2.2) with RStudio (“Spotted Wakero
 
 
 # Aquafeeds as nutrient sources
-Aquafeeds are considered to be the most important source of nutrients, providing a large and continuous nutrient input into the system. Formulating a specific aquaponics feed was thus thought to be the most suitable approach to develop an “off-the-shelf” nutrient delivery system [@Lennard2017; @Eck2019]. When discussing aquafeeds as nutrient input route, it is important to consider pathways of diet utilization, as shown in Figure 1.2. Uneaten feed and the indigestible mass fraction of ingested feed make up the solid wastes. The digestible mass fraction is meanwhile utilized to sustain the animals’ basal metabolism, somatic growth and reproductive activity. Metabolic end products are then excreted via the gills and the urinary system in form of dissolved matter [@Hardy2003; @Evans2005]. Only the dissolved fraction of the nutrients is immediately available for plant uptake via the root system.
+Aquafeeds are considered to be the most important source of nutrients, providing a large and continuous nutrient input into the system. Formulating a specific aquaponics feed was thus thought to be the most suitable approach to develop an “off-the-shelf” nutrient delivery system [@Lennard2017; @Eck2019]. 
+
+## Nutrient inclusion rates
+While it is common standard to report the proximate composition of the diets, giving Kjeldahl nitrogen and ash as sum parameter for the metal content of feeds, more detailed insights with respect to other nutrients essential for plant growth are rather scarce.
+
+
+
+## Sources and extent of variability
+
+### Fish species
+@Gebauer2023
+@Shaw2022b
+
+### Ingredients (digestibility)
+@Shaw2022a
+@Shaw2022b
+@Gebauer2023
+@Seawright1998
+
+
+When discussing aquafeeds as nutrient input route, it is important to consider pathways of diet utilization, as shown in Figure 1.2. Uneaten feed and the indigestible mass fraction of ingested feed make up the solid wastes. The digestible mass fraction is meanwhile utilized to sustain the animals’ basal metabolism, somatic growth and reproductive activity. Metabolic end products are then excreted via the gills and the urinary system in form of dissolved matter [@Hardy2003; @Evans2005]. Only the dissolved fraction of the nutrients is immediately available for plant uptake via the root system.
 
 The availability of digestibility, retentiton and excretion data for individual nutrients, with the former expressed as \gls{adc}, depends on whether the nutrient is essential and has to be considered for feed formulation. 
 
@@ -184,11 +210,11 @@ Studies about \gls{adc} for the remaining essential plant nutrients are scarce. 
 - Why is water added?
 - Where does it come from?
 
+
 Water is added to the system either to compensate evaporation, spillage or leaning losses (e.g., the drum filter backwash) or to dilute accumulating substances such as nitrate. The source water can originate from wells, collected rain or the municipal tap.
 
-
-
-Meanwhile, the importance of water as nutrient source is seen as negligible [@Schmautz2016]. However, large amounts of calcium (Ca), magnesium (Mg) and sulfur (S), that are essential plant nutrients, were found to enter the system via exchange water in one study [@Delaide2017]. 
+## Nutrient inclusion rates
+The importance of water as nutrient source is seen as negligible [@Schmautz2016]. However, large amounts of calcium (Ca), magnesium (Mg) and sulfur (S), that are essential plant nutrients, were found to enter the system via exchange water in one study [@Delaide2017]. 
 
 A recent survey revealed that the majority of European aquaponics entities (\SI{71.7}{\p}) uses municipal tap water [@Raulier2023]. Aquaponic food production is usually seen in the context of decentralized urban farming, where limited space due to high land prices is compensated by innovative approaches such as vertical farming and synergy effects due to the simultaneous production of fish and crops. Though, it has to be considered that the availability of rain water and space for its storage is limited and wells are unlikely to be approved by authorities. Thus, tap water would 
 
@@ -196,6 +222,8 @@ This observation will likely
 
 This is not surprising, considering that aquaponic facilities 
 
+
+### Sources and extent of variability
 Though, water can vary in its composition, depending on its origin. A glimpse of the extent of variability of terrestrial waters in their chemical composition is provided in Figure 1.1. Weathering of rock, ion exchange, redox reactions and the buildup of biomass are the main processes that are affecting concentrations of the shown compounds [@Stumm1981]. The highest variability can be found in anionic compounds such as nitrate (\ce{NO3-}) and sulfate (\ce{SO4^2-}) and the cationic alkaline earth metals \ce{Ca^2+} and \ce{Mg^2+} that are covering a concentration range of approximately two orders of magnitude.
 
 
@@ -205,11 +233,19 @@ Though, water can vary in its composition, depending on its origin. A glimpse of
 # Alkalinity supplements as nutrient sources
 The term alkalinity supplements summarizes several alkaline substances that are used to maintain a stable pH in the water [@Timmons2010]. Nitrification decreases the pH over time and, consequently, also the activity of nitrifyers [Ward2011]. Thus, a stable pH has to be maintained to ensure both high nitrification performance and animal welfare. For this purpose, several Na-based substances such as sodium hydrogen carbonate (baking soda, \ce{NaHCO3}) are commonly used in aquaculture due to their high and rapid solubility at a comparably cheap price. However, high sodium (Na) concentrations must be avoided in aquaponic systems due to its phytotoxicity [@Maathuis2014]. Na is therefore replaced with several other supplements based on K or Ca that come with the benefit of providing an additional source of nutrients besides increasing the pH.
 
+## Nutrient inclusion rates
+
+
+## Sources and extent of variability
+Depends on the product quality
 
 
 
 
-# Contribution of the nutrient sources to the total nutrient mass flows
+# The big picture
+
+
+## Contribution of the nutrient sources to the total nutrient mass flows
 The average nutrient composition of both aquafeeds and source water and the lower and upper limits of the \SI{90}{\p} confidence interval for source water are shown in Table 3.1. Figure 3.2 provides an additional graphical presentation of the findings with emphasis on the variability of nutrient contributions by source water.
 
 The highest daily nutrient inputs with respect to the macronutrients N and P in the reviewed studies likely originated from aquafeeds, being on average 99.2% and 99.3%, respectively. The overall amounts of these two nutrients contributed by source water are negligible. Aquafeeds can also be assumed being the main source of the micronutrients Fe, Mn, Cu, Zn, and Mo, with an average contribution of 96.2%, 97.2%, 79.8%, 93.9% and 76.3%, respectively. Among these nutrients, Cu and Mo showed the highest variability with respect to the contribution of source water between locations (Cu 90% CI: 8%, 29.7%; Mo 90% CI: 14.7%, 29.3%), with up to almost a third of the daily inputs possibly entering the system via the water. Meanwhile, source water likely had a comparably high contribution to Mg and S. With 76.5% for Mg (90% CI: 72.1%, 79.7%) and 68.8% for S (90% CI: 58.9%, 74.8%), an average delivery of more than half of the daily input was found. Also, a considerable contribution to daily B (63.1%; 90% CI: 48.5%, 48.5%) and Ni (56.2%; 90% CI: 33.3%, 67.4%) inputs probably originated from the source water.
@@ -233,12 +269,15 @@ The daily quantity of alkalinity supplements to be added might be overestimated.
 
 
 
-## Implications for the formulation of tailored aquaponics feeds
+## Implications for nutrient management in aquaponic systems
 Firstly, considering potential precipitation, target nutrients for an increased delivery could include N, K, Mg, S, B, and Zn. This suggestion is partly confirmed by prior empirical studies. One of those found K, Mg, and Zn to accumulate out of the mentioned nutrients, with additional accumulation of P, Mn and Zn [@Seawright1998]. Another study reported N, K, and Mg accumulation alongside P and Cu (Shaw et al. 2022). The focus on K and Mg can thus be considered “safe”, considering the generally high solubility of both compounds [@Lide2007] and reported deficiencies for both in aquaponics [@Lunda2019]. Natural feed ingredients rich in K are soy lecithin (\SI{13.0}{\p} K on dry matter basis), vinasse (\SI{3.6}{\p} K on dry matter basis) and some protein feedstuffs such as poultry by-product meal (\SI{3.5}{\p} K on dry matter basis) and hydrolyzed fish solubles \SIrange{2.4}{2.9}{\p} K on dry matter basis). Mg can be introduced to aquafeeds mostly via the use of seaweed (\SI{3.9}{\p} Mg on dry matter basis) (International Aquaculture Feed Formulation Database (IAFFD) 2021). The drawback of the use of some of the above-stated feed ingredients is that the target nutrient is usually accompanied by comparably high amounts of Na. Even though this study shows that aquafeeds were not the main input route of Na in the reviewed literature, it is nevertheless reasonable to attempt to decrease Na inclusion rates during feed formulation because the initial assumptions leading to the nutrient input scenarios are not representative for commercial systems, as described above. This could be done for instance by replacement of feed ingredients with high Na inclusion rates such as fish meal originating from marine fish by other protein feedstuffs. 
 
 Another possibility is given by using food-grade salts of the desired nutrients. However, considering the nutrient input via feed (\SI{1.1}{\p}) in comparison with that of alkalinity supplements containing K (\SI{98.7}{\p}) in this study, it depends on target concentrations and costs whether it is reasonable or not to increase the inclusion rate of K in a tailored aquafeed versus using the respective alkalinity supplements. 
 
 It remains questionable whether it is more meaningful to include, for instance, salts into the feed or to add them directly into the system. Inclusion rates of nutrients that are confirmed to be affected by precipitation (Ca, Fe) are, in turn, recommended to be decreased in case the nutrient is not essential for the livestock and a change in feed formulation economically viable.
+
+
+## Other implications
 
 
 # Conclusion
