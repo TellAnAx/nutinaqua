@@ -174,14 +174,25 @@ All calculations were conducted using R (v4.2.2) with RStudio (“Spotted Wakero
 
 
 # Aquafeeds as nutrient sources
-Aquafeeds are considered to be the most important source of nutrients, providing a large and continuous nutrient input into the system. Formulating a specific aquaponics feed was thus thought to be the most suitable approach to develop an “off-the-shelf” nutrient delivery system [@Lennard2017; @Eck2019]. 
+Aquafeeds are considered to be the most important source of nutrients, providing a large and continuous nutrient input into the system. Formulating a specific aquaponics feed was thus thought to be the most suitable approach to develop an “off-the-shelf” nutrient delivery system [@Lennard2017; @Eck2019].
 
 ## Nutrient inclusion rates
 While it is common standard to report the proximate composition of the diets, giving Kjeldahl nitrogen and ash as sum parameter for the metal content of feeds, more detailed insights with respect to other nutrients essential for plant growth are rather scarce.
 
+### Commercial feeds
+Information about nutrient inclusion rates that exceed the standard fish nutrients is scarce as it is not of greater interest for aquaculture and the growth of the fish. A publication looking into this topic dates back 40 years [@Tacon1983]
+
+
+### Experimental feeds
+@Shaw2022a
+@Shaw2022b
+@Gebauer2023
+@Seawright1998
+
 
 
 ## Sources and extent of variability
+[@Prabhu]
 
 ### Fish species
 @Gebauer2023
