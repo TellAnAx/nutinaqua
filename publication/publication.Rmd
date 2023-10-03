@@ -158,7 +158,7 @@ The total daily feed input $m_{in,total}$ (`r rearingV * SD * (FR/100)` \si{\kg\
 
 ### Alkalinity supplements
 An estimate for the total daily input of alkalinity supplements was derived from the total daily feed input. First, the daily \gls{cp} input was calculated by multiplying the total daily feed input with the \gls{cp} inclusion rate of the feed. 
-...
+..
 
 
 
@@ -179,17 +179,29 @@ Aquafeeds are considered to be the most important source of nutrients, providing
 ## Nutrient inclusion rates
 While it is common standard to report the proximate composition of the diets, giving Kjeldahl nitrogen and ash as sum parameter for the metal content of feeds, more detailed insights with respect to other nutrients essential for plant growth are rather scarce.
 
+
 ### Commercial feeds
-Information about nutrient inclusion rates that exceed the standard fish nutrients is scarce as it is not of greater interest for aquaculture and the growth of the fish. A publication looking into this topic dates back 40 years [@Tacon1983]
+Information about nutrient inclusion rates that exceed the standard fish nutrients is scarce as it is not of greater interest for aquaculture and the growth of the fish. A publication looking into this topic dates back 40 years [@Tacon1983]. 
+
+```{=tex}
+% overview table with the composition of commercial feeds
+```
 
 
 ### Experimental feeds
+Several experiments were conducted in the past to closer examine the extent to which manipulation of aquafeeds is possible when aiming at specific substance excretion patterns by fish.
+
+@Seawright1998
+
+Different natural and new feed ingredients were recently tested.
 @Shaw2022a
 @Shaw2022b
 @Gebauer2023
-@Seawright1998
 
 
+```{=tex}
+% overview table with the composition of experimental feeds
+```
 
 ## Sources and extent of variability
 [@Prabhu]
