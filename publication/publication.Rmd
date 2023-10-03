@@ -75,7 +75,7 @@ source(here("R", "plot_functions.R"))
 # Introduction
 One of the obstacles in the wider adoption of aquaponic systems, the combination of aquaculture and hydroponics (soilless plant production), is stated to be the rather complex management of plant nutrients within the system. While a wide range of "off-the-shelf" fertilizer is available for hydroponics, this is not the case for aquaponic systems. Developing more efficient and simple nutrient management practices thus appears to be an opportunity to facilitate systems management. Within this context, nutrient management refers to guaranteeing that optimum plant nutrient concentrations are met by controlling the inputs.
 
-In aquaculture and aquaponics, nutrients enter the system through the daily ration of feed for the aquatic livestock (hereinafter denoted as aquafeed), alkalinity supplements used for pH control, and the source water [@Rakocy2006; @Eck2019; @Robaina2019].
+In aquaculture and aquaponics, nutrients enter the system through the daily ration of feed for the aquatic livestock (hereinafter denoted as aquafeed), alkalinity supplements used for pH control, and the source water [@Rakocy2006; @Eck2019; @Robaina2019]. Within this context, essential plant nutrients are the elements nitrogen, phosphorus, potassium, calcium, magnesium, sulfur, iron, boron, silicon, manganese, copper, zinc, nickel, and molybdenum [Mengel].
 
 When focussing on the efficiency aspect of nutrient management, the most efficient solution would be to monitor each plant nutrient individually. This would ensure that each individual nutrient can be supplied in the necessary amount to reach target concentrations, for instance as pure salts. However, a full-spectrum monitoring of all plant nutrients is not practical, as it requires expensive equipment and qualified workforce. Instead, it would be more meaningful to focus on the simplicity aspect and develop a management practice that is easily implementable without introducing additional tasks to the working schedule. Against this background, optimizing an existing nutrient input can be considered as more feasible solution.
 
@@ -172,11 +172,15 @@ All calculations were conducted using R (v4.2.2) with RStudio (“Spotted Wakero
 
 
 
-
 # Aquafeeds as nutrient sources
-Aquafeeds are considered to be the most important source of nutrients, providing a large and continuous nutrient input into the system. Formulating a specific aquaponics feed was thus thought to be the most suitable approach to develop an “off-the-shelf” nutrient delivery system [@Lennard2017; @Eck2019].
+Aquafeeds are considered to be the most important source of nutrients in aquaculture and, consequently, aquaponics, providing a large and continuous nutrient input into the system. Formulating a specific aquaponics feed is thus generally thought to be the most suitable approach to develop an “off-the-shelf” nutrient delivery system [@Lennard2017; @Eck2019]. However, general information with regards to nutrient inclusion levels is scarce.
+
+With regards to commercial aquafeeds from producers located in Europe, this circumstance is due to the current regulations affecting the labeling. Currently, general mandatory and specific requirements with regards to the labelling of compound feeds are defined by Regulation (EC) No. 767/2009 of the European Parliament defines in the articles 15 and 17 and a detailed explanation with respect to the labelling of feed materials and compound feed for animals intended for human consumption can be found in Annex VI, stating that the levels of crude protein, crude fibre, crude oils and fats, crude ash, calcium, sodium and phosphorus need to be listed by the feed producer (EU). This 
+
 
 ## Nutrient inclusion rates
+
+
 While it is common standard to report the proximate composition of the diets, giving Kjeldahl nitrogen and ash as sum parameter for the metal content of feeds, more detailed insights with respect to other nutrients essential for plant growth are rather scarce.
 
 
@@ -221,6 +225,10 @@ When discussing aquafeeds as nutrient input route, it is important to consider p
 
 The availability of digestibility, retentiton and excretion data for individual nutrients, with the former expressed as \gls{adc}, depends on whether the nutrient is essential and has to be considered for feed formulation. 
 
+```{=tex}
+% overview of ADCs determined for plant nutrients
+```
+
 N that is, for the most part, present as \gls{cp} in aquafeeds, is generally well-digestible, with an \gls{adc} usually being above \SI{70}{\p} and on average approximately \SI{90}{\p} [@Guillaume2001; @IAFFD2021]. The excretion of N as end product of the protein and amino acid catabolism takes place in form of ammonia (\ce{NH3}) and, to a small extent, urea. The predominant excretory site are the gills, followed by renal excretion [@Dabrowski2003]. 
 
 A less digestible nutrient is P with \gls{adc} ranging from \SI{70}{\p} to only \SI{40}{\p} and a resulting excretion of \SI{30}{\p} to \SI{60}{\p} of the supply [@Lall2003; @Sugiura2018]. Especially plant ingredients in aquafeeds can cause low \gls{adc} if they are rich in phytic acid. Phytic acid is poorly digestible and can furthermore reduce the digestibility of minerals in the feed. This might also explain contradictory information in literature with reported renal excretion rates of \SI{90}{\p} of the total excreta [@Lall2003] in contrast to estimates of \SI{28}{\p} of excretion taking place in dissolved form and \SI{30}{\p} to \SI{64}{\p} excreted as particulate P [@Dabrowski2003]. 
@@ -234,7 +242,7 @@ Studies about \gls{adc} for the remaining essential plant nutrients are scarce. 
 - Where does it come from?
 
 
-Water is added to the system either to compensate evaporation, spillage or leaning losses (e.g., the drum filter backwash) or to dilute accumulating substances such as nitrate. The source water can originate from wells, collected rain or the municipal tap.
+Water is added to the system either to compensate evaporation, spillage or leaning losses (e.g., the drum filter backwash) or to dilute accumulating substances such as nitrate [Maucieri]. The source water can originate from wells, collected rain or the municipal tap.
 
 ## Nutrient inclusion rates
 The importance of water as nutrient source is seen as negligible [@Schmautz2016]. However, large amounts of calcium (Ca), magnesium (Mg) and sulfur (S), that are essential plant nutrients, were found to enter the system via exchange water in one study [@Delaide2017]. 
