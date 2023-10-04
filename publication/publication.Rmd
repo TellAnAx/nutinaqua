@@ -173,7 +173,9 @@ All calculations were conducted using R (v4.2.2) with RStudio (“Spotted Wakero
 
 
 # Aquafeeds as nutrient sources
-Aquafeeds are considered to be the most important source of nutrients in aquaculture and, consequently, aquaponics, providing a large and continuous nutrient input into the system. Formulating a specific aquaponics feed is thus generally thought to be the most suitable approach to develop an “off-the-shelf” nutrient delivery system [@Lennard2017; @Eck2019]. However, general information with regards to nutrient inclusion levels is scarce.
+Aquafeeds are considered to be the most important source of nutrients in aquaculture and, consequently, aquaponics, providing a large and continuous nutrient input into the system. Formulating a specific aquaponics feed is thus generally thought to be the most suitable approach to develop an “off-the-shelf” nutrient delivery system [@Lennard2017; @Eck2019]. However, detailed information with regards to the inclusion levels of nutrients in aquafeeds is scarce.
+
+Essential nutrients 
 
 With regards to commercial aquafeeds from producers located in Europe, this circumstance is due to the current regulations affecting the labeling. Currently, general mandatory and specific requirements with regards to the labelling of compound feeds are defined by Regulation (EC) No. 767/2009 of the European Parliament defines in the articles 15 and 17 and a detailed explanation with respect to the labelling of feed materials and compound feed for animals intended for human consumption can be found in Annex VI, stating that the levels of crude protein, crude fibre, crude oils and fats, crude ash, calcium, sodium and phosphorus need to be listed by the feed producer (EU). This 
 
