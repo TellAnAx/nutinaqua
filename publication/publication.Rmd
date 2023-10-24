@@ -175,7 +175,32 @@ All calculations were conducted using R (v4.2.2) with RStudio (“Spotted Wakero
 # Aquafeeds as nutrient sources
 Aquafeeds are considered to be the most important source of nutrients in aquaculture and, consequently, aquaponics, providing a large and continuous nutrient input into the system. Formulating a specific aquaponics feed is thus generally thought to be the most suitable approach to develop an “off-the-shelf” nutrient delivery system [@Lennard2017; @Eck2019]. However, detailed information with regards to the inclusion levels of nutrients in aquafeeds is scarce.
 
-Essential nutrients 
+In fish, the essentiality of calcium, phosphorus, magnesium, sodium, potassium, chloride, iron, copper, manganese, zinc, iodine, selenium, cobalt, and chromium was shown [@Lall2021]. These elements play a vital role in the development and maintenance of the skeletal system, signal transmission, osmoregulation, as reactive centers of metalloenzymes, and others. A comprehensive summary can be found can be found elsewhere (see e.g., Lall, 2003).
+While some of the mentioned substances are taken up in relatively large quantities, only small amounts of others are required, as indicated by the term "trace element". However, the exact requirements are unknown for many of the above-mentioned nutrients due to difficulties in their determination, as described elsewhere (see e.g., Lall, 2003). In addition, uptake from the water via gills and skin contributes significantly to the total nutrient budget, enabling the animal to reach homeostasis. This is known for
+
+Following: [@Lall2003]
+K (water, feed)
+Na (water)
+Cl (water)
+Following: [@Lall2021]
+Ca (gills)
+I (80% water rainbow trout)
+Cr (gills)
+Co (gills and feed)
+Cu (feed; gills can contribute more than half of demand)
+P (feed)
+Mg (feed)
+Fe (feed)
+Se (feed)
+Zn (feed)
+Mn (unknown)
+
+Therefore, the need to include those specific nutrients into the feed formulation is usually not done.
+
+```{=tex}
+% list of Bittzansky nutrients for fish and plants, together with those that have to be reported by law
+```
+
 
 With regards to commercial aquafeeds from producers located in Europe, this circumstance is due to the current regulations affecting the labeling. Currently, general mandatory and specific requirements with regards to the labelling of compound feeds are defined by Regulation (EC) No. 767/2009 of the European Parliament defines in the articles 15 and 17 and a detailed explanation with respect to the labelling of feed materials and compound feed for animals intended for human consumption can be found in Annex VI, stating that the levels of crude protein, crude fibre, crude oils and fats, crude ash, calcium, sodium and phosphorus need to be listed by the feed producer (EU). This 
 
