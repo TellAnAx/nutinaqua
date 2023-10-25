@@ -1,2 +1,2 @@
-# APO-SUB-2 (renaming AQUA-SUB-1)
+# APO-SUB-2
 Investigating the origin of nutrients in aquaponic systems
