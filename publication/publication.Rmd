@@ -67,6 +67,9 @@ library(viridis)
 library(RColorBrewer)
 library(bookdown)
 library(png)
+library(tellbuschR) # Install from GitHub TellAnAx/tellbuschR with GitHub token for authentication
+
+import_from_server("Feed%20composition%20APO-SUB-2.xlsx", ...)
 
 # Load functions
 source(here("R", "plot_functions.R"))
