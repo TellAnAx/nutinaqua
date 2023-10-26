@@ -16,7 +16,6 @@ publication/publication.pdf
 publication/publication_files/
 
 # Other
-plots/
 data/HWSD2_RASTER/
 data/HWSD2.mdb
 data/HWSD2.sqlite
