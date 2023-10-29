@@ -14,7 +14,7 @@ plot_google_map <- function(data,
 
   # Connect with API
   register_google(
-    key = Sys.getenv("GOOGLE_MAPS_API_KEY"),
+    key = Sys.getenv("GGMAP_GOOGLE_API_KEY"),
     account_type = "standard"
   )
 
