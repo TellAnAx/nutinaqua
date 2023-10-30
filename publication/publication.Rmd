@@ -156,7 +156,7 @@ The total daily feed input $m_{in,total}$ (`r rearingV * SD * (FR/100)` \si{\kg\
 
 
 ### Alkalinity supplements
-The input of alkalinity supplements was estimated based on @Timmons2003, with an amount of \SI{250}{\g} sodium bicarbonate (\ce{NaHCO3}) being recommended per \si{\kg} of feed input. Given the molar mass of \ce{NaHCO3} of $M(\ce{NaHCO3})$ = \SI{84.01}{\gmol}$, this would translate into $n = \frac{m}{M} = \frac{\SI{250}{\g}}{\SI{84.01}{\gmol}} = \SI{2.975}{\mol}$
+The input of alkalinity supplements was estimated based on @Timmons2003, with an amount of \SI{250}{\g} sodium bicarbonate (\ce{NaHCO3}) being recommended per \si{\kg} of feed input. Given the molar mass of \ce{NaHCO3} of $M(\ce{NaHCO3}) = \SI{84.01}{\gmol}$, this would translate into $n = \frac{m}{M} = \frac{\SI{250}{\g}}{\SI{84.01}{\gmol}} = \SI{2.975}{\mol}$ of \ce{HCO3-} as $n(\ce{HCO3-}) = n(\ce{NaHCO3})$.  
 
 
 
