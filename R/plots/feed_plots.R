@@ -1,4 +1,5 @@
-plot_data <- data$feed_commercial[[1]] %>% 
+plot_feed_comp <- function(x) {
+plot_data <- x %>% 
   select(c(producer:size_mm, P_gkg:Cu_mgkg)) %>% 
   pivot_longer(
     cols = P_gkg:Cu_mgkg,
@@ -27,5 +28,4 @@ plot_data %>%
   geom_vline(data = q3, aes(xintercept = grp.q3), linetype = "dashed") + 
   theme_bw() +
   theme(legend.position = "none")
-
-ggsave(here("plots", "feed_composition.png"))
+  }

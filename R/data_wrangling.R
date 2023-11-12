@@ -8,3 +8,17 @@ gps_coordinates <- tibble(gps = data$water_tap[[1]]$GPS,
   distinct(city, .keep_all = TRUE) %>%
   separate(gps, into = c("latitude", "longitude"),
            sep = ", ", convert = TRUE)
+
+
+
+create_plot_data <- function(data_to_wrangle) {
+  
+  # Create dataset----
+  data_to_wrangle %>% 
+    pivot_longer(
+      cols = P_gkg:Cu_mgkg,
+      names_to = "name",
+      values_to = "value"
+    ) %>% 
+    mutate(name = factor(name))
+}
