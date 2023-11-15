@@ -165,7 +165,7 @@ The input of alkalinity supplements was estimated based on @Timmons2003, with an
 \SI{90}{\p} confidence intervals were calculated for the nutrient contribution of aquafeeds and tap water.
 
 ## Software
-All calculations were conducted using R (v4.2.2) with RStudio (“Spotted Wakerobin” Release) as graphical user interface.
+All calculations were conducted using R (v4.2.2).
 
 
 
@@ -173,11 +173,9 @@ All calculations were conducted using R (v4.2.2) with RStudio (“Spotted Wakero
 # Aquafeeds as nutrient sources
 Aquafeeds are considered to be the most important source of nutrients in aquaculture (and consequently also in aquaponics) due to continuous mass input into the system. Formulating a specific aquaponics feed that meets the nutritional requirements of fish and leads to higher excretion of otherwise deficient plant nutrients is thus generally thought to be the most suitable approach for the development of an “off-the-shelf” nutrient delivery system that does not require additional management effort by aquaponics farmers [@Lennard2017; @Eck2019]. 
 
-Both fish and plants require calcium, phosphorus, magnesium, sodium, iron, copper, manganese, and zinc for functions such as the development and maintenance of the skeletal system, processes such as signal transmission, osmoregulation, as reactive centers of metalloenzymes (e.g., Haemoglobin, Chlorophyll), and others [@Lall2021; @Marschner]. However, detailed information with regards to the aquafeed inclusion levels of those nutrients is scarce. This is due to the fact that nutritional requirements of some of the mentioned substances have not yet been established for aquatic animals. Consequently, there is no target value that would have to be considered during feed formulation. Variation in the inclusion rates of such "nutritional underdogs" could thus be expected. In addition, current European regulations affecting labelling of compound feeds for aquaculture (defined by Regulation EC No. 767/2009 of the European Parliament) list only crude protein, crude fibre, crude oils and fats, crude ash, calcium, sodium and phosphorus as obligatory values to be stated on labels of commercial feeds. There is thus no incentive to analyze an aquafeed for metals other than the stated ones and as a result, the most recent publication looking into metal inclusion rates in aquafeeds dates back 40 years [@Tacon1983]. 
+- fish and plants differ in their nutritional needs
 
-```{r create_plot_data}
-create_plot_data()
-```
+Both fish and plants require calcium, phosphorus, magnesium, sodium, iron, copper, manganese, and zinc for functions such as the development and maintenance of the skeletal system, processes such as signal transmission, osmoregulation, as reactive centers of metalloenzymes (e.g., Haemoglobin, Chlorophyll), and others [@Lall2021; @Marschner]. However, detailed information with regards to the aquafeed inclusion levels of those nutrients is scarce. This is due to the fact that nutritional requirements of some of the mentioned substances have not yet been established for aquatic animals. Consequently, there is no target value that would have to be considered during feed formulation. Variation in the inclusion rates of such "nutritional underdogs" could thus be expected. In addition, current European regulations affecting labelling of compound feeds for aquaculture (defined by Regulation EC No. 767/2009 of the European Parliament) list only crude protein, crude fibre, crude oils and fats, crude ash, calcium, sodium and phosphorus as obligatory values to be stated on labels of commercial feeds. There is thus no incentive to analyze an aquafeed for metals other than the stated ones and as a result, the most recent publication looking into metal inclusion rates in aquafeeds dates back 40 years [@Tacon1983]. 
 
 ```{r plot_commercial_datasheet, include=TRUE}
 data$feed_commercial[[1]] %>% 
@@ -189,6 +187,10 @@ data$feed_commercial[[1]] %>%
 ggsave(here("plots", "feed_composition_commercial.png"))
 ```
 
+- N data
+- P data
+- Ca and K data
+
 ```{r plot_commercial_studies, include=TRUE}
 data$feed_commercial[[1]] %>% 
   create_plot_data() %>% 
@@ -199,6 +201,8 @@ data$feed_commercial[[1]] %>%
 ggsave(here("plots", "feed_composition_commercial.png"))
 ```
 
+- some commercial feeds were used in aquaponics studies. There is thus more nutrient composition data available.
+
 ```{r plot_experimental_studies, include=TRUE}
 data$feed_experimental[[1]] %>% 
   create_plot_data() %>% 
@@ -206,6 +210,9 @@ data$feed_experimental[[1]] %>%
 
 ggsave(here("plots", "feed_composition_commercial.png"))
 ```
+
+- several experimental feeds were developed for aquaponics experiments to study wether nutrient excretion patterns might differ between feed ingredients.
+- overall nutrient composition comparable to commercial feeds
 
 In fish, the essentiality of several macrominerals (calcium, phosphorus, magnesium, sodium, potassium, chloride) and microminerals (iron, copper, manganese, zinc, iodine, selenium, cobalt, and chromium) was shown [@Lall2021]. These elements play a vital role in the development and maintenance of the skeletal system, processes such as signal transmission, osmoregulation, as reactive centers of metalloenzymes, and others. A comprehensive summary can be found elsewhere (see e.g., Lall, 2003). Out of these, calcium, phosphorus, magnesium, sodium, iron, copper, manganese, and zinc are relevant for plant growth [@Marschner]. 
 
