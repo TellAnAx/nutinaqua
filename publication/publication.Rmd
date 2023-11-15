@@ -1,5 +1,5 @@
 ---
-title: "Sources of nutrients, their variability and contribution to the total input into aquaponic systems"
+title: "Nutrient inputs into aquaculture systems: Sources, variability, contribution to the nutrient budget and implications for integrated food systems such as aquaponics"
 author:
   - name: Anıl Axel Tellbüscher
     email: atellbuscher@frov.jcu.cz
@@ -25,7 +25,7 @@ footnote:
   - code: 2
     text: "Another author footnote."
 abstract: |
-  Input routes of nutrients into aquaculture and aquaponic systems are known, but their contribution to the total nutrient input and the variability between locations remains unclear.
+  Input routes of nutrients into aquaculture systems are generally known, but their contribution to the total nutrient input and the variability between locations remains unclear.
 keywords: 
   - aquaponics
   - minerals
@@ -171,7 +171,12 @@ All calculations were conducted using R (v4.2.2).
 
 
 # Aquafeeds as nutrient sources
-Aquafeeds are considered to be the most important source of nutrients in aquaculture (and consequently also in aquaponics) due to continuous mass input into the system. Formulating a specific aquaponics feed that meets the nutritional requirements of fish and leads to higher excretion of otherwise deficient plant nutrients is thus generally thought to be the most suitable approach for the development of an “off-the-shelf” nutrient delivery system that does not require additional management effort by aquaponics farmers [@Lennard2017; @Eck2019]. 
+Aquafeeds are considered to be the most important source of nutrients in aquaculture due to continuous mass input into the system. 
+- formulation of special feeds for 
+  - pond aquaculture, cage aquaculture, (low in P to reduce eutrophication)
+  - RAS (improved faeces properties as instable faeces cannot be removed from the system via mechanical filtration and thus produces a polluted effluent that is more expensive for discharge and has negative environmental effects)
+  - aquaponics (feed with high P and K)
+Formulating a specific aquaponics feed that meets the nutritional requirements of fish and leads to higher excretion of otherwise deficient plant nutrients is thus generally thought to be the most suitable approach for the development of an “off-the-shelf” nutrient delivery system that does not require additional management effort by aquaponics farmers [@Lennard2017; @Eck2019]. 
 
 - fish and plants differ in their nutritional needs
 
