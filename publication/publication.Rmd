@@ -222,16 +222,27 @@ These elements are required for physiological functions such as the development 
 
 However, detailed information with regards to the aquafeed inclusion levels of those nutrients is scarce. This might be due to the fact that nutritional requirements of some of the mentioned substances have not yet been established for aquatic animals. Thus, there is no incentive to include those nutrients into feed formulation or to monitor their inclusion rates, making considerable variation between feeds likely. 
 
-In addition, current European regulations affecting labelling of compound feeds for aquaculture (defined by Regulation EC No. 767/2009 of the European Parliament) list only crude protein, crude fibre, crude oils and fats, crude ash, calcium, sodium and phosphorus as mandatory values to be stated on labels of commercial feeds. There is thus no obligation to analyse metals other than the stated ones. As a result, the most recent publication looking into metal inclusion rates in aquafeeds dates back 40 years [@Tacon1983]. 
+In addition, current European regulations affecting labelling of compound feeds for aquaculture (defined by Regulation EC No. 767/2009 of the European Parliament) list only crude protein, crude fibre, crude oils and fats, crude ash, calcium, sodium and phosphorus as mandatory values to be stated on labels of commercial feeds. There is thus no obligation to analyse metals other than the stated ones. As a result, the most recent publication looking into metal inclusion rates in aquafeeds dates back 40 years [@Tacon1983]. A more recent overview is provided in Table \ref{tab:feedcomp}.
 
-```{r}
-data$feed_commercial[[1]] %>% 
+```{=tex}
+\begin{sidewaystable}
+  \caption{Synthesis of the mineral composition of starter and grower feeds for freshwater fishes suitable for aquaponic systems. Data covers compositions of fingerling and grower trout feeds reported by Tacon (1983), a compilation of feed compositions for African catfish, Common carp, Pikeperch, Nile tilapia, and Trout, the composition of speciality feeds for aquaponic systems and ponds and some experimental feeds used in aquaponics trials. N, P, K, Ca, Mg: \si{\gpkg}. Fe, Mn, Cu, Zn: \si{mgpkg}.}
+  \label{tab:feedcomp}
+  \vspace{1em}
+  
+  \csvautotabular[separator=semicolon]{table_feedcomp.csv}
+  
+\end{sidewaystable}
+```
+
+```{r data_commercial}
+data_commercial <- data$feed_commercial[[1]] %>% 
   create_plot_data() %>% 
-  filter(reference_id == "datasheet" & 
-           !feed_category4 %in% c("aquaponic", "pond", "cage")) %>%
+  filter(!target_system %in% c("aquaponics", "pond", "cage")) %>%
+  filter(feed_category3 != "broodstock") %>% 
   select(c(producer:feed_category4, name:value)) %>% 
   drop_na(value) %>% 
-  group_by(name, target_species) %>% 
+  group_by(name) %>% # or growth stage? feed_category3
   summarise(
     n = n(),
     min = min(value, na.rm = TRUE),
@@ -239,34 +250,36 @@ data$feed_commercial[[1]] %>%
     q2 = quantile(value, na.rm = TRUE, 0.5),
     mean = mean(value, na.rm = TRUE),
     sd = sd(value, na.rm = TRUE),
+    cv = sd/mean*100,
     q3 = quantile(value, na.rm = TRUE, 0.75),
     max = max(value, na.rm = TRUE)
-    )
+    ) %>% 
+  #filter(target_species == "tilapia") %>% 
+  #arrange(cv) %>% 
+  print()
 ```
 
 - N data
 
-Excluding speciality feeds, the range in which phosphorus can be found in commercial fish feeds is comparably narrow, ranging from \SIrange{7}{18}{\gpkg}. \SI{11(2)}{\gpkg} is found in the feeds on average with no statistical differences among species.
+In grower feeds (excluding specialty feeds), the range in which phosphorus can be found in commercial fish feeds is comparably narrow, ranging from \SIrange{7}{18}{\gpkg}. \SI{11(2)}{\gpkg} is found in the feeds on average with no statistical differences among species.
 Calcium and potassium data is not reported by default.
 
-```{r}
+```{r plot_commercial_boxplot}
 data$feed_commercial[[1]] %>% 
   create_plot_data() %>% 
-  filter(reference_id == "datasheet" & 
-           !feed_category4 %in% c("aquaponic", "pond", "age")) %>%
+  filter(!target_system %in% c("aquaponics", "pond", "cage")) %>%
   select(c(producer:feed_category4, name:value)) %>% 
   drop_na(value) %>% 
   ggplot(aes(x = target_species, y = value)) + 
   geom_boxplot(notch = TRUE) +
-  facet_wrap(facets = vars(name))
+  facet_wrap(facets = vars(name), scales = "free")
 ```
 
 
-```{r plot_commercial_datasheet, include=TRUE}
+```{r plot_commercial_density, include=TRUE}
 data$feed_commercial[[1]] %>% 
   create_plot_data() %>% 
-  filter(reference_id == "datasheet" & 
-           !feed_category4 %in% c("aquaponic", "pond", "age")) %>%
+  filter(!target_system %in% c("aquaponics", "pond", "cage")) %>%
   select(c(producer:feed_category4, name:value)) %>% 
   plot_feed_comp()
 
@@ -275,13 +288,13 @@ ggsave(here("plots", "feed_composition_commercial.png"))
 
 
 
-```{r plot_commercial_studies, include=TRUE}
-data$feed_commercial[[1]] %>% 
+```{r data_commercial_special}
+data_commercial_special <- data$feed_commercial[[1]] %>% 
   create_plot_data() %>% 
-  filter(reference_id != "datasheet") %>% 
+  filter(target_system %in% c("aquaponics", "pond", "cage")) %>% 
   select(c(producer:feed_category4, name:value)) %>% 
   drop_na(value) %>% 
-  group_by(name) %>% 
+  group_by(name, target_system) %>% 
   summarise(
     n = n(),
     min = min(value, na.rm = TRUE),
@@ -291,15 +304,19 @@ data$feed_commercial[[1]] %>%
     sd = sd(value, na.rm = TRUE),
     q3 = quantile(value, na.rm = TRUE, 0.75),
     max = max(value, na.rm = TRUE)
-    )
+    ) %>%
+  arrange(sd) %>% 
+  print()
 ```
 
-- some commercial feeds were used in aquaponics studies. There is thus more nutrient composition data available.
+Some commercial feeds were specifically formulated for aquaponics (n = 3) or pond aquaculture (n = 3).
+With an average phosphorus content of \SI{12(2)}{\gpkg}, the in-depth characterised feeds do not differ from 
+
 
 ```{r}
 data$feed_commercial[[1]] %>% 
   create_plot_data() %>% 
-  filter(reference_id != "datasheet") %>% 
+  filter(target_system %in% c("aquaponics", "pond", "cage")) %>% 
   select(c(producer:feed_category4, name:value)) %>% 
   plot_feed_comp()
 
@@ -308,8 +325,8 @@ ggsave(here("plots", "feed_composition_commercial.png"))
 
 
 
-```{r plot_experimental_studies, include=TRUE}
-data$feed_experimental[[1]] %>% 
+```{r data_experimental_studies}
+data_experimental_studies <- data$feed_experimental[[1]] %>% 
   create_plot_data() %>% 
   drop_na(value) %>% 
   group_by(name) %>% 
@@ -318,10 +335,12 @@ data$feed_experimental[[1]] %>%
     min = min(value, na.rm = TRUE),
     q1 = quantile(value, na.rm = TRUE, 0.25),
     mean = mean(value, na.rm = TRUE),
+    sd = sd(value, na.rm = TRUE),
     q2 = quantile(value, na.rm = TRUE, 0.5),
     q3 = quantile(value, na.rm = TRUE, 0.75),
     max = max(value, na.rm = TRUE)
-    )
+    ) %>% 
+  print()
 ```
 
 - several experimental feeds were developed for aquaponics experiments to study wether nutrient excretion patterns might differ between feed ingredients.
