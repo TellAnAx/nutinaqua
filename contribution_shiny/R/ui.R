@@ -1,15 +1,15 @@
 ui <- fluidPage(
   
-  tags$head(tags$link(rel = "icon", type = "image/png", sizes = "32x32", href = "logo_frov.png")),
+  tags$head(tags$link(rel = "icon", type = "image/png", sizes = "32x32", href = "logo_frov_small.png")),
   titlePanel(title =  div(img(src="logo_frov_small.png"), "The Source of Nutrients in Aquaponic Systems"), 
              windowTitle = "Nutrient Sources in Aquaponics"), 
   
   inputPanel(
-    sliderInput(inputId = "waterExchange", label = "Daily water exchange rate (% V/d)",min = 0, max = 250, value = 5),
+    sliderInput(inputId = "waterExchange", label = HTML(paste0("Water Exchange Rate (% V d",tags$sup("-1"), ')')),min = 0, max = 50, value = 5),
     sliderInput(inputId = "FR", label = "Feeding rate (% BW)", min = 0.1, max = 5, value = 2),
-    numericInput(inputId = "stockingDensity", label = "Stocking density (kg/m^3)", value = 100),
-    numericInput(inputId = "rearingV", "Volume of rearing unit (m^3)", value = 10),
-    numericInput(inputId = "totalV", label = "Total volume of RAS (m^3)", value = 15)    
+    numericInput(inputId = "stockingDensity", label = HTML(paste0("Stocking Density (kg m",tags$sup("-3"), ')')), value = 100),
+    numericInput(inputId = "rearingV", label = HTML(paste0("Volume of Rearing Unit (m",tags$sup("3"), ')')), value = 10),
+    numericInput(inputId = "totalV", label = HTML(paste0("Total Volume of RAS (m",tags$sup("3"), ')')), value = 15)    
   ),
   sidebarLayout(
     sidebarPanel(tableOutput(outputId = "resultsTable")),

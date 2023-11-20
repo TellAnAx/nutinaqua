@@ -16,9 +16,9 @@ server <- function(input, output, session) {
 
     results <- data.frame(
       Value = c(
-        'Total biomass [kg]',
+        'Total biomass (kg)',
         'Daily feed fed (kg/d)',
-        'Daily freshwater volume (m^3/d)',
+        'Daily freshwater volume (m3/d)',
         'Daily freshwater per feed (L/kg/d)'
       ),
       Results = c(
@@ -35,10 +35,12 @@ server <- function(input, output, session) {
 
   # PLOT
   output$resultsPlot <- renderPlot(expr = {
-    data %>%
+    # Load data----
+    read_delim(here("contribution_shiny", "data", "nutrient_contribution.csv"),
+                      col_types = c("f", "n", "n", "n", "n")) %>%
       mutate(
-        WaterContribution = dailyFreshwaterR() * concWater_g.m3,
-        FeedContribution = dailyFeedR() * feedComp_g.kg * digestibility
+        WaterContribution = input$totalV * (input$waterExchange/100) * `concWater_g/m3`,
+        FeedContribution = input$rearingV * input$stockingDensity * (input$FR / 100) * `feedComp_g/kg` * digestibility
       ) %>%
       select(c(compound, WaterContribution, FeedContribution)) %>%
       pivot_longer(
