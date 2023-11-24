@@ -249,9 +249,13 @@ data_commercial <- data$feed_commercial[[1]] %>%
 
 - N data
 
-After exclusion of specialty feeds, the range in which phosphorus, potassium, and calcium can be found in modern commercial fish feeds is comparably narrow, ranging from \SIrange{7}{18}{\gpkg}, \SIrange{10}{13}{\gpkg}, and \SI{12}{20}{\gpkg}, respectively. These nutrients also show the lowest \gls{cv} (between \SIrange{20}{21}{\p}). The average inclusion rates did not significantly change in comparison with past values, being \SI{12(2.5)}{\gpkg}, \SI{11(2.3)}{\gpkg}, and \SI{18(3.7)}{\gpkg} of phosphorus, calcium, and potassium in nowadays' feeds, respectively, while \SI{14.9(0.02)}{\gpkg}, \SI{9.6(1.0)}{\gpkg}, and \SI{20.1(2.7)}{\gpkg} were reported in the past [@Tacon1983]. Magnesium inclusion rates are slightly more variable, ranging from \SIrange{1}{3}{\gpkg} with an average of \SI{2(0.8)}{\gpkg} (\SI{2.1(0.1)}{\gpkg} in the past) and a \gls{cv} of \SI{36}{\p}. 
+After exclusion of specialty feeds, the range in which phosphorus, potassium, and calcium can be found in modern commercial fish feeds is comparably narrow, ranging from \SIrange{7}{18}{\gpkg}, \SIrange{10}{13}{\gpkg}, and \SIrange{12}{20}{\gpkg}, respectively. These nutrients also show the lowest \gls{cv} (between \SIrange{20}{21}{\p}). The average inclusion rates did not significantly change in comparison with past values, being \SI{12(2.5)}{\gpkg}, \SI{11(2.3)}{\gpkg}, and \SI{18(3.7)}{\gpkg} of phosphorus, calcium, and potassium in nowadays' feeds, respectively, while \SI{14.9(0.02)}{\gpkg}, \SI{9.6(1.0)}{\gpkg}, and \SI{20.1(2.7)}{\gpkg} were reported before [@Tacon1983]. Magnesium inclusion rates are slightly more variable, ranging from \SIrange{1}{3}{\gpkg} with an average of \SI{2(0.8)}{\gpkg} (\SI{2.1(0.1)}{\gpkg} in the past) and a \gls{cv} of \SI{36}{\p}. 
 
-The microminerals 
+In comparison with past values, the highest increase in their inclusion rates was found for the microminerals. 
+
+Iron increased by `r (1-183.5/209)*100`\si{\p}, with an average of \SI{209(237.1)}{\mgpkg} in comparison with \SI{183.5(24.7)}{\mgpkg} in the 90ies. Iron is also the nutrient with the highest variability in aquafeeds, indicated by the \gls{cv} of \SI{114}{\p} and a range from \SIrange{40}{544}{\mgpkg}.
+
+Modern aquafeeds are `r (1-15/20)*100`\si{\p} richer in copper than old ones. The average inclusion rate increased from \SI{15(1.4)}{\mgpkg} to \SI{20(18.5)}{\mgpkg}. In the case of zinc, inclusion rates increased by `r (1-90/207)*100`\si{\p}, from \SI{90(7)}{\mgpkg} to \SI{207(126.6)}{\mgpkg}. The inclusion rates of both copper and zinc were again highly variable, with \gls{cv} of \SI{93}{\p} and \SI{61}{\p}, and ranges from \SIrange{5}{46}{\mgpkg} and \SIrange{90}{384}{\mgpkg}, respectively. 
 
 ```{=tex}
 \begin{sidewaystable}
@@ -400,14 +404,6 @@ Mn (unknown)
 This circumstance is due to the current regulations affecting the labeling. Currently, general mandatory and specific requirements with regards to the labelling of compound feeds are defined by Regulation (EC) No. 767/2009 of the European Parliament defines in the articles 15 and 17 and a detailed explanation with respect to the labelling of feed materials and compound feed for animals intended for human consumption can be found in Annex VI, stating that the levels of crude protein, crude fibre, crude oils and fats, crude ash, calcium, sodium and phosphorus need to be listed by the feed producer (EU). This 
 
 
-## Nutrient inclusion rates
-Gathered data was split into four subsets: 1) Commercial aquafeeds with available data according to EU legislation, 2) commercial aquafeeds with additional data (e.g., determined during other studies), 3) commercial aquafeeds for aquaponics purposes, and 4) experimental aquafeeds formulated for aquaponics studies. Figure XXX compares the distribution of nutrients in those subset. 
-
-It is graspable that the ranges of those nutrients with specific target concentrations, such as phosphorus, are comparably narrow. Outliers are 
-
-```{=tex}
-% overview table with the composition of commercial feeds
-```
 
 
 ### Experimental feeds
@@ -426,15 +422,16 @@ Different natural and new feed ingredients were recently tested.
 ```
 
 ## Sources and extent of variability
-When considering aquafeeds as nutrient input into an aquaculture system, it is necessary to 
-
-The variability found in the data can be traced back to three causative factors [@Tacon1983]: 
+The variability found in the data can be traced back to three causative factors, that are 1) the nutritional requirements of the fish species for which the feed was formulated, 2) the current approach of feed formulation based on nutrient digestibility, and 3) variability of the raw material composition among batches.
 
 [@Prabhu]
 
 ### Fish species
 @Gebauer2023
 @Shaw2022b
+
+### Feed formulation
+
 
 ### Ingredients (digestibility)
 @Shaw2022a
