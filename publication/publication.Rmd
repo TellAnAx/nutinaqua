@@ -25,7 +25,7 @@ footnote:
   - code: 2
     text: "Another author footnote."
 abstract: |
-  Input routes of nutrients into aquaculture systems are generally known, but their contribution to the total nutrient input and the variability between locations remains unclear.
+  Understanding substance inputs into aquaculture systems and their variability is necessary for their downstream management. This study reviews substance input routes with respect to their contribution to total substance flows.
 keywords: 
   - aquaponics
   - minerals
