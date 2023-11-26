@@ -61,6 +61,7 @@ options(digits = 1)
 library(here)
 library(readxl)
 library(tidyverse)
+library(rstatix)
 library(ggmap)
 library(gdata)
 library(viridis)
@@ -162,7 +163,10 @@ The input of alkalinity supplements was estimated based on @Timmons2003, with an
 
 
 ## Statistics
+For all statistical tests, a significance level of $\alpha = 0.05$ was chosen, unless otherwise stated.
+
 \SI{90}{\p} confidence intervals were calculated for the nutrient contribution of aquafeeds and tap water.
+
 
 ## Software
 All calculations were conducted using R (v4.2.2).
@@ -179,35 +183,35 @@ Aquafeeds are considered the most important nutrient input into aquaculture syst
 \centering
   \caption{Essential nutrients for fish and plants, adapted from Bittzanszky et al. (2016).}
   \label{tab:essentials}
-  \begin{tabularx}{\textwidth}{XXX}
+  \begin{tabularx}{\textwidth}{XXXX}
 
 \toprule
 
-Nutrient & Fish & Plant \\
+Nutrient & Fish & Plant & Considered \\
 
 \midrule
-C & M & M \\
-O & M & M \\
-P & M & M \\
-K & M & M \\
-Ca & M & M \\
-Mg & M & M \\
-S & M & M \\
+C & M & M & yes\\
+O & M & M & no\\
+P & M & M & yes\\
+K & M & M & no\\
+Ca & M & M & yes\\
+Mg & M & M & no\\
+S & M & M & no\\
 
-N & u & u \\
-Fe & u & u \\
-Mn & u & u \\
-Cu & u & u \\
-Zn & u & u \\
-Mo & u & u \\
+N & u & u & yes\\
+Fe & u & u & no\\
+Mn & u & u & no\\
+Cu & u & u & no\\
+Zn & u & u & yes\\
+Mo & u & u & no\\
 
 \hline
 
-Na & M & - \\
-B & - & u \\
-Ni & - & u \\
-Cr & u & - \\
-I & u & - \\
+Na & M & - & no\\
+B & - & u & no\\
+Ni & - & u & no\\
+Cr & u & - & no\\
+I & u & - & no\\
 
 
 \bottomrule
@@ -253,13 +257,13 @@ After exclusion of specialty feeds, the range in which phosphorus, potassium, an
 
 In comparison with past values, the highest increase in their inclusion rates was found for the microminerals. 
 
-Iron increased by `r (1-183.5/209)*100`\si{\p}, with an average of \SI{209(237.1)}{\mgpkg} in comparison with \SI{183.5(24.7)}{\mgpkg} in the 90ies. Iron is also the nutrient with the highest variability in aquafeeds, indicated by the \gls{cv} of \SI{114}{\p} and a range from \SIrange{40}{544}{\mgpkg}.
+The iron content of aquafeeds increased by `r (1-183.5/209)*100`\si{\p}, with an average of \SI{209(237.1)}{\mgpkg} in comparison with \SI{183.5(24.7)}{\mgpkg} in the 90ies. Iron is also the nutrient with the highest variability in aquafeeds, indicated by the \gls{cv} of \SI{114}{\p} and a range from \SIrange{40}{544}{\mgpkg}.
 
-Modern aquafeeds are `r (1-15/20)*100`\si{\p} richer in copper than old ones. The average inclusion rate increased from \SI{15(1.4)}{\mgpkg} to \SI{20(18.5)}{\mgpkg}. In the case of zinc, inclusion rates increased by `r (1-90/207)*100`\si{\p}, from \SI{90(7)}{\mgpkg} to \SI{207(126.6)}{\mgpkg}. The inclusion rates of both copper and zinc were again highly variable, with \gls{cv} of \SI{93}{\p} and \SI{61}{\p}, and ranges from \SIrange{5}{46}{\mgpkg} and \SIrange{90}{384}{\mgpkg}, respectively. 
+Nowadays, aquafeeds are richer in copper than in the past. The average inclusion rate increased by `r (1-15/20)*100`\si{\p}, from \SI{15(1.4)}{\mgpkg} to \SI{20(18.5)}{\mgpkg}. In the case of zinc, inclusion rates increased by `r (1-90/207)*100`\si{\p}, from \SI{90(7)}{\mgpkg} to \SI{207(126.6)}{\mgpkg}. The inclusion rates of both copper and zinc were again highly variable, with \gls{cv} of \SI{93}{\p} and \SI{61}{\p}, and ranges from \SIrange{5}{46}{\mgpkg} and \SIrange{90}{384}{\mgpkg}, respectively. 
 
 ```{=tex}
 \begin{sidewaystable}
-  \caption{Synthesis of the mineral composition of starter and grower feeds for freshwater fishes suitable for aquaponic systems. Data covers compositions of fingerling and grower trout feeds reported by Tacon (1983), a compilation of feed compositions for African catfish, Common carp, Pikeperch, Nile tilapia, and Trout, the composition of speciality feeds for aquaponic systems and ponds and some experimental feeds used in aquaponics trials. N, P, K, Ca, Mg: \si{\gpkg}. Fe, Mn, Cu, Zn: \si{\mgpkg}.}
+  \caption{Synthesis of the mineral composition of starter and grower feeds for freshwater fishes suitable for aquaponic systems. Data covers compositions of fingerling and grower trout feeds reported by Tacon (1983), a compilation of feed compositions for African catfish, Common carp, Pikeperch, Nile tilapia, and Trout, the composition of speciality feeds for aquaponic systems, and some experimental feeds used in aquaponics trials. N, P, K, Ca, Mg: \si{\gpkg}. Fe, Mn, Cu, Zn: \si{\mgpkg}.}
   \label{tab:feedcomp}
   \vspace{1em}
   
@@ -301,7 +305,7 @@ ggsave(here("plots", "feed_composition_commercial.png"))
 ```{r data_commercial_special}
 data_commercial_special <- data$feed_commercial[[1]] %>% 
   create_plot_data() %>% 
-  filter(target_system %in% c("aquaponics", "pond", "cage")) %>% 
+  filter(target_system %in% c("aquaponics")) %>% 
   select(c(producer:feed_category4, name:value)) %>% 
   drop_na(value) %>% 
   group_by(name, target_system) %>% 
@@ -312,6 +316,7 @@ data_commercial_special <- data$feed_commercial[[1]] %>%
     q2 = quantile(value, na.rm = TRUE, 0.5),
     mean = mean(value, na.rm = TRUE),
     sd = sd(value, na.rm = TRUE),
+    cv = sd/mean*100,
     q3 = quantile(value, na.rm = TRUE, 0.75),
     max = max(value, na.rm = TRUE)
     ) %>%
@@ -319,14 +324,30 @@ data_commercial_special <- data$feed_commercial[[1]] %>%
   print()
 ```
 
-Some commercial feeds were specifically formulated for aquaponics (n = 3) or pond aquaculture (n = 3).
-With an average phosphorus content of \SI{12(2)}{\gpkg}, the in-depth characterised feeds do not differ from 
+
+## Aquaponics feeds
+There are also some commercial feeds available that are marketed as specifically formulated for aquaponic systems (n = 3). Though, an in-depth characterisation of these feeds is lacking. 
+
+```{r}
+data$feed_commercial[[1]] %>% 
+  create_plot_data() %>% 
+  filter(!target_system %in% c("pond", "cage")) %>% 
+  select(c(producer:feed_category4, name:value)) %>% 
+  drop_na(value) %>% 
+  mutate(target_system = if_else(is.na(target_system),"not specified",target_system)) %>% 
+  filter(name == "P_gkg") %>% 
+  rstatix::t_test(value ~ target_system)
+```
+
+Even though available data is limited, it can be seen that the phosphorus content of these aquafeeds is highly variable (\gls{cv} = \SI{76}{\p}). The average phosphorus content of \SI{22(17)}{\gpkg}, meanwhile, is not significantly different from the unspecific diets (t-test: p = 0.4). Information with regards to potassium and calcium inclusion rates were reported only for one feed. Here, potassium and calcium inclusion rates were `r (1-20/11)*100`\si{\p} higher and `r (1-15/18)*100`\si{\p} lower than the average of unspecific diets, respectively. Other data with regards to these feeds is not available to the best of the author's knowledge.
+
+
 
 
 ```{r}
 data$feed_commercial[[1]] %>% 
   create_plot_data() %>% 
-  filter(target_system %in% c("aquaponics", "pond", "cage")) %>% 
+  filter(target_system %in% c("aquaponics")) %>% 
   select(c(producer:feed_category4, name:value)) %>% 
   plot_feed_comp()
 
@@ -334,6 +355,23 @@ ggsave(here("plots", "feed_composition_commercial.png"))
 ```
 
 
+## Experimental feeds
+In the recent past, experiments were conducted to closer examine the manipulability of substance excretion patterns by fish, for instance in relation to alterations in the raw material composition.
+
+
+@Seawright1998
+
+Different natural and new feed ingredients were recently tested.
+@Shaw2022a
+@Shaw2022b
+@Gebauer2023
+
+- several experimental feeds were developed for aquaponics experiments to study wether nutrient excretion patterns might differ between feed ingredients.
+- overall nutrient composition comparable to commercial feeds
+
+```{=tex}
+% overview table with the composition of experimental feeds
+```
 
 ```{r data_experimental_studies}
 data_experimental_studies <- data$feed_experimental[[1]] %>% 
@@ -346,6 +384,7 @@ data_experimental_studies <- data$feed_experimental[[1]] %>%
     q1 = quantile(value, na.rm = TRUE, 0.25),
     mean = mean(value, na.rm = TRUE),
     sd = sd(value, na.rm = TRUE),
+    cv = sd/mean*100,
     q2 = quantile(value, na.rm = TRUE, 0.5),
     q3 = quantile(value, na.rm = TRUE, 0.75),
     max = max(value, na.rm = TRUE)
@@ -353,8 +392,12 @@ data_experimental_studies <- data$feed_experimental[[1]] %>%
   print()
 ```
 
-- several experimental feeds were developed for aquaponics experiments to study wether nutrient excretion patterns might differ between feed ingredients.
-- overall nutrient composition comparable to commercial feeds
+```{r}
+bind_rows(list(commercial = data_commercial, experimental = data_experimental_studies), .id = "source") %>% 
+  arrange(name) %>% 
+  print()
+```
+
 
 ```{r}
 data$feed_experimental[[1]] %>% 
@@ -406,20 +449,7 @@ This circumstance is due to the current regulations affecting the labeling. Curr
 
 
 
-### Experimental feeds
-Several experiments were conducted in the past to closer examine the extent to which manipulation of aquafeeds is possible when aiming at specific substance excretion patterns by fish.
 
-@Seawright1998
-
-Different natural and new feed ingredients were recently tested.
-@Shaw2022a
-@Shaw2022b
-@Gebauer2023
-
-
-```{=tex}
-% overview table with the composition of experimental feeds
-```
 
 ## Sources and extent of variability
 The variability found in the data can be traced back to three causative factors, that are 1) the nutritional requirements of the fish species for which the feed was formulated, 2) the current approach of feed formulation based on nutrient digestibility, and 3) variability of the raw material composition among batches.
@@ -500,6 +530,11 @@ The average nutrient composition of both aquafeeds and source water and the lowe
 The highest daily nutrient inputs with respect to the macronutrients N and P in the reviewed studies likely originated from aquafeeds, being on average 99.2% and 99.3%, respectively. The overall amounts of these two nutrients contributed by source water are negligible. Aquafeeds can also be assumed being the main source of the micronutrients Fe, Mn, Cu, Zn, and Mo, with an average contribution of 96.2%, 97.2%, 79.8%, 93.9% and 76.3%, respectively. Among these nutrients, Cu and Mo showed the highest variability with respect to the contribution of source water between locations (Cu 90% CI: 8%, 29.7%; Mo 90% CI: 14.7%, 29.3%), with up to almost a third of the daily inputs possibly entering the system via the water. Meanwhile, source water likely had a comparably high contribution to Mg and S. With 76.5% for Mg (90% CI: 72.1%, 79.7%) and 68.8% for S (90% CI: 58.9%, 74.8%), an average delivery of more than half of the daily input was found. Also, a considerable contribution to daily B (63.1%; 90% CI: 48.5%, 48.5%) and Ni (56.2%; 90% CI: 33.3%, 67.4%) inputs probably originated from the source water.
 
 Inputs of the remaining two nutrients, K and Ca, were found to be heavily depending on the alkalinity supplement used. In absence of the alkalinity supplement, aquafeeds were found to have the greatest impact on K with a contribution of 81.16%, while a higher proportion of Ca (69.62%; 90% CI: 65.51%, 72.86%) would enter the system on average via the water, compared with an average of30.38% of feed contribution. The difference is more pronounced with respect to Na: 82.25% (90% CI: 73.11%, 86.76%) of the total input was calculated to originate from water while only 17.75% were found to enter the system via daily feeding. However, the calculated quantities of alkalinity supplements necessary to maintain a constant pH were found to dominate each input scenario, resulting in a contribution of more than 80% of the total input of K, Ca, or Na in any case. 
+
+
+## Stoichiometry of nutrient inputs
+
+
 
 ## Economic considerations
 Table 3.2 summarizes some supplements, their properties and prices. Using one of these substances would result in the supplement contributing 98.7%, 86.5% or 96.3% of the total K, Ca or Na input, respectively. Regarding the costs for alkalinity supplements, Na based substances are the cheapest, with prices of between 0.01 and 0.03 EUR d-1, followed by Ca based supplements ranging in the same price class. The most expensive supplements to be used are those based on K. These substances would cause costs between 0.10 and 0.14 EUR d-1, thus being on average 6 times more expensive than Ca or Na based substances.
