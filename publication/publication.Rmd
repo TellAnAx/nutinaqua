@@ -179,45 +179,7 @@ Aquafeeds are considered the most important nutrient input into aquaculture syst
 
 ```{=tex}
 % list of Bittzansky nutrients for fish and plants, together with those that have to be reported by law
-\begin{table}
-\centering
-  \caption{Essential nutrients for fish and plants, adapted from Bittzanszky et al. (2016).}
-  \label{tab:essentials}
-  \begin{tabularx}{\textwidth}{XXXX}
-
-\toprule
-
-Nutrient & Fish & Plant & Considered \\
-
-\midrule
-C & M & M & yes\\
-O & M & M & no\\
-P & M & M & yes\\
-K & M & M & no\\
-Ca & M & M & yes\\
-Mg & M & M & no\\
-S & M & M & no\\
-
-N & u & u & yes\\
-Fe & u & u & no\\
-Mn & u & u & no\\
-Cu & u & u & no\\
-Zn & u & u & yes\\
-Mo & u & u & no\\
-
-\hline
-
-Na & M & - & no\\
-B & - & u & no\\
-Ni & - & u & no\\
-Cr & u & - & no\\
-I & u & - & no\\
-
-
-\bottomrule
-
-  \end{tabularx}
-\end{table}
+\include{table_essential_nutrients.tex}
 ```
 
 Both fish and plants require carbon and oxygen in large quantities. Further macronutrients that are required by both are calcium, phosphorus, magnesium, iron, copper, manganese, and zinc for 
