@@ -192,10 +192,13 @@ In addition, current European regulations affecting labelling of compound feeds 
 
 ```{r data_commercial}
 data_commercial <- data$feed_commercial[[1]] %>% 
-  create_plot_data() %>% 
   filter(!target_system %in% c("aquaponics", "pond", "cage")) %>%
   filter(feed_category3 != "broodstock") %>% 
-  select(c(producer:feed_category4, name:value)) %>% 
+  select(-c(producer, feed_name, reference_id, target_system))
+  
+data_commercial_summary <- data_commercial %>% 
+  create_plot_data() %>% 
+  select(c(target_species:feed_category4, name:value)) %>% 
   drop_na(value) %>% 
   group_by(name) %>% # or growth stage? feed_category3
   summarise(
@@ -265,12 +268,15 @@ ggsave(here("plots", "feed_composition_commercial.png"))
 
 
 ```{r data_commercial_special}
-data_commercial_special <- data$feed_commercial[[1]] %>% 
-  create_plot_data() %>% 
+data_commercial_AP <- data$feed_commercial[[1]] %>% 
   filter(target_system %in% c("aquaponics")) %>% 
-  select(c(producer:feed_category4, name:value)) %>% 
+  select(-c(producer, feed_name, reference_id, target_system))
+  
+data_commercial_AP_summary <- data_commercial_AP %>% 
+  create_plot_data() %>% 
+  select(c(target_species:feed_category4, name:value)) %>% 
   drop_na(value) %>% 
-  group_by(name, target_system) %>% 
+  group_by(name) %>% 
   summarise(
     n = n(),
     min = min(value, na.rm = TRUE),
@@ -288,7 +294,7 @@ data_commercial_special <- data$feed_commercial[[1]] %>%
 
 
 ## Aquaponics feeds
-There are also some commercial feeds available that are marketed as specifically formulated for aquaponic systems (n = 3). Though, an in-depth characterisation of these feeds is lacking. 
+There are some commercial feeds available that are marketed as specifically formulated for aquaponic systems (n = 3). Though, an in-depth characterisation of these feeds was not done until now to the best of the author's knowledge. 
 
 ```{r}
 data$feed_commercial[[1]] %>% 
@@ -301,12 +307,12 @@ data$feed_commercial[[1]] %>%
   rstatix::t_test(value ~ target_system)
 ```
 
-Even though available data is limited, it can be seen that the phosphorus content of these aquafeeds is highly variable (\gls{cv} = \SI{76}{\p}). The average phosphorus content of \SI{22(17)}{\gpkg}, meanwhile, is not significantly different from the unspecific diets (t-test: p = 0.4). Information with regards to potassium and calcium inclusion rates were reported only for one feed. Here, potassium and calcium inclusion rates were `r (1-20/11)*100`\si{\p} higher and `r (1-15/18)*100`\si{\p} lower than the average of unspecific diets, respectively. Other data with regards to these feeds is not available to the best of the author's knowledge.
+However, even though available data is limited, it can be seen that the phosphorus content of these aquafeeds is highly variable (\gls{cv} = \SI{76}{\p}). The average phosphorus content of \SI{22(17)}{\gpkg}, meanwhile, is not significantly different from the unspecific diets (t-test: p = 0.4). Information with regards to potassium and calcium inclusion rates were reported only for one feed. Here, potassium and calcium inclusion rates were `r (1-20/11)*100`\si{\p} higher and `r (1-15/18)*100`\si{\p} lower than the average of unspecific diets, respectively. Other data with regards to these feeds is not available to the best of the author's knowledge.
 
 
 
 
-```{r}
+```{r include=TRUE}
 data$feed_commercial[[1]] %>% 
   create_plot_data() %>% 
   filter(target_system %in% c("aquaponics")) %>% 
@@ -318,25 +324,13 @@ ggsave(here("plots", "feed_composition_commercial.png"))
 
 
 ## Experimental feeds
-In the recent past, experiments were conducted to closer examine the manipulability of substance excretion patterns by fish, for instance in relation to alterations in the raw material composition.
-
-
-@Seawright1998
-
-Different natural and new feed ingredients were recently tested.
-@Shaw2022a
-@Shaw2022b
-@Gebauer2023
-
-- several experimental feeds were developed for aquaponics experiments to study wether nutrient excretion patterns might differ between feed ingredients.
-- overall nutrient composition comparable to commercial feeds
-
-```{=tex}
-% overview table with the composition of experimental feeds
-```
+In the recent past, experiments were conducted to closer examine the manipulability of substance excretion patterns by fish in relation to alterations in the raw material composition of provided aquafeeds.
 
 ```{r data_experimental_studies}
-data_experimental_studies <- data$feed_experimental[[1]] %>% 
+data_experimental <- data$feed_experimental[[1]] %>% 
+  select(-c(reference_id, treatment_id))
+
+data_experimental_summary <- data_experimental %>%   
   create_plot_data() %>% 
   drop_na(value) %>% 
   group_by(name) %>% 
@@ -354,14 +348,15 @@ data_experimental_studies <- data$feed_experimental[[1]] %>%
   print()
 ```
 
+The overall nutrient composition of the experimental diets is comparable with commercially available aquafeeds, with no significant differences in average nutrient inclusion levels. Potassium (t-test: p = 0.3), phosphorus (t-test: p = 0.1), calcium (t-test: p = 0.4), and magnesium (t-test: p = 0.7) had average inclusion rates of \SI{9(2.8)}{\gpkg}, \SI{14(4.9)}{\gpkg}, \SI{15(8.4)}{\gpkg}, and \SI{2(0.7)}{\gpkg}, respectively.
+Also, no differences were found for iron (t-test: p = 0.4), copper (t-test: p = 0.7), and zinc (t-test: p = 0.2). The average inclusion rates were \SI{348(29)}{\mgpkg}, \SI{16(2.9)}{\mgpkg}, and \SI{93(35.8)}{\mgpkg}, respectively.
+
 ```{r}
-bind_rows(list(commercial = data_commercial, experimental = data_experimental_studies), .id = "source") %>% 
-  arrange(name) %>% 
-  print()
+bind_rows(list(commercial = data_commercial, experimental = data_experimental), .id = "source") %>% 
+  t_test(Mg_gkg ~ source)
 ```
 
-
-```{r}
+```{r include=TRUE}
 data$feed_experimental[[1]] %>% 
   create_plot_data() %>% 
   plot_feed_comp()
@@ -371,21 +366,30 @@ ggsave(here("plots", "feed_composition_commercial.png"))
 
 
 
-In fish, the essentiality of several macrominerals (calcium, phosphorus, magnesium, sodium, potassium, chloride) and microminerals (iron, copper, manganese, zinc, iodine, selenium, cobalt, and chromium) was shown [@Lall2021]. These elements play a vital role in the development and maintenance of the skeletal system, processes such as signal transmission, osmoregulation, as reactive centers of metalloenzymes, and others. A comprehensive summary can be found elsewhere (see e.g., Lall, 2003). Out of these, calcium, phosphorus, magnesium, sodium, iron, copper, manganese, and zinc are relevant for plant growth [@Marschner]. 
+## Sources and extent of variability
+The variability found in the data can be traced back to three causative factors, that are 1) the nutritional requirements of the fish species for which the feed was formulated, 2) the current approach of feed formulation based on nutrient digestibility, and 3) variability of the raw material composition among batches.
+
+[@Prabhu]
+
+### Fish species
+@Gebauer2023
+@Shaw2022b
+
+### Feed formulation
+Feed formulators need to react to fluctuations of market prices for raw materials and the natural variation in raw material composition. 
+
+
+### Ingredients (digestibility)
+@Shaw2022a
+@Shaw2022b
+@Gebauer2023
+@Seawright1998
+
+ 
 
 
 
- these substances are not 
 
-This circumstance is due to the current regulations affecting the labeling. Currently, general mandatory and specific requirements with regards to the labelling of compound feeds are defined by Regulation (EC) No. 767/2009 of the European Parliament defines in the articles 15 and 17 and a detailed explanation with respect to the labelling of feed materials and compound feed for animals intended for human consumption can be found in Annex VI, stating that the levels of crude protein, crude fibre, crude oils and fats, crude ash, calcium, sodium and phosphorus need to be listed by the feed producer (EU). This 
-
-
-
-
-In fish, the essentiality of several macrominerals (calcium, phosphorus, magnesium, sodium, potassium, chloride) and microminerals (iron, copper, manganese, zinc, iodine, selenium, cobalt, and chromium) was shown [@Lall2021]. These elements play a vital role in the development and maintenance of the skeletal system, processes such as signal transmission, osmoregulation, as reactive centers of metalloenzymes, and others. A comprehensive summary can be found elsewhere (see e.g., Lall, 2003).
-While macrominerals are taken up in relatively large quantities by fish, only small amounts of others are required of the microminerals. However, exact nutritional requirements are unknown for many of the mentioned substances due to difficulties in their determination, as described elsewhere (see e.g., Lall, 2003). In addition, uptake from the water via gills and skin contributes significantly to the nutrient budget, enabling the organism to reach homeostasis. Phosphorus, magnesium, iron, zinc, and selenium are mainly taken up via the feed.
-
-This is known for
 
 Following: [@Lall2003]
 K (water, feed)
@@ -405,33 +409,6 @@ Zn (feed)
 Mn (unknown)
 
 
-
-This circumstance is due to the current regulations affecting the labeling. Currently, general mandatory and specific requirements with regards to the labelling of compound feeds are defined by Regulation (EC) No. 767/2009 of the European Parliament defines in the articles 15 and 17 and a detailed explanation with respect to the labelling of feed materials and compound feed for animals intended for human consumption can be found in Annex VI, stating that the levels of crude protein, crude fibre, crude oils and fats, crude ash, calcium, sodium and phosphorus need to be listed by the feed producer (EU). This 
-
-
-
-
-
-
-## Sources and extent of variability
-The variability found in the data can be traced back to three causative factors, that are 1) the nutritional requirements of the fish species for which the feed was formulated, 2) the current approach of feed formulation based on nutrient digestibility, and 3) variability of the raw material composition among batches.
-
-[@Prabhu]
-
-### Fish species
-@Gebauer2023
-@Shaw2022b
-
-### Feed formulation
-
-
-### Ingredients (digestibility)
-@Shaw2022a
-@Shaw2022b
-@Gebauer2023
-@Seawright1998
-
-
 When discussing aquafeeds as nutrient input route, it is important to consider pathways of diet utilization, as shown in Figure 1.2. Uneaten feed and the indigestible mass fraction of ingested feed make up the solid wastes. The digestible mass fraction is meanwhile utilized to sustain the animals’ basal metabolism, somatic growth and reproductive activity. Metabolic end products are then excreted via the gills and the urinary system in form of dissolved matter [@Hardy2003; @Evans2005]. Only the dissolved fraction of the nutrients is immediately available for plant uptake via the root system.
 
 The availability of digestibility, retentiton and excretion data for individual nutrients, with the former expressed as \gls{adc}, depends on whether the nutrient is essential and has to be considered for feed formulation. 
@@ -448,12 +425,13 @@ Studies about \gls{adc} for the remaining essential plant nutrients are scarce. 
 
 
 
+
 # Water as nutrient source
 - Why is water added?
 - Where does it come from?
 
 
-Water is added to the system either to compensate evaporation, spillage or leaning losses (e.g., the drum filter backwash) or to dilute accumulating substances such as nitrate [@Maucieri2018]. The source water can originate from wells, collected rain or the municipal tap.
+After the initial system fill-up, water is added to the system either to compensate evaporation, spillage or leaning losses (e.g., the drum filter backwash) or to dilute accumulating substances such as nitrate [@Maucieri2018]. The source water for an aquaponic system can originate from wells, collected rain, other sources of surface water, or municipal tap. Aqua
 
 ## Nutrient inclusion rates
 The importance of water as nutrient source is seen as negligible [@Schmautz2016]. However, large amounts of calcium (Ca), magnesium (Mg) and sulfur (S), that are essential plant nutrients, were found to enter the system via exchange water in one study [@Delaide2017]. 
