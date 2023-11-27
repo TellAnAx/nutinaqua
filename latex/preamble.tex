@@ -16,6 +16,9 @@
 
 \sisetup{separate-uncertainty, multi-part-units = repeat}
 
+\newcommand\SIci[5]{\SI{#1}{#2} ({#3}CI: \SIrange{#4}{#5}{#2})} % Confidence interval
+\newcommand\SIcv[1]{\SI{#1}{\percent}} % Coefficient of variation
+
 \DeclareSIUnit[number-unit-product = {}]\degC{\degreeCelsius}
 \DeclareSIUnit[number-unit-product = {}]\p{\percent}
 \DeclareSIUnit[number-unit-product = \;]\s{\second}
