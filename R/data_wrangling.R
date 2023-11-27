@@ -1,4 +1,4 @@
-### MAP PLOT DATA-----------------------------------
+# DATA WRANGLING FOR MAP PLOT-----------------------------------
 gps_coordinates <- tibble(gps = data$water_tap[[1]]$GPS,
                           location = data$water_tap[[1]]$Location,
                           city = data$water_tap[[1]]$City,
@@ -11,6 +11,7 @@ gps_coordinates <- tibble(gps = data$water_tap[[1]]$GPS,
 
 
 
+# DATA WRANGLING FOR FEED PLOT-----------------------------------
 create_plot_data <- function(data_to_wrangle) {
   
   # Create dataset----
