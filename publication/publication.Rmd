@@ -62,6 +62,7 @@ library(here)
 library(readxl)
 library(tidyverse)
 library(rstatix)
+library(NADA)
 library(ggmap)
 library(gdata)
 library(viridis)
@@ -434,42 +435,49 @@ Studies about \gls{adc} for the remaining essential plant nutrients are scarce. 
 After an initial system fill-up, water is added to the system either to compensate evaporation, spillage or leaning losses (e.g., the drum filter backwash) or to dilute accumulating substances such as nitrate [@Maucieri2018]. The source water for an aquaponic system can originate from wells, collected rain, other sources of surface water, or municipal tap. However, considering that aquaponic systems are seen as especially beneficial for water-scarce regions [@Joyce2019] or urban areas [@Junge2017], where restrictive water management by authorities can be expected, tap water likely represents an important source of water. This assumption is also corroborated by recent survey results among aquaponic practicioners [@Pattillo2022]. Thus, the following assessment of water composition data focusses on the evaluation of tap water analyses.
 
 ```{r}
-selection <- data$water_tap[[1]] %>% 
-  select(Reference_ID:GPS, matches("belowLimit")) %>% 
-  pivot_longer(cols = NH4_belowLimit:TOC_belowLimit,
-               names_to = "analyte",
-               values_to = "limit") %>% 
-  mutate(analyte = str_remove(analyte, "_belowLimit"))
-
-data$water_tap[[1]] %>% 
-  select(Reference_ID:GPS, matches("mgL")) %>% 
-  pivot_longer(cols = NH4_mgL:TOC_mgL,
-               names_to = "analyte",
-               values_to = "value_mgL") %>% 
-  mutate(analyte = str_remove(analyte, "_mgL"),
-         value_ugL = value_mgL*1e3) %>% 
-  left_join(selection) %>% 
-  filter(limit == FALSE) %>% 
-  rename(value = "value_ugL") %>% 
+data_water_summary <- data$water_tap[[1]] %>% 
+  select(-c(Reference_ID:`EC_uS_cm_25degC`)) %>% 
+  mutate(
+    NO3_mgL = NO3_mgL*0.23 + NO2_mgL*0.3 + NH4_mgL*0.7, # convert to elemental N (TN_dissolved)
+    SO4_mgL = SO4_mgL*0.3, # convert SO4 to elemental S
+    PO4_mgL = PO4_mgL*0.33 # convert PO4 to elemental P
+  ) %>% 
+  pivot_longer(
+    everything(),
+  names_to = c("analyte", ".value"),
+  names_pattern = "(.+)_(.+)*"
+    ) %>% 
+  mutate(analyte = as.factor(analyte),
+         belowLimit = as.logical(belowLimit)) %>% 
+  drop_na() %>% 
   group_by(analyte) %>% 
   summarise(
     n = n(),
-    min = min(value, na.rm = TRUE),
-    q1 = quantile(value, na.rm = TRUE, 0.25),
-    mean = mean(value, na.rm = TRUE),
-    sd = sd(value, na.rm = TRUE),
-    cv = sd/mean*100,
-    q2 = quantile(value, na.rm = TRUE, 0.5),
-    q3 = quantile(value, na.rm = TRUE, 0.75),
-    max = max(value, na.rm = TRUE)
+    min = min(mgL, na.rm = TRUE),
+    lowconf = mean(cenmle(mgL, belowLimit, dist = 'gaussian'))[c(3)],
+    meanconf = mean(cenmle(mgL, belowLimit, dist = 'gaussian'))[c(1)],
+    sd = sd(mgL),
+    cv = sd/meanconf*100,
+    highconf = mean(cenmle(mgL, belowLimit, dist = 'gaussian'))[c(4)],
+    max = max(mgL, na.rm = TRUE)
     ) %>% 
-  arrange(desc(mean))
+  mutate(
+    analyte = if_else(analyte == "NO3", "N", analyte), # rename after conversion
+    analyte = if_else(analyte == "SO4", "S", analyte), # rename after conversion
+    analyte = if_else(analyte == "PO4", "P", analyte) # rename after conversion    
+  ) %>% 
+  #mutate(across(where(is.numeric), ~ num(., digits = 2))) %>% 
+  arrange(desc(meanconf), cv) %>% 
+  print()
 ```
 
-While tap water is rich in the macronutrients calcium, sulfur, and magnesium, those substances are comparably little variable among sampling sites. An average calcium concentration of \SI{59.9(3.0)}{\mgL} 
-sulfur concentration of 
-The magnesium concentration in tap water was found to be on average \SI{12.0(8.0)}{\mgL}, with a total range of \SIrange{0.1}{4.0}{\mgL} in the dataset. 
 
+Tap water is richest in the macronutrients calcium, sulfur, and magnesium, followed by potassium, nitrogen, phosphorus, followed by boron, iron, copper, zinc, and manganese. Interestingly, also the variability in their concentrations appears to follow this trend. 
+Calcium, sulfur, and manganese were found to be comparably little variable among sampling sites in Europe, indicated by their \gls{cv} of \SIcv{53}, \SIcv{95}, and \SIcv{64}, respectively. Calcium concentrations ranged from \SIrange{3.3}{147.8}{\mgL}, with an average concentration of \SIci{59.9}{\mgL}{90\%}{53.9}{66.0}. The second most abundant macronutrient was sulfur, ranging between \SIrange{0.4}{61.8}{\mgL}. On average, \SIci{12.5}{\mgL}{90\%}{10.4}{14.8} sulfur is present in the water. The concentration range of magnesium in tap water was found to be \SIrange{0.1}{4.0}{\mgL}, averaging \SIci{12.0}{\mgL}{90\%}{10.6}{13.5}. 
+
+Other substances found in concentrations of \si{\mgL} are potassium and nitrogen. With a 
+
+As far as other substances relevant for plant nutrition are analysed by water utilities, the average 
 
 
 ## Nutrient inclusion rates
