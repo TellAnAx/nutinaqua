@@ -239,13 +239,14 @@ Nowadays, aquafeeds are richer in copper than in the past. The average inclusion
 
 
 
-```{r plot_commercial_boxplot}
+```{r plot_commercial_boxplot, include=TRUE}
 data$feed_commercial[[1]] %>% 
   create_plot_data() %>% 
   filter(!target_system %in% c("aquaponics", "pond", "cage")) %>%
   select(c(producer:feed_category4, name:value)) %>% 
   drop_na(value) %>% 
-  ggplot(aes(x = target_species, y = value)) + 
+  #ggplot(aes(x = target_species, y = value)) + 
+  ggplot(aes(y = value)) + 
   geom_boxplot(notch = TRUE) +
   facet_wrap(facets = vars(name), scales = "free") + 
   theme_classic() +
@@ -434,6 +435,7 @@ After the initial system fill-up, water is added to the system either to compens
 
 ```{r}
 data_water_summary <- data$water_tap[[1]] %>% 
+  filter(Source == "tap") %>% 
   select(-c(Reference_ID:`EC_uS_cm_25degC`)) %>% 
   mutate(
     NO3_mgL = NO3_mgL*0.23 + NO2_mgL*0.3 + NH4_mgL*0.7, # convert to elemental N (TN_dissolved)
