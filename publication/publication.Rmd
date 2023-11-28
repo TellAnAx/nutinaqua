@@ -137,13 +137,14 @@ ggsave(plot = last_plot(), filename = here("plots", "map.png"))
 
 The total daily volume of freshwater introduced into the system (`r totalV * ER` \si{\L\per\d}) was calculated based on the model system. Daily plant nutrient inputs via source water were calculated by gathering water analysis reports from locations all over Europe. Here, official reports provided by local authorities and water utilities in the corresponding municipalities were used to ensure that analyses were conducted according to accepted laboratory standards. The collected `r nrow(gps_coordinates)` water analysis reports originated from a total of `r length(unique(gps_coordinates$country))` countries, with their spatial distribution being shown in Figure \ref{fig:map_water}. 
 
+```{=tex}
 \begin{figure}
 \centering
   \includegraphics{../plots/map.png}
   \caption{Geographical distribution of water analysis reports included in the source water dataset. Green: analysis of municipal tap water; Red: rainwater analysis.}
   \label{fig:map_water}
 \end{figure}
-
+```
 
 
 ### Aquafeeds
@@ -540,6 +541,14 @@ The term alkalinity supplements summarizes several alkaline substances that are 
 
 # Drawing the big picture
 
+```{=tex}
+\begin{figure}
+\centering
+  \includegraphics{../plots/substance_flows.png}
+  \caption{Substance flow diagram.}
+  \label{fig:substance_flows}
+\end{figure}
+```
 
 ## Contribution of the nutrient sources to the total nutrient mass flows
 
