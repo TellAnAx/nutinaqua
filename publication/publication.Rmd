@@ -174,7 +174,7 @@ All calculations were conducted using R (v4.2.2).
 
 
 
-# Feed(-ing) as nutrient sources
+# Feed(-ing) as nutrient source
 Aquafeeds are considered the most important nutrient input into aquaculture systems. This is acknowledged by the availability of special feeds for open and closed system aquaculture. The former is, for instance, pond or cage aquaculture, where phosphorus emissions into receiving water bodies are intended to be reduced to avoid eutrophication. The latter is represented by \gls{ras}. Here, special feeds target at improved faeces stability and thus removability by mechanical filtration. Aquaponics feeds, meanwhile, contain high proportions of phosphorus and potassium. The formulation of a specific aquaponics feed that meets the nutritional requirements of both fish and plants by leading to higher excretion of otherwise deficient plant nutrients is generally thought to be the most suitable approach for the development of an “off-the-shelf” nutrient delivery system that does not require additional management effort by aquaponics farmers [@Lennard2017; @Eck2019]. However, a problem that comes with this approach is that fish and plants differ in their nutritional requirements, as shown in Table \ref{tab:essentials}.
 
 ```{=tex}
@@ -413,19 +413,21 @@ Mn (unknown)
 
 
 ## Livestock as causative factor for variance
-When discussing aquafeeds as nutrient input route, it is important to consider pathways of diet utilization. Uneaten feed and the indigestible mass fraction of ingested feed make up the solid wastes. The digestible mass fraction is meanwhile utilized to sustain the animals’ basal metabolism, somatic growth and reproductive activity. Metabolic end products are then excreted via the gills and the urinary system in form of dissolved matter [@Hardy2003; @Evans2005]. Only the dissolved fraction of the nutrients is immediately available for plant uptake via the root system.
+When discussing aquafeeds as nutrient input route, digestibility and retention of nutrients by the livestock must be considered. 
 
-The availability of digestibility, retentiton and excretion data for individual nutrients, with the former expressed as \gls{adc}, depends on whether the nutrient is essential and has to be considered for feed formulation. 
+The indigestible mass fraction of ingested feed, together with uneaten feed, make up the solid wastes. The fraction of feed that is digestible is meanwhile utilised to sustain the animals’ basal metabolism, somatic growth and reproductive activity. Metabolic end products are then excreted via the gills and the urinary system in dissolved form [@Hardy2003; @Evans2005]. Only the dissolved fraction of the nutrients is immediately available for plant uptake via the root system.
+
+The availability of \gls{adc} and nutrient retention data for individual nutrients depends on whether the nutrient is essential and has to be considered for feed formulation. 
 
 ```{=tex}
 % overview of ADCs determined for plant nutrients
 ```
 
-N that is, for the most part, present as \gls{cp} in aquafeeds, is generally well-digestible, with an \gls{adc} usually being above \SI{70}{\p} and on average approximately \SI{90}{\p} [@Guillaume2001; @IAFFD2021]. The excretion of N as end product of the protein and amino acid catabolism takes place in form of ammonia (\ce{NH3}) and, to a small extent, urea. The predominant excretory site are the gills, followed by renal excretion [@Dabrowski2003]. 
+Nitrogen that is, for the most part, present as \gls{cp} in aquafeeds, is generally well-digestible, with an \gls{adc} usually being above \SI{70}{\p} and on average approximately \SI{90}{\p} [@Guillaume2001; @IAFFD2021]. The excretion of N as end product of the protein and amino acid catabolism takes place in form of ammonia (\ce{NH3}) and, to a small extent, urea. The predominant excretory site are the gills, followed by renal excretion [@Dabrowski2003]. 
 
-A less digestible nutrient is P with \gls{adc} ranging from \SI{70}{\p} to only \SI{40}{\p} and a resulting excretion of \SI{30}{\p} to \SI{60}{\p} of the supply [@Lall2003; @Sugiura2018]. Especially plant ingredients in aquafeeds can cause low \gls{adc} if they are rich in phytic acid. Phytic acid is poorly digestible and can furthermore reduce the digestibility of minerals in the feed. This might also explain contradictory information in literature with reported renal excretion rates of \SI{90}{\p} of the total excreta [@Lall2003] in contrast to estimates of \SI{28}{\p} of excretion taking place in dissolved form and \SI{30}{\p} to \SI{64}{\p} excreted as particulate P [@Dabrowski2003].
+A less digestible nutrient is phosphorus, with \gls{adc} ranging from \SI{70}{\p} to only \SI{40}{\p} and a resulting excretion of \SI{30}{\p} to \SI{60}{\p} of the supply [@Lall2003; @Sugiura2018]. Especially plant ingredients in aquafeeds can cause low \gls{adc} if they are rich in phytic acid. Phytic acid is poorly digestible and can furthermore reduce the digestibility of minerals in the feed. This might also explain contradictory information in literature with reported renal excretion rates of \SI{90}{\p} of the total excreta [@Lall2003] in contrast to estimates of \SI{28}{\p} of excretion taking place in dissolved form and \SI{30}{\p} to \SI{64}{\p} excreted as particulate phosphorus [@Dabrowski2003].
 
-Studies about \gls{adc} for the remaining essential plant nutrients are scarce. Variability of \gls{adc} among different feed ingredients was shown in Atlantic salmon (\emph{Salmo salar}) for Ca, Mg, Fe, Mn and Zn, with \gls{adc} ranging between \SIrange{30}{50}{\p} [@Sugiura1998]. Excretion of the earth alkaline metals Ca and Mg primarily occurs in dissolved form via the gills and urine [@Oikari1985; @Lall2003]. Mn, in contrast, is mostly excreted in solid form as feces, while renal excretion was found to be negligible [@Lall2003]. Cu is predominantly excreted via the bile [@Bury2003]. Excess dietary Cu is not taken up but excreted as feces. Cu inclusion rates in aquafeeds are thus reduced to minimize its release into the environment [@Lall2003]. Excretion of Zn mostly takes place renally and via the gills [@Lall2003]. 
+Studies about \gls{adc} for the remaining essential plant nutrients are scarce. Variability of \gls{adc} among different feed ingredients was shown in Atlantic salmon (\emph{Salmo salar}) for Ca, Mg, Fe, Mn and Zn, with \gls{adc} ranging between \SIrange{30}{50}{\p} [@Sugiura1998]. Excretion of the earth alkaline metals calcium and magnesium primarily occurs in dissolved form via the gills and urine [@Oikari1985; @Lall2003]. Manganese, in contrast, is mostly excreted in solid form with feces, while renal excretion was found to be negligible [@Lall2003]. Copper is predominantly excreted via the bile [@Bury2003]. Excess dietary copper is not taken up but excreted with feces. Copper inclusion rates in aquafeeds are thus reduced to minimise its release into the environment [@Lall2003]. Excretion of Zinc mostly takes place renally and via the gills [@Lall2003]. 
 
 
 
