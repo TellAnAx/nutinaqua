@@ -3,7 +3,7 @@
 .RData
 .Ruserdata
 apo-sub-2.Rproj
-#plots/
+plots/
 
 # MacOS
 .DS_Store
