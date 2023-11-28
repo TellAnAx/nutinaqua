@@ -1670,4 +1670,17 @@
   groups       = {Introduction},
 }
 
+@Article{Roy2022,
+  author       = {Koushik Roy and Lenka Kajgrova and Jan Mraz},
+  date         = {2022},
+  journaltitle = {New Biotechnology},
+  title        = {{TILAFeed}: A bio-based inventory for circular nutrients management and achieving bioeconomy in future aquaponics},
+  doi          = {10.1016/j.nbt.2022.04.002},
+  pages        = {9--18},
+  volume       = {70},
+  file         = {:Articles/2022 Roy - TILAFeed- A bio-based inventory for circular nutrients management and achieving bioeconomy in future aquaponics.pdf:PDF},
+  groups       = {Aquaponics Feed},
+  publisher    = {Elsevier {BV}},
+}
+
 @Comment{jabref-meta: databaseType:biblatex;}
