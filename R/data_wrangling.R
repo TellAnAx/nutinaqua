@@ -18,7 +18,7 @@ create_plot_data <- function(data_to_wrangle) {
   # Create dataset----
   data_to_wrangle %>% 
     pivot_longer(
-      cols = P_gkg:Cu_mgkg,
+      cols = c(P_gkg:Cu_mgkg, N_gkg),
       names_to = "name",
       values_to = "value"
     ) %>% 

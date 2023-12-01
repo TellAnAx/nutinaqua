@@ -15,7 +15,7 @@ author:
     correspondingauthor: true
 address:
   - code: USB
-    organization: University of South Bohemia in České Budějovice, Faculty of Fisheries and Protection of Waters, South Bohemian Research Center of Aquaculture and Biodiversity of Hydrocenoses, Institute of Aquaculture and Protection of Waters
+    organization: "University of South Bohemia in České Budějovice, Faculty of Fisheries and Protection of Waters, South Bohemian Research Center of Aquaculture and Biodiversity of Hydrocenoses, Institute of Aquaculture and Protection of Waters"
     addressline: Na Sádkach 1780
     city: 37005 České Budějovice
     country: Czech Republic
@@ -176,6 +176,43 @@ All calculations were conducted using R (v4.2.2).
 
 
 # Feed(-ing) as nutrient source
+
+```{r}
+data$feed_cleaned <- data$feed[[1]] %>% 
+  filter(feed_cat3 != "broodstock") %>% 
+  mutate(
+    N_gkg = CP*1e3/6.25,
+    cat2 = case_when(
+      cat1=="commercial" ~ "commercial",
+      cat1=="experimental" ~ "experimental"
+      ),
+    cat2 = if_else(grepl("Tacon", ref_id),"old",cat2),
+    cat2 = if_else(grepl("aquaponic",target_system),"aquaponic",cat2)
+    ) %>% 
+  select(cat2, P_gkg:Cu_mgkg, N_gkg) %>% 
+  write_rds(here("interm", "feed_stattest.rds")) %>% 
+  create_plot_data() %>% 
+  drop_na(value) %>% 
+  separate(name, into = c("substance", "unit"), sep = "_") %>% 
+  print()
+```
+
+```{r}
+data$feed_cleaned %>% 
+  group_by(cat2,substance) %>% 
+  summarise(
+    mean = mean(value),
+    sd = sd(value),
+    n = n()
+  ) %>% 
+  pivot_wider(names_from = cat2, values_from = c(mean, sd, n))
+```
+
+```{r, eval=FALSE, include=FALSE}
+read_rds(here("interm", "feed_stattest.rds")) %>% 
+  tukey_hsd(P_gkg ~ cat2) 
+```
+
 Aquafeeds are considered the most important nutrient input into aquaculture systems. This is acknowledged by the availability of special feeds for open and closed system aquaculture. The former is, for instance, pond or cage aquaculture, where phosphorus emissions into receiving water bodies are intended to be reduced to avoid eutrophication. The latter is represented by \gls{ras}. Here, special feeds target at improved faeces stability and thus removability by mechanical filtration. Aquaponics feeds, meanwhile, contain high proportions of phosphorus and potassium. The formulation of a specific aquaponics feed that meets the nutritional requirements of both fish and plants by leading to higher excretion of otherwise deficient plant nutrients is generally thought to be the most suitable approach for the development of an “off-the-shelf” nutrient delivery system that does not require additional management effort by aquaponics farmers [@Lennard2017; @Eck2019]. However, a problem that comes with this approach is that fish and plants differ in their nutritional requirements, as shown in Table \ref{tab:essentials}.
 
 ```{=tex}
@@ -183,15 +220,17 @@ Aquafeeds are considered the most important nutrient input into aquaculture syst
 \include{table_essential_nutrients.tex}
 ```
 
-Both fish and plants require carbon and oxygen in large quantities. Further macronutrients that are required by both are calcium, phosphorus, magnesium, iron, copper, manganese, and zinc for 
+Both fish and plants require carbon and oxygen in large quantities. Further essential macronutrients for both are calcium, phosphorus, magnesium, iron, copper, manganese, and zinc. These elements are required for physiological functions such as the development and maintenance of the skeletal system, processes such as signal transmission, osmoregulation, as reactive centers of metalloenzymes (e.g., Haemoglobin, Chlorophyll), and others [@Lall2021; @Marschner2012]. 
 
-These elements are required for physiological functions such as the development and maintenance of the skeletal system, processes such as signal transmission, osmoregulation, as reactive centers of metalloenzymes (e.g., Haemoglobin, Chlorophyll), and others [@Lall2021; @Marschner2012]. 
+- differences in requirements of the nutrients which are needed by both fish and plants
 
-However, detailed information with regards to the aquafeed inclusion levels of those nutrients is scarce. This might be due to the fact that nutritional requirements of some of the mentioned substances have not yet been established for aquatic animals. Thus, there is no incentive to include those nutrients into feed formulation or to monitor their inclusion rates, making considerable variation between feeds likely. 
+Nutrients relevant only for plants are 
+
+Detailed information with regards to inclusion levels of those nutrients into aquafeeds is scarce. This might be due to the fact that nutritional requirements of some of the mentioned substances have not yet been established for aquatic animals. Thus, there is no incentive to include those nutrients into feed formulation or to monitor their inclusion rates, making considerable variation between feeds likely. 
 
 In addition, current European regulations affecting labelling of compound feeds for aquaculture (defined by Regulation EC No. 767/2009 of the European Parliament) list only crude protein, crude fibre, crude oils and fats, crude ash, calcium, sodium and phosphorus as mandatory values to be stated on labels of commercial feeds. There is thus no obligation to analyse metals other than the stated ones. As a result, the most recent publication looking into metal inclusion rates in aquafeeds dates back 40 years [@Tacon1983]. However, comparing modern feeds with the results of that time (see Table \ref{tab:feedcomp}), changes in the feed composition are barely observable. 
 
-```{r data_commercial}
+```{r data_commercial, eval=FALSE, include=FALSE}
 data_commercial <- data$feed_commercial[[1]] %>% 
   filter(!target_system %in% c("aquaponics", "pond", "cage")) %>%
   filter(feed_category3 != "broodstock") %>% 
@@ -228,6 +267,10 @@ The iron content of aquafeeds increased by `r (1-183.5/209)*100`\si{\p}, with an
 Nowadays, aquafeeds are richer in copper than in the past. The average inclusion rate increased by `r (1-15/20)*100`\si{\p}, from \SI{15(1.4)}{\mgkg} to \SI{20(18.5)}{\mgkg}. In the case of zinc, inclusion rates increased by `r (1-90/207)*100`\si{\p}, from \SI{90(7)}{\mgkg} to \SI{207(126.6)}{\mgkg}. The inclusion rates of both copper and zinc were again highly variable, with \gls{cv} of \SI{93}{\p} and \SI{61}{\p}, and ranges from \SIrange{5}{46}{\mgkg} and \SIrange{90}{384}{\mgkg}, respectively. 
 
 ```{=tex}
+\include{table_feedcomp.tex}
+```
+
+```{=tex}
 \begin{sidewaystable}
   \caption{Synthesis of the mineral composition of starter and grower feeds for freshwater fishes suitable for aquaponic systems. Data covers compositions of fingerling and grower trout feeds reported by Tacon (1983), a compilation of feed compositions for African catfish, Common carp, Pikeperch, Nile tilapia, and Trout, the composition of speciality feeds for aquaponic systems, and some experimental feeds used in aquaponics trials. N, P, K, Ca, Mg: \si{\gkg}. Fe, Mn, Cu, Zn: \si{\mgkg}.}
   \label{tab:feedcomp}
@@ -238,26 +281,7 @@ Nowadays, aquafeeds are richer in copper than in the past. The average inclusion
 \end{sidewaystable}
 ```
 
-
-
-```{r plot_commercial_boxplot, include=TRUE}
-data$feed_commercial[[1]] %>% 
-  create_plot_data() %>% 
-  filter(!target_system %in% c("aquaponics", "pond", "cage")) %>%
-  select(c(producer:feed_category4, name:value)) %>% 
-  drop_na(value) %>% 
-  #ggplot(aes(x = target_species, y = value)) + 
-  ggplot(aes(y = value)) + 
-  geom_boxplot(notch = TRUE) +
-  facet_wrap(facets = vars(name), scales = "free") + 
-  theme_classic() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)
-  )
-```
-
-
-```{r plot_commercial_density, include=TRUE}
+```{r plot_commercial_density, eval=FALSE, include=FALSE}
 data$feed_commercial[[1]] %>% 
   create_plot_data() %>% 
   filter(!target_system %in% c("aquaponics", "pond", "cage")) %>%
@@ -269,7 +293,7 @@ ggsave(here("plots", "feed_composition_commercial.png"))
 
 
 
-```{r data_commercial_special}
+```{r data_commercial_special, eval=FALSE, include=FALSE}
 data_commercial_AP <- data$feed_commercial[[1]] %>% 
   filter(target_system %in% c("aquaponics")) %>% 
   select(-c(producer, feed_name, reference_id, target_system))
@@ -298,7 +322,7 @@ data_commercial_AP_summary <- data_commercial_AP %>%
 ## Aquaponics feeds
 There are some commercial feeds available that are marketed as specifically formulated for aquaponic systems (n = 3). Though, an in-depth characterisation of these feeds was not done until now to the best of the author's knowledge. 
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 data$feed_commercial[[1]] %>% 
   create_plot_data() %>% 
   filter(!target_system %in% c("pond", "cage")) %>% 
@@ -314,7 +338,7 @@ However, even though available data is limited, it can be seen that the phosphor
 
 
 
-```{r include=TRUE}
+```{r, eval=FALSE, include=FALSE}
 data$feed_commercial[[1]] %>% 
   create_plot_data() %>% 
   filter(target_system %in% c("aquaponics")) %>% 
@@ -328,7 +352,7 @@ ggsave(here("plots", "feed_composition_commercial.png"))
 ## Experimental feeds
 In the recent past, experiments were conducted to closer examine the manipulability of substance excretion patterns by fish in relation to alterations in the raw material composition of provided aquafeeds.
 
-```{r data_experimental_studies}
+```{r data_experimental_studies, eval=FALSE, include=FALSE}
 data_experimental <- data$feed_experimental[[1]] %>% 
   select(-c(reference_id, treatment_id))
 
@@ -353,12 +377,12 @@ data_experimental_summary <- data_experimental %>%
 The overall nutrient composition of the experimental diets is comparable with commercially available aquafeeds, with no significant differences in average nutrient inclusion levels. Potassium (t-test: p = 0.3), phosphorus (t-test: p = 0.1), calcium (t-test: p = 0.4), and magnesium (t-test: p = 0.7) had average inclusion rates of \SI{9(2.8)}{\gkg}, \SI{14(4.9)}{\gkg}, \SI{15(8.4)}{\gkg}, and \SI{2(0.7)}{\gkg}, respectively.
 Also, no differences were found for iron (t-test: p = 0.4), copper (t-test: p = 0.7), and zinc (t-test: p = 0.2). The average inclusion rates were \SI{348(29)}{\mgkg}, \SI{16(2.9)}{\mgkg}, and \SI{93(35.8)}{\mgkg}, respectively.
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 bind_rows(list(commercial = data_commercial, experimental = data_experimental), .id = "source") %>% 
   t_test(Mg_gkg ~ source)
 ```
 
-```{r include=TRUE}
+```{r, eval=FALSE, include=FALSE}
 data$feed_experimental[[1]] %>% 
   create_plot_data() %>% 
   plot_feed_comp()
@@ -542,12 +566,12 @@ The term alkalinity supplements summarizes several alkaline substances that are 
 # Drawing the big picture
 
 ```{=tex}
-\begin{figure}
-\centering
-  \includegraphics{../plots/substance_flows.png}
-  \caption{Substance flow diagram.}
-  \label{fig:substance_flows}
-\end{figure}
+%\begin{figure}
+%\centering
+%  \includegraphics{../plots/substance_flows.png}
+%  \caption{Substance flow diagram.}
+%  \label{fig:substance_flows}
+%\end{figure}
 ```
 
 ## Contribution of the nutrient sources to the total nutrient mass flows
