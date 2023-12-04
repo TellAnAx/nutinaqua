@@ -7,8 +7,7 @@ gps_coordinates <- tibble(gps = data$water_tap[[1]]$GPS,
   drop_na(gps) %>%
   distinct(city, .keep_all = TRUE) %>%
   separate(gps, into = c("latitude", "longitude"),
-           sep = ", ", convert = TRUE) %>% 
-  filter(source == "tap")
+           sep = ", ", convert = TRUE)
 
 
 
