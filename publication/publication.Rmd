@@ -69,10 +69,16 @@ library(tellbuschR) # Install from GitHub TellAnAx/tellbuschR with GitHub token 
 
 # Load functions
 source(here("R", "plot_functions.R"))
+source(here("R", "helper_functions.R"))
 ```
 
 # Introduction
+The EU Green Deal, presented in 2019, states the decoupling of economic growth from resource use as one of its key objectives. A crucial necessity is the transition towards a circular economy that functions according to the 3Rs: Reduce, reuse, recycle. This reality also affects the aquaculture industry, as the farming of animals is inevitably causing emissions of non-retained nutrients into the environment. 
+
+
 One of the obstacles in the wider adoption of aquaponic systems, the combination of aquaculture and hydroponics (soilless plant production), is stated to be the rather complex management of plant nutrients within the system. While a wide range of "off-the-shelf" fertilizer is available for hydroponics, this is not the case for aquaponic systems. Developing more efficient and simple nutrient management practices thus appears to be an opportunity to facilitate systems management. Within this context, nutrient management refers to guaranteeing that optimum plant nutrient concentrations are met by controlling nutrient inputs.
+
+
 
 In aquaculture and aquaponics, nutrients enter the system through the daily ration of feed for the aquatic livestock (hereinafter denoted as aquafeed), alkalinity supplements used for pH control, and the source water [@Rakocy2006; @Eck2019; @Robaina2019]. When focussing on the efficiency aspect, the most efficient solution for nutrient management would be to monitor each plant nutrient individually. This would ensure that each individual nutrient can be supplied in the necessary amount to reach target concentrations, for instance as pure salts. However, a full-spectrum monitoring of all plant nutrients is not practical, as it requires expensive equipment and qualified workforce. Instead, it would be more meaningful to focus on the simplicity aspect and develop a management practice that is easily implementable without introducing additional tasks to the working schedule. Against this background, optimizing an existing nutrient input can be considered as more feasible solution. Though, when optimizing one nutrient input while not controlling for the others, it is important to consider the range of nutrient input that can be expected by other sources of nutrients. Awareness about the nutrients that run the risk of under- or oversupply under "non-average" conditions is crucial, as this might have adverse effects on the livestock or plants. Hence, the variability of nutrients originating from different sources ultimately determines which nutrients to focus on when optimizing nutrient inputs. However,little is known about the variability of plant nutrient mass flows in aquaculture, which is crucial for the development of a nutrient management solution that is optimized with regards to its simplicity of use, such as a dedicated aquafeed. 
 
@@ -190,7 +196,7 @@ data$feed_cleaned <- data$feed[[1]] %>%
     cat2 = if_else(grepl("aquaponic",target_system),"aquaponic",cat2)
     ) %>% 
   select(cat2, P_gkg:Cu_mgkg, N_gkg) %>% 
-  write_rds(here("interm", "feed_stattest.rds")) %>% 
+  write_rds(here("interm", "feed_stattest.rds")) %>% # write data for statistical analysis
   create_plot_data() %>% 
   drop_na(value) %>% 
   separate(name, into = c("substance", "unit"), sep = "_") %>%
@@ -222,7 +228,12 @@ read_rds(here("interm", "feed_stattest.rds")) %>%
   tukey_hsd(P_gkg ~ cat2)
 ```
 
-Aquafeeds are considered the most important nutrient input into aquaculture systems. This is acknowledged by the availability of special feeds for open and closed system aquaculture. Here, open systems refer to pond or cage aquaculture, where phosphorus emissions into receiving water bodies are intended to be reduced. In closed systems such as \gls{ras}, special feeds target at improved faeces stability and thus removability by mechanical filtration. 
+Aquafeeds are considered the most important nutrient input into aquaculture systems. This is acknowledged by the availability of specific feeds for aquaculture in open (ponds or cages) and closed (\gls{ras}) systems to reduce the nutrient load of effluents or improve faeces stability and thus removability by mechanical filtration. 
+
+
+
+
+
 Aquaponics feeds, meanwhile, contain high proportions of phosphorus and potassium. The formulation of a specific aquaponics feed that meets the nutritional requirements of both fish and plants by leading to higher excretion of otherwise deficient plant nutrients is generally thought to be the most suitable approach for the development of an “off-the-shelf” nutrient delivery system that does not require additional management effort by aquaponics farmers [@Lennard2017; @Eck2019]. However, a problem that comes with this approach is that fish and plants differ in their nutritional requirements, as shown in Table \ref{tab:essentials}.
 
 ```{=tex}
