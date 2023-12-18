@@ -1,5 +1,5 @@
 ---
-title: "Nutrient inputs into aquaculture systems: Sources, variability, contribution to the nutrient budget and implications for integrated food systems"
+title: "Nutrient inputs into aquaculture systems: Sources, variability, contribution to the nutrient budget and implications for integrated freshwater aquaculture systems"
 author:
   - name: Anıl Axel Tellbüscher
     email: atellbuscher@frov.jcu.cz
@@ -80,7 +80,11 @@ One of the obstacles in the wider adoption of aquaponic systems, the combination
 
 
 
-In aquaculture and aquaponics, nutrients enter the system through the daily ration of feed for the aquatic livestock (hereinafter denoted as aquafeed), alkalinity supplements used for pH control, and the source water [@Rakocy2006; @Eck2019; @Robaina2019]. When focussing on the efficiency aspect, the most efficient solution for nutrient management would be to monitor each plant nutrient individually. This would ensure that each individual nutrient can be supplied in the necessary amount to reach target concentrations, for instance as pure salts. However, a full-spectrum monitoring of all plant nutrients is not practical, as it requires expensive equipment and qualified workforce. Instead, it would be more meaningful to focus on the simplicity aspect and develop a management practice that is easily implementable without introducing additional tasks to the working schedule. Against this background, optimizing an existing nutrient input can be considered as more feasible solution. Though, when optimizing one nutrient input while not controlling for the others, it is important to consider the range of nutrient input that can be expected by other sources of nutrients. Awareness about the nutrients that run the risk of under- or oversupply under "non-average" conditions is crucial, as this might have adverse effects on the livestock or plants. Hence, the variability of nutrients originating from different sources ultimately determines which nutrients to focus on when optimizing nutrient inputs. However,little is known about the variability of plant nutrient mass flows in aquaculture, which is crucial for the development of a nutrient management solution that is optimized with regards to its simplicity of use, such as a dedicated aquafeed. 
+In aquaculture and aquaponics, nutrients enter the system through the daily ration of feed for the aquatic livestock (hereinafter denoted as aquafeed), alkalinity supplements used for pH control, and the source water [@Rakocy2006; @Eck2019; @Robaina2019]. 
+
+
+
+When focussing on the efficiency aspect, the most efficient solution for nutrient management would be to monitor each plant nutrient individually. This would ensure that each individual nutrient can be supplied in the necessary amount to reach target concentrations, for instance as pure salts. However, a full-spectrum monitoring of all plant nutrients is not practical, as it requires expensive equipment and qualified workforce. Instead, it would be more meaningful to focus on the simplicity aspect and develop a management practice that is easily implementable without introducing additional tasks to the working schedule. Against this background, optimizing an existing nutrient input can be considered as more feasible solution. Though, when optimizing one nutrient input while not controlling for the others, it is important to consider the range of nutrient input that can be expected by other sources of nutrients. Awareness about the nutrients that run the risk of under- or oversupply under "non-average" conditions is crucial, as this might have adverse effects on the livestock or plants. Hence, the variability of nutrients originating from different sources ultimately determines which nutrients to focus on when optimizing nutrient inputs. However,little is known about the variability of plant nutrient mass flows in aquaculture, which is crucial for the development of a nutrient management solution that is optimized with regards to its simplicity of use, such as a dedicated aquafeed. 
 
 The objective of this study is to assess the nutrient budget of aquaculture systems with regards to the contribution and variability of aquafeeds, alkalinity supplements, and the source water. Emphasis is given to plant nutrients as their successfull management is crucial for the functioning of integrated systems such as aquaponics. Expanding the body of knowledge with regards to this aspect is thus expected to contribute to improvements of these food production systems by further advancing means of nutrient management.
 
@@ -228,11 +232,7 @@ read_rds(here("interm", "feed_stattest.rds")) %>%
   tukey_hsd(P_gkg ~ cat2)
 ```
 
-Aquafeeds are considered the most important nutrient input into aquaculture systems. This is acknowledged by the availability of specific feeds for aquaculture in open (ponds or cages) and closed (\gls{ras}) systems to reduce the nutrient load of effluents or improve faeces stability and thus removability by mechanical filtration. 
-
-
-
-
+Aquafeeds are considered the most important nutrient input into aquaculture systems [@Delaide2017; @Strauch2018]. This is acknowledged by the availability of specific feeds for aquaculture in open (ponds or cages) and closed (\gls{ras}) systems to reduce the nutrient load of effluents or improve faeces stability and thus removability by mechanical filtration. 
 
 Aquaponics feeds, meanwhile, contain high proportions of phosphorus and potassium. The formulation of a specific aquaponics feed that meets the nutritional requirements of both fish and plants by leading to higher excretion of otherwise deficient plant nutrients is generally thought to be the most suitable approach for the development of an “off-the-shelf” nutrient delivery system that does not require additional management effort by aquaponics farmers [@Lennard2017; @Eck2019]. However, a problem that comes with this approach is that fish and plants differ in their nutritional requirements, as shown in Table \ref{tab:essentials}.
 
@@ -242,19 +242,13 @@ Aquaponics feeds, meanwhile, contain high proportions of phosphorus and potassiu
 ```
 
 ## Essential nutrients for fish and plants
-Both fish and plants require carbon and oxygen in large quantities. Further essential macronutrients for both are calcium, phosphorus, magnesium, iron, copper, manganese, and zinc. These elements are required for physiological functions such as the development and maintenance of the skeletal system, processes such as signal transmission, osmoregulation, as reactive centers of metalloenzymes (e.g., Haemoglobin, Chlorophyll), and others [@Lall2021; @Marschner2012]. 
-
-- differences in requirements of the nutrients which are needed by both fish and plants
-
-
-## Essential nutrients for plants 
-Nutrients relevant only for plants are 
+Fish as well as plants require a set of nutrients that can be divided into macro- and micronutrients, according to their required quantities. Carbon and oxygen are required by both fish and plants in large quantities. Further essential macronutrients for both are calcium, magnesium, and phosphorus. Iron, copper, manganese, and zinc are essential micronutrients for both fish and plants. All of these elements are required for physiological functions such as the development and maintenance of the skeletal system, processes such as signal transmission, osmoregulation, as reactive centers of metalloenzymes (e.g., Haemoglobin, Chlorophyll), and others [@Lall2021; @Marschner2012]. Further nutrients that are only relevant for fish are chromium, fluoride, iodine, and sodium. Meanwhile, essential plant nutrients that are not essential for fish are are boron, silicone, and nickel [@Bittsanszky2016].
 
 
 ## Inclusion levels of nutrients
 Detailed information with regards to inclusion levels of those nutrients into aquafeeds is scarce. This might be due to the fact that nutritional requirements of some of the mentioned substances have not yet been established for aquatic animals. Thus, there is currently no incentive to include those nutrients into feed formulation or to monitor their inclusion rates, making considerable variation between feeds likely. 
 
-In addition, current European regulations affecting labelling of compound feeds for aquaculture (defined by Regulation EC No. 767/2009 of the European Parliament) list only crude protein, crude fibre, crude oils and fats, crude ash, calcium, sodium and phosphorus as mandatory values to be stated on labels of commercial feeds. There is thus no obligation to analyse metals other than the stated ones. As a result, the most recent publication looking into metal inclusion rates in aquafeeds dates back 40 years [@Tacon1983].
+In addition, current European regulations affecting labelling of compound feeds for aquaculture (defined by Regulation EC No. 767/2009 of the European Parliament) list only crude protein, crude fibre, crude oils and fats, crude ash, calcium, sodium and phosphorus as mandatory values to be stated on labels of commercial feeds. There is thus no obligation to analyse metals other than the stated ones. As a result, the most recent overview publication looking into metal inclusion rates in aquafeeds dates back 40 years [@Tacon1983].
 
 However, comparing modern feeds with the results of that time (see Table \ref{tab:feedcomp}), changes in the feed composition are barely observable. 
 
