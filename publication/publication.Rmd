@@ -29,7 +29,7 @@ keywords:
 journal: "Reviews in Aquaculture"
 date: "`r Sys.Date()`"
 classoption: preprint, 3p, authoryear
-bibliography: library_APO-SUB-2.bib
+bibliography: ../latex/library_APO-SUB-2.bib
 linenumbers: true
 numbersections: true
 # Use a CSL with `citation_package = "default"`
@@ -52,223 +52,59 @@ knitr::opts_chunk$set(
 )
 options(digits = 1)
 
-# Load packages
-library(here)
-library(readxl)
-library(tidyverse)
-library(rstatix)
-library(NADA)
-library(PeriodicTable)
-library(ggmap)
-library(gdata)
-library(viridis)
-library(RColorBrewer)
-library(bookdown)
-library(png)
-library(tellbuschR) # Install from GitHub TellAnAx/tellbuschR with GitHub token for authentication
-
-# Load functions
-source(here("R", "plot_functions.R"))
-source(here("R", "helper_functions.R"))
+# Read data
+results <- readr::read_rds(here::here("output", "interm", "results_list.rds"))
+source(here::here("R", "assumptions.R"))
 ```
 
+
+
 # Introduction
-The EU Green Deal, presented in 2019, states the decoupling of economic growth from resource use as one of its key objectives. A crucial necessity is the transition towards a circular economy that functions according to the 3Rs: Reduce, reuse, recycle. This reality also affects the aquaculture industry, as the farming of animals is inevitably causing emissions of non-retained nutrients into the environment. 
 
-
-One of the obstacles in the wider adoption of aquaponic systems, the combination of aquaculture and hydroponics (soilless plant production), is stated to be the rather complex management of plant nutrients within the system. While a wide range of "off-the-shelf" fertilizer is available for hydroponics, this is not the case for aquaponic systems. Developing more efficient and simple nutrient management practices thus appears to be an opportunity to facilitate systems management. Within this context, nutrient management refers to guaranteeing that optimum plant nutrient concentrations are met by controlling nutrient inputs.
-
-
-
-In aquaculture and aquaponics, nutrients enter the system through the daily ration of feed for the aquatic livestock (hereinafter denoted as aquafeed), alkalinity supplements used for pH control, and the source water [@Rakocy2006; @Eck2019; @Robaina2019]. 
-
-
-
-When focussing on the efficiency aspect, the most efficient solution for nutrient management would be to monitor each plant nutrient individually. This would ensure that each individual nutrient can be supplied in the necessary amount to reach target concentrations, for instance as pure salts. However, a full-spectrum monitoring of all plant nutrients is not practical, as it requires expensive equipment and qualified workforce. Instead, it would be more meaningful to focus on the simplicity aspect and develop a management practice that is easily implementable without introducing additional tasks to the working schedule. Against this background, optimizing an existing nutrient input can be considered as more feasible solution. Though, when optimizing one nutrient input while not controlling for the others, it is important to consider the range of nutrient input that can be expected by other sources of nutrients. Awareness about the nutrients that run the risk of under- or oversupply under "non-average" conditions is crucial, as this might have adverse effects on the livestock or plants. Hence, the variability of nutrients originating from different sources ultimately determines which nutrients to focus on when optimizing nutrient inputs. However,little is known about the variability of plant nutrient mass flows in aquaculture, which is crucial for the development of a nutrient management solution that is optimized with regards to its simplicity of use, such as a dedicated aquafeed. 
-
-The objective of this study is to assess the nutrient budget of aquaculture systems with regards to the contribution and variability of aquafeeds, alkalinity supplements, and the source water. Emphasis is given to plant nutrients as their successfull management is crucial for the functioning of integrated systems such as aquaponics. Expanding the body of knowledge with regards to this aspect is thus expected to contribute to improvements of these food production systems by further advancing means of nutrient management.
-
-
+```{=tex}
+\include{../latex/introduction.tex}
+\include{../latex/aims.tex}
+```
 
 
 
 # Methodology
 
-## Model system
-
-```{r}
-source(here("R", "assumptions.R"))
+```{=tex}
+\include{../latex/M.tex}
 ```
 
-The ASTAF-PRO system [@Kloas2015] was chosen as a model system for the estimation of aquafeed, alkalinity supplement, and source water mass flows into an exemplary aquaponic system. The sizing of the chosen system is comparable with results from a recent survey targeting aquaponics production sites [@Pattillo2022] and its system components are well-described. All model data are summarized in table \ref{tab:assumptions}.
+
+
+# Essential nutrients for fish and plants
 
 ```{=tex}
-\include{table_assumptions.tex}
+\input{../latex/essential_nutrients.tex}
 ```
-
-
-## Data collection and calculations
-
-### Source water
-
-```{r import_data}
-source(here("R", "import_data.R"))
-```
-
-```{r data_wrangling}
-source(here("R", "data_wrangling.R"))
-```
-
-```{r plot_functions}
-source(here("R", "plot_functions.R"))
-```
-
-```{r plot_water_sources}
-plot_google_map(data = gps_coordinates, 
-                longitude = gps_coordinates$longitude, 
-                latitude = gps_coordinates$latitude,
-                longitude_limits = c(-11.5,38),
-                latitude_limits = c(35,65),
-                #shape_variable = gps_coordinates$country,
-                fill_variable = gps_coordinates$source,
-                center = c(10.08415861471605, # longitude; x-axis
-                           49.905624997321596), # latitude; y-axis
-                zoom_factor = 4, 
-                map_source = "google")
-
-ggsave(plot = last_plot(), filename = here("plots", "map.png"))
-
-# zoom_factor: an integer from 3 (continent) to 21 (building), default value 10 (city). openstreetmaps limits a zoom of 18, and the limit on stamen maps depends on the maptype. "auto" automatically determines the zoom for bounding box specifications
-```
-
-The total daily volume of freshwater introduced into the system (`r totalV * ER` \si{\L\per\d}) was calculated based on the model system. Daily plant nutrient inputs via source water were calculated by gathering tap water analysis reports from locations all over Europe. Official reports provided by local authorities and water utilities in the corresponding municipalities were used to ensure that analyses were conducted according to accepted laboratory standards. The collected `r nrow(gps_coordinates)` water analysis reports originated from a total of `r length(unique(gps_coordinates$country))` countries. 
-Rain water analysis reports were collected from literature.
-Their spatial distribution is shown in Figure \ref{fig:map_water}. 
-
-
 
 ```{=tex}
-\begin{figure}
-\centering
-  \includegraphics{../plots/map.png}
-  \caption{Geographical distribution of water analysis reports included in the source water dataset. Green: analysis of municipal tap water; Red: rainwater analysis.}
-  \label{fig:map_water}
-\end{figure}
+% list of nutrients for fish and plants, together with those that have to be reported by law
+\input{../latex/table_essential_nutrients.tex}
 ```
 
 
-### Aquafeeds
-The total daily feed input $m_{in,total}$ (`r rearingV * SD * (FR/100)` \si{\kg\per\d}) was calculated based on the model system. Eventually, daily nutrient inputs via aquafeeds were calculated by multiplying the total daily feed input with the inclusion rates of the corresponding nutrient $\gamma_{X}$. As the study focusses on plant nutrients in aquaponic systems, nutrient retention by the livestock was considered, because it renders nutrients inaccessible for plants. This was done by multiplication of the total daily nutrient input with an \gls{adc} for each nutrient, yielding the true daily plant nutrient input via aquafeed. It was assumed that \gls{cp} digestibility would be on average \SI{90}{\p}, while the \gls{adc} for all other plant nutrients were assumed to be \SI{50}{\p} [@Lall2003]. Finally, due to the fact that solid substances are not accessible for plant uptake, it was assumed that \SI{50}{\p} of the digestible fraction is retained while the remaining \SI{50}{\p} is excreted in dissolved form [@Halver2003]. The calculation is described by equation \ref{eq:feed_input}.
 
-\begin{equation}
-  m_{in,true} = m_{in,total} \cdot r_{feed} \cdot \gamma_{X} \cdot \text{ADC}_{X} \cdot r_{ex,diss}
-  \label{eq:feed_input}
-\end{equation}
+# Nutrient sources
 
-
-
-### Alkalinity supplements
-The input of alkalinity supplements was estimated based on @Timmons2010, with an amount of \SI{250}{\g} sodium bicarbonate (\ce{NaHCO3}) being recommended per \si{\kg} of feed input. Given the molar mass of \ce{NaHCO3} of $M(\ce{NaHCO3}) = \SI{84.01}{\gmol}$, this would translate into $n = \frac{m}{M} = \frac{\SI{250}{\g}}{\SI{84.01}{\gmol}} = \SI{2.975}{\mol}$ of \ce{HCO3-}, because $n(\ce{HCO3-}) = n(\ce{NaHCO3})$.  
-
-
-
-
-## Data presentation, statistics, and software
-All mass concentrations were converted to molar concentrations.
-
-For statistical testing, a significance level of $\alpha = 0.05$ was chosen, unless otherwise stated.
-
-In water analysis, it is common practice to report the value of the instrument detection limit instead of the measured value in case that the analyte concentration found was below the sensitivity of the measurement instrument [@ISO11843]. This practice is known as data censoring and used to ensure that the analyte signal can be distinguished from the instruments signal noise with satisfying confidence. However, retaining these data points in the dataset leads to incorrect results as the true concentration is within the interval from zero to the detection limit. To avoid an overestimation of plant nutrient concentrations within the tap water, true means from censored data were estimated by \gls{mle}, using the \emph{cenmle()} function from the R package NADA [@Helsel2011]. The calculated estimates were reported along with their \SI{95}{\p} confidence intervals.
-
-All calculations were conducted using R (v4.2.2).
-
-
-
-
-# Feed(-ing) as nutrient source
-
-```{r}
-data$feed_cleaned <- data$feed[[1]] %>% 
-  filter(feed_cat3 != "broodstock") %>% 
-  mutate(
-    N_gkg = CP*1e3/6.25,
-    cat2 = case_when(
-      cat1=="commercial" ~ "commercial",
-      cat1=="experimental" ~ "experimental"
-      ),
-    cat2 = if_else(grepl("Tacon", ref_id),"old",cat2),
-    cat2 = if_else(grepl("aquaponic",target_system),"aquaponic",cat2)
-    ) %>% 
-  select(cat2, P_gkg:Cu_mgkg, N_gkg) %>% 
-  write_rds(here("interm", "feed_stattest.rds")) %>% # write data for statistical analysis
-  create_plot_data() %>% 
-  drop_na(value) %>% 
-  separate(name, into = c("substance", "unit"), sep = "_") %>%
-  
-  # Conversion to mol/kg
-  mutate(
-    value = if_else(unit == "mgkg", value*1e-3, value),
-    unit = if_else(unit == "mgkg", "gkg", unit),
-    molmass = map_dbl(convert_formula(substance), ~ sum(mass(.x))),
-    value = value/molmass,
-    unit = if_else(unit == "gkg", "molkg", unit),
-    ) %>% 
-  print()
-```
-
-```{r}
-data$feed_cleaned %>% 
-  group_by(cat2,substance) %>% 
-  summarise(
-    mean = mean(value),
-    sd = sd(value),
-    n = n()
-  ) %>% 
-  pivot_wider(names_from = cat2, values_from = c(mean, sd, n))
-```
-
-```{r, eval=FALSE, include=FALSE}
-read_rds(here("interm", "feed_stattest.rds")) %>% 
-  tukey_hsd(P_gkg ~ cat2)
-```
-
+## Feed(-ing) as nutrient source
 Aquafeeds are considered the most important nutrient input into aquaculture systems [@Delaide2017; @Strauch2018]. This is acknowledged by the availability of specific feeds for aquaculture in open (ponds or cages) and closed (\gls{ras}) systems to reduce the nutrient load of effluents or improve faeces stability and thus removability by mechanical filtration. 
 
-Aquaponics feeds, meanwhile, contain high proportions of phosphorus and potassium. The formulation of a specific aquaponics feed that meets the nutritional requirements of both fish and plants by leading to higher excretion of otherwise deficient plant nutrients is generally thought to be the most suitable approach for the development of an “off-the-shelf” nutrient delivery system that does not require additional management effort by aquaponics farmers [@Lennard2017; @Eck2019]. However, a problem that comes with this approach is that fish and plants differ in their nutritional requirements, as shown in Table \ref{tab:essentials}.
-
-```{=tex}
-% list of Bittzansky nutrients for fish and plants, together with those that have to be reported by law
-\include{table_essential_nutrients.tex}
-```
-
-## Essential nutrients for fish and plants
-Fish as well as plants require a set of nutrients that can be divided into macro- and micronutrients, according to their required quantities. Carbon and oxygen are required by both fish and plants in large quantities. Further essential macronutrients for both are calcium, magnesium, and phosphorus. Iron, copper, manganese, and zinc are essential micronutrients for both fish and plants. All of these elements are required for physiological functions such as the development and maintenance of the skeletal system, processes such as signal transmission, osmoregulation, as reactive centers of metalloenzymes (e.g., Haemoglobin, Chlorophyll), and others [@Lall2021; @Marschner2012]. Further nutrients that are only relevant for fish are chromium, fluoride, iodine, and sodium. Meanwhile, essential plant nutrients that are not essential for fish are are boron, silicone, and nickel [@Bittsanszky2016].
+Aquaponics feeds, meanwhile, contain high proportions of phosphorus and potassium. The formulation of a specific aquaponics feed that meets the nutritional requirements of both fish and plants by leading to higher excretion of otherwise deficient plant nutrients is generally thought to be the most suitable approach for the development of an “off-the-shelf” nutrient delivery system that does not require additional management effort by aquaponics farmers [@Lennard2017; @Eck2019].
 
 
-## Inclusion levels of nutrients
-Detailed information with regards to inclusion levels of those nutrients into aquafeeds is scarce. This might be due to the fact that nutritional requirements of some of the mentioned substances have not yet been established for aquatic animals. Thus, there is currently no incentive to include those nutrients into feed formulation or to monitor their inclusion rates, making considerable variation between feeds likely. 
+### Inclusion levels of nutrients
+Detailed information with regards to inclusion levels of those nutrients into aquafeeds is scarce. This might be due to the fact that nutritional requirements of some of the mentioned substances have not yet been established for aquatic animals. Thus, there is currently no incentive to include those nutrients into feed formulation or to monitor their inclusion rates, making considerable variation between feeds likely.
 
 In addition, current European regulations affecting labelling of compound feeds for aquaculture (defined by Regulation EC No. 767/2009 of the European Parliament) list only crude protein, crude fibre, crude oils and fats, crude ash, calcium, sodium and phosphorus as mandatory values to be stated on labels of commercial feeds. There is thus no obligation to analyse metals other than the stated ones. As a result, the most recent overview publication looking into metal inclusion rates in aquafeeds dates back 40 years [@Tacon1983].
 
 However, comparing modern feeds with the results of that time (see Table \ref{tab:feedcomp}), changes in the feed composition are barely observable. 
 
-```{r data_commercial, eval=FALSE, include=FALSE}
-data_commercial <- data$feed_cleaned %>% 
-  filter(cat2 == "commercial") %>% 
-  group_by(substance, unit) %>% 
-  summarise(
-    n = n(),
-    min = min(value, na.rm = TRUE),
-    q1 = quantile(value, na.rm = TRUE, 0.25),
-    q2 = quantile(value, na.rm = TRUE, 0.5),
-    mean = mean(value, na.rm = TRUE),
-    sd = sd(value, na.rm = TRUE),
-    cv = sd/mean*100,
-    q3 = quantile(value, na.rm = TRUE, 0.75),
-    max = max(value, na.rm = TRUE)
-    ) %>% 
-  print()
-```
+
 
 - N data
 
@@ -281,8 +117,9 @@ The iron content of aquafeeds increased by `r (1-183.5/209)*100`\si{\p}, with an
 Nowadays, aquafeeds are richer in copper than in the past. The average inclusion rate increased by `r (1-15/20)*100`\si{\p}, from \SI{15(1.4)}{\mgkg} to \SI{20(18.5)}{\mgkg}. In the case of zinc, inclusion rates increased by `r (1-90/207)*100`\si{\p}, from \SI{90(7)}{\mgkg} to \SI{207(126.6)}{\mgkg}. The inclusion rates of both copper and zinc were again highly variable, with \gls{cv} of \SI{93}{\p} and \SI{61}{\p}, and ranges from \SIrange{5}{46}{\mgkg} and \SIrange{90}{384}{\mgkg}, respectively. 
 
 ```{=tex}
-\include{table_feedcomp.tex}
+\input{../latex/table_feedcomp.tex}
 ```
+
 
 ```{=tex}
 \begin{sidewaystable}
@@ -290,135 +127,50 @@ Nowadays, aquafeeds are richer in copper than in the past. The average inclusion
   \label{tab:feedcomp}
   \vspace{1em}
   
-  \csvautotabular[separator=semicolon]{table_feedcomp.csv}
+  \csvautotabular[separator=semicolon]{../latex/table_feedcomp.csv}
   
 \end{sidewaystable}
 ```
 
-```{r feed_tukey}
-stat_results <- list()
-substances <- unique(data$feed_cleaned$substance)
-
-for(i in 1:length(substances)) {
-  stat_results[[i]] <- data$feed_cleaned %>% 
-  filter(substance == substances[i]) %>% 
-  rstatix::tukey_hsd(value~cat2)
-}
-names(stat_results) <- substances
-```
-
-
-```{r plot_commercial_density, eval=FALSE, include=FALSE}
-data$feed_commercial %>% 
-  create_plot_data() %>% 
-  filter(!target_system %in% c("aquaponics", "pond", "cage")) %>%
-  select(c(producer:feed_category4, name:value)) %>% 
-  plot_feed_comp()
-
-ggsave(here("plots", "feed_composition_commercial.png"))
-```
 
 
 
-```{r data_commercial_special, eval=FALSE, include=FALSE}
-data$feed_cleaned %>% 
-  filter(cat2 == "aquaponic") %>% 
-  group_by(substance, unit) %>% 
-  summarise(
-    n = n(),
-    min = min(value, na.rm = TRUE),
-    q1 = quantile(value, na.rm = TRUE, 0.25),
-    q2 = quantile(value, na.rm = TRUE, 0.5),
-    mean = mean(value, na.rm = TRUE),
-    sd = sd(value, na.rm = TRUE),
-    cv = sd/mean*100,
-    q3 = quantile(value, na.rm = TRUE, 0.75),
-    max = max(value, na.rm = TRUE)
-    ) %>% 
-  print()
-```
-
-
-## Aquaponics feeds
+### Aquaponics feeds
 There are some commercial feeds available that are marketed as specifically formulated for aquaponic systems (n = 3). Though, an in-depth characterisation of these feeds was not done until now to the best of the author's knowledge. 
 
-```{r, eval=FALSE, include=FALSE}
-data$feed_commercial[[1]] %>% 
-  create_plot_data() %>% 
-  filter(!target_system %in% c("pond", "cage")) %>% 
-  select(c(producer:feed_category4, name:value)) %>% 
-  drop_na(value) %>% 
-  mutate(target_system = if_else(is.na(target_system),"not specified",target_system)) %>% 
-  filter(name == "P_gkg") %>% 
-  rstatix::t_test(value ~ target_system)
-```
+
 
 However, even though available data is limited, it can be seen that the phosphorus content of these aquafeeds is highly variable (\gls{cv} = \SI{76}{\p}). The average phosphorus content of \SI{22(17)}{\gkg}, meanwhile, is not significantly different from the unspecific diets (t-test: p = 0.4). Information with regards to potassium and calcium inclusion rates were reported only for one feed. Here, potassium and calcium inclusion rates were `r (1-20/11)*100`\si{\p} higher and `r (1-15/18)*100`\si{\p} lower than the average of unspecific diets, respectively. Other data with regards to these feeds is not available to the best of the author's knowledge.
 
 
 
 
-```{r, eval=FALSE, include=FALSE}
-data$feed_commercial[[1]] %>% 
-  create_plot_data() %>% 
-  filter(target_system %in% c("aquaponics")) %>% 
-  select(c(producer:feed_category4, name:value)) %>% 
-  plot_feed_comp()
-
-ggsave(here("plots", "feed_composition_commercial.png"))
-```
 
 
-## Experimental feeds
+
+### Experimental feeds
 In the recent past, experiments were conducted to closer examine the manipulability of substance excretion patterns by fish in relation to alterations in the raw material composition of provided aquafeeds.
 
-```{r data_experimental_studies, eval=FALSE, include=FALSE}
-data$feed_cleaned %>% 
-  filter(cat2 == "experimental") %>% 
-  group_by(substance, unit) %>% 
-  summarise(
-    n = n(),
-    min = min(value, na.rm = TRUE),
-    q1 = quantile(value, na.rm = TRUE, 0.25),
-    q2 = quantile(value, na.rm = TRUE, 0.5),
-    mean = mean(value, na.rm = TRUE),
-    sd = sd(value, na.rm = TRUE),
-    cv = sd/mean*100,
-    q3 = quantile(value, na.rm = TRUE, 0.75),
-    max = max(value, na.rm = TRUE)
-    ) %>% 
-  print()
-```
+
 
 The overall nutrient composition of the experimental diets is comparable with commercially available aquafeeds, with no significant differences in average nutrient inclusion levels. Potassium (t-test: p = 0.3), phosphorus (t-test: p = 0.1), calcium (t-test: p = 0.4), and magnesium (t-test: p = 0.7) had average inclusion rates of \SI{9(2.8)}{\gkg}, \SI{14(4.9)}{\gkg}, \SI{15(8.4)}{\gkg}, and \SI{2(0.7)}{\gkg}, respectively.
 Also, no differences were found for iron (t-test: p = 0.4), copper (t-test: p = 0.7), and zinc (t-test: p = 0.2). The average inclusion rates were \SI{348(29)}{\mgkg}, \SI{16(2.9)}{\mgkg}, and \SI{93(35.8)}{\mgkg}, respectively.
 
-```{r, eval=FALSE, include=FALSE}
-bind_rows(list(commercial = data_commercial, experimental = data_experimental), .id = "source") %>% 
-  t_test(Mg_gkg ~ source)
-```
-
-```{r, eval=FALSE, include=FALSE}
-data$feed_experimental[[1]] %>% 
-  create_plot_data() %>% 
-  plot_feed_comp()
-
-ggsave(here("plots", "feed_composition_commercial.png"))
-```
 
 
 
-## Sources and extent of variability
+
+### Sources and extent of variability
 The variability found in the data can be traced back to three causative factors, that are 1) the nutritional requirements of the fish species for which the feed was formulated, 2) the current approach of feed formulation based on nutrient digestibility, and 3) variability of the raw material composition among batches. 
 
 [@Prabhu2016]
 
-### Fish species
+#### Fish species
 @Gebauer2023
 @Shaw2022
 @Shaw2022a
 
-### Ingredients and feed formulation 
+#### Ingredients and feed formulation 
 Feed formulators need to react to fluctuations of market prices for raw materials and the natural variation in raw material composition. 
 
 
@@ -430,60 +182,7 @@ Feed formulators need to react to fluctuations of market prices for raw material
 IAFFD database - check variability 
 
 
-```{r}
-data$iaffd_overview[[1]] %>% 
-  left_join(data$iaffd_composition[[1]], by = c("code","description")) %>% 
-  select(-c("code", "winfeed.x", "winfeed.y")) %>% 
-  mutate(description = str_extract(description, "^[^,]+")) %>% 
-  drop_na(cat1) %>%
-  mutate(
-    class = case_when(
-      cat1=="animal"&grepl("[Ff]ish", cat2) ~ "fish",
-      grepl("[Cc]rustacean", cat2) ~ "crustacean",
-      cat1=="animal"&cat2=="insect" ~ "insect",
-      grepl("[Mm]icro", cat1) ~ "microbial",
-      grepl("[Mm]ammal", cat2) ~ "mammal",
-      grepl("[Pp]oultry", cat2) ~ "poultry",
-      grepl("[Ll]egumes", cat2) ~ "legume",
-      grepl("[Gg]rains", cat2) ~ "grain",
-      cat2=="Roots and tubers" ~ "roots"
-    ),
-    class = fct_relevel(class, 
-                        "fish", "crustacean", "mammal", "poultry", "legume", "grain", "roots", "insect", "microbial"),
-    colclass = case_when(
-      class %in% c("fish", "crustacean") ~ "aquatic",
-      class %in% c("mammal", "poultry") ~ "terrestrial",
-      class %in% c("legume", "grain", "roots") ~ "plant",
-      class == "insect" ~ "insect",
-      class == "microbial" ~ "microbial"
-    ) 
-  ) %>% 
-  drop_na(class) %>% 
-  mutate(across(contains("(%)"), ~ . * 10)) %>% 
-  print() %>% 
-  pivot_longer(`Dry Matter (%)`:`SID Tyr - poultry (%)`,
-               names_to = "analyte", values_to = "value") %>% 
-  filter(grepl("Protein", analyte) | grepl("Potassium", analyte) | grepl("Phosphorus", analyte) | grepl("Iron", analyte) | grepl("Manganese", analyte) | grepl("Zinc", analyte)) %>% 
-  ggplot(aes(y = class, x=value, fill=colclass)) + 
-  geom_boxplot() +
-  facet_wrap(facets = vars(analyte), scales = "free") + 
-  #scale_x_log10() +
-  theme_classic() + 
-  theme(
-    legend.position = "none"
-  )
-  
-  
-  group_by(analyte, class) %>% 
-  summarise(mean=mean(value, na.rm=T),
-            sd=sd(value,na.rm=T),
-            cv=sd/mean*100,
-            n = n()) %>% 
-  arrange(mean)
-  mutate(across(where(is.numeric), ~ num(., digits = 3))) %>% 
-  filter(n > 4) %>% 
-  pivot_wider(names_from = analyte, values_from = mean:cv)
-```
+
 
 
 
@@ -509,7 +208,7 @@ Mn (unknown)
 
 
 
-## Livestock as causative factor for variance
+### Livestock as causative factor for variance
 When discussing aquafeeds as nutrient input route, digestibility and retention of nutrients by the livestock must be considered. 
 
 The indigestible mass fraction of ingested feed, together with uneaten feed, make up the solid wastes. The fraction of feed that is digestible is meanwhile utilised to sustain the animals’ basal metabolism, somatic growth and reproductive activity. Metabolic end products are then excreted via the gills and the urinary system in dissolved form [@Hardy2003; @Evans2005]. Only the dissolved fraction of the nutrients is immediately available for plant uptake via the root system.
@@ -529,53 +228,22 @@ Studies about \gls{adc} for the remaining essential plant nutrients are scarce. 
 
 
 
-# Water as nutrient source
+## Water as nutrient source
 Aquaponics scholars usually focus on aquafeeds as the main source of nutrients, while the importance of water as nutrient source is denoted as negligible [@Schmautz2016]. However, a comparison of substance flows and their variability is lacking.
+
+```{=tex}
+\begin{figure}
+\centering
+  \includegraphics{../output/plots/map.png}
+  \caption{Geographical distribution of water analysis reports included in the source water dataset. Green: analysis of municipal tap water; Red: rainwater analysis.}
+  \label{fig:map_water}
+\end{figure}
+```
 
 After the initial system fill-up, water is added to the system either to compensate evaporation, spillage or leaning losses (e.g., the drum filter backwash) or to dilute accumulating substances such as nitrate [@Maucieri2018]. The source water for an aquaponic system can originate from wells, collected rain, other sources of surface water, or municipal tap. However, considering that aquaponic systems are seen as especially beneficial for water-scarce regions [@Joyce2019] or urban areas [@Junge2017], where restrictive water management by authorities can be expected, tap water is likely the most important water source. Recent surveys corroborate this assumption, as the results show that the proportion of aquaponic practicioners using municipal tap water in the USA and Europe is \SI{47}{\p} and \SI{71.7}{\p}, respectively [@Pattillo2022; @Raulier2023]. Thus, the following assessment of water composition data focusses on the evaluation of tap water analyses. 
 
 
-```{r}
-data_water_summary <- data$water_tap[[1]] %>% 
-  filter(Source == "tap") %>% 
-  select(-c(Reference_ID:`EC_uS_cm_25degC`)) %>% 
-  mutate(
-    NO3_mgL = NO3_mgL*0.23 + NO2_mgL*0.3 + NH4_mgL*0.7, # convert to elemental N (TN_dissolved)
-    SO4_mgL = SO4_mgL*0.3, # convert SO4 to elemental S
-    PO4_mgL = PO4_mgL*0.33 # convert PO4 to elemental P
-  ) %>% 
-  pivot_longer(
-    everything(),
-  names_to = c("analyte", ".value"),
-  names_pattern = "(.+)_(.+)*"
-    ) %>% 
-  mutate(
-    analyte = as.factor(analyte),
-    mgL = mgL * 1000,
-    belowLimit = as.logical(belowLimit)
-    ) %>% 
-  drop_na() %>% 
-  group_by(analyte) %>% 
-  summarise(
-    n = n(),
-    min = min(mgL, na.rm = TRUE),
-    lowconf = mean(cenmle(mgL, belowLimit, dist = 'gaussian'))[c(3)],
-    meanconf = mean(cenmle(mgL, belowLimit, dist = 'gaussian'))[c(1)],
-    sd = sd(mgL),
-    cv = sd/meanconf*100,
-    highconf = mean(cenmle(mgL, belowLimit, dist = 'gaussian'))[c(4)],
-    max = max(mgL, na.rm = TRUE)
-    ) %>% 
-  mutate(
-    analyte = if_else(analyte == "NO3", "N", analyte), # rename after conversion
-    analyte = if_else(analyte == "SO4", "S", analyte), # rename after conversion
-    analyte = if_else(analyte == "PO4", "P", analyte) # rename after conversion    
-  ) %>% 
-  #mutate(across(where(is.numeric), ~ num(., digits = 2))) %>% 
-  arrange(desc(meanconf), cv) %>% 
-  print() %>% 
-  write_delim(here("interm", "summary_water.csv"), delim = ";")
-```
+
 
 ```{=tex}
 \begin{table}
@@ -584,7 +252,7 @@ data_water_summary <- data$water_tap[[1]] %>%
   \label{tab:watercomp}
   \vspace{1em}
   
-  \csvautotabular[separator=semicolon]{table_summary_water_edited.csv}
+  \csvautotabular[separator=semicolon]{../latex/table_summary_water_edited.csv}
   
 \end{table}
 ```
@@ -640,7 +308,7 @@ The term alkalinity supplements summarizes several alkaline substances that are 
 ```{=tex}
 %\begin{figure}
 %\centering
-%  \includegraphics{../plots/substance_flows.png}
+%  \includegraphics{../output/plots/substance_flows.png}
 %  \caption{Substance flow diagram.}
 %  \label{fig:substance_flows}
 %\end{figure}
