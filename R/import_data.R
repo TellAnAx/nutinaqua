@@ -1,6 +1,6 @@
 data <- list()
 
-data$water_tap <- import_from_server("Water%20quality%20APO-SUB-2.xlsx", 
+data$water <- import_from_server("Water%20quality%20APO-SUB-2.xlsx", 
                                      "home/OneDrive-USB/APO-SUB-2/", 
                                      sheet_name = "data", 
                                      skip = 1)
