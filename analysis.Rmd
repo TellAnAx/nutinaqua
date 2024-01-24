@@ -19,6 +19,7 @@ library(here)
 library(rlang)
 library(readxl)
 library(tidyverse)
+library(httr)
 library(rstatix)
 library(NADA)
 library(PeriodicTable)
@@ -34,6 +35,12 @@ library(tellbuschR) # Install from GitHub TellAnAx/tellbuschR with GitHub token 
 source(here("R", "plot_functions.R"))
 source(here("R", "helper_functions.R"))
 ```
+
+
+
+# To Do
+
+- **update table construction in Feeding as nutrient source**
 
 
 
@@ -73,11 +80,12 @@ source(here("R", "plot_functions.R"))
 
 ```{r}
 results <- list()
+tables <- list()
 ```
 
 
 
-# Feed(-ing) as nutrient source
+## Feed(-ing) as nutrient source
 
 ```{r}
 data$feed_cleaned <- data$feed[[1]] %>% 
@@ -134,6 +142,8 @@ data$feed_cleaned %>%
 ```
 
 ```{r}
+data$feed_stat <- read_rds(here("output", "interm", "feed_stattest.rds"))
+
 summary(data$feed_stat)
 
 # enough data for reliable comparison
@@ -235,7 +245,7 @@ data$feed_cleaned %>%
 
 
 
-## Aquaponics feeds
+### Aquaponics feeds
 
 ```{r, eval=FALSE, include=FALSE}
 data$feed_commercial[[1]] %>% 
@@ -260,7 +270,7 @@ ggsave(here("output", "plots", "feed_composition_commercial.png"))
 
 
 
-## Experimental feeds
+### Experimental feeds
 
 ```{r data_experimental_studies, eval=FALSE, include=FALSE}
 data$feed_cleaned %>% 
@@ -290,56 +300,25 @@ data$feed_experimental[[1]] %>%
   create_plot_data() %>% 
   plot_feed_comp()
 
-ggsave(here("output", "plots", "feed_composition_commercial.png"))
+knitr::include_graphics(here("output", "plots", "feed_composition.png"))
 ```
 
 
 
-## Sources and Extent of Variability
+### Sources and Extent of Variability
+
+```{r}
+plot_feedstuff_comp(read_rds(here("output", "interm", "feedstuff_long.rds")))
+
+knitr::include_graphics(here("output", "plots", "feedstuff_composition.png"))
+```
+
 
 ```{r eval=FALSE, include=FALSE}
-data$iaffd_overview[[1]] %>% 
-  left_join(data$iaffd_composition[[1]], by = c("code","description")) %>% 
-  select(-c("code", "winfeed.x", "winfeed.y")) %>% 
-  mutate(description = str_extract(description, "^[^,]+")) %>% 
-  drop_na(cat1) %>%
-  mutate(
-    class = case_when(
-      cat1=="animal"&grepl("[Ff]ish", cat2) ~ "fish",
-      grepl("[Cc]rustacean", cat2) ~ "crustacean",
-      cat1=="animal"&cat2=="insect" ~ "insect",
-      grepl("[Mm]icro", cat1) ~ "microbial",
-      grepl("[Mm]ammal", cat2) ~ "mammal",
-      grepl("[Pp]oultry", cat2) ~ "poultry",
-      grepl("[Ll]egumes", cat2) ~ "legume",
-      grepl("[Gg]rains", cat2) ~ "grain",
-      cat2=="Roots and tubers" ~ "roots"
-    ),
-    class = fct_relevel(class, 
-                        "fish", "crustacean", "mammal", "poultry", "legume", "grain", "roots", "insect", "microbial"),
-    colclass = case_when(
-      class %in% c("fish", "crustacean") ~ "aquatic",
-      class %in% c("mammal", "poultry") ~ "terrestrial",
-      class %in% c("legume", "grain", "roots") ~ "plant",
-      class == "insect" ~ "insect",
-      class == "microbial" ~ "microbial"
-    ) 
-  ) %>% 
-  drop_na(class) %>% 
-  mutate(across(contains("(%)"), ~ . * 10)) %>% 
-  print() %>% 
-  pivot_longer(`Dry Matter (%)`:`SID Tyr - poultry (%)`,
-               names_to = "analyte", values_to = "value") %>% 
-  filter(grepl("Protein", analyte) | grepl("Potassium", analyte) | grepl("Phosphorus", analyte) | grepl("Iron", analyte) | grepl("Manganese", analyte) | grepl("Zinc", analyte)) %>% 
-  
-  ggplot(aes(y = class, x=value, fill=colclass)) + 
-  geom_boxplot() +
-  facet_wrap(facets = vars(analyte), scales = "free") + 
-  #scale_x_log10() +
-  theme_classic() + 
-  theme(
-    legend.position = "none"
-  )
+ 
+
+
+
   
   
   group_by(analyte, class) %>% 
@@ -357,32 +336,46 @@ data$iaffd_overview[[1]] %>%
 
 
 
-# Water as Nutrient Source
+## Water as Nutrient Source
+
+### Data origin
 
 ```{r create_water_map}
 source(here("R", "plots", "map_plots.R"))
+source(here("R", "plots", "water_plots.R"))
 ```
 
 ```{r}
-results$n_wateranalysis <- nrow(gps_coordinates)
+knitr::include_graphics(here("output", "plots", "map.png"))
+```
+
+
+```{r}
+results$n_wateranalysis <- nrow(gps_coordinates[,which("source" == "tap")])
 results$n_wateranalysis_countries <- length(unique(gps_coordinates$country))
 ```
 
 
-```{r}
-data_water_summary <- data$water_tap[[1]] %>% 
-  filter(Source == "tap") %>% 
-  select(-c(Reference_ID:`EC_uS_cm_25degC`)) %>% 
+
+### Tap water
+
+```{r tap}
+data$water_cleaned_tap <- read_rds(here("output", "interm", "water_cleaned.rds")) %>% 
+  filter(source == "tap") %>% 
+  select(-c(ref_id:`EC_uS_cm_25degC`)) %>% 
+  
   mutate(
     NO3_mgL = NO3_mgL*0.23 + NO2_mgL*0.3 + NH4_mgL*0.7, # convert to elemental N (TN_dissolved)
     SO4_mgL = SO4_mgL*0.3, # convert SO4 to elemental S
     PO4_mgL = PO4_mgL*0.33 # convert PO4 to elemental P
   ) %>% 
+  
   pivot_longer(
     everything(),
   names_to = c("analyte", ".value"),
   names_pattern = "(.+)_(.+)*"
     ) %>% 
+  
   mutate(
     analyte = as.factor(analyte),
     mgL = mgL * 1000,
@@ -390,6 +383,7 @@ data_water_summary <- data$water_tap[[1]] %>%
     ) %>% 
   drop_na() %>% 
   group_by(analyte) %>% 
+  
   summarise(
     n = n(),
     min = min(mgL, na.rm = TRUE),
@@ -400,6 +394,7 @@ data_water_summary <- data$water_tap[[1]] %>%
     highconf = mean(cenmle(mgL, belowLimit, dist = 'gaussian'))[c(4)],
     max = max(mgL, na.rm = TRUE)
     ) %>% 
+  
   mutate(
     analyte = if_else(analyte == "NO3", "N", analyte), # rename after conversion
     analyte = if_else(analyte == "SO4", "S", analyte), # rename after conversion
@@ -408,9 +403,58 @@ data_water_summary <- data$water_tap[[1]] %>%
   #mutate(across(where(is.numeric), ~ num(., digits = 2))) %>% 
   arrange(desc(meanconf), cv) %>% 
   print() %>% 
-  write_delim(here("output", "interm", "summary_water.csv"), delim = ";")
+  write_rds(here("output", "interm", "water_cleaned_tap.rds"))
 ```
 
+
+
+### Rain water
+
+```{r}
+data$water_cleaned_rain <- read_rds(here("output", "interm", "water_cleaned.rds")) %>% 
+  filter(source == "rain") %>% 
+  select(-matches("belowLimit")) %>% 
+  select(-("ref_id":"aquaponics")) %>% 
+  select(-c(pH, EC_uS_cm_25degC)) %>% 
+  pivot_longer(
+    everything(),
+    names_to = "names",
+    values_to = "value"
+  ) %>% 
+  separate(names, into = c("analyte", "unit"), sep = "_") %>% 
+  filter(analyte != "TOC") %>% 
+  drop_na(value) %>% 
+  #filter(if_all(value, ~.x < quantile(.x, 0.95))) %>% 
+  print() %>% 
+  write_rds(here("output", "interm", "water_cleaned_rain.rds"))
+```
+
+```{r}
+knitr::include_graphics(here("output", "plots", "water_rain.png"))
+```
+
+- outliers on the upper end
+
+
+```{r}
+tables$water_rain <- read_rds(here("output", "interm", "water_cleaned_rain.rds")) %>% 
+  group_by(analyte, unit) %>% 
+  summarise(
+    n = n(),
+    min = min(value),
+    Q1 = quantile(value, 0.25),
+    mean = min(value),
+    sd = sd(value),    
+    Q3 = quantile(value, 0.75),
+    max = max(value)
+  ) %>% 
+  filter(n > 5) %>% 
+  write_csv(here("output", "tables", "water_rain.csv"))
+```
+
+```{r}
+knitr::kable(tables$water_rain)
+```
 
 
 

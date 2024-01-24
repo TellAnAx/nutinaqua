@@ -28,4 +28,31 @@ plot_data %>%
   geom_vline(data = q3, aes(xintercept = grp.q3), linetype = "dashed") + 
   theme_bw() +
   theme(legend.position = "none")
-  }
+
+ggsave(here::here("output", "plots", "feed_composition.png"))
+}
+
+
+
+plot_feedstuff_comp <- function(x) {
+  
+  x %>% 
+    ggplot(aes(y = class, 
+               x = value, 
+               fill = colclass)) + 
+    geom_boxplot() +
+    facet_wrap(facets = vars(analyte), scales = "free") + 
+    labs(
+      fill = "class",
+      x = "",
+      y = ""
+    ) +
+    theme_classic() + 
+    theme(
+      legend.position = "bottom",
+      axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)
+    )
+  
+  ggsave(here::here("output", "plots", "feedstuff_composition.png"))
+}
+

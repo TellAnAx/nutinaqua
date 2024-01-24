@@ -62,8 +62,8 @@ source(here::here("R", "assumptions.R"))
 # Introduction
 
 ```{=tex}
-\include{../latex/introduction.tex}
-\include{../latex/aims.tex}
+\input{../latex/introduction.tex}
+\input{../latex/aims.tex}
 ```
 
 
@@ -71,7 +71,7 @@ source(here::here("R", "assumptions.R"))
 # Methodology
 
 ```{=tex}
-\include{../latex/M.tex}
+% \input{../latex/methodology.tex}
 ```
 
 
@@ -80,6 +80,10 @@ source(here::here("R", "assumptions.R"))
 
 ```{=tex}
 \input{../latex/essential_nutrients.tex}
+```
+
+```{=tex}
+\input{../latex/table_assumptions.tex}
 ```
 
 ```{=tex}
