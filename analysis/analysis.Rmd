@@ -48,6 +48,7 @@ source(here("R", "helper_functions.R"))
 
 # To Do
 
+- **tap water stuff**
 - **Permutations**
 - **update table construction in Feeding as nutrient source**
 
@@ -398,7 +399,10 @@ data$water_cleaned_tap <- read_rds(here("output", "interm", "water_cleaned.rds")
   
   rename(conc = "mgL") %>% 
   mutate(
-    unit = "mgL",
+    conc = conc*1e-3, # mg/L -> g/L
+    molmass = map_dbl(convert_formula(analyte), ~ sum(mass(.x))),
+    conc = conc/molmass, # g/L -> mol/L
+    unit = "molL",
     analyte = as.factor(analyte),
     belowLimit = as.logical(belowLimit)
     ) %>% 
@@ -424,8 +428,12 @@ data$water_cleaned_tap <- read_rds(here("output", "interm", "water_cleaned.rds")
     analyte = if_else(analyte == "PO4", "P", analyte) # rename after conversion    
   ) %>% 
     
-  #mutate(across(where(is.numeric), ~ num(., digits = 2))) %>% 
+  # control number of digits
+  mutate(across(where(is.numeric), ~ num(., digits = 3))) %>% 
   arrange(desc(meanconf), cv) %>% 
+  
+  filter(!analyte %in% c("NH4", "NO2", "NO3", "TOC")) %>%
+  print()
     
   write_rds(here("output", "interm", "water_cleaned_tap.rds"))
 ```

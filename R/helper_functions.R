@@ -36,6 +36,11 @@ convert_formula <- function(formula) {
 }
 
 
+# Calculate molar mass
+
+
+
+
 
 #
 process_col <- function(column1 = col1,
@@ -46,6 +51,7 @@ process_col <- function(column1 = col1,
 }
 
 map_dfr(names(iris)[1:4], "Species", process_col, data = iris)
+
 
 
 
