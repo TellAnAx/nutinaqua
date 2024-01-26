@@ -20,3 +20,6 @@ data/HWSD2_RASTER/
 data/HWSD2.mdb
 data/HWSD2.sqlite
 tmp.xlsx
+output/tables/*
+output/interm/*
+output/plots/*
