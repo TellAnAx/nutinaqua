@@ -48,7 +48,8 @@ source(here("R", "helper_functions.R"))
 
 # To Do
 
-- **tap water stuff**
+- **feed data update**
+- **alkalinity data**
 - **Permutations**
 - **update table construction in Feeding as nutrient source**
 
@@ -84,6 +85,14 @@ source(here("R", "data_wrangling.R"))
 source(here("R", "plot_functions.R"))
 ```
 
+## Feed
+
+## Water
+
+## Alkalinity supplements
+
+
+
 
 
 # Results
@@ -115,12 +124,11 @@ data$feed_cleaned <- data$feed[[1]] %>%
     cat2 = if_else(grepl("aquaponic",target_system),"aquaponic",cat2)
     ) %>% 
   
-  # remove unnecessary data
+  # keep only necessary data
   select(cat2, P_gkg:Cu_mgkg, N_gkg) %>% 
   
   # write data for statistical analysis
   write_rds(here("output", "interm", "feed_stattest.rds")) %>% 
-  
   
   create_plot_data() %>% 
   
@@ -130,32 +138,47 @@ data$feed_cleaned <- data$feed[[1]] %>%
   # split single column into two columns
   separate(name, into = c("substance", "unit"), sep = "_") %>%
   
-  # Conversion of mg/kg to mol/kg
+  # Unit conversion
   mutate(
-    value = if_else(unit == "mgkg", value*1e-3, value),
+    value = if_else(unit == "mgkg", value*1e-3, value), 
     unit = if_else(unit == "mgkg", "gkg", unit),
     molmass = map_dbl(convert_formula(substance), ~ sum(mass(.x))),
-    value = value/molmass,
-    unit = if_else(unit == "gkg", "molkg", unit),
+    value = value/molmass, # g/kg -> mol/kg
+    unit = "molkg",
+    value = value*1e3, # mol/kg -> mmol/kg
+    unit = "mmolkg"
     ) %>% 
-  print()
+  write_rds(here("output", "interm", "feed_cleaned.rds"))
 ```
 
 ```{r}
-data$feed_cleaned %>% 
-  group_by(cat2,substance) %>% 
+tables$feed_summary_long <- read_rds(here("output", "interm", "feed_cleaned.rds")) %>% 
+  group_by(cat2, substance, unit) %>% 
   summarise(
-    mean = mean(value),
-    sd = sd(value),
-    n = n()
+    n = n(),
+    min = min(value, na.rm = T),
+    mean = mean(value, na.rm = T),
+    sd = sd(value, na.rm = T),
+    cv = sd/mean,
+    max = max(value, na.rm = T)
   ) %>% 
-  pivot_wider(names_from = cat2, values_from = c(mean, sd, n))
+  rename(category = "cat2") %>% 
+  write_csv(here("output", "tables", "feed_summary_long.csv"))
+  
+
+tables$feed_summary_wide <- tables$feed_summary_long %>% 
+  pivot_wider(names_from = category, values_from = c(n, min, mean, sd, cv, max)) %>%
+  write_csv(here("output", "tables", "feed_summary_wide.csv"))
 ```
 
-```{r}
-data$feed_stat <- read_rds(here("output", "interm", "feed_stattest.rds"))
+```{r include=TRUE}
+knitr::kable(tables$feed_summary_long,
+             #format.args = list(digits = 4),
+             caption = "")
+```
 
-summary(data$feed_stat)
+```{r feed_statistics}
+data$feed_stat <- read_rds(here("output", "interm", "feed_stattest.rds"))
 
 # enough data for reliable comparison
 results$feed_comp_N <- data$feed_stat %>% tukey_hsd(N_gkg~cat2) %>% print()
@@ -170,6 +193,36 @@ results$feed_comp_Fe <- data$feed_stat %>% tukey_hsd(Fe_mgkg~cat2) %>% print()
 results$feed_comp_Cu <- data$feed_stat %>% tukey_hsd(Cu_mgkg~cat2) %>% print()
 results$feed_comp_Zn <- data$feed_stat %>% tukey_hsd(Zn_mgkg~cat2) %>% print()
 ```
+
+- reliable comparison of nutrient inclusion is possible for N and P data only, considering the number of observations in the dataset.
+- N: no significant difference between any of the feeds
+- P: Aquaponics feeds are richer in P compared with commercial feeds and also compared with experimental diets (Tukey test: p < 0.05). The smallest difference was found between aquaponics and old diets. The difference between them is non-significant. 
+
+
+```{r}
+read_rds(here("output", "interm", "feed_cleaned.rds")) %>% 
+  mutate(
+    substance = fct_relevel(substance, "N", "P", "K", "Ca", "Mg", "S", "Fe", "Cu", "Zn"),
+    category = fct_relevel(cat2, "old", "commercial", "aquaponic", "experimental")
+  ) %>% 
+  ggplot(aes(x = substance, y = value, fill = category)) + 
+  geom_boxplot() +
+  facet_wrap(facets = vars(substance), scales = "free") + 
+  scale_fill_manual(values = c("grey", "lightblue", "lightgreen", "gold")) +
+  theme_bw() +
+  theme(axis.ticks.x = element_blank(),
+        axis.text.x = element_blank()) +
+  labs(x = "",
+       y = "Inclusion rate (mmol/kg)",
+       fill = "class")
+  
+ggsave(here("output", "plots", "feed.png"))
+```
+
+```{r include=TRUE}
+knitr::include_graphics(here("output", "plots", "feed.png"))
+```
+
 
 
 ```{r, eval=FALSE, include=FALSE}
@@ -196,25 +249,9 @@ for(name in 2:length(col_names)) {
 }
 ```
 
-```{r data_commercial, eval=FALSE, include=FALSE}
-data_commercial <- data$feed_cleaned %>% 
-  filter(cat2 == "commercial") %>% 
-  group_by(substance, unit) %>% 
-  summarise(
-    n = n(),
-    min = min(value, na.rm = TRUE),
-    q1 = quantile(value, na.rm = TRUE, 0.25),
-    q2 = quantile(value, na.rm = TRUE, 0.5),
-    mean = mean(value, na.rm = TRUE),
-    sd = sd(value, na.rm = TRUE),
-    cv = sd/mean*100,
-    q3 = quantile(value, na.rm = TRUE, 0.75),
-    max = max(value, na.rm = TRUE)
-    ) %>% 
-  print()
-```
 
-```{r feed_tukey}
+
+```{r feed_tukey, eval=FALSE}
 stat_results <- list()
 substances <- unique(data$feed_cleaned$substance)
 
@@ -226,120 +263,142 @@ for(i in 1:length(substances)) {
 names(stat_results) <- substances
 ```
 
-```{r plot_commercial_density, eval=FALSE, include=FALSE}
-data$feed_commercial %>% 
-  create_plot_data() %>% 
-  filter(!target_system %in% c("aquaponics", "pond", "cage")) %>%
-  select(c(producer:feed_category4, name:value)) %>% 
-  plot_feed_comp()
-
-ggsave(here("output", "plots", "feed_composition_commercial.png"))
-```
-
-```{r data_commercial_special, eval=FALSE, include=FALSE}
-data$feed_cleaned %>% 
-  filter(cat2 == "aquaponic") %>% 
-  group_by(substance, unit) %>% 
-  summarise(
-    n = n(),
-    min = min(value, na.rm = TRUE),
-    q1 = quantile(value, na.rm = TRUE, 0.25),
-    q2 = quantile(value, na.rm = TRUE, 0.5),
-    mean = mean(value, na.rm = TRUE),
-    sd = sd(value, na.rm = TRUE),
-    cv = sd/mean*100,
-    q3 = quantile(value, na.rm = TRUE, 0.75),
-    max = max(value, na.rm = TRUE)
-    ) %>% 
-  print()
-```
 
 
 
-### Aquaponics feeds
-
-```{r, eval=FALSE, include=FALSE}
-data$feed_commercial[[1]] %>% 
-  create_plot_data() %>% 
-  filter(!target_system %in% c("pond", "cage")) %>% 
-  select(c(producer:feed_category4, name:value)) %>% 
-  drop_na(value) %>% 
-  mutate(target_system = if_else(is.na(target_system),"not specified",target_system)) %>% 
-  filter(name == "P_gkg") %>% 
-  rstatix::t_test(value ~ target_system)
-```
-
-```{r, eval=FALSE, include=FALSE}
-data$feed_commercial[[1]] %>% 
-  create_plot_data() %>% 
-  filter(target_system %in% c("aquaponics")) %>% 
-  select(c(producer:feed_category4, name:value)) %>% 
-  plot_feed_comp()
-
-ggsave(here("output", "plots", "feed_composition_commercial.png"))
-```
 
 
 
-### Experimental feeds
 
-```{r data_experimental_studies, eval=FALSE, include=FALSE}
-data$feed_cleaned %>% 
-  filter(cat2 == "experimental") %>% 
-  group_by(substance, unit) %>% 
-  summarise(
-    n = n(),
-    min = min(value, na.rm = TRUE),
-    q1 = quantile(value, na.rm = TRUE, 0.25),
-    q2 = quantile(value, na.rm = TRUE, 0.5),
-    mean = mean(value, na.rm = TRUE),
-    sd = sd(value, na.rm = TRUE),
-    cv = sd/mean*100,
-    q3 = quantile(value, na.rm = TRUE, 0.75),
-    max = max(value, na.rm = TRUE)
-    ) %>% 
-  print()
-```
 
-```{r, eval=FALSE, include=FALSE}
-bind_rows(list(commercial = data_commercial, experimental = data_experimental), .id = "source") %>% 
-  t_test(Mg_gkg ~ source)
-```
 
-```{r, eval=FALSE, include=FALSE}
-data$feed_experimental[[1]] %>% 
-  create_plot_data() %>% 
-  plot_feed_comp()
 
-knitr::include_graphics(here("output", "plots", "feed_composition.png"))
-```
+
+
+
 
 
 
 ### Variability
+
+```{r}
+data$feedstuff <- data$iaffd_overview[[1]] %>% 
+  
+  # join with XXX
+  left_join(data$iaffd_composition[[1]], by = c("code","description")) %>% 
+  
+  # Data cleaning
+  select(-c("code", "winfeed.x", "winfeed.y")) %>% 
+  mutate(description = str_extract(description, "^[^,]+")) %>% 
+  drop_na(cat1) %>%
+  
+  mutate(
+    class = case_when(
+      cat1=="animal"&grepl("[Ff]ish", cat2) ~ "fish",
+      grepl("[Cc]rustacean", cat2) ~ "crustacean",
+      cat1=="animal"&cat2=="insect" ~ "insect",
+      grepl("[Mm]icro", cat1) ~ "microbial",
+      grepl("[Mm]ammal", cat2) ~ "mammal",
+      grepl("[Pp]oultry", cat2) ~ "poultry",
+      grepl("[Ll]egumes", cat2) ~ "legume",
+      grepl("[Gg]rains", cat2) ~ "grain",
+      cat2=="Roots and tubers" ~ "roots"
+    ),
+    
+    class = fct_relevel(class, 
+                        "fish", "crustacean", "mammal", "poultry", "legume", "grain", "roots", "insect", "microbial"),
+    
+    colclass = case_when(
+      class %in% c("fish", "crustacean") ~ "aquatic",
+      class %in% c("mammal", "poultry") ~ "terrestrial",
+      class %in% c("legume", "grain", "roots") ~ "plant",
+      class == "insect" ~ "insect",
+      class == "microbial" ~ "microbial"
+    ) 
+  ) %>% 
+  drop_na(class) %>% 
+  
+  # multiply all percentages by 10
+  mutate(
+    across(contains("(%)"), ~ . * 10),
+    unit = "gkg") %>% 
+  
+  write_rds(here("output", "interm", "feedstuff.rds"))
+```
+  
+```{r}
+data$feedstuff_cleaned <- read_rds(here("output", "interm", "feedstuff.rds")) %>% 
+  
+  pivot_longer(`Dry Matter (%)`:`SID Tyr - poultry (%)`,
+               names_to = "analyte", values_to = "value") %>% 
+  
+  filter(grepl("Protein", analyte) | 
+           grepl("Potassium", analyte) | 
+           grepl("Phosphorus", analyte) | 
+           grepl("Iron", analyte) | 
+           grepl("Manganese", analyte) | 
+           grepl("Zinc", analyte)) %>% 
+  
+  
+  select(c(description:origin, class:value)) %>% 
+  
+  mutate(analyte = str_remove(analyte, " \\(.*"),
+         analyte = fct_recode(analyte, 
+                              N = "Crude  Protein", P = "Phosphorus", 
+                              K = "Potassium", Fe = "Iron", 
+                              Mn = "Manganese", Zn = "Zinc"),
+         value = if_else(analyte == "N", value/6.25, value)) %>% # convert CP to N
+  
+  select(-c(description, origin, cat2, cat3)) %>% 
+  
+  rename(cat3 = "class", cat2 = "colclass") %>% 
+  
+  write_rds(here("output", "interm", "feedstuff_cleaned.rds"))
+```
+
+```{r}
+tables$feedstuff_summary_long <- read_rds(here("output", "interm", "feedstuff_cleaned.rds")) %>% 
+  group_by(cat2, analyte) %>% 
+  summarise(n = n(), 
+            mean = mean(value),
+            sd = sd(value),
+            cv = sd/mean) %>% 
+  
+  write_csv(here("output", "tables", "feedstuff_summary_long.csv"))
+
+tables$feedstuff_summary_wide <- tables$feedstuff_summary_long %>% 
+  pivot_wider(
+    names_from = "cat2",
+    values_from = c("n", "mean", "sd", "cv"),
+    names_sort = TRUE
+  ) %>% 
+  
+  write_csv(here("output", "tables", "feedstuff_summary_wide.csv"))
+```
+
+```{r include=TRUE}
+knitr::kable(tables$feedstuff_summary_long,
+             caption = "")
+```
+
+```{r}
+library(onewaytests)
+
+data$feedstuff_stattest <- read_rds(here("output", "interm", "feedstuff_cleaned.rds"))
+
+# 
+#paircomp(bf.test(value ~ cat3, data$feedstuff_stattest))
+
+# 
+#paircomp(bf.test(value ~ cat2, data$feedstuff_stattest))
+```
+
 
 ```{r include=TRUE}
 knitr::include_graphics(here("output", "plots", "feedstuff_composition.png"))
 ```
 
 
-```{r eval=FALSE, include=FALSE}
- 
-
-
-
-  
-  
-  group_by(analyte, class) %>% 
-  summarise(mean=mean(value, na.rm=T),
-            sd=sd(value,na.rm=T),
-            cv=sd/mean*100,
-            n = n()) %>% 
-  arrange(mean)
-  mutate(across(where(is.numeric), ~ num(., digits = 3))) %>% 
-  filter(n > 4) %>% 
-  pivot_wider(names_from = analyte, values_from = mean:cv)
-```
 
 
 
@@ -372,8 +431,6 @@ results$n_wateranalysis_countries <- length(unique(gps_coordinates$country))
 results$n_observations_water_tap <- filter(data$water_cleaned, source == "tap") %>% nrow()
 ```
 
-**FIXIT** CHECK ELEMENTAL CONVERSION STUFF
-
 ```{r tap}
 data$water_cleaned_tap <- read_rds(here("output", "interm", "water_cleaned.rds")) %>% 
   
@@ -398,11 +455,15 @@ data$water_cleaned_tap <- read_rds(here("output", "interm", "water_cleaned.rds")
     ) %>% 
   
   rename(conc = "mgL") %>% 
+  
+  # convert units
   mutate(
     conc = conc*1e-3, # mg/L -> g/L
     molmass = map_dbl(convert_formula(analyte), ~ sum(mass(.x))),
     conc = conc/molmass, # g/L -> mol/L
     unit = "molL",
+    conc = conc*1e6, # mol/L -> µmol/L
+    unit = "µmolL",
     analyte = as.factor(analyte),
     belowLimit = as.logical(belowLimit)
     ) %>% 
@@ -429,11 +490,11 @@ data$water_cleaned_tap <- read_rds(here("output", "interm", "water_cleaned.rds")
   ) %>% 
     
   # control number of digits
-  mutate(across(where(is.numeric), ~ num(., digits = 3))) %>% 
+  #mutate(across(where(is.numeric), ~ num(., digits = 3))) %>% 
+  
   arrange(desc(meanconf), cv) %>% 
   
   filter(!analyte %in% c("NH4", "NO2", "NO3", "TOC")) %>%
-  print()
     
   write_rds(here("output", "interm", "water_cleaned_tap.rds"))
 ```
@@ -468,7 +529,7 @@ data$water_cleaned_rain <- read_rds(here("output", "interm", "water_cleaned.rds"
   select(-("ref_id":"aquaponics")) %>% 
   select(-c(pH, EC_uS_cm_25degC)) %>% 
   
-  #rowwise() %>% 
+  rowwise() %>% 
     # convert concentrations
   mutate(
     N_mgL = sum(c(NO3_mgL*0.23, NO2_mgL*0.3, NH4_mgL*0.7), na.rm = TRUE), # convert to elemental N (TN_dissolved)
@@ -480,12 +541,27 @@ data$water_cleaned_rain <- read_rds(here("output", "interm", "water_cleaned.rds"
   pivot_longer(
     everything(),
     names_to = "names",
-    values_to = "value"
+    values_to = "conc"
   ) %>% 
   separate(names, into = c("analyte", "unit"), sep = "_") %>% 
-  filter(!analyte %in% c("TOC", "NH4", "NO2", "NO3")) %>% 
-  drop_na(value) %>% 
-  print() %>% 
+  
+  # convert units
+  mutate(
+    conc = conc*1e-3, # mg/L -> g/L
+    unit = "gL",
+    molmass = map_dbl(convert_formula(analyte), ~ sum(mass(.x))),
+    conc = conc/molmass, # g/L -> mol/L
+    unit = "molL",
+    conc = conc*1e6, # mol/L -> µmol/L
+    unit = "µmolL"
+  ) %>% 
+  
+  
+  filter(!analyte %in% c("TOC", "NH4", "NO2", "NO3", "PO4", "SO4")) %>% 
+  drop_na(conc) %>% 
+  #filter(analyte == "N") %>% 
+  #print() 
+  
   write_rds(here("output", "interm", "water_cleaned_rain.rds"))
 ```
 
@@ -508,33 +584,34 @@ results$water_rain_threshold_removal <- 5
 # calculate Interquartile range
 data$iqr_water_rain <- read_rds(here("output", "interm", "water_cleaned_rain.rds")) %>% 
   group_by(analyte, unit) %>% 
-    summarise(iqr = IQR(value))
+    summarise(iqr = IQR(conc))
 
 
 tables$water_rain <- read_rds(here("output", "interm", "water_cleaned_rain.rds")) %>% 
   
   # remove upper outliers
   left_join(data$iqr_water_rain) %>% 
-  mutate(value = if_else(value > 1.5*iqr, NA, value)) %>% 
-  drop_na(value) %>% 
-  #filter(if_all(value, ~.x < quantile(.x, 0.95))) %>% # alternative for removal of upper X% of data
+  mutate(conc = if_else(conc > 1.5*iqr, NA, conc)) %>% 
+  drop_na(conc) %>% 
+  #filter(if_all(conc, ~.x < quantile(.x, 0.95))) %>% # alternative for removal of upper X% of data
   
   group_by(analyte, unit) %>% 
   summarise(
     n = n(),
-    min = min(value),
-    Q1 = quantile(value, 0.25),
-    mean = min(value),
-    sd = sd(value),
+    min = min(conc),
+    Q1 = quantile(conc, 0.25),
+    mean = mean(conc),
+    sd = sd(conc),
     cv = sd/mean,
-    Q3 = quantile(value, 0.75),
-    max = max(value)
+    Q3 = quantile(conc, 0.75),
+    max = max(conc)
   ) %>% 
   
   # remove data with few observations
   filter(n > results$water_rain_threshold_removal) %>% 
   
   select(-c(Q1, Q3)) %>% 
+  print() %>% 
   write_csv(here("output", "tables", "water_rain.csv"))
 ```
 
@@ -565,7 +642,9 @@ tables$water_combined <- data$water_combined_tap %>%
     mean < conf.025 ~ "lower",
     mean > conf.025 & mean < conf.975 ~ "not significant",
     mean > conf.975 ~ "higher"
-    )) %>% 
+    ),
+    `tap:rain ratio` = round(meanconf/mean)
+    ) %>% 
   
   select(-c(conf.025, conf.975)) %>% 
   
@@ -578,6 +657,9 @@ tables$water_combined <- data$water_combined_tap %>%
 knitr::kable(tables$water_combined,
              caption = paste0(""))
 ```
+
+- All substance concentrations that are known for both tap and rain water are significantly lower in rain water (p < 0.05).
+
 
 
 
@@ -602,9 +684,8 @@ waterEx_perFeed <- (dailyFreshwater * 1e3) / dailyFeed   # Water exchange per fe
 Based on these inputs, a biomass of `r print(BM)` \si{\kg}, a total weight of `r print(dailyFeed)` \si{\kg} feed fed per day, a daily exchanged volume of `r print(dailyFreshwater)` \si{\cubicm\per\d} freshwater and `r print(waterEx_perFeed)` \si{\L\per\kg} exchanged water per weight unit feed fed is calculated.
 
 ```{r include=FALSE}
-results <- data.frame(Values = c(SD, FR, BM, dailyFeed, rearingV, totalV, ER, dailyFreshwater, waterEx_perFeed))
-
-rownames(results) <- c(
+tables$assumptions <- tibble(
+  Parameter = c(
   'Stocking density (kg/m^3)'
   ,'Feeding rate (%)'
   ,'Total biomass (kg)'
@@ -613,12 +694,14 @@ rownames(results) <- c(
   ,'Total volume (m^3)'
   ,'Daily water exchange rate (%/m^3/day)'
   ,'Daily freshwater volume (m^3/day)'
-  ,'Freshwater per feed (L/kg)'
-)
+  ,'Freshwater per feed (L/kg)'),
+  Values = c(SD, FR, BM, dailyFeed, rearingV, totalV, ER, dailyFreshwater, waterEx_perFeed)) %>% 
+  write_csv(here("output", "tables", "assumptions.csv"))
 ```
 
 ```{r table_assumptions}
-knitr::kable(results)
+knitr::kable(tables$assumptions,
+             caption = "")
 ```
 
 
@@ -629,6 +712,11 @@ knitr::kable(results)
 To estimate the mass contribution of source water and feed to the total amount of nutrients that are entering the system, it is assumed that the RAS operator is using tap water as freshwater source and analysis results from water treatment plants are thus taken as data input. Furthermore, the average of the nutrient profile of a number of commercial fish feeds is used.
 
 ### Feed
+
+```{r eval=FALSE, include=FALSE}
+read_rds(here("output", "interm", ""))
+```
+
 
 ```{r}
 assumption_data_feed <- read_excel(here("data", "APO-masterfile_nutrients.xlsx"), 
@@ -688,27 +776,40 @@ read_excel(here("data", "APO - Water quality.xlsx"), sheet = "municipalTap", ski
 
 
 
+
+
 ## Permutation
 
-```{r permutation_test}
-fruits <- tibble(a = rnorm(100,3,2), b = rnorm(100, 9,4))
+```{r permutation_test, include=TRUE}
+# create dummy data using uniform distribution
+nutrient <- tibble(water = runif(100, 1, 2), 
+                   feed = runif(100, 1, 4))
 
-fruits %>% 
-  expand(a,b) %>% 
+
+nutrient %>%
+  
+  # create all possible combinations
+  expand(water, feed) %>% 
+  
+  # calculate percentage
   mutate(
-    sum=a+b, 
-    perc_a = a/sum*100, 
-    perc_b = b/sum*100
+    perc_water = water/(water+feed)*100, 
+    perc_feed = feed/(water+feed)*100
     ) %>% 
+  
+  # convert to longtable
   pivot_longer(
-    perc_a:perc_b, 
+    perc_water:perc_feed, 
     names_to = "group", 
     values_to = "values"
     ) %>% 
-  
-  ggplot(aes(x=values,fill=group)) + 
-  geom_density() + 
-  lims(x=c(-10,10))
+
+  # plot data
+  ggplot(aes(x = values, fill = group)) + 
+  geom_density(alpha = 0.5) +
+  lims(x = c(0, 100)) + 
+  labs(x = "Percentage contribution",
+       y = "Probability of occurrence")
 ```
 
 

@@ -76,14 +76,14 @@ plot_feed_comp <- function(x, ...) {
 plot_feedstuff_comp <- function(x, ...) {
 
   x %>%
-    ggplot(aes(y = class,
+    ggplot(aes(y = cat2,
                x = value,
-               fill = colclass)) +
+               fill = cat3)) +
     geom_boxplot() +
     facet_wrap(facets = vars(analyte), scales = "free") +
     labs(
       fill = "class",
-      x = "",
+      x = "Inclusion rate (g/kg)",
       y = ""
     ) +
     theme_classic() +
