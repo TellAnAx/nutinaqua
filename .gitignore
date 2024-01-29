@@ -23,3 +23,6 @@ tmp.xlsx
 output/tables/*
 output/interm/*
 output/plots/*
+*.csv
+*.rds
+*.png
