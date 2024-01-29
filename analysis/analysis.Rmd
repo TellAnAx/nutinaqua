@@ -20,7 +20,8 @@ knitr::opts_chunk$set(
 )
 
 # R options
-options(knitr.kable.NA = "")
+options(knitr.kable.NA = "", 
+        digits = 3)
 
 # Load packages
 library(here)
@@ -57,11 +58,11 @@ source(here("R", "helper_functions.R"))
 
 # Data import
 
-|File|
-|---|
-|Feed composition APO-SUB-2.xlsx|
-|Water quality APO-SUB-2.xlsx|
-|IAFFD FICD.xlsx|
+|File|Content|
+|---|---|
+|Feed composition APO-SUB-2.xlsx|Composition data of commercial and experimental fish feeds|
+|Water quality APO-SUB-2.xlsx|Composition data of tap and rain water|
+|IAFFD FICD.xlsx|Composition of aquafeed raw materials; data downloaded from www.iaffd.com|
 
 
 
@@ -87,7 +88,15 @@ source(here("R", "plot_functions.R"))
 
 ## Feed
 
+
+
+
+
 ## Water
+
+- outliers for rain water were removed
+
+
 
 ## Alkalinity supplements
 
@@ -104,7 +113,7 @@ tables <- list()
 
 
 
-## Feed(-ing) as nutrient source
+## Feed as nutrient source
 
 
 ```{r}
@@ -125,7 +134,7 @@ data$feed_cleaned <- data$feed[[1]] %>%
     ) %>% 
   
   # keep only necessary data
-  select(cat2, P_gkg:Cu_mgkg, N_gkg) %>% 
+  select(cat2, treat_id, P_gkg:Cu_mgkg, N_gkg) %>% 
   
   # write data for statistical analysis
   write_rds(here("output", "interm", "feed_stattest.rds")) %>% 
@@ -142,17 +151,19 @@ data$feed_cleaned <- data$feed[[1]] %>%
   mutate(
     value = if_else(unit == "mgkg", value*1e-3, value), 
     unit = if_else(unit == "mgkg", "gkg", unit),
-    molmass = map_dbl(convert_formula(substance), ~ sum(mass(.x))),
-    value = value/molmass, # g/kg -> mol/kg
-    unit = "molkg",
-    value = value*1e3, # mol/kg -> mmol/kg
-    unit = "mmolkg"
+    molmass = map_dbl(convert_formula(substance), ~ sum(mass(.x)))
+    #value = value/molmass, # g/kg -> mol/kg
+    #unit = "molkg",
+    #value = value*1e3, # mol/kg -> mmol/kg
+    #unit = "mmolkg"
     ) %>% 
   write_rds(here("output", "interm", "feed_cleaned.rds"))
 ```
 
 ```{r}
 tables$feed_summary_long <- read_rds(here("output", "interm", "feed_cleaned.rds")) %>% 
+  
+  # Calculate summary statistics
   group_by(cat2, substance, unit) %>% 
   summarise(
     n = n(),
@@ -162,6 +173,7 @@ tables$feed_summary_long <- read_rds(here("output", "interm", "feed_cleaned.rds"
     cv = sd/mean,
     max = max(value, na.rm = T)
   ) %>% 
+  
   rename(category = "cat2") %>% 
   write_csv(here("output", "tables", "feed_summary_long.csv"))
   
@@ -177,25 +189,43 @@ knitr::kable(tables$feed_summary_long,
              caption = "")
 ```
 
+
+
+### Statistics
+
 ```{r feed_statistics}
-data$feed_stat <- read_rds(here("output", "interm", "feed_stattest.rds"))
+data$feed_stat <- read_rds(here("output", "interm", "feed_cleaned.rds")) %>% 
+  filter(cat2 == "commercial") %>% 
+  print()
 
-# enough data for reliable comparison
-results$feed_comp_N <- data$feed_stat %>% tukey_hsd(N_gkg~cat2) %>% print()
-results$feed_comp_P <- data$feed_stat %>% tukey_hsd(P_gkg~cat2) %>% print()
+# Calculate mean inclusion rates and use as mu for t-test
+read_rds(here("output", "interm", "feed_cleaned.rds")) %>% 
+  filter(cat2 == "old") %>% 
+  drop_na(value) %>% 
+  group_by(substance, unit) %>% 
+  summarise(mean = mean(value)) %>%
+  print()
 
-# almost no data - many NAs
-results$feed_comp_K <- data$feed_stat %>% tukey_hsd(K_gkg~cat2) %>% print()
-results$feed_comp_Ca <- data$feed_stat %>% tukey_hsd(Ca_gkg~cat2) %>% print()
-results$feed_comp_Mg <- data$feed_stat %>% tukey_hsd(Mg_gkg~cat2) %>% print()
-results$feed_comp_S <- data$feed_stat %>% tukey_hsd(S_gkg~cat2) %>% print()
-results$feed_comp_Fe <- data$feed_stat %>% tukey_hsd(Fe_mgkg~cat2) %>% print()
-results$feed_comp_Cu <- data$feed_stat %>% tukey_hsd(Cu_mgkg~cat2) %>% print()
-results$feed_comp_Zn <- data$feed_stat %>% tukey_hsd(Zn_mgkg~cat2) %>% print()
+
+
+
+# PHOSPHORUS
+# n = 68; enough data for reliable comparison
+results$feed_comp_P <- data$feed_stat %>% filter(substance == "P") %>% 
+  t_test(value ~ 1, mu = 524.714, detailed = T) %>% print()
+
+# Change in P
+results$feed_P_decrease_old_new <- (1 - 524.714/377) * 100
+
+# CALCIUM
+# n = 5; 
+results$feed_comp_P <- data$feed_stat %>% filter(substance == "Ca") %>% 
+  t_test(value ~ 1, mu = 565.801) %>% print()
 ```
 
-- reliable comparison of nutrient inclusion is possible for N and P data only, considering the number of observations in the dataset.
-- N: no significant difference between any of the feeds
+- reliable comparison of nutrient inclusion is only possible for P, considering the number of observations in the dataset.
+- comparison of commercial data with aquaponics or experimental feed is also not meaningful due to low sample size
+
 - P: Aquaponics feeds are richer in P compared with commercial feeds and also compared with experimental diets (Tukey test: p < 0.05). The smallest difference was found between aquaponics and old diets. The difference between them is non-significant. 
 
 
@@ -203,17 +233,18 @@ results$feed_comp_Zn <- data$feed_stat %>% tukey_hsd(Zn_mgkg~cat2) %>% print()
 read_rds(here("output", "interm", "feed_cleaned.rds")) %>% 
   mutate(
     substance = fct_relevel(substance, "N", "P", "K", "Ca", "Mg", "S", "Fe", "Cu", "Zn"),
-    category = fct_relevel(cat2, "old", "commercial", "aquaponic", "experimental")
+    category = fct_relevel(cat2, "old", "commercial", "experimental", "aquaponic"),
+    category = fct_recode(category,  past = "old", present = "commercial", aquaponic = "aquaponic", experimental = "experimental")
   ) %>% 
-  ggplot(aes(x = substance, y = value, fill = category)) + 
+  ggplot(aes(y = fct_rev(category), x = value, fill = category)) + 
   geom_boxplot() +
   facet_wrap(facets = vars(substance), scales = "free") + 
-  scale_fill_manual(values = c("grey", "lightblue", "lightgreen", "gold")) +
+  scale_fill_manual(values = c("grey", "lightblue", "gold", "lightgreen")) +
   theme_bw() +
-  theme(axis.ticks.x = element_blank(),
-        axis.text.x = element_blank()) +
-  labs(x = "",
-       y = "Inclusion rate (mmol/kg)",
+  theme(legend.position = "none",
+        axis.text.y = element_text(angle = 45, hjust = 1)) +
+  labs(y = "",
+       x = "Inclusion rate (mmol/kg)",
        fill = "class")
   
 ggsave(here("output", "plots", "feed.png"))
@@ -410,10 +441,9 @@ knitr::include_graphics(here("output", "plots", "feedstuff_composition.png"))
 
 ```{r create_water_map}
 source(here("R", "plots", "map_plots.R"))
-source(here("R", "plots", "water_plots.R"))
 ```
 
-```{r}
+```{r include=TRUE, fig.cap = "Origins of data included into the water dataset. Blue dots: Drinking water analysis reports. Red dots: Rain water analyses."}
 knitr::include_graphics(here("output", "plots", "map.png"))
 ```
 
@@ -499,6 +529,8 @@ data$water_cleaned_tap <- read_rds(here("output", "interm", "water_cleaned.rds")
   write_rds(here("output", "interm", "water_cleaned_tap.rds"))
 ```
 
+
+
 ```{r}
 tables$water_tap <- read_rds(here("output", "interm", "water_cleaned_tap.rds")) %>% 
   select(analyte, unit, n, min, meanconf, sd, cv, max) %>% 
@@ -563,6 +595,10 @@ data$water_cleaned_rain <- read_rds(here("output", "interm", "water_cleaned.rds"
   #print() 
   
   write_rds(here("output", "interm", "water_cleaned_rain.rds"))
+```
+
+```{r}
+source(here("R", "plots", "water_plots.R"))
 ```
 
 ```{r}
@@ -735,7 +771,7 @@ assumption_data_feed <- read_excel(here("data", "APO-masterfile_nutrients.xlsx")
 head(assumption_data_feed)
 ```
 
-```{r include=FALSE}
+```{r include=FALSE, eval=FALSE}
 # Load nutrient data
 data <- read.csv2(here("data", "nutrient_contribution.csv"))
 
@@ -754,7 +790,7 @@ data[,2:5] <- apply(data[,2:5], 2, as.numeric)
 
 ### Water
 
-```{r}
+```{r eval=FALSE}
 read_excel(here("data", "APO - Water quality.xlsx"), sheet = "municipalTap", skip = 1) %>% 
   select(-c(Reference_ID:`EC_uS_cm_25degC`)) %>% 
   pivot_longer(
