@@ -97,8 +97,7 @@ source(here::here("R", "assumptions.R"))
 # Nutrient sources
 
 ## Aquafeeds
-
-Aquafeeds are considered the most important nutrient input into aquaculture systems. Studies comparing nutrient inputs from aquafeeds versus source water in aquaponics found that they are the dominant source of nitrogen, phosphorus, potassium, iron, manganese, copper, zinc, and molybdenum [@Delaide2017]. Another study found that also the majority of calcium, magnesium, and sulphur originated from the feed [@Strauch2018]. However, the most recent study providing a general overview of mineral inclusion rates in aquafeeds dating back more than 40 years [@Tacon1983]. In the meantime, the raw material composition of aquafeeds has changed substantially. For instance, the amount of fish meal has been reduced in favour of mostly plant-based ingredients [@MOWI2023]. It could thus be assumed that the inclusion rates of those nutrients that are not controlled during aquafeed formulation changed as well. Though, detailed information with regards to nutrients other than nitrogen and phosphorus in aquafeeds is scarce. Figure \ref{fig:feedcomp} provides an overview of nutrient inclusion rates compiled from feed manufacturer datasheets and literature studies. 
+Aquafeeds are considered the most important nutrient input into aquaculture systems. Studies comparing nutrient inputs from aquafeeds versus source water in aquaponics found that they are the dominant source of nitrogen, phosphorus, potassium, iron, manganese, copper, zinc, and molybdenum [@Delaide2017]. Another study found that also the majority of calcium, magnesium, and sulphur originated from the feed [@Strauch2018]. However, the most recent study providing a general overview of mineral inclusion rates in aquafeeds dating back more than 40 years [@Tacon1983]. In the meantime, the raw material composition of aquafeeds has changed substantially. For instance, the amount of fish meal has been reduced in favour of mostly plant-based ingredients [@MOWI2023]. It could thus be assumed that the inclusion rates of those nutrients that are not controlled during aquafeed formulation changed as well. Though, while the nitrogen and phosphorus content of aquafeeds has been extennsively studied, detailed information with regards to other nutrients is scarce. Figure \ref{fig:feedcomp} provides an overview of nutrient inclusion rates compiled from feed manufacturer datasheets and literature studies.
 
 ```{=tex}
 \begin{figure}
@@ -109,7 +108,8 @@ Aquafeeds are considered the most important nutrient input into aquaculture syst
 \end{figure}
 ```
 
-It is noteworthy that the average inclusion rate of phosphorus decreased by \SI{-39.2}{\p} (two-sided t-test: p < 0.05). This development is due to the increased use of raw materials with more bioavailable phosphorus. 
+While it can be assumed that the nitrogen content of aquafeeds ranged around similar levels over time, average inclusion rates of phosphorus decreased by `r (1-16.252/11.662)*100`\si{\p} (two-sided t-test: p < 0.05). This development is due to concerns regarding eutrophication of water bodies and regulations with regards to the emission of phosphorus. The reduction was achieved by the increased use of raw materials with more bioavailable phosphorus and the use of phytase to feeds to reduce the amount of phytic acid in the feeds, which was introduced by using increasing proportions of plant-based raw materials.
+
 
 
 
@@ -119,6 +119,9 @@ The iron content of aquafeeds increased by `r (1-183.5/209)*100`\si{\p}, with an
 Nowadays, aquafeeds are richer in copper than in the past. The average inclusion rate increased by `r (1-15/20)*100`\si{\p}, from \SI{15(1.4)}{\mgkg} to \SI{20(18.5)}{\mgkg}. In the case of zinc, inclusion rates increased by `r (1-90/207)*100`\si{\p}, from \SI{90(7)}{\mgkg} to \SI{207(126.6)}{\mgkg}. The inclusion rates of both copper and zinc were again highly variable, with \gls{cv} of \SI{93}{\p} and \SI{61}{\p}, and ranges from \SIrange{5}{46}{\mgkg} and \SIrange{90}{384}{\mgkg}, respectively. 
 
 
+
+### Specialty feeds
+As answer to special needs, several commercial specialty feeds were developed. These comprise feeds for cage culture, pond aquaculture, \gls{ras} and aquaponics. 
 
 
 
