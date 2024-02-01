@@ -113,7 +113,7 @@ tables <- list()
 
 
 
-## Feed as nutrient source
+## Aquafeeds
 
 
 ```{r}
@@ -435,7 +435,7 @@ knitr::include_graphics(here("output", "plots", "feedstuff_composition.png"))
 
 
 
-## Water as Nutrient Source
+## Water
 
 ### Data origin
 
@@ -695,6 +695,14 @@ knitr::kable(tables$water_combined,
 ```
 
 - All substance concentrations that are known for both tap and rain water are significantly lower in rain water (p < 0.05).
+
+
+
+
+## Alkalinity supplements
+
+
+
 
 
 
