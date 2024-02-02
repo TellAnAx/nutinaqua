@@ -97,7 +97,7 @@ source(here::here("R", "assumptions.R"))
 # Nutrient sources
 
 ## Aquafeeds
-Aquafeeds are considered the most important nutrient input into aquaculture systems. Studies comparing nutrient inputs from aquafeeds versus source water in aquaponics found that they are the dominant source of nitrogen, phosphorus, potassium, iron, manganese, copper, zinc, and molybdenum [@Delaide2017]. Another study found that also the majority of calcium, magnesium, and sulphur originated from the feed [@Strauch2018]. However, the most recent study providing a general overview of mineral inclusion rates in aquafeeds dating back more than 40 years [@Tacon1983]. In the meantime, the raw material composition of aquafeeds has changed substantially. For instance, the amount of fish meal has been reduced in favour of mostly plant-based ingredients [@MOWI2023]. It could thus be assumed that the inclusion rates of those nutrients that are not controlled during aquafeed formulation changed as well. Though, while the nitrogen and phosphorus content of aquafeeds has been extennsively studied, detailed information with regards to other nutrients is scarce. Figure \ref{fig:feedcomp} provides an overview of nutrient inclusion rates compiled from feed manufacturer datasheets and literature studies.
+Aquafeeds are considered the most important nutrient input into aquaculture systems. Studies comparing nutrient inputs from aquafeeds versus source water in aquaponics found that they are the dominant source of nitrogen, phosphorus, potassium, iron, manganese, copper, zinc, and molybdenum [@Delaide2017]. Another study found that also the majority of calcium, magnesium, and sulphur originated from the feed [@Strauch2018]. However, the most recent work that provides a general overview of mineral inclusion rates in aquafeeds dating back more than 40 years [@Tacon1983]. In the meantime, the raw material composition of aquafeeds has changed substantially. For instance, the amount of fish meal has been reduced in favour of mostly plant-based ingredients [@MOWI2023]. It could thus be assumed that the inclusion rates of those nutrients that are not controlled during aquafeed formulation changed as well. Figure \ref{fig:feedcomp} provides an overview of nutrient inclusion rates compiled from feed manufacturer datasheets and literature studies.
 
 ```{=tex}
 \begin{figure}
@@ -108,10 +108,14 @@ Aquafeeds are considered the most important nutrient input into aquaculture syst
 \end{figure}
 ```
 
+
+
+The nitrogen and phosphorus content of aquafeeds is subject of continuous research due to the relevance of both substances for growth and also emissions from aquaculture [@Sugiura2018].
+
 While it can be assumed that the nitrogen content of aquafeeds ranged around similar levels over time, average inclusion rates of phosphorus decreased by `r (1-16.252/11.662)*100`\si{\p} (two-sided t-test: p < 0.05). This development is due to concerns regarding eutrophication of water bodies and regulations with regards to the emission of phosphorus. The reduction was achieved by the increased use of raw materials with more bioavailable phosphorus and the use of phytase to feeds to reduce the amount of phytic acid in the feeds, which was introduced by using increasing proportions of plant-based raw materials.
 
 
-
+Detailed information with regards to other nutrients is scarce. 
 
 In comparison with past values, the highest increase in inclusion rates was found for microminerals. 
 The iron content of aquafeeds increased by `r (1-183.5/209)*100`\si{\p}, with an average of \SI{209(237.1)}{\mgkg} in comparison with \SI{183.5(24.7)}{\mgkg} in the 90ies. Iron is also the nutrient with the highest variability in aquafeeds, indicated by the \gls{cv} of \SI{114}{\p} and a range from \SIrange{40}{544}{\mgkg}.
