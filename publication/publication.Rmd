@@ -97,7 +97,12 @@ source(here::here("R", "assumptions.R"))
 # Nutrient sources
 
 ## Aquafeeds
-Aquafeeds are considered the most important nutrient input into aquaculture systems. Studies comparing nutrient inputs from aquafeeds versus source water in aquaponics found that they are the dominant source of nitrogen, phosphorus, potassium, iron, manganese, copper, zinc, and molybdenum [@Delaide2017]. Another study found that also the majority of calcium, magnesium, and sulphur originated from the feed [@Strauch2018]. However, the most recent work that provides a general overview of mineral inclusion rates in aquafeeds dating back more than 40 years [@Tacon1983]. In the meantime, the raw material composition of aquafeeds has changed substantially. For instance, the amount of fish meal has been reduced in favour of mostly plant-based ingredients [@MOWI2023]. It could thus be assumed that the inclusion rates of those nutrients that are not controlled during aquafeed formulation changed as well. Figure \ref{fig:feedcomp} provides an overview of nutrient inclusion rates compiled from feed manufacturer datasheets and literature studies.
+Aquafeeds are considered the most important nutrient input into aquaculture systems. Studies comparing nutrient inputs from aquafeeds versus source water in aquaponics found that they are the dominant source of nitrogen, phosphorus, potassium, iron, manganese, copper, zinc, and molybdenum [@Delaide2017]. Another study found that also the majority of calcium, magnesium, and sulphur originated from the feed [@Strauch2018]. However, the most recent work that provides a general overview of mineral inclusion rates in aquafeeds dating back more than 40 years [@Tacon1983]. In the meantime, the raw material composition of aquafeeds has changed substantially. For instance, the amount of fish meal has been reduced in favour of mostly plant-based ingredients [@MOWI2023]. It could thus be assumed that the inclusion rates of those nutrients that are not controlled during aquafeed formulation changed as well. Figure \ref{fig:feedcomp} provides an overview of nutrient inclusion rates compiled from literature studies and feed manufacturer datasheets.
+
+```{r include=FALSE, fig.cap="Inclusion rates of some nutrients essential for fish or plants in different types of aquafeeds. The composition of "past" feeds is based on data from Tacon, 1983. Data about "present" aquafeeds was compiled from datasheets and scientific publications providing analyses of commercial aquafeeds for Rainbow trout (\emph{Oncorhynchus mykiss}), Common carp (\emph{Cyprinus carpio}), Pike-perch (\emph{Sander lucioperca}), Nile tilapia (\emph{Oreochromis niloticus}), and African catfish (\emph{Clarias gariepinnus}). The dataset includes starter and grower feeds. "Experimental" feeds were those specifically formulated for studies related to aquaponics. "Aquaponic" feeds comprise commercially available feeds (n = 3) for aquaponic systems. Data was compiled from supplier datasheets."}
+knitr::include_graphics(here("output", "plots", "feed.png"))
+```
+
 
 ```{=tex}
 \begin{figure}
@@ -109,62 +114,32 @@ Aquafeeds are considered the most important nutrient input into aquaculture syst
 ```
 
 
+Nitrogen in form of \gls{cp} is an important cost factor in feed production. Phosphorus is a problem because it is poorly digestible depending on the raw materials used for feed production. It is therefore excreted in comparatively large quantities and, depending on the production system, leads to water eutrophication and algae blooms [@Sugiura2018]. The nitrogen and phosphorus content of aquafeeds is thus subject to ongoing research. As a consequence, nitrogen inclusion rates have decreased from initial values ranging around \SI{96}{\gkg} (\SI{60}{\p} \gls{cp}) in the early days of aquafeed production to approximately \SI{72}{\gkg} (\SI{45}{\p} \gls{cp}) for salmonid fish [@MOWI2023] and an average of \SI{63}{\gkg} (\SI{45}{\p} \gls{cp}), if aquafeeds for other freshwater species such as carp, tilapia, catfish, and percids are considered (n = 74). This is due to discoveries such as the protein sparing effect, for instance in rainbow trout, carp, and tilapia [@Takeuchi1978; @Beamish1986; @Shiau1993] and improvements in the digestibility of aquafeeds. 
+Average inclusion rates of phosphorus decreased by about `r round((1-16.252/11.662)*100)`\si{\p}, from \SI{16}{\gkg} to \SI{12}{\gkg} over time (n = 68). The reduction was achieved by a two-step approach, combining a reduction of dietary phosphorus and efforts to increase its bioavailability in aquafeeds [@Sugiura2018]. 
 
-The nitrogen and phosphorus content of aquafeeds is subject of continuous research due to the relevance of both substances for growth and also emissions from aquaculture [@Sugiura2018].
+Little information is available on the inclusion rates of other nutrients, making a statistically sound comparison between past and present values impossible. Though, the calcium content of the aquafeeds in the the collected dataset is on average `r round((1-22.676/17.56)*100)`\si{\p} lower in comparison with past values (n = 5). This might be due to the close nutritional relation of calcium with phosphorus and the resulting necessity to maintain an optimum calcium-to-phosphorus ratio in the feeds [@Hossain2014].
 
-While it can be assumed that the nitrogen content of aquafeeds ranged around similar levels over time, average inclusion rates of phosphorus decreased by `r (1-16.252/11.662)*100`\si{\p} (two-sided t-test: p < 0.05). This development is due to concerns regarding eutrophication of water bodies and regulations with regards to the emission of phosphorus. The reduction was achieved by the increased use of raw materials with more bioavailable phosphorus and the use of phytase to feeds to reduce the amount of phytic acid in the feeds, which was introduced by using increasing proportions of plant-based raw materials.
+The magnesium and iron content of aquafeeds, meanwhile, appears not to have changed. The averge magnesium content was \SI{2.2}{\gkg} (n = 3) in comparison with \SI{2.1}{\gkg} in past feeds. The iron content ranges around \SI{200}{\mgkg} (n = 4), even though highly variable (cv = \num{1.13}), ranging from \SIrange{40}{544}{\mgkg}. However, the variability in iron was alreday noticed in the past [@Tacon1983].
 
+Aquafeeds may contain more zinc (n = 4), copper (n = 4), and potassium (n = 2) today than in the past. In the case of zinc, inclusion rates were found to be `r round((1-90/207)*100)`\si{\p} higher in modern feeds. The average copper inclusion rate increased by `r round((1-15/20)*100)`\si{\p}, while `r round((1-9.5/11.2)*100)`\si{\p} more potassium was found in modern commercial aquafeeds. However, data was highly variable, with a \gls{cv} of \num{0.61} and \num{0.93} for zinc and copper, respectively, and a \gls{cv} of \num{0.20} for potassium.
 
-Detailed information with regards to other nutrients is scarce. 
-
-In comparison with past values, the highest increase in inclusion rates was found for microminerals. 
-The iron content of aquafeeds increased by `r (1-183.5/209)*100`\si{\p}, with an average of \SI{209(237.1)}{\mgkg} in comparison with \SI{183.5(24.7)}{\mgkg} in the 90ies. Iron is also the nutrient with the highest variability in aquafeeds, indicated by the \gls{cv} of \SI{114}{\p} and a range from \SIrange{40}{544}{\mgkg}.
-
-Nowadays, aquafeeds are richer in copper than in the past. The average inclusion rate increased by `r (1-15/20)*100`\si{\p}, from \SI{15(1.4)}{\mgkg} to \SI{20(18.5)}{\mgkg}. In the case of zinc, inclusion rates increased by `r (1-90/207)*100`\si{\p}, from \SI{90(7)}{\mgkg} to \SI{207(126.6)}{\mgkg}. The inclusion rates of both copper and zinc were again highly variable, with \gls{cv} of \SI{93}{\p} and \SI{61}{\p}, and ranges from \SIrange{5}{46}{\mgkg} and \SIrange{90}{384}{\mgkg}, respectively. 
+The authors highlight the lack of mineral composition data in the field of aquaculture nutrition, despite the extensive literature assessing mineral requirements of finfish.
 
 
 
-### Specialty feeds
+### Speciality feeds
 As answer to special needs, several commercial specialty feeds were developed. These comprise feeds for cage culture, pond aquaculture, \gls{ras} and aquaponics. 
 
 
 
 
-## Feed(-ing) as nutrient source
 
 Aquaponics feeds, meanwhile, contain high proportions of phosphorus and potassium. The formulation of a specific aquaponics feed that meets the nutritional requirements of both fish and plants by leading to higher excretion of otherwise deficient plant nutrients is generally thought to be the most suitable approach for the development of an “off-the-shelf” nutrient delivery system that does not require additional management effort by aquaponics farmers [@Lennard2017; @Eck2019].
 
-
-### Inclusion levels of nutrients
-Detailed information with regards to inclusion levels of those nutrients into aquafeeds is scarce. This might be due to the fact that nutritional requirements of some of the mentioned substances have not yet been established for aquatic animals. Thus, there is currently no incentive to include those nutrients into feed formulation or to monitor their inclusion rates, making considerable variation between feeds likely.
-
-In addition, current European regulations affecting labelling of compound feeds for aquaculture (defined by Regulation EC No. 767/2009 of the European Parliament) list only crude protein, crude fibre, crude oils and fats, crude ash, calcium, sodium and phosphorus as mandatory values to be stated on labels of commercial feeds. There is thus no obligation to analyse metals other than the stated ones. As a result, the most recent overview publication looking into metal inclusion rates in aquafeeds dates back 40 years [@Tacon1983].
+There are some commercial feeds available that are marketed as specifically formulated for aquaponic systems (n = 3). Though, an in-depth characterisation of these feeds was not done until now to the best of the author's knowledge. However, even though available data is limited, it can be seen that the phosphorus content of these aquafeeds is highly variable (\gls{cv} = \SI{76}{\p}). The average phosphorus content of \SI{22(17)}{\gkg}, meanwhile, is not significantly different from the unspecific diets (t-test: p = 0.4). Information with regards to potassium and calcium inclusion rates were reported only for one feed. Here, potassium and calcium inclusion rates were `r (1-20/11)*100`\si{\p} higher and `r (1-15/18)*100`\si{\p} lower than the average of unspecific diets, respectively. Other data with regards to these feeds is not available to the best of the author's knowledge.
 
 
 
-
-After exclusion of specialty feeds, the range in which phosphorus, potassium, and calcium can be found in modern commercial fish feeds is comparably narrow, ranging from \SIrange{7}{18}{\gkg}, \SIrange{10}{13}{\gkg}, and \SIrange{12}{20}{\gkg}, respectively. These nutrients also show the lowest \gls{cv} (between \SIrange{20}{21}{\p}). The average inclusion rates did not significantly change in comparison with past values, being \SI{12(2.5)}{\gkg}, \SI{11(2.3)}{\gkg}, and \SI{18(3.7)}{\gkg} of phosphorus, calcium, and potassium in nowadays' feeds, respectively, while \SI{14.9(0.02)}{\gkg}, \SI{9.6(1.0)}{\gkg}, and \SI{20.1(2.7)}{\gkg} were reported before [@Tacon1983]. Magnesium inclusion rates are slightly more variable, ranging from \SIrange{1}{3}{\gkg} with an average of \SI{2(0.8)}{\gkg} (\SI{2.1(0.1)}{\gkg} in the past) and a \gls{cv} of \SI{36}{\p}. 
-
-In comparison with past values, the highest increase in their inclusion rates was found for the microminerals. 
-
-The iron content of aquafeeds increased by `r (1-183.5/209)*100`\si{\p}, with an average of \SI{209(237.1)}{\mgkg} in comparison with \SI{183.5(24.7)}{\mgkg} in the 90ies. Iron is also the nutrient with the highest variability in aquafeeds, indicated by the \gls{cv} of \SI{114}{\p} and a range from \SIrange{40}{544}{\mgkg}.
-
-Nowadays, aquafeeds are richer in copper than in the past. The average inclusion rate increased by `r (1-15/20)*100`\si{\p}, from \SI{15(1.4)}{\mgkg} to \SI{20(18.5)}{\mgkg}. In the case of zinc, inclusion rates increased by `r (1-90/207)*100`\si{\p}, from \SI{90(7)}{\mgkg} to \SI{207(126.6)}{\mgkg}. The inclusion rates of both copper and zinc were again highly variable, with \gls{cv} of \SI{93}{\p} and \SI{61}{\p}, and ranges from \SIrange{5}{46}{\mgkg} and \SIrange{90}{384}{\mgkg}, respectively. 
-
-```{=tex}
-\input{../latex/table_feedcomp.tex}
-```
-
-
-
-
-
-### Aquaponics feeds
-There are some commercial feeds available that are marketed as specifically formulated for aquaponic systems (n = 3). Though, an in-depth characterisation of these feeds was not done until now to the best of the author's knowledge. 
-
-
-
-However, even though available data is limited, it can be seen that the phosphorus content of these aquafeeds is highly variable (\gls{cv} = \SI{76}{\p}). The average phosphorus content of \SI{22(17)}{\gkg}, meanwhile, is not significantly different from the unspecific diets (t-test: p = 0.4). Information with regards to potassium and calcium inclusion rates were reported only for one feed. Here, potassium and calcium inclusion rates were `r (1-20/11)*100`\si{\p} higher and `r (1-15/18)*100`\si{\p} lower than the average of unspecific diets, respectively. Other data with regards to these feeds is not available to the best of the author's knowledge.
 
 
 
@@ -185,27 +160,28 @@ Also, no differences were found for iron (t-test: p = 0.4), copper (t-test: p = 
 
 
 ### Sources and extent of variability
-The variability found in the data can be traced back to three causative factors, that are 1) the nutritional requirements of the fish species for which the feed was formulated, 2) the current approach of feed formulation based on nutrient digestibility, and 3) variability of the raw material composition among batches. 
+The variability found in the data can be traced back to 1) differences between the nutritional requirements of fish species for which the feeds in the dataset were formulated, 2) the variability in the raw material composition among feeds, and 3) variability in the raw materials themselves.
+
+- carnivorus fish need more protein, thus more N, thus less other nutrients and different feed ingredient composition, thus changes in the nutrient composition.
+- there is, obviously, a variety of fish feeds on the market that have different formulations
+- Feed formulators need to react to fluctuations of market prices for raw materials and the natural variation in raw material composition. 
+- fish feed composition will have to change to reduce the forage fish demand, making aquaculture more sustainable and fit for the future [@Cottrell2020]. 
+- it was shown that differences in raw material composition lead to comparable growth but the nutrient composition can dramatically vary
+
 
 [@Prabhu2016]
+[@Gebauer2023]
+[@Shaw2022]
+[@Shaw2022a]
 
-#### Fish species
-@Gebauer2023
-@Shaw2022
-@Shaw2022a
-
-#### Ingredients and feed formulation 
-Feed formulators need to react to fluctuations of market prices for raw materials and the natural variation in raw material composition. 
-
-
-@Shaw2022
-@Shaw2022a
-@Gebauer2023
 @Seawright1998
 
 IAFFD database - check variability 
 
 
+```{r include=TRUE, fig.cap="Mass fractions of some nutrients in different feedstuffs. Dashed red line indicates average inclusion of respective nutrient in fish meal. Data from IAFFD."}
+knitr::include_graphics(here("output", "plots", "feedstuff_composition.png"))
+```
 
 
 
@@ -252,6 +228,11 @@ Studies about \gls{adc} for the remaining essential plant nutrients are scarce. 
 
 
 
+
+
+
+
+
 ## Water as nutrient source
 Aquaponics scholars usually focus on aquafeeds as the main source of nutrients, while the importance of water as nutrient source is denoted as negligible [@Schmautz2016]. However, a comparison of substance flows and their variability is lacking.
 
@@ -264,7 +245,12 @@ Aquaponics scholars usually focus on aquafeeds as the main source of nutrients, 
 \end{figure}
 ```
 
-After the initial system fill-up, water is added to the system either to compensate evaporation, spillage or leaning losses (e.g., the drum filter backwash) or to dilute accumulating substances such as nitrate [@Maucieri2018]. The source water for an aquaponic system can originate from wells, collected rain, other sources of surface water, or municipal tap. However, considering that aquaponic systems are seen as especially beneficial for water-scarce regions [@Joyce2019] or urban areas [@Junge2017], where restrictive water management by authorities can be expected, tap water is likely the most important water source. Recent surveys corroborate this assumption, as the results show that the proportion of aquaponic practicioners using municipal tap water in the USA and Europe is \SI{47}{\p} and \SI{71.7}{\p}, respectively [@Pattillo2022; @Raulier2023]. Thus, the following assessment of water composition data focusses on the evaluation of tap water analyses. 
+After the initial system fill-up, water is added to the system either to compensate evaporation, spillage or leaning losses (e.g., the drum filter backwash) or to dilute accumulating substances such as nitrate [@Maucieri2018]. The source water for an aquaponic system can originate from wells, collected rain, other sources of surface water, or municipal tap. 
+
+However, considering that aquaponic systems are seen as especially beneficial for water-scarce regions [@Joyce2019] or urban areas [@Junge2017], where restrictive water management by authorities can be expected, tap water is likely the most important water source. Recent surveys corroborate this assumption, as the results show that the proportion of aquaponic practicioners using municipal tap water in the USA and Europe is \SI{47}{\p} and \SI{71.7}{\p}, respectively [@Pattillo2022; @Raulier2023]. 
+
+
+Thus, the following assessment of water composition data focusses on the evaluation of tap water analyses. 
 
 
 
@@ -315,6 +301,13 @@ A glimpse of the extent of variability of terrestrial waters in their chemical c
 
 
 
+
+
+
+
+
+
+
 # Alkalinity supplements as nutrient sources
 The term alkalinity supplements summarizes several alkaline substances that are used to maintain a stable pH in the water [@Timmons2010]. Nitrification decreases the pH over time and, consequently, also the activity of nitrifyers [Ward2011]. Thus, a stable pH has to be maintained to ensure both high nitrification performance and animal welfare. For this purpose, several Na-based substances such as sodium hydrogen carbonate (baking soda, \ce{NaHCO3}) are commonly used in aquaculture due to their high and rapid solubility at a comparably cheap price. However, high sodium (Na) concentrations must be avoided in aquaponic systems due to its phytotoxicity [@Maathuis2014]. Na is therefore replaced with several other supplements based on K or Ca that come with the benefit of providing an additional source of nutrients besides increasing the pH.
 
@@ -329,6 +322,8 @@ The term alkalinity supplements summarizes several alkaline substances that are 
 
 # Drawing the big picture
 
+
+
 ```{=tex}
 %\begin{figure}
 %\centering
@@ -342,6 +337,8 @@ The term alkalinity supplements summarizes several alkaline substances that are 
 
 
 Inputs of the remaining two nutrients, K and Ca, were found to be heavily depending on the alkalinity supplement used. In absence of the alkalinity supplement, aquafeeds were found to have the greatest impact on K with a contribution of 81.16%, while a higher proportion of Ca (69.62%; 90% CI: 65.51%, 72.86%) would enter the system on average via the water, compared with an average of30.38% of feed contribution. The difference is more pronounced with respect to Na: 82.25% (90% CI: 73.11%, 86.76%) of the total input was calculated to originate from water while only 17.75% were found to enter the system via daily feeding. However, the calculated quantities of alkalinity supplements necessary to maintain a constant pH were found to dominate each input scenario, resulting in a contribution of more than 80% of the total input of K, Ca, or Na in any case. 
+
+
 
 
 ## Stoichiometry of nutrient inputs
