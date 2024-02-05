@@ -83,9 +83,10 @@ plot_feedstuff_comp <- function(x, ...) {
     facet_wrap(facets = vars(analyte), scales = "free") +
     labs(
       fill = "class",
-      x = "Inclusion rate (g/kg)",
+      x = expression(log[10]("inclusion")),
       y = ""
     ) +
+    #scale_x_log10() +
     theme_classic() +
     theme(
       legend.position = "bottom",

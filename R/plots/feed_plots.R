@@ -6,7 +6,15 @@
 
 
 # Feedstuff composition----
-read_rds(here("output", "interm", "feedstuff_cleaned.rds")) %>%
-  plot_feedstuff_comp()
+
+mean_aquatic <- read_rds(here("output", "interm", "feedstuff_cleaned.rds")) %>%
+  filter(cat2 == "aquatic") %>% 
+  group_by(analyte) %>% 
+  summarise(mean = mean(value))
+
+read_rds(here("output", "interm", "feedstuff_cleaned.rds")) %>% 
+  plot_feedstuff_comp() + 
+  geom_vline(data = mean_aquatic, aes(xintercept = mean),
+             linetype = "dashed", size = 1.2, color = "red")
 
 ggsave(here::here("output", "plots", "feedstuff_composition.png"))

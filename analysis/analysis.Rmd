@@ -8,6 +8,7 @@ output:
     includes:
       in_header: ../latex/preamble.tex
     toc: true
+    keep_tex: true
 ---
 
 ```{r setup, include=FALSE}
@@ -49,6 +50,7 @@ source(here("R", "helper_functions.R"))
 
 # To Do
 
+- **does it make sense to include roots, tubers, and grains in the feedstuff overview?**
 - **feed data update**
 - **alkalinity data**
 - **Permutations**
@@ -310,7 +312,7 @@ names(stat_results) <- substances
 
 
 
-### Variability
+### Feedstuffs
 
 ```{r}
 data$feedstuff <- data$iaffd_overview[[1]] %>% 
@@ -375,14 +377,30 @@ data$feedstuff_cleaned <- read_rds(here("output", "interm", "feedstuff.rds")) %>
   
   mutate(analyte = str_remove(analyte, " \\(.*"),
          analyte = fct_recode(analyte, 
-                              N = "Crude  Protein", P = "Phosphorus", 
-                              K = "Potassium", Fe = "Iron", 
-                              Mn = "Manganese", Zn = "Zinc"),
+                              `N (g/kg)` = "Crude  Protein", `P (g/kg)` = "Phosphorus", 
+                              `K (g/kg)` = "Potassium", `Fe (mg/kg)` = "Iron", 
+                              `Mn (mg/kg)` = "Manganese", `Zn (mg/kg)` = "Zinc"),
          value = if_else(analyte == "N", value/6.25, value)) %>% # convert CP to N
   
   select(-c(description, origin, cat2, cat3)) %>% 
   
   rename(cat3 = "class", cat2 = "colclass") %>% 
+  
+  mutate_if(is.character, as.factor) %>% 
+  
+  # crop dataset
+  
+    # remove zeros because they produce non-finite values on log scales and interfere with quantiles
+  filter(value > 0) %>% 
+  
+  # now remove all values below or above 1.5xIQR
+  group_by(analyte) %>%
+  filter(between(value, quantile(value, 0.25) - 1.5*IQR(value), quantile(value, 0.75) + 1.5*IQR(value))) %>% 
+  
+  # remove Fe outlier
+  #filter(!(analyte == "Fe (mg/kg)" & value < 0.02)) %>% 
+  # remove Zn outlier
+  #filter(!(analyte == "Zn (mg/kg)" & value < 5)) %>% 
   
   write_rds(here("output", "interm", "feedstuff_cleaned.rds"))
 ```
