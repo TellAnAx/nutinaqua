@@ -54,7 +54,7 @@ map_dfr(names(iris)[1:4], "Species", process_col, data = iris)
 
 
 
-
+# arrange analytes in tables according to a pre-defined order
 table_styler <- function(x) {
 
   # create tibble with analytes and their desired order
@@ -68,4 +68,23 @@ table_styler <- function(x) {
     left_join(analyte_order) %>%
     arrange(position) %>%
     select(-position)
+}
+
+
+
+
+# normalize a numeric data vector so that all values fit into the interval [0,1]
+normalize_vector <- function(x) { 
+  
+  min_x <- min(x)
+  max_x <- max(x)
+  
+  normalized <- vector(mode = "numeric")
+  
+  for(i in 1:length(x)) {
+    normalized[i] <- (x[i] - min_x) / (max_x - min_x) 
+  }
+  
+  return(normalized)
+  
 }
