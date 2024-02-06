@@ -83,7 +83,8 @@ plot_feedstuff_comp <- function(x, ...) {
     facet_wrap(facets = vars(analyte), scales = "free") +
     labs(
       fill = "class",
-      x = expression(log[10]("inclusion")),
+      #x = expression(log[10]("inclusion")),
+      x = "inclusion",
       y = ""
     ) +
     #scale_x_log10() +

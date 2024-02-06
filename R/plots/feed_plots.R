@@ -15,6 +15,6 @@ mean_aquatic <- read_rds(here("output", "interm", "feedstuff_cleaned.rds")) %>%
 read_rds(here("output", "interm", "feedstuff_cleaned.rds")) %>% 
   plot_feedstuff_comp() + 
   geom_vline(data = mean_aquatic, aes(xintercept = mean),
-             linetype = "dashed", size = 1.2, color = "red")
+             linetype = "dashed", color = "red")
 
 ggsave(here::here("output", "plots", "feedstuff_composition.png"))
