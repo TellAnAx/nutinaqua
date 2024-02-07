@@ -756,7 +756,7 @@ To estimate the mass contribution of source water and feed to the total amount o
 
 ```{r prepare_feed}
 data$permutation_feed <- data$feed_cleaned %>% 
-  filter(cat2 == "commercial") %>% 
+  filter(cat2 %in% c("commercial", "experimental")) %>% 
   mutate(feed = value/molmass,
          unit = "molkg") %>% 
   select(substance, unit, feed)
@@ -901,7 +901,7 @@ data$permutation_water_rain %>%
 
 ## Permutation analysis
 
-```{r without_digestibility_tap, include=TRUE}
+```{r without_digestibility_tap}
 data$permutation_feed %>% 
     mutate(feed = feed*dailyFeed,
            unit = "mol") %>%
@@ -937,6 +937,11 @@ data$permutation_feed %>%
 ggsave(here("output", "plots", "permutation_no_digestibility.png"))
 ```
 
+```{r include=TRUE}
+knitr::include_graphics(here("output", "plots", "permutation_no_digestibility.png"))
+```
+
+
 ```{r}
 data$permutation_feed_with_assumptions %>% 
   left_join(data$permutation_water_tap_with_assumptions, 
@@ -965,6 +970,7 @@ data$permutation_feed_with_assumptions %>%
   theme(legend.position = "top") +
   labs(x = "Percentage contribution",
        y = "Density of occurrence",
+       title = "Tap water",
        fill = "Nutrient source")
 
 ggsave(here("output", "plots", "permutation_tap.png"))
@@ -1012,6 +1018,7 @@ data$permutation_feed_with_assumptions %>%
   theme(legend.position = "top") +
   labs(x = "Percentage contribution",
        y = "Probability of occurrence",
+       title = "Rain water",
        fill = "Nutrient source")
 
 ggsave(here("output", "plots", "permutation_rain.png"))
