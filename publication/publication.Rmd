@@ -62,17 +62,31 @@ source(here::here("R", "assumptions.R"))
 
 
 # Introduction
+Compared to land animal husbandry, aquaculture faces particular challenges that are caused by the water as a habitat for the farmed animals. In water, solid excreta are directly exposed to dissolution processes and microbial degradation, as long as they are not removed by means of mechanical filtration. Meanwhile, water-soluble substances from feces decomposition, branchial or urinary excretion are highly diluted in the system water, which is eventually discharged. This is a problem from an environmental perspective, but also with regard to the efficient utilisation of finite raw materials, as industrial downstream processes such as biogas production cannot be easily implemented in such systems. Several concepts have thus been developed to valorise those nutrients *in situ*, such as the nutritious pond concept [@Joffre2019], fish-rice co-culture, or aquaponics. All these concepts combine aspects of circular economy, which is nowadays even more in the focus of the scientific community and the general public due to growing world population, climate change and resource scarcity being omnipresent in the media and addressed by policy makers worldwide, for instance in form of the EU Green Deal.
 
-```{=tex}
-\input{../latex/introduction.tex}
-\input{../latex/aims.tex}
+- The efficiency of these co-cultivation systems that comprise multiple trophic levels is usually limited by the most limited nutrient. 
+- In the nutritious pond concept, emphasis is given to the ratio of carbon and nitrogen. 
+- In aquaponics, all nutrients are in an imbalance [@Bittzanszky2016]. 
+- Tackling these problems is usually approached by formulating a dedicated feed.
+- at the same time, there is only limited information about which source is contributing what share of nutrients to the system. 
+- there is also no information about the variability between locations. A high variability might lead to the failure of a "generalised" nutrient supply system if the extrema lead to a final value that is outside of a tolerable range for whatever.
+
+
+
+```{r include=TRUE, fig.cap="Crappy placeholder scheme to visualise nutrient flows in aquaculture. Gas exchange of nutrients with the atmosphere is negligible in intensive systems.", out.width="100%"}
+
+knitr::include_graphics(here("latex", "scheme.png"))
 ```
 
 
+The objective of this study is to assess the nutrient budget of aquaculture systems with regards to the contribution and variability of aquafeeds, alkalinity supplements, and the source water. Emphasis is given to plant nutrients as their successfull management is crucial for the functioning of integrated systems such as aquaponics. Expanding the body of knowledge with regards to this aspect is thus expected to contribute to improvements of these food production systems by further advancing means of nutrient management.
 
-# Methodology
+
+
+
 
 ```{=tex}
+% \section{Methodology}
 % \input{../latex/methodology.tex}
 ```
 
@@ -82,8 +96,24 @@ source(here::here("R", "assumptions.R"))
 
 ```{=tex}
 \label{sec:essential_nutrients}
-\input{../latex/essential_nutrients.tex}
 ```
+
+Fishes as well as plants require a set of elements that have to be provided via the diet or nutrient solution and can be divided into macro- and micronutrients, according to their required quantities. However, they differ both in the required elements and their abundance. Table \ref{tab:essentials} provides an overview of the essential nutrients.
+
+Both fishes and plants require carbon, oxygen, nitrogen, and sulphur as essential building bricks of the cells and for cellular respiration in large quantities. 
+
+Further essential macronutrients for both are phosphorus, calcium, and magnesium. 
+All organisms require phosphorus as essential building block for their \gls{dna} and \gls{rna} and for the storage of energy in form of \gls{atp}. It is also the major constituent of phospholipids that form cell membranes. In fish, phosphorus is, in combination with calcium, also required for the development and maintenance of the skeletal system [@Lall2021]. Plants also require calcium for their growth. Biochemical processes such as cell elongation and division are affected by calcium levels [@Mengel2001].
+Magnesium contributes to many biological processes in all organisms, from protein synthesis, over cell replication to the energy metabolism. In fish, it also plays a key role in signal transmission via the nervous system, among others [@Lall2021]. Magnesium is the central atom of chlorophyll, thus being crucial for the functioning of photosynthesis [@Mengel2001].
+
+Essential micronutrients required by both fish and plants are iron, copper, manganese, and zinc. 
+Iron and copper are important constituents of many metalloproteins and metalloenzymes in both fish and plants, such as heme proteins, cytochromes, among others [@Marschner2012; @Lall2021]. After iron, zinc is the second most abundant micronutrient in living organisms. Being part of metalloenzymes, it does not take part in redox reactions. Instead, it stabilises the enzyme structure [@Lall2021; @Marschner2013]. Manganese is an important co-factor for the activation of enzymes. It is also part of some metalloenzymes [@Marschner2013. In vertebrates, it is also involved in bone mineralisation [@Lall2021]. 
+
+A trace elements with proven relevance for fish but without physiological function in plants is iodine. Fish require iodine as constituent of the thyroid hormones that play a crucial role in the regulation of cell growth and functioning [@Lall2021].
+
+Meanwhile, essential plant nutrients that are not essential for fish comprise boron, nickel, molybdenum, and chlorine [@Marschner2013].
+Boron has been suggested to have several roles in metabolism, formation of cell wall structure, and substance transport. However, even though required in the largest amounts of all plant micronutrients, the physiological role of boron has not been fully understood [@Marschner2013]. Nickel is another micromineral for which essentiality has been shown but whose functions are not yet fully explored. As transition metal, it is also a constituent of metalloproteins and -enzymes [@Marschner2013]. Molybdenum is mostly involved in the nitrogen metabolism, either as constituent or co-factor of metalloenzymes [@Marschner2013].
+Chlorine is an indispensable element for the maintenance of the ion balance and the stabilisation of the membrane potential. Even though considered a micronutrient due to it's low requirement, it is present in amounts that are comparable with macronutrients [@Marschner2013].
 
 ```{=tex}
 \input{../latex/table_assumptions.tex}
@@ -96,24 +126,11 @@ source(here::here("R", "assumptions.R"))
 
 
 
-Following: [@Lall2003]
-K (water, feed)
-Na (water)
-Cl (water)
 
-Following: [@Lall2021]
-Ca (gills)
-I (80% water rainbow trout)
-Cr (gills)
 
-Co (gills and feed)
-Cu (feed; gills can contribute more than half of demand)
-P (feed)
-Mg (feed)
-Fe (feed)
-Se (feed)
-Zn (feed)
-Mn (unknown)
+
+
+
 
 
 # Nutrient sources
@@ -191,7 +208,7 @@ The variability found in the data can be traced back to 1) differences between t
 
 
 
-```{r include=TRUE, fig.cap="Mass fractions of some nutrients in different feedstuffs. Dashed red line indicates average inclusion of respective nutrient in fish meal. Data from IAFFD."}
+```{r include=TRUE, fig.cap="Mass fractions of some nutrients in different feedstuffs. Dashed red line indicates average inclusion of respective nutrient in fish meal. Data from IAFFD.", out.width="100%"}
 knitr::include_graphics(here("output", "plots", "feedstuff_composition.png"))
 ```
 
@@ -206,8 +223,8 @@ The indigestible mass fraction of ingested feed, together with uneaten feed, mak
 
 The availability of \gls{adc} and nutrient retention data for individual nutrients depends on whether the nutrient is essential and has to be considered for feed formulation. 
 
-```{=tex}
-% sketch with excretory sites of fish
+```{r include=TRUE, fig.cap="Placeholder showing the metabolic pathways related to fish", out.width="100%"}
+knitr::include_graphics(here("latex", "fish_metabolism.png"))
 ```
 
 Nitrogen that is, for the most part, present as \gls{cp} in aquafeeds, is generally well-digestible, with an \gls{adc} usually being above \SI{70}{\p} and on average approximately \SI{90}{\p} [@Guillaume2001; @IAFFD2021]. The excretion of N as end product of the protein and amino acid catabolism takes place in form of ammonia (\ce{NH3}) and, to a small extent, urea. The predominant excretory site are the gills, followed by renal excretion [@Dabrowski2003]. 
@@ -274,6 +291,7 @@ Cl
 
 
 ## Sources and extent of variability
+
 Water can vary both spatially and temporally in its composition, depending on where it is sourced. Tap water can originate from natural springs, ground-, or surface water, where it was in contact with solids or gases for a prolonged period of time. 
 
 The spatial variation of water is caused, for instance, by the properties of the aquifer. An important process that affects the composition of spring- and groundwater is weathering of rock, ion exchange, and the buildup of biomass [@Stumm1981]. In regions where water originates from surface water such as rivers or lakes, gas exchange and resulting chemical reactions, for instance redox reactions with oxygen, are affecting the composition of the water.
