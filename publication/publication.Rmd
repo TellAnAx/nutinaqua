@@ -348,13 +348,13 @@ The term alkalinity supplements summarizes several alkaline substances that are 
 Inputs of the remaining two nutrients, K and Ca, were found to be heavily depending on the alkalinity supplement used. In absence of the alkalinity supplement, aquafeeds were found to have the greatest impact on K with a contribution of 81.16%, while a higher proportion of Ca (69.62%; 90% CI: 65.51%, 72.86%) would enter the system on average via the water, compared with an average of30.38% of feed contribution. The difference is more pronounced with respect to Na: 82.25% (90% CI: 73.11%, 86.76%) of the total input was calculated to originate from water while only 17.75% were found to enter the system via daily feeding. However, the calculated quantities of alkalinity supplements necessary to maintain a constant pH were found to dominate each input scenario, resulting in a contribution of more than 80% of the total input of K, Ca, or Na in any case. 
 
 
-```{r include=TRUE, fig.cap="Permutation tap water", out.width="100%}
+```{r include=TRUE, fig.cap="Permutation tap water", out.width="100%"}
 knitr::include_graphics(here("output", "plots", "permutation_tap.png"))
 ```
 
 
 
-```{r include=TRUE, fig.cap="Permutation rain water", out.width="100%}
+```{r include=TRUE, fig.cap="Permutation rain water", out.width="100%"}
 knitr::include_graphics(here("output", "plots", "permutation_rain.png"))
 ```
 
