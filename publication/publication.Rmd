@@ -96,6 +96,26 @@ source(here::here("R", "assumptions.R"))
 
 
 
+Following: [@Lall2003]
+K (water, feed)
+Na (water)
+Cl (water)
+
+Following: [@Lall2021]
+Ca (gills)
+I (80% water rainbow trout)
+Cr (gills)
+
+Co (gills and feed)
+Cu (feed; gills can contribute more than half of demand)
+P (feed)
+Mg (feed)
+Fe (feed)
+Se (feed)
+Zn (feed)
+Mn (unknown)
+
+
 # Nutrient sources
 
 ## Aquafeeds
@@ -121,9 +141,9 @@ Average inclusion rates of phosphorus decreased by about `r round((1-16.252/11.6
 
 Little information is available on the inclusion rates of other nutrients, making a statistically sound comparison between past and present values impossible. Though, the calcium content of the aquafeeds in the the collected dataset is on average `r round((1-22.676/17.56)*100)`\si{\p} lower in comparison with past values (n = 5). This might be due to the close nutritional relation of calcium with phosphorus and the resulting necessity to maintain an optimum calcium-to-phosphorus ratio in the feeds [@Hossain2014].
 
-The magnesium and iron content of aquafeeds, meanwhile, appears not to have changed. The averge magnesium content was \SI{2.2}{\gkg} (n = 3) in comparison with \SI{2.1}{\gkg} in past feeds. The iron content ranges around \SI{200}{\mgkg} (n = 4), even though highly variable (cv = \num{1.13}), ranging from \SIrange{40}{544}{\mgkg}. However, the variability in iron was alreday noticed in the past [@Tacon1983].
+The magnesium and iron content of aquafeeds, meanwhile, appears not to have changed. The averge magnesium content was \SI{2.2}{\gkg} (n = 3) in comparison with \SI{2.1}{\gkg} in past feeds. The iron content ranges around \SI{200}{\mgkg} (n = 4), even though highly variable (cv = \SI{113}{\p}), ranging from \SIrange{40}{544}{\mgkg}. However, the variability in iron was alreday noticed in the past [@Tacon1983].
 
-Nowadays, aquafeeds may contain more zinc (n = 4), copper (n = 4), and potassium (n = 2) than in the past. In the case of zinc, inclusion rates were found to be `r round((1-90/207)*100)`\si{\p} higher in modern feeds. The average copper inclusion rate increased by `r round((1-15/20)*100)`\si{\p}, while `r round((1-9.5/11.2)*100)`\si{\p} more potassium was found in modern commercial aquafeeds. However, data was highly variable, with a \gls{cv} of \num{0.61} and \num{0.93} for zinc and copper, respectively, and a \gls{cv} of \num{0.20} for potassium.
+Nowadays, aquafeeds may contain more zinc (n = 4), copper (n = 4), and potassium (n = 2) than in the past. In the case of zinc, inclusion rates were found to be `r round((1-90/207)*100)`\si{\p} higher in modern feeds. The average copper inclusion rate increased by `r round((1-15/20)*100)`\si{\p}, while `r round((1-9.5/11.2)*100)`\si{\p} more potassium was found in modern commercial aquafeeds. However, data was highly variable, with a \gls{cv} of \SI{61}{\p} and \SI{93}{\p} for zinc and copper, respectively, and a \gls{cv} of \SI{20}{\p} for potassium.
 
 The authors highlight the lack of mineral composition data in the field of aquaculture nutrition, despite the extensive literature assessing mineral requirements of finfish.
 
@@ -134,14 +154,9 @@ The importance of aquafeeds as nutrient input are reflected by the development o
 
 Pond and cage aquaculture is affected by environmental pollution as consequence of feeding. Low-pollution feeds have thus been developed that cause reduced nitrogen and phosphorus emissions [@Pigott; @Millian-Sorribes2021]. \gls{ras} pose similar problems for the aquaculture industry due to the investment and operation costs for water purification systems. Reducing the proportion of indigestible feed components therefore leads to a financial advantage. 
 
-Aquaponics feeds, meanwhile, contain high proportions of phosphorus and potassium. The formulation of a specific aquaponics feed that meets the nutritional requirements of both fish and plants by leading to higher excretion of otherwise deficient plant nutrients is generally thought to be the most suitable approach for the development of an “off-the-shelf” nutrient delivery system that does not require additional management effort by aquaponics farmers [@Lennard2017; @Eck2019].
+Commercial aquaponics feeds, meanwhile, are meant to be a response to plant nutrient deficiencies in aquaponic systems. Overall, it is thought that the formulation of a specific feed that meets the nutritional requirements of both fish and plants by leading to higher excretion of otherwise deficient plant nutrients is the most suitable approach for the development of an “off-the-shelf” nutrient delivery system that does not require additional management effort by aquaponics farmers [@Lennard2017; @Eck2019].
 
-There are some commercial feeds available that are marketed as specifically formulated for aquaponic systems (n = 3). Though, an in-depth characterisation of these feeds was not done until now to the best of the author's knowledge. However, even though available data is limited, it can be seen that the phosphorus content of these aquafeeds is highly variable (\gls{cv} = \SI{76}{\p}). The average phosphorus content of \SI{22(17)}{\gkg}, meanwhile, is not significantly different from the unspecific diets (t-test: p = 0.4). Information with regards to potassium and calcium inclusion rates were reported only for one feed. Here, potassium and calcium inclusion rates were `r (1-20/11)*100`\si{\p} higher and `r (1-15/18)*100`\si{\p} lower than the average of unspecific diets, respectively. Other data with regards to these feeds is not available to the best of the author's knowledge.
-
-
-
-
-
+An in-depth characterisation of these feeds (n = 3) was not done until now to the best of the author's knowledge. However, even though available data is limited, it can be seen that the phosphorus content of these aquafeeds is highly variable (\gls{cv} = \SI{76}{\p}). The average phosphorus content of \SI{22(17)}{\gkg}, meanwhile, is not significantly different from the unspecific diets (t-test: p = 0.4). Information with regards to potassium and calcium inclusion rates were reported only for one feed. Here, potassium and calcium inclusion rates were `r (1-20/11)*100`\si{\p} higher and `r (1-15/18)*100`\si{\p} lower than the average of unspecific diets, respectively.
 
 
 
@@ -149,8 +164,6 @@ There are some commercial feeds available that are marketed as specifically form
 
 ### Experimental feeds
 In the recent past, experiments were conducted to closer examine the manipulability of substance excretion patterns by fish in relation to alterations in the raw material composition of provided aquafeeds.
-
-
 
 The overall nutrient composition of the experimental diets is comparable with commercially available aquafeeds, with no significant differences in average nutrient inclusion levels. Potassium (t-test: p = 0.3), phosphorus (t-test: p = 0.1), calcium (t-test: p = 0.4), and magnesium (t-test: p = 0.7) had average inclusion rates of \SI{9(2.8)}{\gkg}, \SI{14(4.9)}{\gkg}, \SI{15(8.4)}{\gkg}, and \SI{2(0.7)}{\gkg}, respectively.
 Also, no differences were found for iron (t-test: p = 0.4), copper (t-test: p = 0.7), and zinc (t-test: p = 0.2). The average inclusion rates were \SI{348(29)}{\mgkg}, \SI{16(2.9)}{\mgkg}, and \SI{93(35.8)}{\mgkg}, respectively.
@@ -176,7 +189,6 @@ The variability found in the data can be traced back to 1) differences between t
 
 @Seawright1998
 
-IAFFD database - check variability 
 
 
 ```{r include=TRUE, fig.cap="Mass fractions of some nutrients in different feedstuffs. Dashed red line indicates average inclusion of respective nutrient in fish meal. Data from IAFFD."}
@@ -187,28 +199,7 @@ knitr::include_graphics(here("output", "plots", "feedstuff_composition.png"))
 
 
 
-
-
-Following: [@Lall2003]
-K (water, feed)
-Na (water)
-Cl (water)
-Following: [@Lall2021]
-Ca (gills)
-I (80% water rainbow trout)
-Cr (gills)
-Co (gills and feed)
-Cu (feed; gills can contribute more than half of demand)
-P (feed)
-Mg (feed)
-Fe (feed)
-Se (feed)
-Zn (feed)
-Mn (unknown)
-
-
-
-### Livestock as causative factor for variance
+**Livestock as causative factor for variance**
 When discussing aquafeeds as nutrient input route, digestibility and retention of nutrients by the livestock must be considered. 
 
 The indigestible mass fraction of ingested feed, together with uneaten feed, make up the solid wastes. The fraction of feed that is digestible is meanwhile utilised to sustain the animals’ basal metabolism, somatic growth and reproductive activity. Metabolic end products are then excreted via the gills and the urinary system in dissolved form [@Hardy2003; @Evans2005]. Only the dissolved fraction of the nutrients is immediately available for plant uptake via the root system.
@@ -216,7 +207,7 @@ The indigestible mass fraction of ingested feed, together with uneaten feed, mak
 The availability of \gls{adc} and nutrient retention data for individual nutrients depends on whether the nutrient is essential and has to be considered for feed formulation. 
 
 ```{=tex}
-% overview of ADCs determined for plant nutrients
+% sketch with excretory sites of fish
 ```
 
 Nitrogen that is, for the most part, present as \gls{cp} in aquafeeds, is generally well-digestible, with an \gls{adc} usually being above \SI{70}{\p} and on average approximately \SI{90}{\p} [@Guillaume2001; @IAFFD2021]. The excretion of N as end product of the protein and amino acid catabolism takes place in form of ammonia (\ce{NH3}) and, to a small extent, urea. The predominant excretory site are the gills, followed by renal excretion [@Dabrowski2003]. 
