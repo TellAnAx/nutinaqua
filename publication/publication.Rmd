@@ -66,7 +66,13 @@ Compared to land animal husbandry, aquaculture faces particular challenges that 
 
 One of the factors affecting the total efficiency (*ergo*, the yield of all targeted system outputs) of these co-cultivation systems is the availability of the most limited nutrient [@Nederlof2021]. Imbalances of nutrients are considered an important issue in aquaponics [@Bittzanszky2016; @Seawright1998]. In closed and semi-open intensive systems where the majority of substance inputs stems from human activity, the approach of choice is usually to formulate a dedicated feed as simple control measure. However, if the aim is to provide optimum conditions for organisms that absorb nutrients in dissolved form, it is necessary not to neglect nutrient sources other than the feed, their contribution to the nutrient budget and also their variability. Otherwise, optimum values might be missed or even critical values could be reached if the total nutrient concentration is too high or too low in individual cases due to extreme values of another nutrient source.
 
+<<<<<<< Updated upstream
 ```{r include=TRUE, fig.cap="Crappy placeholder scheme to visualise nutrient flows in aquaculture. Gas exchange of nutrients with the atmosphere is negligible in intensive systems.", out.width="100%", eval=FALSE}
+=======
+
+
+```{r include=TRUE, fig.cap="Crappy placeholder scheme to visualise nutrient flows in aquaculture. Contribution through gas exchange of nutrients with the atmosphere is negligible in intensive systems.", out.width="100%"}
+>>>>>>> Stashed changes
 
 knitr::include_graphics(here("latex", "scheme.png"))
 ```
