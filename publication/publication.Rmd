@@ -267,6 +267,7 @@ Calcium, sulfur, and manganese were found to be comparably little variable among
 Other substances found in concentrations of \si{\mgL} are potassium, with a range of \SIrange{0.1}{23.6}{\mgL} and average of \SIci{2.76}{\mgL}{2.16}{3.36}, and nitrogen, ranging from \SIrange{0.09}{10.3}{\mgL} and averaging \SIci{2.16}{\mgL}{1.68}{2.65}. The most important nitrogenous compound in water is nitrate, making up the largest proportion of the total nitrogen in solution.
 
 As far as other substances relevant for plant nutrition are analysed by water utilities, their concentrations in water are usually low due to their low solubility. Phosphorus in aqueous solution is mostly present in form of orthophosphates. The concentration of phosphorus as important plant nutrient is generally low in tap water. In the reviewed analysis reports, concentrations ranged from \SIrange{0.1}{6006}{\ugL}, averaging \SIci{223}{\ugL}{-67.2}{514}. The average concentrations of boron, iron, copper, zinc, and manganese were found to be similar. An average of \SIci{47}{\ugL}{30.3}{63.8} boron, \SIci{25.3}{\ugL}{3.35}{47.2} iron, \SIci{18.8}{\ugL}{3.97}{33.7} copper, \SIci{11.5}{\ugL}{1.17}{21.8} zinc, and \SIci{4.39}{\ugL}{2.57}{6.21} manganese was found, respectively. Among these microminerals, iron and zinc had the highest variability (iron: \gls{cv} = \SIcv{480}; zinc: \gls{cv} = \SIcv{448}), ranging from \SIrange{0.005}{1320}{\ugL} and \SIrange{0.5}{200}{\ugL}, respectively. The variability of manganese and boron was found to be lower (manganese: \gls{cv} = \SIcv{224}; boron: \gls{cv} = \SIcv{193}), with a mass concentration range of \SIrange{0.2}{77.1}{\ugL} and \SIrange{5}{638}{\ugL}, respectively.
+
 Mo
 Ni
 Na
@@ -302,13 +303,23 @@ A glimpse of the extent of variability of terrestrial waters in their chemical c
 
 
 # Alkalinity supplements as nutrient sources
-The term alkalinity supplements summarizes several alkaline substances that are used to maintain a stable pH in the water [@Timmons2010]. The activity of nitrifying bacteria in the biofilter follows the overall simplified reaction equation 
+The term alkalinity supplements summarizes several alkaline substances that are used to maintain a stable pH in the water. The pH in aquaculture systems decreases over time due to the activity of nitrifying bacteria in the biofilter. The conversion of ammonium to nitrate follows the overall simplified reaction equation \ref{eq:nitrification} [@Timmons2010].
 
+\begin{align}
+  \ce{NH4+} + 2\ce{O2} + \ce{H2O} -> \ce{NO3-} + 2{H3O+}
+  \label{eq:nitrification}
+\end{align}
 
+Per mole of ammonium (\ce{NH4+}) that is converted to nitrate (\ce{NO3-}), two moles of hydronium ions (\ce{H3O+}) are released. The decrease in pH causes a decrease in the activity of nitrifyers [Ward2011] and has to be counteracted.
 
-Nitrification thus decreases the pH over time and, consequently, also the activity of nitrifyers [Ward2011]. Per mole of ammonium (〖"NH" 〗_4^+) that is converted to nitrate (〖"NO" 〗_3^-), two moles of protons (H^+) are released. Furthermore, it can be derived from equation (2.3) that n(〖"NH" 〗_4^+ )=n(N) and 2n(N)=n("H" ^+ ). Thus, the amount of moles that have to be neutralized based on the feed input can be calculated as 
+Furthermore, it can be derived from equation \ref{eq:nitrification} that $n(\ce{NH4+})) = n(\ce{N})$ and $2n(\ce{N}) = n(\ce{H3O+})$. Thus, the amount of moles that have to be neutralized can be calculated from the feed input as shown in equation \ref{eq:nitrification_feed}
 
-with the molar mass M("N" )=14.007〖" g mol" 〗^(-1). Na-based substances such as sodium hydrogen carbonate (baking soda, \ce{NaHCO3}) are commonly used in aquaculture due to their high and rapid solubility at a comparably cheap price. The chemical reaction with bases such as 〖"NaHCO" 〗_3, "KOH"  or 〖"Ca(OH)" 〗_2 is eventually a simple neutralization reaction of the pattern
+\begin{align}
+  n(\ce{H3O+}) = 2\frac{m(\ce{N})}{M(\ce{N})}
+  \label{eq:nitrification_feed}
+\end{align}
+
+with the molar mass $M(\ce{N}) = \SI{14.007}{\gmol}$. Sodium based substances such as sodium hydrogen carbonate (baking soda, \ce{NaHCO3}) are commonly used in aquaculture due to their high and rapid solubility at a comparably cheap price. The chemical reaction with bases such as \ce{NaHCO3}, \ce{KOH}  or \ce{Ca(HCO3)2} is eventually a simple neutralization reaction of the pattern
 
 
 The mass of sodium, potassium or calcium can consequently be calculated by rearranging equation (2.4) and using the correct stoichiometric conversion factor. High sodium concentrations must be avoided in aquaponic systems due to its phytotoxicity [@Maathuis2014]. Sodium is therefore replaced with several other supplements based on potassium or calcium that come with the benefit of providing an additional source of nutrients besides increasing the pH.

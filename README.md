@@ -28,10 +28,11 @@ of nutrients is being retained in the biomass before being available
 ### Nutrient budget
 
 - **Permutations**
-  - collect digestibility data (P: Sugiura2018)
   - simulate normally distributed digestibility
-  - permutate on FEED + ADC
-  - calculate all possible output scenarios
+  - conduct statistical test to check whether contribution of water is
+    significantly greater than 0
+  - extract data so that probability can be calculated for occurrences
+    of xyz
 
 # QUESTIONS
 
