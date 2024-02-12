@@ -1,0 +1,78 @@
+---
+title: "The nutrient budget of closed and semi-open aquaculture systems"
+subtitle: "Assessment of contributions from different nutrient sources based on estimated assumptions and permutations"
+author: "Anıl A. Tellbüscher"
+date: "Last updated: `r format(Sys.Date(), '%d.%m.%Y')`"
+output: 
+  pdf_document:
+    includes:
+      in_header: ../latex/preamble.tex
+    keep_tex: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE
+)
+
+library(here)
+library(knitr)
+library(tidyverse)
+```
+
+
+# Permutation analysis
+
+## Rationale
+The few studies assessing contributions of different nutrient sources to aquaculture systems (e.g., Delaide et al., 2017; Strauch et al., 2018) only reported a single set of nutrient ratios. However, there is considerable variation in the composition of aquafeeds and water used for aquaculture purposes. Those studies can therefore not be regarded as representative of all conceivable scenarios.
+
+If we assumed that we would use a model system such as depicted by the assumptions in Table 1, then we would end up with a feed input of \SI{4.8}{\kg\per\day} and a water input of \SI{0.5}{\cubicm\per\day}. 
+
+```{r assumptions}
+knitr::kable(read_csv(here("output", "tables", "assumptions.csv")),
+             caption = "Assumed model system to derive nutrient inputs with regards to the daily feed and water input.")
+```
+
+Fish feed is regarded as the most important cost driver in aquaculture and for this reason there are various intelligent feeding systems that minimise the loss of fish feed due to uneaten feed residues. It can thus be assumed that feeding losses are negligible. Further assuming that we aim at nutrients available for plants or other organisms, we need to consider the gross aquafeed input corrected by the digestibility and incorporation of a fraction of the nutrients as biomass. Here, different fish species might differ in the digestibility and retention of nutrients to be expected. 
+
+We can also assume that the hypothetical aquaculture facility could be located everywhere in Europe, thus having access to all kinds of water included in our dataset (see Figure 1) and also being able to source any of the feeds that was included in our set of data. 
+
+```{r map, fig.cap="Geographical distribution of water analysis reports included in the source water dataset. Green: analysis of municipal tap water; Red: rainwater analysis."}
+knitr::include_graphics(here("output", "plots", "map.png"))
+```
+
+*Ergo*, we need to consider all possible combinations (= permutations) of aquafeed compositions, digestibilities, retentions, and also the water qualities.
+
+
+
+## Outcomes
+
+Figure 2 and 3 show the permutation results split by the source of water (municipal tap or rain water). 
+
+```{r permutation_rain, include=TRUE, fig.cap="Permutation rain water. The probability of the occurrence of an event is given as the integral of the are below the curve over the range of interest.", out.width="100%"}
+knitr::include_graphics(here("output", "plots", "permutation_rain.png"))
+```
+
+The permutation analysis of the rainwater data clearly shows that the proportion of nutrients from the rainwater is not significantly affecting the total nutrient budget (one-sided t-test suitable here to distinguish the contribution from 0?). It can be expected with 100% probability that the contribution of rainwater to the input of nitrogen, potassium, magnesium, copper, and zinc is less than 10% of the total input from water and feed.
+
+
+
+```{r permutation_tap, include=TRUE, fig.cap="Permutation tap water. The probability of the occurrence of an event is given as the integral of the are below the curve over the range of interest.", out.width="100%"}
+knitr::include_graphics(here("output", "plots", "permutation_tap.png"))
+```
+
+A different picture emerges when tap water is taken into account. Here, the contribution of phosphorus to the total nutrient input was negligible in all cases and the contribution of nitrogen has been found to be below 10% of the total input. However, in the case of potassium, a contribution of up to 30% is possible and a contribution of more than 10% can be expected with a probability of XXX. 
+Zinc
+iron
+copper
+
+Interestingly, the probability that calcium and magnesium 
+calcium
+magnesium
+sulfur
+
+
+
+
