@@ -127,6 +127,8 @@ Boron has been suggested to have several roles in metabolism, formation of cell 
 # Nutrient inputs into semi-open and closed aquaculture systems
 
 ## Aquafeeds
+
+### Nutrient composition and changes over the years
 Aquafeeds are considered the most important nutrient input into aquaculture systems. Studies comparing nutrient inputs from aquafeeds versus source water in aquaponics found that they are the dominant source of nitrogen, phosphorus, potassium, iron, manganese, copper, zinc, and molybdenum [@Delaide2017]. Another study found that also the majority of calcium, magnesium, and sulfur originated from the feed [@Strauch2018]. However, the most recent general overview study of mineral inclusion rates in aquafeeds dates back more than 40 years [@Tacon1983]. In the meantime, the raw material composition of aquafeeds has changed substantially. For instance, the amount of fish meal has been reduced in favor of mostly plant-based ingredients [@MOWI2023]. It could thus be assumed that the inclusion rates of those nutrients that are not controlled during aquafeed formulation changed as well. Figure \ref{fig:feedcomp} provides an overview of nutrient inclusion rates compiled from literature studies and feed manufacturer datasheets.
 
 ```{r include=FALSE, fig.cap="Inclusion rates of some nutrients essential for fish or plants in different types of aquafeeds. The composition of past feeds is based on data from Tacon, 1983. Data about present aquafeeds was compiled from datasheets and scientific publications providing analyses of commercial aquafeeds for Rainbow trout (*Oncorhynchus mykiss*), Common carp (*Cyprinus carpio*), Pike-perch (*Sander lucioperca*), Nile tilapia (*Oreochromis niloticus*), and African catfish (*Clarias gariepinnus*). The dataset includes starter and grower feeds. Experimental feeds were those specifically formulated for studies related to aquaponics. Aquaponic feeds comprise commercially available feeds (n = 3) for aquaponic systems. Data was compiled from supplier datasheets."}
@@ -144,43 +146,37 @@ knitr::include_graphics(here("output", "plots", "feed.png"))
 ```
 
 Nitrogen and phosphorus are subject of continuous research in the field of fish nutrition because nitrogen in form of \gls{cp} is an important cost factor in feed production. Phosphorus, meanwhile, is problematic because it is present in poorly digestible form in some mostly plant-based raw materials. It is therefore excreted in comparatively large quantities and can, in dependence on the production system, lead to water eutrophication and algae blooms [@Sugiura2018].
-As a consequence, nitrogen inclusion rates have decreased from values ranging around \SI{96}{\gkg} (\SI{60}{\p} \gls{cp}) in the early days of aquafeed production to approximately \SI{72}{\gkg} (\SI{45}{\p} \gls{cp}) for salmonid fish [@MOWI2023] and an average of \SI{63}{\gkg} (\SI{45}{\p} \gls{cp}) under consideration of other freshwater species such as carp, tilapia, catfish, and percids (n = 74). This development can be ascribed to discoveries such as the protein sparing effect, for instance in rainbow trout, carp, and tilapia [@Takeuchi1978; @Beamish1986; @Shiau1993] and improvements in the digestibility of aquafeeds. 
-In the case of phosphorus, average inclusion rates decreased by about `r round((1-16.252/11.662)*100)`\si{\p}, from \SI{16}{\gkg} to \SI{12}{\gkg} over time (n = 68). The reduction was achieved by a two-step approach, combining the reduction of dietary phosphorus with efforts to increase its bioavailability in aquafeeds [@Sugiura2018]. 
+As a consequence, nitrogen inclusion rates have decreased from values ranging around \SI{96}{\gkg} (\SI{60}{\p} \gls{cp}) in the early days of aquafeed production to approximately \SI{72}{\gkg} (\SI{45}{\p} \gls{cp}) for salmonid fish [@MOWI2023]. An average of \SI{63}{\gkg} (\SI{45}{\p} \gls{cp}) is found in feeds for freshwater species such as carp, tilapia, catfish, and percids (n = 74). The decrease in nitrogen can be ascribed to discoveries such as the protein sparing effect, for instance in rainbow trout, carp, and tilapia [@Takeuchi1978; @Beamish1986; @Shiau1993] and improvements in the digestibility of aquafeeds. 
+In the case of phosphorus, average inclusion rates decreased by about `r round((1-16.252/11.662)*100)`\si{\p}, from \SI{16}{\gkg} to \SI{12}{\gkg} (n = 68). The reduction was achieved by a two-step approach, combining the reduction of dietary phosphorus with efforts to increase its bioavailability in aquafeeds [@Sugiura2018]. 
 
-Information about inclusion rates of other nutrients in commercial standard feeds was found in scientific studies (n = 5). The calcium content of the aquafeeds in the the collected data was on average `r round((1-22.676/17.56)*100)`\si{\p} lower in comparison with past values (n = 5). This might be due to the close nutritional relation of calcium with phosphorus and the resulting necessity to maintain an optimum calcium-to-phosphorus ratio in the feeds [@Hossain2014]. The magnesium and iron content of aquafeeds, meanwhile, appears not to have changed. The average magnesium content was \SI{2.2}{\gkg} (n = 3) in comparison with \SI{2.1}{\gkg} in past feeds. The iron content ranged around \SI{200}{\mgkg} (n = 4), even though highly variable (cv = \SI{113}{\p}, range \SIrange{40}{544}{\mgkg}). Variability in iron was already noticed in the past [@Tacon1983].
+Information about inclusion rates of other nutrients in commercial standard feeds was found in scientific studies (n = 5). The calcium content of aquafeeds in the collected data (n = 5) is on average `r round((1-22.676/17.56)*100)`\si{\p} lower in comparison with past values. This might be due to the close nutritional relation of calcium with phosphorus and the resulting necessity to maintain an optimum calcium-to-phosphorus ratio in the feeds [@Hossain2014]. The magnesium and iron content of aquafeeds, meanwhile, might not have changed. The average magnesium content is \SI{2.2}{\gkg} (n = 3) in comparison with \SI{2.1}{\gkg} in past feeds. On average, \SI{200}{\mgkg} iron is found in aquafeeds (n = 4), even though highly variable (cv = \SI{113}{\p}, range \SIrange{40}{544}{\mgkg}). Variability in iron was already noticed in the past [@Tacon1983].
 
-Nowadays, aquafeeds may contain more zinc (n = 4), copper (n = 4), and potassium (n = 2). In the case of zinc, inclusion rates were found to be `r round((1-90/207)*100)`\si{\p} higher in modern feeds. The average copper inclusion rate increased by `r round((1-15/20)*100)`\si{\p}, while `r round((1-9.5/11.2)*100)`\si{\p} more potassium was found in modern commercial aquafeeds. Data was highly variable, with a \gls{cv} of \SI{61}{\p} and \SI{93}{\p} for zinc and copper, respectively, and a \gls{cv} of \SI{20}{\p} for potassium.
+Nowadays, aquafeeds may contain more zinc (n = 4), copper (n = 4), and potassium (n = 2). In the case of zinc, average inclusion rates are `r round((1-90/207)*100)`\si{\p} higher in modern feeds. The average copper inclusion rate increased by `r round((1-15/20)*100)`\si{\p}, while `r round((1-9.5/11.2)*100)`\si{\p} more potassium is present in modern commercial aquafeeds. Data is highly variable, with a \gls{cv} of \SI{61}{\p} and \SI{93}{\p} for zinc and copper, respectively, and a \gls{cv} of \SI{20}{\p} for potassium.
 
-The authors highlight the lack of mineral composition data in the field of aquaculture nutrition, making a statistically sound comparison between past and present values impossible. 
-
-
-
-### Specialty feeds
-The importance of aquafeeds as nutrient input is reflected by the development of several commercial specialty feeds, for instance, for cage culture, pond aquaculture, \gls{ras}, and aquaponics. 
-
-Pond and cage aquaculture is affected by environmental pollution as consequence of feeding. Low-pollution feeds have thus been developed that cause reduced nitrogen and phosphorus emissions [@Pigott; @Millian-Sorribes2021]. \gls{ras} pose similar problems for the aquaculture industry due to the investment and operation costs for water purification systems. Reducing the proportion of indigestible feed components therefore leads to a financial advantage.
-
-Commercial aquaponics feeds, meanwhile, are supposed to increase the excretion of target nutrients such as phosphorus and potassium by fish to counteract deficiencies. The formulation of a specific feed is proposed as simple approach to provide an “off-the-shelf” nutrient delivery system without additional management effort for aquaponics farmers [@Lennard2017; @Eck2019]. At least three commercial aquaponics feeds are already on the market. However, it was found that the average phosphorus content of \SI{22(17)}{\gkg} does not significantly differ from standard feeds (t-test: p = 0.4). Information with regards to potassium and calcium inclusion rates were reported only for one feed. Here, their inclusion rates were `r (1-20/11)*100`\si{\p} higher and `r (1-15/18)*100`\si{\p} lower than in standard feeds, respectively. An in-depth characterisation of those diets might reveal further details.
+The authors highlight the lack of mineral composition data in the field of aquaculture nutrition, making a statistically sound comparison between past and present values impossible.
 
 
 
 
 
-### Experimental feeds
-In the recent past, several experiments were conducted to closer examine the extent to which substance excretion patterns by fish are affected by alterations in the raw material composition of aquafeeds [@Gebauer2023; @Shaw2022; @Shaw2022a].
+### From gross to net feed input
+When discussing aquafeeds as nutrient input route into integrated systems, it has to be considered that the gross feed input that is provided is not what is available for the secondary organisms that are co-cultivated in an integrated system (see Figure \ref(fig:metabolism). Instead, the retention of a fraction of nutrients by the livestock must be considered [@Robaina2019].
 
-The overall nutrient composition of the experimental diets is comparable with commercially available aquafeeds, with no significant differences in average nutrient inclusion levels. Potassium (t-test: p = 0.3), phosphorus (t-test: p = 0.1), calcium (t-test: p = 0.4), and magnesium (t-test: p = 0.7) had average inclusion rates of \SI{9(2.8)}{\gkg}, \SI{14(4.9)}{\gkg}, \SI{15(8.4)}{\gkg}, and \SI{2(0.7)}{\gkg}, respectively.
-Also, no differences were found for iron (t-test: p = 0.4), copper (t-test: p = 0.7), and zinc (t-test: p = 0.2). The average inclusion rates were \SI{348(29)}{\mgkg}, \SI{16(2.9)}{\mgkg}, and \SI{93(35.8)}{\mgkg}, respectively.
+Finfish species cultivated in aquaculture retain about \SI{19}{\p} of the nitrogen [@Fry2018] and \SI{40}{\p} of the phosphorus [@Sugiura2018] that is provided via aquafeeds. Due to the lack of data for other minerals, a conceptual study approximated their retention efficiency from the retention efficiency of ash as sum parameter [@Roy2022].
+
+```{r include=TRUE, fig.cap="Placeholder showing the metabolic pathways related to fish", out.width="100%", eval=FALSE}
+knitr::include_graphics(here("latex", "fish_metabolism.png"))
+```
 
 
+The variability found in the results can be traced back to 
 
-
-
-### Sources and extent of variability
-The variability found in the data can be traced back to 1) differences between the nutritional requirements of fish species for which the feeds in the dataset were formulated, 2) the variability in the raw material composition among feeds, and 3) variability in the raw materials themselves.
+- differences between the nutritional requirements of fish species for which the feeds in the dataset were formulated
 
 - carnivorus fish need more protein, thus more N, thus less other nutrients and different feed ingredient composition, thus changes in the nutrient composition.
 - there is, obviously, a variety of fish feeds on the market that have different formulations
+
+
 - Feed formulators need to react to fluctuations of market prices for raw materials and the natural variation in raw material composition. 
 - fish feed composition will have to change to reduce the forage fish demand, making aquaculture more sustainable and fit for the future [@Cottrell2020]. 
 - it was shown that differences in raw material composition lead to comparable growth but the nutrient composition can dramatically vary
@@ -192,6 +188,26 @@ The variability found in the data can be traced back to 1) differences between t
 
 
 
+
+
+### Variability through changing nutrient inclusion rates - Speciality feeds
+
+The "brute force" approach.
+
+The importance of aquafeeds as nutrient input is reflected by the development of several commercial specialty feeds. For instance, low-pollution feeds have thus been developed that cause reduced nitrogen and phosphorus emissions from pond and cage aquaculture [@Pigott; @Millian-Sorribes2021]. \gls{ras} pose similar problems for the aquaculture industry due to high initial and operation costs for water purification systems. Reducing the need for water treatment through the development of highly bioavailable aquafeeds therefore reduces costs on the long run. 
+Commercial aquaponics feeds, meanwhile, are supposed to increase the excretion of target nutrients such as phosphorus and potassium by fish. The formulation of a specific feed was proposed to provide an “off-the-shelf” nutrient delivery system without additional management effort for aquaponics farmers [@Lennard2017; @Eck2019]. Achieving higher nutrient excretion is possible for instance, by using feed additives 
+At least three commercial aquaponics feeds are already on the market. However, according to the datasheets, two out of three feeds do not differ from standard feeds in their phosphorus content. Information with regards to potassium and calcium inclusion rates were reported only for one feed. Here, their inclusion rates were `r (1-20/11)*100`\si{\p} higher and `r (1-15/18)*100`\si{\p} lower than in standard feeds, respectively.
+
+
+
+
+
+### Changing raw materials - Experimental feeds for integrated systems
+Instead of changing the inclusion rate of 
+
+An alternative to altering the inclusion rates of specific substances in aquafeeds is to make use of differences in nutrient excretion patterns through changes in the raw material composition of aquafeeds.
+
+
 ```{r include=TRUE, fig.cap="Mass fractions of some nutrients in different feedstuffs. Dashed red line indicates average inclusion of respective nutrient in fish meal. Data from IAFFD.", out.width="100%"}
 knitr::include_graphics(here("output", "plots", "feedstuff_composition.png"))
 ```
@@ -199,23 +215,20 @@ knitr::include_graphics(here("output", "plots", "feedstuff_composition.png"))
 
 
 
+the recent past, several experiments were conducted to closer examine the extent to which substance excretion patterns by fish are affected by alterations in the raw material composition of aquafeeds [@Gebauer2023; @Shaw2022; @Shaw2022a].
 
-**Livestock as causative factor for variance**
-When discussing aquafeeds as nutrient input route, digestibility and retention of nutrients by the livestock must be considered. 
+The overall nutrient composition of the experimental diets is comparable with commercially available aquafeeds, with no significant differences in average nutrient inclusion levels. Potassium (t-test: p = 0.3), phosphorus (t-test: p = 0.1), calcium (t-test: p = 0.4), and magnesium (t-test: p = 0.7) had average inclusion rates of \SI{9(2.8)}{\gkg}, \SI{14(4.9)}{\gkg}, \SI{15(8.4)}{\gkg}, and \SI{2(0.7)}{\gkg}, respectively.
+Also, no differences were found for iron (t-test: p = 0.4), copper (t-test: p = 0.7), and zinc (t-test: p = 0.2). The average inclusion rates were \SI{348(29)}{\mgkg}, \SI{16(2.9)}{\mgkg}, and \SI{93(35.8)}{\mgkg}, respectively.
 
-The indigestible mass fraction of ingested feed, together with uneaten feed, make up the solid wastes. The fraction of feed that is digestible is meanwhile utilised to sustain the animals’ basal metabolism, somatic growth and reproductive activity. Metabolic end products are then excreted via the gills and the urinary system in dissolved form [@Hardy2003; @Evans2005]. Only the dissolved fraction of the nutrients is immediately available for plant uptake via the root system.
 
-The availability of \gls{adc} and nutrient retention data for individual nutrients depends on whether the nutrient is essential and has to be considered for feed formulation. 
 
-```{r include=TRUE, fig.cap="Placeholder showing the metabolic pathways related to fish", out.width="100%", eval=FALSE}
-knitr::include_graphics(here("latex", "fish_metabolism.png"))
-```
 
-Nitrogen that is, for the most part, present as \gls{cp} in aquafeeds, is generally well-digestible, with an \gls{adc} usually being above \SI{70}{\p} and on average approximately \SI{90}{\p} [@Guillaume2001; @IAFFD2021]. The excretion of N as end product of the protein and amino acid catabolism takes place in form of ammonia (\ce{NH3}) and, to a small extent, urea. The predominant excretory site are the gills, followed by renal excretion [@Dabrowski2003]. 
 
-The digestibility of phosphorus is highly variable, with \gls{adc} ranging from \SI{70}{\p} to only \SI{40}{\p} and a resulting excretion of \SI{30}{\p} to \SI{60}{\p} of the supply [@Lall2003; @Sugiura2018]. Especially plant ingredients in aquafeeds can cause poor digestibility if they are rich in phytic acid. Phytic acid is poorly digestible and can furthermore reduce the digestibility of minerals in the feed. This might also explain contradictory information in literature with reported renal excretion rates of \SI{90}{\p} of the total excreta [@Lall2003] in contrast to estimates of \SI{28}{\p} of excretion taking place in dissolved form and \SI{30}{\p} to \SI{64}{\p} excreted as particulate phosphorus [@Dabrowski2003].
 
-Studies about \gls{adc} for the remaining essential plant nutrients are scarce. Variability of \gls{adc} among different feed ingredients was shown in Atlantic salmon (\emph{Salmo salar}) for Ca, Mg, Fe, Mn and Zn, with \gls{adc} ranging between \SIrange{30}{50}{\p} [@Sugiura1998]. Excretion of the earth alkaline metals calcium and magnesium primarily occurs in dissolved form via the gills and urine [@Oikari1985; @Lall2003]. Manganese, in contrast, is mostly excreted in solid form with feces, while renal excretion was found to be negligible [@Lall2003]. Copper is predominantly excreted via the bile [@Bury2003]. Excess dietary copper is not taken up but excreted with feces. Copper inclusion rates in aquafeeds are thus reduced to minimise its release into the environment [@Lall2003]. Excretion of Zinc mostly takes place renally and via the gills [@Lall2003]. 
+
+
+
+
 
 
 
@@ -226,6 +239,8 @@ Studies about \gls{adc} for the remaining essential plant nutrients are scarce. 
 
 
 ## Water as nutrient source
+
+
 Aquaponics scholars usually focus on aquafeeds as the main source of nutrients, while the importance of water as nutrient source is denoted as negligible [@Schmautz2016]. However, a comparison of substance flows and their variability is lacking.
 
 ```{=tex}
@@ -237,12 +252,15 @@ Aquaponics scholars usually focus on aquafeeds as the main source of nutrients, 
 \end{figure}
 ```
 
-After the initial system fill-up, water is added to the system either to compensate evaporation, spillage or leaning losses (e.g., the drum filter backwash) or to dilute accumulating substances such as nitrate [@Maucieri2018]. The source water for an aquaponic system can originate from wells, collected rain, other sources of surface water, or municipal tap. 
+After the initial system fill-up, water is added to the system either to compensate evaporation, spillage or leaning losses (e.g., the drum filter backwash) or to dilute accumulating substances such as nitrate [@Maucieri2018]. 
 
-However, considering that aquaponic systems are seen as especially beneficial for water-scarce regions [@Joyce2019] or urban areas [@Junge2017], where restrictive water management by authorities can be expected, tap water is likely the most important water source. Recent surveys corroborate this assumption, as the results show that the proportion of aquaponic practicioners using municipal tap water in the USA and Europe is \SI{47}{\p} and \SI{71.7}{\p}, respectively [@Pattillo2022; @Raulier2023]. 
+The source water for aquaculture systems originates from wells, surface water such as brooks or rivers, or the municipal tap. In integrated systems, the use of rainwater might be a potential amendmend, considering that, for instance, up to \SI{50}{\p} of the water demand of a greenhouse can be covered by rainwater harvesting in some locations around the world [@Boyaci2019; @Dezetter2022].
 
 
-Thus, the following assessment of water composition data focusses on the evaluation of tap water analyses. 
+
+Aquaponic systems are seen as especially beneficial for water-scarce regions [@Joyce2019] or urban areas [@Junge2017], where restrictive water management by authorities can be expected, tap water is likely the most important water source. Recent surveys corroborate this assumption, as the results show that the proportion of aquaponic practicioners using municipal tap water in the USA and Europe is \SI{47}{\p} and \SI{71.7}{\p}, respectively [@Pattillo2022; @Raulier2023]. 
+
+
 
 
 
