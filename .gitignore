@@ -26,3 +26,4 @@ output/plots/*
 *.csv
 *.rds
 *.png
+tests/
