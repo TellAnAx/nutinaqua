@@ -62,18 +62,16 @@ source(here::here("R", "assumptions.R"))
 
 
 # Introduction
-Compared to land animal husbandry, aquaculture faces particular challenges that are caused by the water as a habitat for the farmed animals. In water, solid excreta are directly exposed to dissolution processes and microbial degradation, as long as they are not removed by means of mechanical filtration. Meanwhile, water-soluble substances from feces decomposition, branchial or urinary excretion are highly diluted in the system water, which is eventually discharged. This has been identified as a problem from an environmental perspective (see e.g., @Sugiura2018), but also with regard to the efficient utilization of finite raw materials, as industrial downstream processes such as biogas production cannot be easily implemented in such systems. Several concepts exist where those nutrients are valorized *in situ*, such as the nutritious pond concept [@Joffre2019], fish-rice co-culture [@Halwart2004], or aquaponics [@Goddek2019]. All of these concepts combine aspects of circular economy, which is nowadays even more in the focus of the scientific community and the general public due to growing world population, climate change and resource scarcity being omnipresent in the media and addressed by policy makers worldwide, for instance in form of the EU Green Deal [@EU2015].
+Compared to land animal husbandry, aquaculture faces particular challenges that are caused by the water as a habitat for the farmed animals. In water, solid excreta are directly exposed to dissolution processes and microbial degradation, as long as they are not removed by means of mechanical filtration. Meanwhile, water-soluble substances from feces decomposition, branchial or urinary excretion are highly diluted in the system water. Discharging this nutritious water is problematic from an environmental perspective (e.g., @Sugiura2018), but also with regard to the efficient utilization of finite raw materials. Several concepts exist where those nutrients are valorized *in situ*, such as the nutritious pond concept [@Joffre2019], fish-rice co-culture [@Halwart2004], or aquaponics [@Goddek2019]. All of these concepts combine aspects of circular economy, which is nowadays even more in the focus of the scientific community and the general public due to growing world population, climate change and resource scarcity being omnipresent in the media and addressed by policy makers worldwide, for instance in form of the EU Green Deal [@EU2015].
 
-One factor affecting the total efficiency (*ergo*, the yield of all targeted system outputs) of these co-cultivation systems is the availability of the most limited nutrient [@Nederlof2021]. Imbalances of nutrients are considered an important issue in aquaponics [@Bittzanszky2016]. In closed and semi-open intensive systems where the majority of substance inputs stems from human activity, the approach of choice is usually to formulate a dedicated feed as simple control measure. **FROM HERE CRAPPY** However, while for instance fish rely on a dietary supply of certain nutrients, that requires the intake of feed, plants and microorganisms consume dissolved nutrients that can originate from any source. If the aim is to feed not only fish but also plants by formulating a dedicated feed, thus creating a generalized nutrient supply system, then it is necessary to consider the contribution and variability of other nutrient sources as well. Otherwise, the variability in the other nutrient sources might lead to the failure of a "generalized" nutrient supply system. if the extrema lead to a final value that is outside of a tolerable range
+One of the factors affecting the total efficiency (*ergo*, the yield of all targeted system outputs) of these co-cultivation systems is the availability of the most limited nutrient [@Nederlof2021]. Imbalances of nutrients are considered an important issue in aquaponics [@Bittzanszky2016; @Seawright1998]. In closed and semi-open intensive systems where the majority of substance inputs stems from human activity, the approach of choice is usually to formulate a dedicated feed as simple control measure. However, if the aim is to provide optimum conditions for organisms that absorb nutrients in dissolved form, it is necessary not to neglect nutrient sources other than the feed, their contribution to the nutrient budget and also their variability. Otherwise, optimum values might be missed or even critical values could be reached if the total nutrient concentration is too high or too low in individual cases due to extreme values of another nutrient source.
 
-
-
-```{r include=TRUE, fig.cap="Crappy placeholder scheme to visualise nutrient flows in aquaculture. Gas exchange of nutrients with the atmosphere is negligible in intensive systems.", out.width="100%"}
+```{r include=TRUE, fig.cap="Crappy placeholder scheme to visualise nutrient flows in aquaculture. Gas exchange of nutrients with the atmosphere is negligible in intensive systems.", out.width="100%", eval=FALSE}
 
 knitr::include_graphics(here("latex", "scheme.png"))
 ```
 
-The objective of this study is to assess the nutrient budget of aquaculture systems with regards to the contribution and variability of aquafeeds, alkalinity supplements, and the source water. Emphasis is given to plant nutrients as their successful management is crucial for the functioning of integrated systems such as aquaponics. Expanding the body of knowledge with regards to this aspect is thus expected to contribute to improvements of these food production systems by further advancing means of nutrient management.
+The objective of this study is to assess the nutrient budget of aquaculture systems with regards to the expected contributions and variabilities in nutrients originating from aquafeeds, alkalinity supplements, and source water. Emphasis is given to plant nutrients as their successful management is crucial for the functioning of integrated systems such as aquaponics. Expanding the body of knowledge with regards to this aspect is thus expected to contribute to improvements of these food production systems by further advancing means of nutrient management.
 
 
 
@@ -97,17 +95,16 @@ Fishes as well as plants require a set of elements that have to be provided via 
 Both fishes and plants require carbon, oxygen, nitrogen, and sulphur as essential building bricks of the cells and for cellular respiration in large quantities. 
 
 Further essential macronutrients for both are phosphorus, calcium, and magnesium. 
-All organisms require phosphorus as essential building block for their \gls{dna} and \gls{rna} and for the storage of energy in form of \gls{atp}. It is also the major constituent of phospholipids that form cell membranes. In fish, phosphorus is, in combination with calcium, also required for the development and maintenance of the skeletal system [@Lall2021]. Plants also require calcium for their growth. Biochemical processes such as cell elongation and division are affected by calcium levels [@Mengel2001].
-Magnesium contributes to many biological processes in all organisms, from protein synthesis, over cell replication to the energy metabolism. In fish, it also plays a key role in signal transmission via the nervous system, among others [@Lall2021]. Magnesium is the central atom of chlorophyll, thus being crucial for the functioning of photosynthesis [@Mengel2001].
+All organisms require phosphorus as essential building block for their \gls{dna} and \gls{rna} and for the storage of energy in form of \gls{atp}. It is also the major constituent of phospholipids that form cell membranes. In fish, phosphorus is, in combination with calcium, required for the development and maintenance of the skeletal system [@Lall2021]. Plants also require calcium for their growth, as biochemical processes such as cell elongation and division are affected by calcium [@Mengel2001].
+Magnesium contributes to many biological processes in all organisms, from protein synthesis, over cell replication to the energy metabolism. In fish, it also plays a key role in signal transmission via the nervous system, among others [@Lall2021]. Magnesium is the central atom of chlorophyll in plants and is thus crucial for the functioning of photosynthesis [@Mengel2001].
 
 Essential micronutrients required by both fish and plants are iron, copper, manganese, and zinc. 
-Iron and copper are important constituents of many metalloproteins and metalloenzymes in both fish and plants, such as heme proteins, cytochromes, among others [@Marschner2012; @Lall2021]. After iron, zinc is the second most abundant micronutrient in living organisms. Being part of metalloenzymes, it does not take part in redox reactions. Instead, it stabilises the enzyme structure [@Lall2021; @Marschner2013]. Manganese is an important co-factor for the activation of enzymes. It is also part of some metalloenzymes [@Marschner2013. In vertebrates, it is also involved in bone mineralisation [@Lall2021]. 
+Iron and copper are important constituents of many metalloproteins and metalloenzymes, such as heme proteins, cytochromes, among others [@Marschner2012; @Lall2021]. After iron, zinc is the second most abundant micronutrient in living organisms. Even though it is a constituent of metalloenzymes, it does not take part in redox reactions. Instead, it stabilises the enzyme structure [@Lall2021; @Marschner2013]. Manganese is an important co-factor for the activation of enzymes. It is also part of some metalloenzymes [@Marschner2013]. In vertebrates, it is involved in bone mineralisation [@Lall2021]. 
 
 A trace elements with proven relevance for fish but without physiological function in plants is iodine. Fish require iodine as constituent of the thyroid hormones that play a crucial role in the regulation of cell growth and functioning [@Lall2021].
 
 Meanwhile, essential plant nutrients that are not essential for fish comprise boron, nickel, molybdenum, and chlorine [@Marschner2013].
-Boron has been suggested to have several roles in metabolism, formation of cell wall structure, and substance transport. However, even though required in the largest amounts of all plant micronutrients, the physiological role of boron has not been fully understood [@Marschner2013]. Nickel is another micromineral for which essentiality has been shown but whose functions are not yet fully explored. As transition metal, it is also a constituent of metalloproteins and -enzymes [@Marschner2013]. Molybdenum is mostly involved in the nitrogen metabolism, either as constituent or co-factor of metalloenzymes [@Marschner2013].
-Chlorine is an indispensable element for the maintenance of the ion balance and the stabilisation of the membrane potential. Even though considered a micronutrient due to it's low requirement, it is present in amounts that are comparable with macronutrients [@Marschner2013].
+Boron has been suggested to have several roles in metabolism, formation of cell wall structure, and substance transport. However, even though required in the largest amounts of all plant micronutrients, the physiological role of boron has not been fully understood [@Marschner2013]. Nickel is another micromineral that was found to be essential, while its functions are not yet fully explored. As transition metal, it is again a constituent of metalloproteins and -enzymes [@Marschner2013]. Molybdenum is mostly involved in the nitrogen metabolism, either as constituent or co-factor of metalloenzymes [@Marschner2013]. Chlorine is an indispensable element for the maintenance of the ion balance and the stabilisation of the membrane potential. Even though considered a micronutrient due to it's low requirement, it is present in amounts that are comparable with macronutrients [@Marschner2013].
 
 ```{=tex}
 \input{../latex/table_assumptions.tex}
@@ -127,10 +124,10 @@ Chlorine is an indispensable element for the maintenance of the ion balance and 
 
 
 
-# Nutrient sources
+# Nutrient inputs into semi-open and closed aquaculture systems
 
 ## Aquafeeds
-Aquafeeds are considered the most important nutrient input into aquaculture systems. Studies comparing nutrient inputs from aquafeeds versus source water in aquaponics found that they are the dominant source of nitrogen, phosphorus, potassium, iron, manganese, copper, zinc, and molybdenum [@Delaide2017]. Another study found that also the majority of calcium, magnesium, and sulfur originated from the feed [@Strauch2018]. However, the most recent work that provides a general overview of mineral inclusion rates in aquafeeds dating back more than 40 years [@Tacon1983]. In the meantime, the raw material composition of aquafeeds has changed substantially. For instance, the amount of fish meal has been reduced in favor of mostly plant-based ingredients [@MOWI2023]. It could thus be assumed that the inclusion rates of those nutrients that are not controlled during aquafeed formulation changed as well. Figure \ref{fig:feedcomp} provides an overview of nutrient inclusion rates compiled from literature studies and feed manufacturer datasheets.
+Aquafeeds are considered the most important nutrient input into aquaculture systems. Studies comparing nutrient inputs from aquafeeds versus source water in aquaponics found that they are the dominant source of nitrogen, phosphorus, potassium, iron, manganese, copper, zinc, and molybdenum [@Delaide2017]. Another study found that also the majority of calcium, magnesium, and sulfur originated from the feed [@Strauch2018]. However, the most recent general overview study of mineral inclusion rates in aquafeeds dates back more than 40 years [@Tacon1983]. In the meantime, the raw material composition of aquafeeds has changed substantially. For instance, the amount of fish meal has been reduced in favor of mostly plant-based ingredients [@MOWI2023]. It could thus be assumed that the inclusion rates of those nutrients that are not controlled during aquafeed formulation changed as well. Figure \ref{fig:feedcomp} provides an overview of nutrient inclusion rates compiled from literature studies and feed manufacturer datasheets.
 
 ```{r include=FALSE, fig.cap="Inclusion rates of some nutrients essential for fish or plants in different types of aquafeeds. The composition of past feeds is based on data from Tacon, 1983. Data about present aquafeeds was compiled from datasheets and scientific publications providing analyses of commercial aquafeeds for Rainbow trout (*Oncorhynchus mykiss*), Common carp (*Cyprinus carpio*), Pike-perch (*Sander lucioperca*), Nile tilapia (*Oreochromis niloticus*), and African catfish (*Clarias gariepinnus*). The dataset includes starter and grower feeds. Experimental feeds were those specifically formulated for studies related to aquaponics. Aquaponic feeds comprise commercially available feeds (n = 3) for aquaponic systems. Data was compiled from supplier datasheets."}
 knitr::include_graphics(here("output", "plots", "feed.png"))
@@ -146,35 +143,31 @@ knitr::include_graphics(here("output", "plots", "feed.png"))
 \end{figure}
 ```
 
+Nitrogen and phosphorus are subject of continuous research in the field of fish nutrition because nitrogen in form of \gls{cp} is an important cost factor in feed production. Phosphorus, meanwhile, is problematic because it is present in poorly digestible form in some mostly plant-based raw materials. It is therefore excreted in comparatively large quantities and can, in dependence on the production system, lead to water eutrophication and algae blooms [@Sugiura2018].
+As a consequence, nitrogen inclusion rates have decreased from values ranging around \SI{96}{\gkg} (\SI{60}{\p} \gls{cp}) in the early days of aquafeed production to approximately \SI{72}{\gkg} (\SI{45}{\p} \gls{cp}) for salmonid fish [@MOWI2023] and an average of \SI{63}{\gkg} (\SI{45}{\p} \gls{cp}) under consideration of other freshwater species such as carp, tilapia, catfish, and percids (n = 74). This development can be ascribed to discoveries such as the protein sparing effect, for instance in rainbow trout, carp, and tilapia [@Takeuchi1978; @Beamish1986; @Shiau1993] and improvements in the digestibility of aquafeeds. 
+In the case of phosphorus, average inclusion rates decreased by about `r round((1-16.252/11.662)*100)`\si{\p}, from \SI{16}{\gkg} to \SI{12}{\gkg} over time (n = 68). The reduction was achieved by a two-step approach, combining the reduction of dietary phosphorus with efforts to increase its bioavailability in aquafeeds [@Sugiura2018]. 
 
-Nitrogen in form of \gls{cp} is an important cost factor in feed production. Phosphorus is a problem because it is poorly digestible depending on the raw materials used for feed production. It is therefore excreted in comparatively large quantities and, depending on the production system, leads to water eutrophication and algae blooms [@Sugiura2018]. The nitrogen and phosphorus content of aquafeeds is thus subject to ongoing research. As a consequence, nitrogen inclusion rates have decreased from initial values ranging around \SI{96}{\gkg} (\SI{60}{\p} \gls{cp}) in the early days of aquafeed production to approximately \SI{72}{\gkg} (\SI{45}{\p} \gls{cp}) for salmonid fish [@MOWI2023] and an average of \SI{63}{\gkg} (\SI{45}{\p} \gls{cp}), if aquafeeds for other freshwater species such as carp, tilapia, catfish, and percids are considered (n = 74). This is due to discoveries such as the protein sparing effect, for instance in rainbow trout, carp, and tilapia [@Takeuchi1978; @Beamish1986; @Shiau1993] and improvements in the digestibility of aquafeeds. 
-Average inclusion rates of phosphorus decreased by about `r round((1-16.252/11.662)*100)`\si{\p}, from \SI{16}{\gkg} to \SI{12}{\gkg} over time (n = 68). The reduction was achieved by a two-step approach, combining a reduction of dietary phosphorus and efforts to increase its bioavailability in aquafeeds [@Sugiura2018]. 
+Information about inclusion rates of other nutrients in commercial standard feeds was found in scientific studies (n = 5). The calcium content of the aquafeeds in the the collected data was on average `r round((1-22.676/17.56)*100)`\si{\p} lower in comparison with past values (n = 5). This might be due to the close nutritional relation of calcium with phosphorus and the resulting necessity to maintain an optimum calcium-to-phosphorus ratio in the feeds [@Hossain2014]. The magnesium and iron content of aquafeeds, meanwhile, appears not to have changed. The average magnesium content was \SI{2.2}{\gkg} (n = 3) in comparison with \SI{2.1}{\gkg} in past feeds. The iron content ranged around \SI{200}{\mgkg} (n = 4), even though highly variable (cv = \SI{113}{\p}, range \SIrange{40}{544}{\mgkg}). Variability in iron was already noticed in the past [@Tacon1983].
 
-Little information is available on the inclusion rates of other nutrients, making a statistically sound comparison between past and present values impossible. Though, the calcium content of the aquafeeds in the the collected dataset is on average `r round((1-22.676/17.56)*100)`\si{\p} lower in comparison with past values (n = 5). This might be due to the close nutritional relation of calcium with phosphorus and the resulting necessity to maintain an optimum calcium-to-phosphorus ratio in the feeds [@Hossain2014].
+Nowadays, aquafeeds may contain more zinc (n = 4), copper (n = 4), and potassium (n = 2). In the case of zinc, inclusion rates were found to be `r round((1-90/207)*100)`\si{\p} higher in modern feeds. The average copper inclusion rate increased by `r round((1-15/20)*100)`\si{\p}, while `r round((1-9.5/11.2)*100)`\si{\p} more potassium was found in modern commercial aquafeeds. Data was highly variable, with a \gls{cv} of \SI{61}{\p} and \SI{93}{\p} for zinc and copper, respectively, and a \gls{cv} of \SI{20}{\p} for potassium.
 
-The magnesium and iron content of aquafeeds, meanwhile, appears not to have changed. The average magnesium content was \SI{2.2}{\gkg} (n = 3) in comparison with \SI{2.1}{\gkg} in past feeds. The iron content ranges around \SI{200}{\mgkg} (n = 4), even though highly variable (cv = \SI{113}{\p}), ranging from \SIrange{40}{544}{\mgkg}. However, the variability in iron was already noticed in the past [@Tacon1983].
-
-Nowadays, aquafeeds may contain more zinc (n = 4), copper (n = 4), and potassium (n = 2) than in the past. In the case of zinc, inclusion rates were found to be `r round((1-90/207)*100)`\si{\p} higher in modern feeds. The average copper inclusion rate increased by `r round((1-15/20)*100)`\si{\p}, while `r round((1-9.5/11.2)*100)`\si{\p} more potassium was found in modern commercial aquafeeds. However, data was highly variable, with a \gls{cv} of \SI{61}{\p} and \SI{93}{\p} for zinc and copper, respectively, and a \gls{cv} of \SI{20}{\p} for potassium.
-
-The authors highlight the lack of mineral composition data in the field of aquaculture nutrition, despite the extensive literature assessing mineral requirements of finfish.
+The authors highlight the lack of mineral composition data in the field of aquaculture nutrition, making a statistically sound comparison between past and present values impossible. 
 
 
 
 ### Specialty feeds
-The importance of aquafeeds as nutrient input are reflected by the development of several commercial specialty feeds, for instance, for cage culture, pond aquaculture, \gls{ras} and aquaponics. 
+The importance of aquafeeds as nutrient input is reflected by the development of several commercial specialty feeds, for instance, for cage culture, pond aquaculture, \gls{ras}, and aquaponics. 
 
-Pond and cage aquaculture is affected by environmental pollution as consequence of feeding. Low-pollution feeds have thus been developed that cause reduced nitrogen and phosphorus emissions [@Pigott; @Millian-Sorribes2021]. \gls{ras} pose similar problems for the aquaculture industry due to the investment and operation costs for water purification systems. Reducing the proportion of indigestible feed components therefore leads to a financial advantage. 
+Pond and cage aquaculture is affected by environmental pollution as consequence of feeding. Low-pollution feeds have thus been developed that cause reduced nitrogen and phosphorus emissions [@Pigott; @Millian-Sorribes2021]. \gls{ras} pose similar problems for the aquaculture industry due to the investment and operation costs for water purification systems. Reducing the proportion of indigestible feed components therefore leads to a financial advantage.
 
-Commercial aquaponics feeds, meanwhile, are meant to be a response to plant nutrient deficiencies in aquaponic systems. Overall, it is thought that the formulation of a specific feed that meets the nutritional requirements of both fish and plants by leading to higher excretion of otherwise deficient plant nutrients is the most suitable approach for the development of an “off-the-shelf” nutrient delivery system that does not require additional management effort by aquaponics farmers [@Lennard2017; @Eck2019].
-
-An in-depth characterisation of these feeds (n = 3) was not done until now to the best of the author's knowledge. However, even though available data is limited, it can be seen that the phosphorus content of these aquafeeds is highly variable (\gls{cv} = \SI{76}{\p}). The average phosphorus content of \SI{22(17)}{\gkg}, meanwhile, is not significantly different from the unspecific diets (t-test: p = 0.4). Information with regards to potassium and calcium inclusion rates were reported only for one feed. Here, potassium and calcium inclusion rates were `r (1-20/11)*100`\si{\p} higher and `r (1-15/18)*100`\si{\p} lower than the average of unspecific diets, respectively.
+Commercial aquaponics feeds, meanwhile, are supposed to increase the excretion of target nutrients such as phosphorus and potassium by fish to counteract deficiencies. The formulation of a specific feed is proposed as simple approach to provide an “off-the-shelf” nutrient delivery system without additional management effort for aquaponics farmers [@Lennard2017; @Eck2019]. At least three commercial aquaponics feeds are already on the market. However, it was found that the average phosphorus content of \SI{22(17)}{\gkg} does not significantly differ from standard feeds (t-test: p = 0.4). Information with regards to potassium and calcium inclusion rates were reported only for one feed. Here, their inclusion rates were `r (1-20/11)*100`\si{\p} higher and `r (1-15/18)*100`\si{\p} lower than in standard feeds, respectively. An in-depth characterisation of those diets might reveal further details.
 
 
 
 
 
 ### Experimental feeds
-In the recent past, experiments were conducted to closer examine the manipulability of substance excretion patterns by fish in relation to alterations in the raw material composition of provided aquafeeds.
+In the recent past, several experiments were conducted to closer examine the extent to which substance excretion patterns by fish are affected by alterations in the raw material composition of aquafeeds [@Gebauer2023; @Shaw2022; @Shaw2022a].
 
 The overall nutrient composition of the experimental diets is comparable with commercially available aquafeeds, with no significant differences in average nutrient inclusion levels. Potassium (t-test: p = 0.3), phosphorus (t-test: p = 0.1), calcium (t-test: p = 0.4), and magnesium (t-test: p = 0.7) had average inclusion rates of \SI{9(2.8)}{\gkg}, \SI{14(4.9)}{\gkg}, \SI{15(8.4)}{\gkg}, and \SI{2(0.7)}{\gkg}, respectively.
 Also, no differences were found for iron (t-test: p = 0.4), copper (t-test: p = 0.7), and zinc (t-test: p = 0.2). The average inclusion rates were \SI{348(29)}{\mgkg}, \SI{16(2.9)}{\mgkg}, and \SI{93(35.8)}{\mgkg}, respectively.
@@ -194,9 +187,6 @@ The variability found in the data can be traced back to 1) differences between t
 
 
 [@Prabhu2016]
-[@Gebauer2023]
-[@Shaw2022]
-[@Shaw2022a]
 
 @Seawright1998
 
@@ -217,7 +207,7 @@ The indigestible mass fraction of ingested feed, together with uneaten feed, mak
 
 The availability of \gls{adc} and nutrient retention data for individual nutrients depends on whether the nutrient is essential and has to be considered for feed formulation. 
 
-```{r include=TRUE, fig.cap="Placeholder showing the metabolic pathways related to fish", out.width="100%"}
+```{r include=TRUE, fig.cap="Placeholder showing the metabolic pathways related to fish", out.width="100%", eval=FALSE}
 knitr::include_graphics(here("latex", "fish_metabolism.png"))
 ```
 
@@ -277,6 +267,7 @@ Calcium, sulfur, and manganese were found to be comparably little variable among
 Other substances found in concentrations of \si{\mgL} are potassium, with a range of \SIrange{0.1}{23.6}{\mgL} and average of \SIci{2.76}{\mgL}{2.16}{3.36}, and nitrogen, ranging from \SIrange{0.09}{10.3}{\mgL} and averaging \SIci{2.16}{\mgL}{1.68}{2.65}. The most important nitrogenous compound in water is nitrate, making up the largest proportion of the total nitrogen in solution.
 
 As far as other substances relevant for plant nutrition are analysed by water utilities, their concentrations in water are usually low due to their low solubility. Phosphorus in aqueous solution is mostly present in form of orthophosphates. The concentration of phosphorus as important plant nutrient is generally low in tap water. In the reviewed analysis reports, concentrations ranged from \SIrange{0.1}{6006}{\ugL}, averaging \SIci{223}{\ugL}{-67.2}{514}. The average concentrations of boron, iron, copper, zinc, and manganese were found to be similar. An average of \SIci{47}{\ugL}{30.3}{63.8} boron, \SIci{25.3}{\ugL}{3.35}{47.2} iron, \SIci{18.8}{\ugL}{3.97}{33.7} copper, \SIci{11.5}{\ugL}{1.17}{21.8} zinc, and \SIci{4.39}{\ugL}{2.57}{6.21} manganese was found, respectively. Among these microminerals, iron and zinc had the highest variability (iron: \gls{cv} = \SIcv{480}; zinc: \gls{cv} = \SIcv{448}), ranging from \SIrange{0.005}{1320}{\ugL} and \SIrange{0.5}{200}{\ugL}, respectively. The variability of manganese and boron was found to be lower (manganese: \gls{cv} = \SIcv{224}; boron: \gls{cv} = \SIcv{193}), with a mass concentration range of \SIrange{0.2}{77.1}{\ugL} and \SIrange{5}{638}{\ugL}, respectively.
+
 Mo
 Ni
 Na
@@ -312,13 +303,33 @@ A glimpse of the extent of variability of terrestrial waters in their chemical c
 
 
 # Alkalinity supplements as nutrient sources
-The term alkalinity supplements summarizes several alkaline substances that are used to maintain a stable pH in the water [@Timmons2010]. Nitrification decreases the pH over time and, consequently, also the activity of nitrifyers [Ward2011]. Thus, a stable pH has to be maintained to ensure both high nitrification performance and animal welfare. For this purpose, several Na-based substances such as sodium hydrogen carbonate (baking soda, \ce{NaHCO3}) are commonly used in aquaculture due to their high and rapid solubility at a comparably cheap price. However, high sodium (Na) concentrations must be avoided in aquaponic systems due to its phytotoxicity [@Maathuis2014]. Na is therefore replaced with several other supplements based on K or Ca that come with the benefit of providing an additional source of nutrients besides increasing the pH.
+The term alkalinity supplements summarizes several alkaline substances that are used to maintain a stable pH in the water. The pH in aquaculture systems decreases over time due to the activity of nitrifying bacteria in the biofilter. The conversion of ammonium to nitrate follows the overall simplified reaction equation \ref{eq:nitrification} [@Timmons2010].
 
-## Nutrient inclusion rates
-- high in single nutrient (>90% purity)
+\begin{align}
+  \ce{NH4+} + 2\ce{O2} + \ce{H2O} -> \ce{NO3-} + 2{H3O+}
+  \label{eq:nitrification}
+\end{align}
 
-## Sources and extent of variability
-- variability very low; depends on the product quality
+Per mole of ammonium (\ce{NH4+}) that is converted to nitrate (\ce{NO3-}), two moles of hydronium ions (\ce{H3O+}) are released. The decrease in pH causes a decrease in the activity of nitrifyers [Ward2011] and has to be counteracted.
+
+Furthermore, it can be derived from equation \ref{eq:nitrification} that $n(\ce{NH4+})) = n(\ce{N})$ and $2n(\ce{N}) = n(\ce{H3O+})$. Thus, the amount of moles that have to be neutralized can be calculated from the feed input as shown in equation \ref{eq:nitrification_feed}
+
+\begin{align}
+  n(\ce{H3O+}) = 2\frac{m(\ce{N})}{M(\ce{N})}
+  \label{eq:nitrification_feed}
+\end{align}
+
+with the molar mass $M(\ce{N}) = \SI{14.007}{\gmol}$. Sodium based substances such as sodium hydrogen carbonate (baking soda, \ce{NaHCO3}) are commonly used in aquaculture due to their high and rapid solubility at a comparably cheap price. The chemical reaction with bases such as \ce{NaHCO3}, \ce{KOH}  or \ce{Ca(HCO3)2} is eventually a simple neutralization reaction of the pattern
+
+
+The mass of sodium, potassium or calcium can consequently be calculated by rearranging equation (2.4) and using the correct stoichiometric conversion factor. High sodium concentrations must be avoided in aquaponic systems due to its phytotoxicity [@Maathuis2014]. Sodium is therefore replaced with several other supplements based on potassium or calcium that come with the benefit of providing an additional source of nutrients besides increasing the pH.
+
+Thus, a stable pH has to be maintained to ensure both high nitrification performance and animal welfare. For this purpose, several Na-based substances such as sodium hydrogen carbonate (baking soda, \ce{NaHCO3}) are commonly used in aquaculture due to their high and rapid solubility at a comparably cheap price. However, high sodium concentrations must be avoided in aquaponic systems due to its phytotoxicity [@Maathuis2014]. Sodium is therefore replaced with several other supplements based on potassium or calcium that come with the benefit of providing an additional source of nutrients besides increasing the pH.
+
+
+
+
+
 
 
 

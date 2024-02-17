@@ -11,11 +11,15 @@ of nutrients is being retained in the biomass before being available
 
 # TO DO
 
+### General
+
+- **check whether Scopus AI finds a paper that is somehow similar to
+  this one!**
+
 ### Aquafeeds
 
-- **does it make sense to include roots, tubers, and grains in the
-  feedstuff overview?**
 - **update table construction in Feeding as nutrient source**
+- make sketch with fish and excretory paths of nutrients
 
 ### Alkalinity
 
@@ -24,7 +28,22 @@ of nutrients is being retained in the biomass before being available
 ### Nutrient budget
 
 - **Permutations**
-  - collect digestibility data (P: Sugiura2018)
-  - simulate normally distributed digestibility
-  - permutate on FEED + ADC
-  - calculate all possible output scenarios
+  - normalize nutrient inputs to 1 kg feed
+  - conduct statistical test to check whether contribution of water is
+    significantly greater than 0
+  - extract data so that probability can be calculated for occurrences
+    of xyz
+
+# QUESTIONS
+
+### Aquafeeds
+
+- **does it make sense to include roots, tubers, and grains in the
+  feedstuff overview?**
+
+### Alkalinity
+
+### Nutrient budget
+
+- **Permutations**
+  - is the approach understandable?
