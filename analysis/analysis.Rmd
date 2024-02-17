@@ -976,27 +976,51 @@ data$permutation_with_assumptions_tap <- data$permutation_feed_with_assumptions 
          substance = fct_relevel(substance, "N", "P", "K", 
                               "Ca", "Mg", "S", 
                               "Fe", "Cu", "Zn")) %>%
-  filter(source != "aquafeed") %>% 
-  write_rds(here("output", "interm", "permutation_tap.rds"))
+  write_rds(here("output", "interm", "permutation.rds"))
 ```
 
 ```{r}
-five_list <- read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
+read_rds(here("output", "interm", "permutation.rds")) %>% 
+  filter(dailyFreshwater == 1000 & substance == "Zn") %>% 
+  #t_test(percentage ~ source, var.equal = FALSE, paired = TRUE, conf.level = 0.1)
+  kruskal_test(percentage ~ source)
+```
+
+
+```{r}
+five_list <- read_rds(here("output", "interm", "permutation.rds")) %>% 
+  filter(source != "aquafeed") %>% 
   group_by(substance, dailyFreshwater) %>% 
   summarise(quantile = quantile(percentage, .05))
 
-median_list <- read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
+median_list <- read_rds(here("output", "interm", "permutation.rds")) %>% 
+  filter(source != "aquafeed") %>% 
   group_by(substance, dailyFreshwater) %>% 
   summarise(median = median(percentage))
 
-ninetyfive_list <- read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
+ninetyfive_list <- read_rds(here("output", "interm", "permutation.rds")) %>% 
+  filter(source != "aquafeed") %>% 
   group_by(substance, dailyFreshwater) %>% 
   summarise(quantile = quantile(percentage, .95))
 ```
 
+```{r}
+read_rds(here("output", "interm", "permutation.rds")) %>% 
+  filter(dailyFreshwater == 100) %>% 
+  ggplot(aes(x = percentage, fill = source)) + 
+  geom_density(alpha = .5) + 
+  facet_wrap(facets = vars(substance), scales = "free") + 
+  theme_bw() + 
+  theme(legend.position = "none") +
+  labs(x = "Percentage contribution",
+       y = "Likelihood of observation")
+
+ggsave(here("output", "plots", "permutation_tap_density.png"))
+```
 
 ```{r}
-read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
+read_rds(here("output", "interm", "permutation.rds")) %>% 
+  filter(source != "aquafeed") %>% 
   ggplot(aes(x = percentage, fill = as.factor(dailyFreshwater))) + 
   geom_density(alpha = .5) + 
   
@@ -1016,7 +1040,8 @@ ggsave(here("output", "plots", "permutation_tap_density.png"))
 ```
 
 ```{r}
-read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
+read_rds(here("output", "interm", "permutation.rds")) %>% 
+  filter(source != "aquafeed") %>% 
   ggplot(aes(x = percentage, fill = as.factor(dailyFreshwater))) + 
   geom_histogram(position = position_dodge()) + 
   facet_wrap(facets = vars(substance), scales = "free") + 
@@ -1032,7 +1057,8 @@ ggsave(here("output", "plots", "permutation_tap_histogram.png"))
 ```
 
 ```{r}
-read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
+read_rds(here("output", "interm", "permutation.rds")) %>% 
+  filter(source != "aquafeed") %>% 
   ggplot(aes(x = percentage, color = as.factor(dailyFreshwater))) + 
   stat_ecdf(geom = "step") +
   
@@ -1058,8 +1084,8 @@ knitr::include_graphics(here("output", "plots", "permutation_tap.png"))
 ```
 
 ```{r}
-read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
-  filter(dailyFreshwater == 100) %>% 
+read_rds(here("output", "interm", "permutation.rds")) %>% 
+  filter(source != "aquafeed" & dailyFreshwater == 100) %>% 
   ggplot(aes(x = percentage, y = substance, fill = as.factor(dailyFreshwater))) + 
   geom_density_ridges(alpha = .5) +
   scale_x_continuous(breaks = seq(0,100,10), 
@@ -1076,7 +1102,8 @@ ggsave(here("output", "plots", "permutation_tap_ridgeddensity.png"))
 ```
 
 ```{r}
-read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
+read_rds(here("output", "interm", "permutation.rds")) %>% 
+  filter(source != "aquafeed") %>% 
   mutate(dailyFreshwater = as.character(dailyFreshwater),
          dailyFreshwater = fct_recode(dailyFreshwater,
                                       `10 L/kg` = "10",
