@@ -33,7 +33,6 @@ It is assumed that the majority of nutrients enters an aquaculture system via th
 
 ### Nutrient budget
 - **Permutations**
-  - normalize nutrient inputs to 1 kg feed
   - conduct statistical test to check whether contribution of water is significantly greater than 0
   - extract data so that probability can be calculated for occurrences of xyz
   

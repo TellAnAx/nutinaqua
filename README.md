@@ -28,7 +28,6 @@ of nutrients is being retained in the biomass before being available
 ### Nutrient budget
 
 - **Permutations**
-  - normalize nutrient inputs to 1 kg feed
   - conduct statistical test to check whether contribution of water is
     significantly greater than 0
   - extract data so that probability can be calculated for occurrences
