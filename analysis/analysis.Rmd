@@ -957,9 +957,8 @@ knitr::include_graphics(here("output", "plots", "permutation_no_digestibility.pn
 ### Retention - Tap water
 
 ```{r}
-data$permutation_with_assumptions_tap <- data$permutation_feed_with_assumptions %>% 
-  left_join(data$permutation_water_tap_with_assumptions, 
-            relationship = "many-to-many") %>% 
+data$permutation_with_assumptions_tap <- data$permutation_water_tap_with_assumptions %>% 
+  left_join(data$permutation_feed_with_assumptions) %>% 
   
   mutate(
     sum = feed + water,
@@ -972,15 +971,16 @@ data$permutation_with_assumptions_tap <- data$permutation_feed_with_assumptions 
                names_to = "source",
                values_to = "percentage") %>% 
   select(substance, unit, source, percentage, dailyFreshwater) %>% 
+  filter(substance %in% c("N", "P", "K", "Ca", "Mg", "S", "Fe", "Cu", "Zn")) %>% 
   mutate(source = fct_recode(source, aquafeed = "perc_feed", `tap water` = "perc_water"),
          substance = fct_relevel(substance, "N", "P", "K", 
                               "Ca", "Mg", "S", 
                               "Fe", "Cu", "Zn")) %>%
-  write_rds(here("output", "interm", "permutation.rds"))
+  write_rds(here("output", "interm", "permutation_tap.rds"))
 ```
 
 ```{r}
-read_rds(here("output", "interm", "permutation.rds")) %>% 
+read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
   filter(dailyFreshwater == 1000 & substance == "Zn") %>% 
   #t_test(percentage ~ source, var.equal = FALSE, paired = TRUE, conf.level = 0.1)
   kruskal_test(percentage ~ source)
@@ -988,24 +988,24 @@ read_rds(here("output", "interm", "permutation.rds")) %>%
 
 
 ```{r}
-five_list <- read_rds(here("output", "interm", "permutation.rds")) %>% 
+five_list <- read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
   filter(source != "aquafeed") %>% 
   group_by(substance, dailyFreshwater) %>% 
   summarise(quantile = quantile(percentage, .05))
 
-median_list <- read_rds(here("output", "interm", "permutation.rds")) %>% 
+median_list <- read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
   filter(source != "aquafeed") %>% 
   group_by(substance, dailyFreshwater) %>% 
   summarise(median = median(percentage))
 
-ninetyfive_list <- read_rds(here("output", "interm", "permutation.rds")) %>% 
+ninetyfive_list <- read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
   filter(source != "aquafeed") %>% 
   group_by(substance, dailyFreshwater) %>% 
   summarise(quantile = quantile(percentage, .95))
 ```
 
 ```{r}
-read_rds(here("output", "interm", "permutation.rds")) %>% 
+read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
   filter(dailyFreshwater == 100) %>% 
   ggplot(aes(x = percentage, fill = source)) + 
   geom_density(alpha = .5) + 
@@ -1019,7 +1019,7 @@ ggsave(here("output", "plots", "permutation_tap_density.png"))
 ```
 
 ```{r}
-read_rds(here("output", "interm", "permutation.rds")) %>% 
+read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
   filter(source != "aquafeed") %>% 
   ggplot(aes(x = percentage, fill = as.factor(dailyFreshwater))) + 
   geom_density(alpha = .5) + 
@@ -1040,7 +1040,7 @@ ggsave(here("output", "plots", "permutation_tap_density.png"))
 ```
 
 ```{r}
-read_rds(here("output", "interm", "permutation.rds")) %>% 
+read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
   filter(source != "aquafeed") %>% 
   ggplot(aes(x = percentage, fill = as.factor(dailyFreshwater))) + 
   geom_histogram(position = position_dodge()) + 
@@ -1057,7 +1057,7 @@ ggsave(here("output", "plots", "permutation_tap_histogram.png"))
 ```
 
 ```{r}
-read_rds(here("output", "interm", "permutation.rds")) %>% 
+read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
   filter(source != "aquafeed") %>% 
   ggplot(aes(x = percentage, color = as.factor(dailyFreshwater))) + 
   stat_ecdf(geom = "step") +
@@ -1084,7 +1084,7 @@ knitr::include_graphics(here("output", "plots", "permutation_tap.png"))
 ```
 
 ```{r}
-read_rds(here("output", "interm", "permutation.rds")) %>% 
+read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
   filter(source != "aquafeed" & dailyFreshwater == 100) %>% 
   ggplot(aes(x = percentage, y = substance, fill = as.factor(dailyFreshwater))) + 
   geom_density_ridges(alpha = .5) +
@@ -1102,7 +1102,13 @@ ggsave(here("output", "plots", "permutation_tap_ridgeddensity.png"))
 ```
 
 ```{r}
-read_rds(here("output", "interm", "permutation.rds")) %>% 
+results$n_combinations_tap <- read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
+  filter(source != "aquafeed" & dailyFreshwater == 100) %>% nrow()
+```
+
+
+```{r}
+read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
   filter(source != "aquafeed") %>% 
   mutate(dailyFreshwater = as.character(dailyFreshwater),
          dailyFreshwater = fct_recode(dailyFreshwater,
@@ -1126,7 +1132,7 @@ read_rds(here("output", "interm", "permutation.rds")) %>%
   labs(x = "Contribution to total nutrient input (%)",
        y = "")
 
-ggsave(here("output", "plots", "permutation_tap_ridgeddensity.png"))
+ggsave(here("output", "plots", "permutation_tap_ridgeddensity_multiple.png"))
 ```
 
 After consideration of nutrient digestibility, two scenarios occur:
@@ -1142,7 +1148,7 @@ After consideration of nutrient digestibility, two scenarios occur:
 ### Retention - Rain water
 
 ```{r}
-data$permutation_feed_with_assumptions %>% 
+data$permutation_with_assumptions_rain <- data$permutation_feed_with_assumptions %>% 
   left_join(data$permutation_water_rain_with_assumptions, 
             relationship = "many-to-many") %>% 
   
@@ -1156,32 +1162,177 @@ data$permutation_feed_with_assumptions %>%
   pivot_longer(c(perc_feed, perc_water),
                names_to = "source",
                values_to = "percentage") %>% 
-  select(substance, unit, source, percentage) %>% 
-  mutate(source = fct_recode(source, feed = "perc_feed", `rain water` = "perc_water"),
+  select(substance, unit, source, percentage, dailyFreshwater) %>% 
+  filter(substance %in% c("N", "P", "K", "Ca", "Mg", "S", "Fe", "Cu", "Zn")) %>% 
+  mutate(source = fct_recode(source, aquafeed = "perc_feed", `tap water` = "perc_water"),
          substance = fct_relevel(substance, "N", "P", "K", 
                               "Ca", "Mg", "S", 
                               "Fe", "Cu", "Zn")) %>%
+  write_rds(here("output", "interm", "permutation_rain.rds"))
+```
+
+```{r}
+five_list <- read_rds(here("output", "interm", "permutation_rain.rds")) %>% 
+  filter(source != "aquafeed") %>% 
+  group_by(substance, dailyFreshwater) %>% 
+  summarise(quantile = quantile(percentage, .05))
+
+median_list <- read_rds(here("output", "interm", "permutation_rain.rds")) %>% 
+  filter(source != "aquafeed") %>% 
+  group_by(substance, dailyFreshwater) %>% 
+  summarise(median = median(percentage))
+
+ninetyfive_list <- read_rds(here("output", "interm", "permutation_rain.rds")) %>% 
+  filter(source != "aquafeed") %>% 
+  group_by(substance, dailyFreshwater) %>% 
+  summarise(quantile = quantile(percentage, .95))
+```
+
+```{r}
+read_rds(here("output", "interm", "permutation_rain.rds")) %>% 
+  filter(dailyFreshwater == 100) %>% 
   ggplot(aes(x = percentage, fill = source)) + 
-  geom_density(alpha = .7) + 
+  geom_density(alpha = .5) + 
   facet_wrap(facets = vars(substance), scales = "free") + 
-  scale_fill_manual(values = c("brown", "lightblue")) +
+  theme_bw() + 
+  theme(legend.position = "none") +
+  labs(x = "Percentage contribution",
+       y = "Likelihood of observation")
+
+ggsave(here("output", "plots", "permutation_rain_density.png"))
+```
+
+```{r}
+read_rds(here("output", "interm", "permutation_rain.rds")) %>% 
+  filter(source != "aquafeed" & dailyFreshwater == 100) %>% 
+  ggplot(aes(x = percentage, y = substance, fill = as.factor(dailyFreshwater))) + 
+  geom_density_ridges(alpha = .5) +
+  scale_x_continuous(breaks = seq(0,100,10), 
+                     labels = c("0","","20","","40","","60","","80","","100"),
+                     limits = c(0,100)) +
+  scale_fill_manual(values = c("lightblue")) +
+  facet_wrap(facets = vars(dailyFreshwater)) + 
+  theme_bw() + 
+  theme(legend.position = "none") +
+  labs(x = "Contribution to nutrient input (%)",
+       y = "Density")
+
+ggsave(here("output", "plots", "permutation_rain_ridgeddensity.png"))
+```
+
+```{r}
+read_rds(here("output", "interm", "permutation_rain.rds")) %>% 
+  filter(source != "aquafeed") %>% 
+  mutate(dailyFreshwater = as.character(dailyFreshwater),
+         dailyFreshwater = fct_recode(dailyFreshwater,
+                                      `10 L/kg` = "10",
+                                      `100 L/kg` = "100",
+                                      `1 000 L/kg` = "1000")) %>% 
+  ggplot(aes(x = percentage, y = substance, fill = stat(quantile))) + 
+  stat_density_ridges(quantile_lines = FALSE,
+                      calc_ecdf = TRUE,
+                      geom = "density_ridges_gradient",
+                      quantiles = c(0.2, 0.4, 0.6, 0.8)) +
+  scale_fill_manual(name = "Occurrence probability interval", 
+                    values = c("white", "lightblue1", "lightblue3", "lightblue1", "white"),
+                    labels = c("(0%, 20%]", "(20%, 40%]", "(40%, 60%]", "(60%, 80%]", "(80%, 100%]")) +
+  scale_x_continuous(breaks = seq(0,100,10), 
+                     labels = c("0","","20","","40","","60","","80","","100"),
+                     limits = c(0,100)) +
+  facet_wrap(facets = vars(dailyFreshwater)) + 
   theme_bw() + 
   theme(legend.position = "top") +
-  labs(x = "Percentage contribution",
-       y = "Probability of occurrence",
-       title = "Rain water",
-       fill = "Nutrient source")
+  labs(x = "Contribution to total nutrient input (%)",
+       y = "")
 
-ggsave(here("output", "plots", "permutation_rain.png"))
+ggsave(here("output", "plots", "permutation_rain_ridgeddensity_multiple.png"))
+```
+
+```{r}
+results$n_combinations_rain <- read_rds(here("output", "interm", "permutation_rain.rds")) %>% 
+  filter(source != "aquafeed" & dailyFreshwater == 100) %>% nrow() %>% print()
+```
+
+
+
+
+### Combined
+
+```{r}
+data$permutation_water_combined_with_assumptions <- data$permutation_water_tap_with_assumptions %>% 
+  bind_rows(data$permutation_water_rain_with_assumptions, .id = "source2") %>%
+  mutate(source2 = as.character(source2),
+         source2 = fct_recode(source2, tap = "1", rain = "2"))
+
+data$permutation_with_assumptions_combined <- data$permutation_water_combined_with_assumptions %>% 
+  left_join(data$permutation_feed_with_assumptions) %>%
+  
+  mutate(
+    sum = feed + water,
+    prop_feed = feed/sum,
+    prop_water = water/sum,
+    perc_feed = prop_feed*100,
+    perc_water = prop_water*100
+    ) %>% 
+  pivot_longer(c(perc_feed, perc_water),
+               names_to = "source",
+               values_to = "percentage") %>% 
+  select(substance, unit, source, source2, percentage, dailyFreshwater) %>% 
+  filter(substance %in% c("N", "P", "K", "Ca", "Mg", "S", "Fe", "Cu", "Zn")) %>% 
+  mutate(source = fct_recode(source, aquafeed = "perc_feed", `water` = "perc_water")) %>%
+  write_rds(here("output", "interm", "permutation_combined.rds"))
 ```
 
 ```{r include=TRUE}
-knitr::include_graphics(here("output", "plots", "permutation_rain.png"))
+read_rds(here("output", "interm", "permutation_combined.rds")) %>% 
+  filter(source != "aquafeed" & dailyFreshwater != "1000") %>% 
+  mutate(dailyFreshwater = as.character(dailyFreshwater),
+         dailyFreshwater = fct_recode(dailyFreshwater,
+                                      `10 L/kg` = "10",
+                                      `100 L/kg` = "100"),
+         substance = fct_relevel(substance, "N", "P", "K", 
+                              "Ca", "Mg", "S", 
+                              "Fe", "Cu", "Zn")) %>% 
+  
+  ggplot(aes(x = percentage, y = fct_rev(substance), fill = stat(quantile))) + 
+  stat_density_ridges(quantile_lines = FALSE,
+                      calc_ecdf = TRUE,
+                      geom = "density_ridges_gradient",
+                      quantiles = c(0.2, 0.4, 0.6, 0.8)) +
+  scale_fill_manual(name = "Occurrence probability", 
+                    values = c("white", "lightblue1", "lightblue4", "lightblue1", "white"),
+                    labels = c("(0%, 20%]", "(20%, 40%]", "(40%, 60%]", "(60%, 80%]", "(80%, 100%]")) +
+  scale_x_continuous(breaks = seq(0,100,10), 
+                     labels = c("0","","20","","40","","60","","80","","100"),
+                     limits = c(0,100)) +
+  facet_grid(cols = vars(dailyFreshwater), rows = vars(source2)) + 
+  theme_bw() + 
+  theme(legend.position = "top") +
+  labs(x = "Share of total nutrient input (%)",
+       y = "")
+
+ggsave(here("output", "plots", "combination_combined_ridgeddensity_multiple.png"))
 ```
 
+```{r}
+tables$water_combined_quantiles <- read_rds(here("output", "interm", "permutation_combined.rds")) %>% 
+  filter(source != "aquafeed" & dailyFreshwater != "1000") %>% 
+  group_by(substance, source2, dailyFreshwater) %>% 
+  summarise(
+    median = median(percentage),
+    `0-20` = quantile(percentage, 0.2),
+    `20-40` = quantile(percentage, 0.4),
+    `40-60` = quantile(percentage, 0.6),
+    `60-80` = quantile(percentage, 0.8),
+    `80-100` = quantile(percentage, 1)
+  ) %>% 
+  write_csv(here("output", "tables", "table_water_contribution_quantiles.csv"))
+```
 
-
-
+```{r table_quantiles, include=TRUE}
+knitr::kable(tables$water_combined_quantiles,
+             caption = "Quantiles of percentage contribution to the total nutrient input into an aquaculture system as shown in the figure before.")
+```
 
 
 
