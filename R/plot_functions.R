@@ -81,13 +81,6 @@ plot_feedstuff_comp <- function(x, ...) {
                fill = cat3)) +
     geom_boxplot() +
     facet_wrap(facets = vars(analyte), scales = "free") +
-    labs(
-      fill = "class",
-      #x = expression(log[10]("inclusion")),
-      x = "inclusion",
-      y = ""
-    ) +
-    #scale_x_log10() +
     theme_classic() +
     theme(
       legend.position = "bottom",

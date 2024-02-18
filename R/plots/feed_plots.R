@@ -8,13 +8,17 @@
 # Feedstuff composition----
 
 mean_aquatic <- read_rds(here("output", "interm", "feedstuff_cleaned.rds")) %>%
-  filter(cat2 == "aquatic") %>% 
-  group_by(analyte) %>% 
+  filter(cat2 == "aquatic") %>%
+  group_by(analyte) %>%
   summarise(mean = mean(value))
 
-read_rds(here("output", "interm", "feedstuff_cleaned.rds")) %>% 
-  plot_feedstuff_comp() + 
+read_rds(here("output", "interm", "feedstuff_cleaned.rds")) %>%
+  plot_feedstuff_comp() +
   geom_vline(data = mean_aquatic, aes(xintercept = mean),
-             linetype = "dashed", color = "red")
+             linetype = "dashed", color = "red") +
+  labs(fill = "class",
+       x = expression(log[10]("inclusion")),
+       y = "") +
+  scale_x_log10()
 
 ggsave(here::here("output", "plots", "feedstuff_composition.png"))
