@@ -171,21 +171,7 @@ The authors highlight the lack of mineral composition data in the field of aquac
 
 
 
-
-
-
-
-
-### From gross to net feed input
-When discussing aquafeeds as nutrient input route into integrated systems, it has to be considered that the gross feed input that is provided is not what is available for the secondary organisms that are co-cultivated in an integrated system (see Figure \ref(fig:metabolism). Instead, the retention of a fraction of nutrients by the livestock must be considered [@Robaina2019].
-
-Finfish species cultivated in aquaculture retain about \SI{19}{\p} of the nitrogen [@Fry2018] and \SI{40}{\p} of the phosphorus [@Sugiura2018] that is provided via aquafeeds. Due to the lack of data for other minerals, a conceptual study approximated their retention efficiency from the retention efficiency of ash as sum parameter [@Roy2022].
-
-```{r include=TRUE, fig.cap="Placeholder showing the metabolic pathways related to fish", out.width="100%", eval=FALSE}
-knitr::include_graphics(here("latex", "fish_metabolism.png"))
-```
-
-
+### Variability through changing nutrient inclusion rates - Speciality feeds
 The variability found in the results can be traced back to 
 
 - differences between the nutritional requirements of fish species for which the feeds in the dataset were formulated
@@ -199,22 +185,12 @@ The variability found in the results can be traced back to
 - it was shown that differences in raw material composition lead to comparable growth but the nutrient composition can dramatically vary
 
 
-[@Prabhu2016]
-
-@Seawright1998
 
 
 
 
 
-### Variability through changing nutrient inclusion rates - Speciality feeds
-
-
-The importance of aquafeeds as nutrient input is reflected by the development of several commercial specialty feeds. For instance, low-pollution feeds have thus been developed that cause reduced nitrogen and phosphorus emissions from pond and cage aquaculture [@Pigott; @Millian-Sorribes2021]. \gls{ras} pose similar problems for the aquaculture industry due to high initial and operation costs for water purification systems. Reducing the need for water treatment through the development of highly bioavailable aquafeeds therefore reduces costs on the long run. 
-
-
-### Special feeds
-The importance of aquafeeds as nutrient input is reflected by the development of several commercial specialty feeds. For instance, low-pollution feeds have thus been developed that cause reduced nitrogen and phosphorus emissions from pond and cage aquaculture [@Pigott; @Millian-Sorribes2021]. \gls{ras} pose similar problems for the aquaculture industry due to high initial and operation costs for water purification systems. Reducing the need for water treatment through the development of highly bioavailable aquafeeds therefore reduces costs on the long run. 
+The importance of aquafeeds as nutrient input is reflected by the development of several commercial specialty feeds. For instance, low-pollution feeds have thus been developed that cause reduced nitrogen and phosphorus emissions from pond and cage aquaculture [@Pigott2003; @Millian-Sorribes2021]. \gls{ras} pose similar problems for the aquaculture industry due to high initial and operation costs for water purification systems. Reducing the need for water treatment through the development of highly bioavailable aquafeeds therefore reduces costs on the long run. 
 
 Feeds for integrated systems such as aquaponics, in contrast, are supposed to increase the excretion of specific nutrients. Although this approach runs counter to the usual logic of reducing emissions from aquaculture, it could be a feasible way to counteract nutrient deficiencies in secondary organisms such as plants. For instance, the formulation of a feed for aquaponics was proposed to provide an “off-the-shelf” nutrient delivery system without additional management effort for aquaponics farmers [@Seawright1998; @Lennard2017; @Eck2019]. Achieving higher nutrient excretion is possible, for instance, by using feed additives or feed ingredients that provoke the excretion of higher amounts of certain nutrients. 
 Figure \@ref{fig:feedstuffs} gives an overview of the variability of several substances in different feedstuffs relevant for aquafeed production (data originating from @IAFFD2021). The replacement of marine feed ingredients in aquafeeds by novel protein sources such as plant- or insect-based feedstuffs is necessary in order to meet sustainability goals [@Hua2019; @Gasco2020]. 
@@ -225,19 +201,28 @@ Also, no differences were found for iron (t-test: p = 0.4), copper (t-test: p = 
 
 
 
-
 At least three commercial aquaponics feeds are already on the market. However, according to the datasheets, two out of three feeds do not differ from standard feeds in their phosphorus content. Information with regards to potassium and calcium inclusion rates were reported only for one feed. Here, their inclusion rates were `r (1-20/11)*100`\si{\p} higher and `r (1-15/18)*100`\si{\p} lower than in standard feeds, respectively.
-
-
-
-
-
-
 
 
 ```{r feedstuffs, include=TRUE, fig.cap="Logarithmic mass fractions of some nutrients in different feedstuffs. Dashed red line indicates average inclusion of respective nutrient in aquatic feedstuffs. Data outside of the 1.5 times interquartile range were removed. Data from IAFFD, 2021.", out.width="100%"}
 knitr::include_graphics(here("output", "plots", "feedstuff_composition.png"))
 ```
+
+
+
+
+
+### From gross to net feed input
+When discussing aquafeeds as nutrient input route into integrated systems, it has to be considered that the gross feed input that is provided is not what is available for the secondary organisms that are co-cultivated in an integrated system (see Figure \@ref{fig:metabolism. Instead, the retention of a fraction of nutrients by the livestock must be considered [@Robaina2019].
+
+```{r include=TRUE, fig.cap="Placeholder showing the metabolic pathways related to fish", out.width="100%", eval=FALSE}
+knitr::include_graphics(here("latex", "fish_metabolism.png"))
+```
+
+Finfish species cultivated in aquaculture retain about \SI{19}{\p} of the nitrogen [@Fry2018] and \SI{40}{\p} of the phosphorus [@Sugiura2018] that is provided via aquafeeds. Due to the lack of data for other minerals, a conceptual study approximated their retention efficiency from the retention efficiency of ash as sum parameter [@Roy2022].
+
+
+
 
 
 
@@ -294,6 +279,8 @@ In water analysis, it is common practice to report the value of the instrument d
 knitr::kable(read_csv(here("output", "tables", "water_combined.csv")),
              caption = "Concentrations of substances relevant for plant production in tap water samples from Europe. Tap water means were calculated from censored data using maximum likelihood estimation (MLE). Tests for significance were conducted by comparing the resulting 95% confidence interval for tap water data with the means of the rain water.")
 ```
+
+
 
 
 
@@ -380,22 +367,12 @@ Thus, a stable pH has to be maintained to ensure both high nitrification perform
 
 
 
-## Implications for nutrient management in aquaponic systems
+# Implications for nutrient management
 
-
-
-
-
-## Economic considerations
-
-
-
-
-
-The contribution of different nutrient sources to the total daily nutrient inputs into an aquaponic system were compared based on assumptions derived from literature.
-It could overall be confirmed by the current input scenario that aquafeeds serve as major nutrient input route for N, P, K, Fe, Mn, Cu, Zn, and Mo after consideration of digestibility and nutrient retention by fish. These results confirm prior findings [@Delaide2017]. Considering variability among locations, it could furthermore be confirmed that Ca, Mg, S, B and Na originate from source water. However, the variability found in the case of Ca does not reflect the usual concentration range of approximately two orders of magnitude found in terrestrial waters [@Stumm1996]. A study reviewing the Ca concentration in tap waters from the USA and Canada found a range from \SIrange{1}{135}{\mgL} [@Morr2006]. 
-
-Considering that the obtained results were obtained making use of assumptions, these initial assumptions need to be discussed. The species distribution with strong emphasis on Tilapia (\emph{Oreochromis} spp.) and African catfish (\emph{Clarias gariepinus}) matches with survey results obtained in Europe [@Villarroel2016], even though approximately half of the studies included in the dataset were conducted in the USA. However, surveys conducted in the USA also revealed that the species mostly cultivated in aquaponic systems are Tilapia [@Love2015; @Pattillo2022]. On the other hand, the average stocking density of 7.69 kg m-3 that was used for the nutrient contribution calculations can neither be considered representative for the intensive cultivation of Tilapia nor for African catfish. While densities between \SIrange{10}{50}{\kg\per\cubicm} are reported as acceptable for cultivation in RAS systems [@El-Sayed2019], densities of \SI{120}{\kg\per\cubicm} were reported to be tolerated by the latter species without any adverse effects on fish health [@Nieuwegiessen2009]. Even though salmonids such as Rainbow trout (\emph{Oncorhynchus mykiss}) are seldom reared in aquaponic systems, they can tolerate stocking densities up to \SI{137}{\kg\per\cubicm}. Though, normal stocking densities range between \SIrange{10}{20}{\kg\per\cubicm}. The assumptions are rather on the lower end for salmonids [@Pennell1996]. Common carp (\emph{Cyprinus carpio}) is irrelevant for aquaponic systems due to its low market price. Though, it was found that fish welfare can be guaranteed at a stocking density of around \SI{28}{\kg\per\cubicm}, which is $\approx 4$ times higher than the assumed density [@Ruane2002]. Consequently, it can be expected that the contribution of aquafeeds to the total daily nutrient input under intensive rearing conditions for the mentioned fish species is considerably higher than assumed in this study. Though, the presented nutrient contribution scenario might be representative for the cultivation of Pikeperch due to the comparably low stocking densities ($\approx$\SI{5}{\kg\per\cubicm}) recommended for its cultivation [@Kestemont2015]. The average \gls{fr} of \SI{2}{\p} is in line with recommendations for the husbandry of Tilapia, Channel catfish (Ictalurus punctatus) and Common carp [@Lovell2003]. Another aspect with respect to the contribution of feeds is that the feed composition is, in adaptation to the species to be reared, variable. For instance, crude protein inclusion rates in commercial aquafeeds for the mentioned species range from 32% for O. spp. [@Wilson2003; @El-Sayed2019] to \SI{50}{\p} for Pikeperch [@Geay2015]. Further variation in the nutrient composition is introduced by feed manufacturers due to changes in its raw material composition made because of fluctuations in feed ingredient availability and market prices. While changes in the mass concentrations of crucial nutrients such as the \gls{cp} inclusion rate are acceptable only within tight limits, this might not be the case for other nutrients that are disregarded in the formulation process. Overall, data about the inclusion rates of nutrients relevant for plants in commercial aquafeeds can be considered scarce because these compounds are either not essential for aquatic animals or can be taken up from water via the gills in sufficient quantities. These nutrients are thus usually not considered during feed formulation [@Lall2003]. However, a comprehensive review about the range of plant nutrient mass concentrations in commercial aquafeeds has not yet been conducted to the best of the authors knowledge. The mean water exchange rate of 3% can be considered at the lower end of commonly reported water exchange rates for RAS and within the range recommended for aquaponic systems [@Timmons2010]. 
+- manipulation of all nutrients via feed possible, if main water source was rain water 
+- manipulation of N, P, K, Fe, Zn via feed, if main water source was tap water in 60% of the cases
+- Cu highly variable in water; attempts to increase Cu in feed might result in toxicity, either for the fed livestock or for the secondary organisms
+- Ca is abundant in tap water and highly variable in its contribution; increase of Ca in feed might lead to precipitation
 
 
 
