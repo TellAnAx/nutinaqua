@@ -854,7 +854,7 @@ data$permutation_feed_with_assumptions <- data$permutation_feed_with_digestibili
 ### Water
 
 ```{r}
-dailyFreshwater <- c(10, 100, 1000) # L
+dailyFreshwater <- c(50, 100, 1000) # L
 ```
 
 
@@ -1112,7 +1112,7 @@ read_rds(here("output", "interm", "permutation_tap.rds")) %>%
   filter(source != "aquafeed") %>% 
   mutate(dailyFreshwater = as.character(dailyFreshwater),
          dailyFreshwater = fct_recode(dailyFreshwater,
-                                      `10 L/kg` = "10",
+                                      `50 L/kg` = "50",
                                       `100 L/kg` = "100",
                                       `1 000 L/kg` = "1000")) %>% 
   ggplot(aes(x = percentage, y = substance, fill = stat(quantile))) + 
