@@ -63,62 +63,74 @@ source(here::here("R", "assumptions.R"))
 
 
 # Introduction
-Compared to land animal husbandry, aquaculture faces particular challenges that are caused by the water as a habitat for the farmed animals. In water, solid excreta are directly exposed to dissolution processes and microbial degradation, as long as they are not removed by means of mechanical filtration. Meanwhile, water-soluble substances from feces decomposition, branchial or urinary excretion are highly diluted in the system water. Discharging this nutritious water is problematic from an environmental perspective (e.g., @Sugiura2018), but also with regard to the efficient utilization of finite raw materials. Several concepts exist where those nutrients are valorized *in situ*, such as the nutritious pond concept [@Joffre2019], fish-rice co-culture [@Halwart2004], or aquaponics [@Goddek2019]. All of these concepts combine aspects of circular economy, which is nowadays even more in the focus of the scientific community and the general public due to growing world population, climate change and resource scarcity being omnipresent in the media and addressed by policy makers worldwide, for instance in form of the EU Green Deal [@EU2015].
+In the recent past, environmental protection has increasingly moved into the public consciousness, particularly due to the first noticeable effects of climate change. In the EU, the issue has been taken up politically by the Circular Economy Strategy, which provides for the increasing recycling of residual materials in all areas of the economy [@EU2015]. This is intended to protect the environment while also reducing dependencies on global supply chains. Against this background, aquaculture faces particular challenges compared to land animal husbandry that are caused by the water as habitat for the farmed animals. In water, solid excreta are exposed to dissolution processes and microbial degradation, and water-soluble substances from feces decomposition, branchial or urinary excretion are highly diluted. 
 
-One of the factors affecting the total efficiency (*ergo*, the yield of all targeted system outputs) of these co-cultivation systems is the availability of the most limited nutrient [@Nederlof2021]. Imbalances of nutrients are considered an important issue in aquaponics [@Bittsanszky2016; @Seawright1998]. In closed and semi-open intensive systems where the majority of substance inputs stems from human activity, the approach of choice is usually to formulate a dedicated feed as simple control measure. However, if the aim is to provide optimum conditions for organisms that absorb nutrients in dissolved form, it is necessary not to neglect nutrient sources other than the feed, their contribution to the nutrient budget and also their variability. Otherwise, optimum values might be missed or even critical values could be reached if the total nutrient concentration is too high or too low in individual cases due to extreme values of another nutrient source.
+If the nutrient-enriched water were to be disposed of, not only would the environment be polluted [@Sugiura2018], but the nutrients in solution would usually be irretrievably lost. However, integrated aquaculture systems allow to recapture parts of the nutrients *in situ*, and convert them into an additional commodity. This can be an additional feed source for the primary livestock (nutritious pond concept, @Joffre2019), or a secondary yield (fish-rice co-culture, @Halwart2004; aquaponics, @Rakocy2006). One of the factors that affects the total efficiency of such systems (*ergo*, the yield of all system outputs) is the availability of the most limiting nutrient in the system [@Nederlof2021]. 
 
-```{r include=TRUE, fig.cap="Crappy placeholder scheme to visualise nutrient flows in aquaculture. Gas exchange of nutrients with the atmosphere is negligible in intensive systems.", out.width="100%"}
+The usual control measure of choice is to formulate a dedicated feed. Aquafeeds are considered the most important nutrient input of nitrogen and phosphorus into aquaculture systems [@Sugiura2018]. Therefore, it appears plausible to increase the input of those nutrients by increasing its proportion in the feed or increasing its excretion by changing the raw material composition, as it has been achieved successfully [@Seawright1998; @Shaw2022a; @Shaw2022b; @Gebauer2023; @Shaw2024]. Studies comparing nutrient inputs from aquafeeds versus source water in aquaponics also found that aquafeeds are the dominant source of potassium, iron, manganese, copper, zinc, molybdenum [@Delaide2017], and calcium, magnesium, and sulfur [@Strauch2018]. However, these studies only stand for a specific combination of food and water and therefore cannot be considered representative. 
+
+It remains unclear whether the manipulation of nutrients via aquafeeds is a meaningful approach for the supply of nutrients other than 
+
+
+This study therefore aims at mapping at least a partial spectrum of feedstuffs and waters and the variance in their composition.
+
+If the aim is to provide optimum conditions for organisms that absorb dissolved nutrients, it is necessary not to neglect nutrient sources other than the feed, their contribution to the nutrient budget and also their variability. Otherwise, optimum values might be missed or even critical values could be reached if the total nutrient concentration is too high or too low in individual cases due to extreme values of another nutrient source.
+
+
+```{r include=FALSE, fig.cap="Crappy placeholder scheme to visualise Assumed nutrient flows in intensive aquaculture systems. Gas exchange of nutrients with the atmosphere is negligible in intensive systems.", out.width="100%"}
 
 knitr::include_graphics(here("latex", "scheme.png"))
 ```
 
-The objective of this study is to assess the nutrient budget of aquaculture systems with regards to the expected contributions and variabilities in nutrients originating from aquafeeds, alkalinity supplements, and source water. Emphasis is given to plant nutrients as their successful management is crucial for the functioning of integrated systems such as aquaponics. Expanding the body of knowledge with regards to this aspect is thus expected to contribute to improvements of these food production systems by further advancing means of nutrient management.
+The objective of the present study was to assess the nutrient budget of closed and semi-open freshwater aquaculture systems in Europe, with a focus on estimating the expected contribution and variability of nutrients originating from aquafeeds, source water, and alkalinity supplements. Special attention was given to plant nutrients due to the fact that imbalances were reported in integrated systems such as aquaponics before [@Seawright1998; @Bittsanszky2016]. The focus on plant nutrients is expected to be valuable for  However, as animals and plants have considerable overlap in their respective essential nutrients, it is expected that the results of this study will be helpful for other fields targeting at valorising aquaculture residues or reducing emissions from aquaculture systems as well.
 
 
 
 
 
+# Methodology
+
+## Data acquisition
+
+### Aquafeeds
+Nutrient inclusion rates of commercial feeds (n = `r results$n_feeds_commercial`) for Common carp (\emph{Cyprinus carpio}), Pike-perch (\emph{Sander lucioperca}), Nile tilapia (\emph{Oreochromis niloticus}), African catfish (\emph{Clarias gariepinus}), and Rainbow trout (\emph{Oncorhynchus mykiss}) were compiled from feed manufacturer datasheets and `r results$n_feeds_commercial_literature` data records were collected from literature (studies using commercial feeds). In addition, `r results$n_feeds_experimental` records about experimental feeds were collected from literature. To find the mentioned literature studies, Scopus was used with the search terms *aquaculture*, *feed*, *aquaponics*, and *imta* in different combinations. Resulting studies were screened for information regarding the nutrient composition of utilised feeds.
 
 
-
-
-
-
-
-
-
-
-
-# Essential nutrients for fish and plants
-
-```{=tex}
-\label{sec:essential_nutrients}
-```
-
-Fishes as well as plants require a set of elements that have to be provided via the diet or nutrient solution and can be divided into macro- and micronutrients, according to their required quantities. However, they differ both in the required elements and their abundance. Table \ref{tab:essentials} provides an overview of the essential nutrients.
-
-Both fishes and plants require carbon, oxygen, nitrogen, and sulphur as essential building bricks of the cells and for cellular respiration in large quantities. 
-
-Further essential macronutrients for both are phosphorus, calcium, and magnesium. 
-All organisms require phosphorus as essential building block for their \gls{dna} and \gls{rna} and for the storage of energy in form of \gls{atp}. It is also the major constituent of phospholipids that form cell membranes. In fish, phosphorus is, in combination with calcium, required for the development and maintenance of the skeletal system [@Lall2021]. Plants also require calcium for their growth, as biochemical processes such as cell elongation and division are affected by calcium [@Mengel2001].
-Magnesium contributes to many biological processes in all organisms, from protein synthesis, over cell replication to the energy metabolism. In fish, it also plays a key role in signal transmission via the nervous system, among others [@Lall2021]. Magnesium is the central atom of chlorophyll in plants and is thus crucial for the functioning of photosynthesis [@Mengel2001].
-
-Essential micronutrients required by both fish and plants are iron, copper, manganese, and zinc. 
-Iron and copper are important constituents of many metalloproteins and metalloenzymes, such as heme proteins, cytochromes, among others [@Marschner2012; @Lall2021]. After iron, zinc is the second most abundant micronutrient in living organisms. Even though it is a constituent of metalloenzymes, it does not take part in redox reactions. Instead, it stabilises the enzyme structure [@Lall2021; @Marschner2012]. Manganese is an important co-factor for the activation of enzymes. It is also part of some metalloenzymes [@Marschner2012]. In vertebrates, it is involved in bone mineralisation [@Lall2021]. 
-
-A trace elements with proven relevance for fish but without physiological function in plants is iodine. Fish require iodine as constituent of the thyroid hormones that play a crucial role in the regulation of cell growth and functioning [@Lall2021].
-
-Meanwhile, essential plant nutrients that are not essential for fish comprise boron, nickel, molybdenum, and chlorine [@Marschner2012].
-Boron has been suggested to have several roles in metabolism, formation of cell wall structure, and substance transport. However, even though required in the largest amounts of all plant micronutrients, the physiological role of boron has not been fully understood [@Marschner2012]. Nickel is another micromineral that was found to be essential, while its functions are not yet fully explored. As transition metal, it is again a constituent of metalloproteins and -enzymes [@Marschner2012]. Molybdenum is mostly involved in the nitrogen metabolism, either as constituent or co-factor of metalloenzymes [@Marschner2012]. Chlorine is an indispensable element for the maintenance of the ion balance and the stabilisation of the membrane potential. Even though considered a micronutrient due to it's low requirement, it is present in amounts that are comparable with macronutrients [@Marschner2012].
+### Water
+Tap water analysis reports from locations all over Europe were collected from local authorities and water utilities in the corresponding municipalities. The collected `r results$n_wateranalysis` water analysis reports originated from a total of `r results$n_wateranalysis_countries` countries. It is common to report the value of the instrument detection limit instead of the measured value if the analyte concentration found was below the sensitivity of the measurement instrument [@ISO11843]. This practice is known as data censoring. Retaining these data points in the dataset would have led to an overestimation of plant nutrient concentrations within the tap water. Therefore, mean average nutrient concentrations in tap water were estimated by \gls{mle}, using the \emph{cenmle()} function from the R package NADA [@Helsel2011]. 
+In addition, `r results$n_observations_water_rain` rain water analyses were collected from literature. The spatial distribution of the data is shown in Figure \ref{fig:map_water}.
 
 ```{=tex}
-% list of nutrients for fish and plants, together with those that have to be reported by law
-\input{../latex/table_essential_nutrients.tex}
+\begin{figure}
+\centering
+  \includegraphics{../output/plots/map.png}
+  \caption{Geographical distribution of water analysis reports included in the source water dataset. Green: analysis of municipal tap water; Red: rainwater analysis.}
+  \label{fig:map_water}
+\end{figure}
 ```
 
 
 
+## Contribution analysis
+The contribution analysis followed the initial assumption that a hypothetical integrated aquaculture facility can be built anywhere in Europe. While the water quality at the chosen location is likely to be subject to comparatively small fluctuations, the system operator can theoretically choose from any feed available on the market. This feed could be used to fatten a range of fish species which differ in the retention of the nutrients supplied. This results in $n$ combinations of water, aquafeeds, and the nutrient retention, given by $n = n_{\text{water}} \cdot n_{\text{feed}} \cdot n_{\text{retention}}$, as depicted in Figure \ref{fig:scheme_combinations}. 
 
+```{=tex}
+\begin{figure}
+  \includegraphics(../latex/permutations.png)
+  \caption{Schematic depiction of the generation of combinations for the contribution analysis. }
+\end{figure}
+```
+
+Both water and aquafeed composition data was based on the metadata gathered as described above. Data from both commercial and experimental feeds was used. The feed input was standardised to $m_{f} = \SI{1}{\kg}$ and three make-up water levels ($V_{w} = $\SI{100}{\L\per\kg}, \SI{100}{\L\per\kg}, and \SI{100}{\L\per\kg} of feed input) was assumed. At a stocking density of $d = \SI{50}{\kg\per\cubicm}$ and a feeding rate of $r_{f} = \SI{2}{\p}$, the resulting system volume would equal to $\frac{m_{f}}{r_{f} \cdot d} \cdot 1000 \si{\L\per\cubicm} = \SI{1000}{\L}$ and the daily water exchange rates would correspond to \SI{1}{\p}, \SI{10}{\p}, and \SI{100}{\p}, respectively. This was assumed as representative for a wide range of fish species [@Dalsgaard2013; @Kloas2015; @Mota2015]. 
+The absolute contributions of water $a_{w}$  and feed $a_{f}$ was calculated by multiplying the inputs of feed ($m_{f}$) and water ($V_{w}$) with the corresponding inclusion of each nutrient $x$ in water ($c_{x}$) and in feed ($\gamma_{x}$). The latter was then multiplied with the possible excretion rates $r_{e}$, which were computed from nutrient retention rates as $r_{e} = 1 - r_{r}$. Three nutrient retention rates were used, with the mean based on literature data [@Sugiura2018; @Roy2022] and a deviation of $\pm\SI{5}{\p}$ to account for intra- and inter-species variability. Eventually, the absolute contribution of water or feed was converted to its percentage contribution to the total as $p_{w \lor f} = \frac{a_{w \lor f}}{a_{f} + a_{w}} \cdot \SI{100}{\p}$.
+
+
+## Statistics
+Statistical analyses were conducted if $n > 5$.
+
+
+## Software
+All calculations and analyses were done using R (v.4.3.2).
 
 
 
@@ -127,10 +139,42 @@ Boron has been suggested to have several roles in metabolism, formation of cell 
 
 # Nutrient inputs into semi-open and closed aquaculture systems
 
+## Essential nutrients for fish and plants
+
+```{=tex}
+\label{sec:essential_nutrients}
+```
+
+Fishes as well as plants require a set of elements for the functioning of their metabolism. However, they differ in the mode of uptake, the required elements and their quantities. As the focus of aquaculture is on the fish, feed contains the nutrients that cannot be absorbed in sufficient quantities for optimum growth elsewhere. The content of some of these nutrients, such as crude protein, is clearly defined in the respective feed formulations. Others are added to the feed in standardised mixtures. However, the water is also subject to certain regulations, provided the water source is tap water.However,the water is also subject to certain regulations, provided the water source is tap water. Table \ref{tab:essentials} provides an overview of the essential elements for both fish and plants, the degree of restrictiveness during feed formulation and potential regulations regarding their concentrations in tap water.
+
+```{=tex}
+% list of nutrients for fish and plants, together with those that have to be reported by law
+\input{../latex/table_essential_nutrients.tex}
+```
+
+Both fishes and plants require carbon, oxygen, nitrogen, and sulphur as essential building bricks of the cells and for cellular respiration. 
+
+Further essential macronutrients for both are phosphorus, calcium, and magnesium. All organisms require phosphorus as building block for \gls{dna} and \gls{rna} and for energy storage in \gls{atp}. It is also the major constituent of phospholipids that form cell membranes. In fish, phosphorus is, in combination with calcium, required for the development and maintenance of the skeletal system [@Lall2021]. Plants also require calcium for their growth, as biochemical processes such as cell elongation and division are affected by calcium [@Mengel2001].
+Magnesium contributes to many biological processes in all organisms, from protein synthesis, over cell replication to the energy metabolism. In fish, it also plays a key role in signal transmission via the nervous system, among others [@Lall2021]. Magnesium is the central atom of chlorophyll in plants and is thus crucial for the functioning of photosynthesis [@Mengel2001].
+
+Essential micronutrients required by both fish and plants are iron, copper, manganese, and zinc. 
+Iron and copper are important constituents of many metalloproteins and metalloenzymes, such as heme proteins, cytochromes, among others [@Marschner2012; @Lall2021]. After iron, zinc is the second most abundant micronutrient in living organisms. Even though it is a constituent of metalloenzymes, it does not take part in redox reactions. Instead, it stabilises the enzyme structure [@Lall2021; @Marschner2012]. Manganese is an important co-factor for the activation of enzymes. It is also part of some metalloenzymes [@Marschner2012]. In vertebrates, it is involved in bone mineralisation [@Lall2021]. 
+
+A trace element with proven relevance for fish but without physiological function in plants is iodine. Fish require iodine as constituent of the thyroid hormones that play a crucial role in the regulation of cell growth and functioning [@Lall2021].
+
+Meanwhile, essential plant nutrients that are not essential for fish comprise boron, nickel, molybdenum, and chlorine [@Marschner2012].
+Boron has been suggested to have several roles in metabolism, formation of cell wall structure, and substance transport. However, even though required in the largest amounts of all plant micronutrients, the physiological role of boron has not been fully understood [@Marschner2012]. Nickel is another micromineral that was found to be essential, while its functions are not yet fully explored. As transition metal, it is again a constituent of metalloproteins and -enzymes [@Marschner2012]. Molybdenum is mostly involved in the nitrogen metabolism, either as constituent or co-factor of metalloenzymes [@Marschner2012]. Chlorine is an indispensable element for the maintenance of the ion balance and the stabilisation of the membrane potential. Even though considered a micronutrient due to it's low requirement, it is present in amounts that are comparable with macronutrients [@Marschner2012].
+
+
+
+
+
 ## Aquafeeds
 
+
+
 ### Nutrient composition and changes over the years
-Aquafeeds are considered the most important nutrient input into aquaculture systems. Studies comparing nutrient inputs from aquafeeds versus source water in aquaponics found that they are the dominant source of nitrogen, phosphorus, potassium, iron, manganese, copper, zinc, and molybdenum [@Delaide2017]. Another study found that also the majority of calcium, magnesium, and sulfur originated from the feed [@Strauch2018]. However, the most recent general overview study of mineral inclusion rates in aquafeeds dates back more than 40 years [@Tacon1983]. In the meantime, the raw material composition of aquafeeds has changed substantially. For instance, the amount of fish meal has been reduced in favor of mostly plant-based ingredients [@MOWI2023]. It could thus be assumed that the inclusion rates of those nutrients that are not controlled during aquafeed formulation changed as well. Figure \ref{fig:feedcomp} provides an overview of nutrient inclusion rates compiled from literature studies and feed manufacturer datasheets.
+The raw material composition of aquafeeds has changed substantially over time. For instance, the amount of fish meal has been reduced in favor of mostly plant-based ingredients [@MOWI2023]. It could thus be assumed that the inclusion rates of those nutrients that are not kept at constant levels during feed formulation changed as well. However, the most recent general overview study of mineral inclusion rates in aquafeeds dates back more than 40 years [@Tacon1983]. Figure \ref{fig:feedcomp} provides an overview of nutrient inclusion rates compiled from literature studies and feed manufacturer datasheets.
 
 ```{r feedcomp, include=TRUE, fig.cap="Inclusion rates of some nutrients essential for fish or plants in different types of aquafeeds. The composition of past feeds is based on data from Tacon, 1983. Data about present aquafeeds was compiled from datasheets and scientific publications providing analyses of commercial aquafeeds for Rainbow trout (Oncorhynchus mykiss), Common carp (Cyprinus carpio), Pike-perch (Sander lucioperca), Nile tilapia (Oreochromis niloticus), and African catfish (Clarias gariepinnus). The dataset includes starter and grower feeds. Experimental feeds were those specifically formulated for studies related to aquaponics. Aquaponic feeds comprise commercially available feeds (n = 3) for aquaponic systems.", out.width="100%"}
 knitr::include_graphics(here("output", "plots", "feed.png"))
@@ -244,18 +288,13 @@ A general overview of the composition of terrestrial waters is provided in Figur
 knitr::include_graphics(here("latex", "waters.png"))
 ```
 
-For further analyses, tap water analysis reports from locations all over Europe were collected from local authorities and water utilities in the corresponding municipalities. The collected `r results$n_wateranalysis` water analysis reports originated from a total of `r results$n_wateranalysis_countries` countries. In addition, rain water analysis reports were collected from literature. The spatial distribution of the data is shown in Figure \ref{fig:map_water}. 
+ 
 
-```{=tex}
-\begin{figure}
-\centering
-  \includegraphics{../output/plots/map.png}
-  \caption{Geographical distribution of water analysis reports included in the source water dataset. Green: analysis of municipal tap water; Red: rainwater analysis.}
-  \label{fig:map_water}
-\end{figure}
-```
 
-In water analysis, it is common practice to report the value of the instrument detection limit instead of the measured value in case that the analyte concentration found was below the sensitivity of the measurement instrument [@ISO11843]. This practice is known as data censoring and used to ensure that the analyte signal can be distinguished from the instruments signal noise with satisfying confidence. However, retaining these data points in the dataset leads to incorrect results as the true concentration is within the interval from zero to the detection limit. To avoid an overestimation of plant nutrient concentrations within the tap water, true means from censored data were estimated by \gls{mle}, using the \emph{cenmle()} function from the R package NADA [@Helsel2011]. The resulting data is shown in Table \ref{tab:watercomp}. The direct comparison between tap water and rainwater clearly shows that tap water is significantly richer in ions.
+
+
+
+The resulting data is shown in Table \ref{tab:watercomp}. The direct comparison between tap water and rainwater clearly shows that tap water is significantly richer in ions.
 
 ```{r watercomp, include=TRUE}
 knitr::kable(read_csv(here("output", "tables", "water_combined.csv")),
@@ -291,22 +330,11 @@ In the European Union, the composition of tap water is regulated by the EU Drink
 In the previous sections, it was analysed which quantities of substances of interest for integrated aquaculture can be expected in the most important inputs of an aquaculture facility and how variable they are. In order to be able to make a statement about how this affects the nutrient budget of an aquaculture facility, further considerations must be made. 
 
 ## Contribution of the nutrient sources to the total nutrient mass flows
-It can initially be assumed that a hypothetical integrated aquaculture facility can be built anywhere in Europe. While the water quality at the chosen location is likely to be subject to comparatively small fluctuations, the system operator can theoretically choose from any feed available on the market. This feed could be used to fatten a range of fish species relevant to aquaculture, which in turn differ in the retention of the nutrients supplied. This results in a number $n$ of combinations of water, aquafeeds, and the nutrient retention, that can be calculated as $n = n_{\text{water}} \cdot n_{\text{feed}} \cdot n_{\text{retention}}$ (see Figure \@ref{scheme_combinations}). After defining a representative water exchange rate per unit mass of feed input, the combinations can be used to make a statement about the extent to which the supplied water and feed contribute to the nutrient input into aquaculture systems. 
-
-```{r scheme_combinations, include=TRUE, fig.cap="Schematic explanation of the creation of combinations.",out.width="100%"}
-knitr::include_graphics(here("latex", "permutations.png"))
-```
-
-In the present study, we standardised the feed input to $m_{f} = \SI{1}{\kg}$. Both water and aquafeed composition data was based on the metadata presented in this study. Data from both commercial and experimental feeds was used and a make-up water volume of $V_{w} = \SI{100}{\L\per\kg}$ of feed input was assumed. At a stocking density of $d = \SI{50}{\kg\per\cubicm}$ and a feeding rate of $r_{f} = \SI{2}{\p}$, the resulting system volume would equal to $\frac{m_{f}}{r_{f} \cdot d} \cdot 1000 \si{\L\per\cubicm} = \SI{1000}{\L}$. Considering the make-up water input, this would correspond to a daily water exchange rate of \SI{10}{\p}. The absolute contributions of water $a_{w}$  and feed $a_{f}$ was calculated by multiplying the inputs of feed ($m_{f} = \SI{1}{\kg}$) and water ($V_{w} = \SI{100}{\L}$) with the corresponding inclusion of each nutrient $x$ in water ($c_{x}$) and in feed ($\gamma_{x}$). The latter was then multiplied with the possible excretion rates $r_{e}$, which was computed from the nutrient retention as $r_{e} = 1 - r_{r}$. Three nutrient retention rates were used, with the mean based on literature data [@Sugiura2018; @Roy2022] and a deviation of $\pm\SI{5}{\p}$. Eventually, the absolute contribution of water or feed can be converted to its percentage contribution to the total as $p_{w \lor f} = \frac{a_{w \lor f}}{a_{f} + a_{w}} \cdot \SI{100}{\p}$.
-
-Following the described logic, density plots were generated for the resulting outputs, distinguishing between tap and rain water (see Figure \@ref{fig:combinations}). 
+The outcomes (see Figure \ref{fig:combinations}) clearly show differences in the share of the total nutrient input and also the variability of the share to be expected between water sources and nutrients. Nutrient contributions of rain water are comparably low in all cases, being below \SI{12}{\p} in all cases for nitrogen, zinc, magnesium, potassium, copper, and phosphorus and below \SI{37}{\p} for calcium, iron, and sulfur. However, in \SI{80}{\p} of the cases, the contribution for all nutrients is expected to be below approximately \SI{10}{\p}. 
 
 ```{r combinations, include=TRUE, fig.cap="The graph shows the probability that the exchange water (provided in L per kg of feed fed) contributes a specified proportion of a nutrient in a closed or semi-open aquaculture system anywhere in Europe to the overall nutrient input. The corresponding contribution of feed can be calculated as follows: %Feed = 100% - %Water. Data (n = 5000) was generated by permutations of feed composition data (n between 2 and 70), three different nutrient retention levels per nutrient, and water composition data (n = 60).", out.width="100%"}
 knitr::include_graphics(here("output", "plots", "combination_combined_ridgeddensity_multiple.png"))
 ```
-
-The outcomes clearly show differences in the share of the total nutrient input and also the variability of the share to be expected between water sources and nutrients. Nutrient contributions of rain water are comparably low in all cases, being below \SI{12}{\p} in all cases for nitrogen, zinc, magnesium, potassium, copper, and phosphorus and below \SI{37}{\p} for calcium, iron, and sulfur. However, in \SI{80}{\p} of the cases, the contribution for all nutrients is expected to be below approximately \SI{10}{\p}. 
-
 
 The median of the tap water contribution increased in the order phosphorus (\SI{0.034}{\p}) < zinc (\SI{2.391}{\p}) < iron (\SI{2.788}{\p}) < potassium (\SI{3.844}{\p}) < nitrogen (\SI{7.741}{\p}), copper (\SI{11.722}{\p}) < sulfur (\SI{16.750}{\p}) < calcium (\SI{34.514}{\p}) < magnesium (\SI{50.562}{\p}). 
 
