@@ -35,6 +35,7 @@ library(NADA)
 library(PeriodicTable)
 library(ggmap)
 library(ggridges)
+library(ggthemes)
 library(gdata)
 library(viridis)
 library(RColorBrewer)
@@ -125,7 +126,7 @@ data$feed_cleaned <- data$feed[[1]] %>%
     ) %>% 
   
   # keep only necessary data
-  select(cat2, treat_id, P_gkg:Cu_mgkg, N_gkg) %>% 
+  select(cat2, ref_id, treat_id, P_gkg:Cu_mgkg, N_gkg) %>% 
   
   # write data for statistical analysis
   write_rds(here("output", "interm", "feed_stattest.rds")) %>% 
@@ -150,6 +151,17 @@ data$feed_cleaned <- data$feed[[1]] %>%
     ) %>% 
   write_rds(here("output", "interm", "feed_cleaned.rds"))
 ```
+
+```{r}
+data$feed <- data$feed[[1]]
+
+results$n_feeds_commercial <- data$feed %>% filter(cat1 == "commercial" & ref_id == "datasheet") %>% nrow()
+
+results$n_feeds_commercial_literature <- data$feed %>% filter(cat1 == "commercial" & !ref_id %in% c("datasheet", "Tacon1983")) %>% nrow()
+
+results$n_feeds_experimental <- data$feed %>% filter(cat1 == "experimental") %>% nrow()
+```
+
 
 ```{r}
 tables$feed_summary_long <- read_rds(here("output", "interm", "feed_cleaned.rds")) %>% 
@@ -559,8 +571,7 @@ knitr::kable(tables$water_tap,
 
 ```{r}
 results$n_observations_water_rain <- read_rds(here("output", "interm", "water_cleaned.rds")) %>% 
-  filter(source == "rain") %>% 
-  nrow()
+  filter(source == "rain") %>% nrow()
 ```
 
 
@@ -1289,21 +1300,20 @@ read_rds(here("output", "interm", "permutation_combined.rds")) %>%
   filter(source != "aquafeed" & !dailyFreshwater %in% c("10", "1000")) %>% 
   mutate(dailyFreshwater = as.character(dailyFreshwater),
          dailyFreshwater = fct_recode(dailyFreshwater,
-                                      #`10 L/kg` = "10",
-                                      `100 L/kg` = "100"
-                                      #`1000 L/kg` = "1000"
-                                      ),
+                                      `10 L/kg` = "10",
+                                      `100 L/kg` = "100",
+                                      `1000 L/kg` = "1000"),
          substance = fct_relevel(substance, "N", "P", "K", 
                                  "Ca", "Mg", "S", "Fe", "Cu", "Zn")) %>% 
   
+  # Plot
   ggplot(aes(x = percentage, y = fct_rev(substance), fill = stat(quantile))) + 
   stat_density_ridges(quantile_lines = FALSE,
                       calc_ecdf = TRUE,
                       geom = "density_ridges_gradient",
                       quantiles = c(0.2, 0.4, 0.6, 0.8)) +
-  scale_fill_manual(name = "Occurrence probability", 
-                    values = c("white", "lightblue1", "lightblue4", "lightblue1", "white"),
-                    labels = c("(0%, 20%]", "(20%, 40%]", "(40%, 60%]", "(60%, 80%]", "(80%, 100%]")) +
+  scale_fill_colorblind(name = "Occurrence probability", 
+                        labels = c("(0%, 20%]", "(20%, 40%]", "(40%, 60%]", "(60%, 80%]", "(80%, 100%]")) +
   scale_x_continuous(breaks = seq(0,100,10), 
                      labels = c("0","","20","","40","","60","","80","","100"),
                      limits = c(0,100)) +
@@ -1332,6 +1342,27 @@ read_rds(here("output", "interm", "permutation_combined.rds")) %>%
   #summarise(mean(percentage)) %>% print()
   t_test(percentage ~ 1, mu = 10, alternative = "greater", conf.level = 0.9)
   
+```
+
+```{r plot_variability, include=TRUE}
+data$permutation_water_combined_with_assumptions %>% 
+  left_join(data$permutation_feed_with_assumptions) %>%
+  pivot_longer(cols = c(water, feed), names_to = "source", values_to = "value") %>% 
+  filter(substance %in% c("N", "P", "K", "Ca", "Mg", "S", "Fe", "Cu", "Zn")) %>% 
+  ungroup() %>% 
+  mutate(source = if_else(source == "water", source2, source),
+         substance = fct_relevel(substance, "N", "P", "K", 
+                                 "Ca", "Mg", "S", "Fe", "Cu", "Zn")) %>% 
+  filter(dailyFreshwater == 100) %>% 
+  group_by(source, substance, dailyFreshwater) %>% 
+  summarise(mean = mean(value),
+            sd = sd(value),
+            cv = sd/mean) %>% 
+  ggplot(aes(y = fct_rev(substance), x = cv, fill = source)) + 
+  geom_col(position = position_dodge()) + 
+  scale_fill_colorblind() +
+  #facet_grid(rows = vars(dailyFreshwater)) +
+  theme_bw()
 ```
 
 
