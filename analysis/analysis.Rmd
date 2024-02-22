@@ -848,7 +848,7 @@ data$permutation_feed_with_digestibility <- data$permutation_feed %>%
   )
 ```
 
-The amount of daily feed fed is normalised to 1 kg of feed instead of going for the initial assumptions. This makes it better comparable.
+The amount of daily feed fed was normalised to 1 kg of feed instead of going for the initial assumptions. This makes it better comparable.
 
 ```{r}
 # daily nutrient input via feed based on hypothetical RAS
@@ -1344,8 +1344,8 @@ read_rds(here("output", "interm", "permutation_combined.rds")) %>%
   
 ```
 
-```{r plot_variability, include=TRUE}
-data$permutation_water_combined_with_assumptions %>% 
+```{r data_variability}
+data$variability_raw <- data$permutation_water_combined_with_assumptions %>% 
   left_join(data$permutation_feed_with_assumptions) %>%
   pivot_longer(cols = c(water, feed), names_to = "source", values_to = "value") %>% 
   filter(substance %in% c("N", "P", "K", "Ca", "Mg", "S", "Fe", "Cu", "Zn")) %>% 
@@ -1353,18 +1353,38 @@ data$permutation_water_combined_with_assumptions %>%
   mutate(source = if_else(source == "water", source2, source),
          substance = fct_relevel(substance, "N", "P", "K", 
                                  "Ca", "Mg", "S", "Fe", "Cu", "Zn")) %>% 
-  filter(dailyFreshwater == 100) %>% 
+  filter(dailyFreshwater == 100)
+  
+data$variability <- data$variability_raw %>% 
   group_by(source, substance, dailyFreshwater) %>% 
   summarise(mean = mean(value),
             sd = sd(value),
             cv = sd/mean) %>% 
+  write_rds(here("output", "interm", "cv.rds"))
+```
+
+
+
+```{r plot_variability, include=TRUE}
+read_rds(here("output", "interm", "cv.rds")) %>% 
   ggplot(aes(y = fct_rev(substance), x = cv, fill = source)) + 
   geom_col(position = position_dodge()) + 
   scale_fill_colorblind() +
-  #facet_grid(rows = vars(dailyFreshwater)) +
-  theme_bw()
+  #scale_fill_manual(values = c("brown", "lightblue", "blue"))+
+  theme_bw() + 
+  labs(
+    x = "Coefficient of Variation",
+    y = ""
+  )
+
+ggsave(here("output", "plots", "variability.png"))
 ```
 
+
+It can be seen that tap water is the predominant source of variability in the results
+Feed was found to have the lowest variability (\gls{cv} < 0.5) of all nutrient sources for the major nutrients (nitrogen, phosphorus, the earth alkaline metals, potassium, and sulfur). The variability in the mass fractions of transition metals in feeds, on the other hand, is significantly higher. However, the variability is always lower than that found for tap water sources.
+
+The highest variability in the data can be found in tap water with exception of phosphorus, which is more variable in rain
 
 ```{r}
 tables$water_combined_quantiles_tap <- read_rds(here("output", "interm", "permutation_combined.rds")) %>% 

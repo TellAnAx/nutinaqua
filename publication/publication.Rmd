@@ -63,7 +63,9 @@ source(here::here("R", "assumptions.R"))
 
 
 # Introduction
-In the recent past, environmental protection has increasingly moved into the public consciousness, particularly due to the first noticeable effects of climate change. In the EU, the issue has been taken up politically by the Circular Economy Strategy, which provides for the increasing recycling of residual materials in all areas of the economy [@EU2015]. This is intended to protect the environment while also reducing dependencies on global supply chains. Against this background, aquaculture faces particular challenges compared to land animal husbandry that are caused by the water as habitat for the farmed animals. In water, solid excreta are exposed to dissolution processes and microbial degradation, and water-soluble substances from feces decomposition, branchial or urinary excretion are highly diluted. 
+In the recent past, environmental issues made it's way into the public consciousness, particularly due to the first noticeable effects of climate change, media coverage, and youth movements [@Calculli2021].
+
+Politically, the issue has been taken up for instance by the Circular Economy Strategy of the \gls{usepa} and the \gls{usda} that foresees the reduction of organic wastes along the food supply chain, and the Circular Economy Action Plan of the European Union, which aims at increasing recycling of residual materials in all areas of the economy [@USEPA2023; @EU2020]. This is intended to protect the environment while also reducing dependencies on global supply chains. Against this background, aquaculture faces particular challenges compared to land animal husbandry that are caused by the water as habitat for the farmed animals. In water, solid excreta are exposed to dissolution processes and microbial degradation, and water-soluble substances from feces decomposition, branchial or urinary excretion are highly diluted. 
 
 If the nutrient-enriched water were to be disposed of, not only would the environment be polluted [@Sugiura2018], but the nutrients in solution would usually be irretrievably lost. However, integrated aquaculture systems allow to recapture parts of the nutrients *in situ*, and convert them into an additional commodity. This can be an additional feed source for the primary livestock (nutritious pond concept, @Joffre2019), or a secondary yield (fish-rice co-culture, @Halwart2004; aquaponics, @Rakocy2006). One of the factors that affects the total efficiency of such systems (*ergo*, the yield of all system outputs) is the availability of the most limiting nutrient in the system [@Nederlof2021]. 
 
@@ -97,7 +99,7 @@ Nutrient inclusion rates of commercial feeds (n = `r results$n_feeds_commercial`
 
 
 ### Water
-Tap water analysis reports from locations all over Europe were collected from local authorities and water utilities in the corresponding municipalities. The collected `r results$n_wateranalysis` water analysis reports originated from a total of `r results$n_wateranalysis_countries` countries. It is common to report the value of the instrument detection limit instead of the measured value if the analyte concentration found was below the sensitivity of the measurement instrument [@ISO11843]. This practice is known as data censoring. Retaining these data points in the dataset would have led to an overestimation of plant nutrient concentrations within the tap water. Therefore, mean average nutrient concentrations in tap water were estimated by \gls{mle}, using the \emph{cenmle()} function from the R package NADA [@Helsel2011]. 
+Tap water analysis reports from locations all over Europe were collected from local authorities and water utilities in the corresponding municipalities. The collected `r results$n_wateranalysis` water analysis reports originated from a total of `r results$n_wateranalysis_countries` countries. It is common to report the value of the instrument detection limit instead of the measured value if the analyte concentration found was below the sensitivity of the measurement instrument [@ISO11843]. This practice is known as data censoring. Retaining these data points in the dataset would have led to an overestimation of plant nutrient concentrations within the tap water. Therefore, mean average nutrient concentrations in tap water were estimated by \gls{mle}, using the *cenmle()* function from the R package NADA [@Helsel2011]. 
 In addition, `r results$n_observations_water_rain` rain water analyses were collected from literature. The spatial distribution of the data is shown in Figure \ref{fig:map_water}.
 
 ```{=tex}
@@ -116,8 +118,8 @@ The contribution analysis followed the initial assumption that a hypothetical in
 
 ```{=tex}
 \begin{figure}
-  \includegraphics(../latex/permutations.png)
-  \caption{Schematic depiction of the generation of combinations for the contribution analysis. }
+  \includegraphics{../latex/permutations.png}
+  \caption{Schematic depiction of the generation of combinations for the contribution analysis.}
 \end{figure}
 ```
 
@@ -340,7 +342,13 @@ The median of the tap water contribution increased in the order phosphorus (\SI{
 
 The high variability in the results is confirmed by other studies that have found, for example, a proportion of calcium, magnesium and sulphur in the water of around \SI{30}{\p} and more than \SI{70}{\p}, respectively [@Strauch2018; @Delaide2017].
 
+Figure \ref{fig:variability} clearly depicts that tap water is the predominant source of variability in the results.
 
+\begin{figure}
+  \includegraphics{output/plots/variability.png}
+  \caption{Coefficients of variability for the nutrient contributions of different nutrient sources.}
+  \label{fig:variability}
+\end{figure}
 
 
 
