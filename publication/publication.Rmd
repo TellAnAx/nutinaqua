@@ -22,10 +22,11 @@ address:
 abstract: |
   Understanding substance inputs into aquaculture systems and their variability on a global scale is necessary for their downstream management, for instance via integrated systems. This study reviews substance input routes with respect to their contribution to total substance flows. 
 keywords: 
+  - integrated aquaculture
+  - nutrients
+  - substance flow
   - aquaponics
-  - minerals
-  - fish feed
-  - alkalinity supplements
+  - specialty feeds
 journal: "Reviews in Aquaculture"
 date: "`r Sys.Date()`"
 classoption: preprint, 3p, authoryear
@@ -63,13 +64,21 @@ source(here::here("R", "assumptions.R"))
 
 
 # Introduction
-In the recent past, environmental issues made it's way into the public consciousness, particularly due to the first noticeable effects of climate change, media coverage, and youth movements [@Calculli2021].
+The production of food inevitably contributes to drastic changes in our environment, such as global warming, pollution, and biodiversity loss [@Foley2005]. As the consequences of those alterations in our living sphere become increasingly tangible, the relevant stakeholders started to take action. Politically, the issue has been taken up by the Circular Economy Strategy of the \gls{usepa} and the \gls{usda} that foresees the reduction of organic wastes along the food supply chain, and the Circular Economy Action Plan of the European Union, which aims at increasing recycling of residual materials in all areas of the economy [@USEPA2023; @EU2020]. Considering the rapid growth of the global aquaculture industry over the last decades [@FAO2022] and the resulting increase in the role that aquaculture plays related to those issues [@Beusen2016], it is evident that the aquaculture industry is urged to react as well.
 
-Politically, the issue has been taken up for instance by the Circular Economy Strategy of the \gls{usepa} and the \gls{usda} that foresees the reduction of organic wastes along the food supply chain, and the Circular Economy Action Plan of the European Union, which aims at increasing recycling of residual materials in all areas of the economy [@USEPA2023; @EU2020]. This is intended to protect the environment while also reducing dependencies on global supply chains. Against this background, aquaculture faces particular challenges compared to land animal husbandry that are caused by the water as habitat for the farmed animals. In water, solid excreta are exposed to dissolution processes and microbial degradation, and water-soluble substances from feces decomposition, branchial or urinary excretion are highly diluted. 
+\gls{imta}, the co-culture of fed and extractive species within the same system, has the potential to reduce the environmental impact of aquaculture while increasing its output [@Hughes2016; @Klinger2012]. Several types of \gls{imta} exist, both in marine and freshwater systems at different degree of system-openness. In any case, „fed“ and „extractive“ species are co-cultured in one system, and the latter species takes up suspended and dissolved wastes of the the former. \gls{imta} thus allows to recapture parts of the otherwise lost nutrients *in situ*, and converts them into additional yield (fish-rice co-culture, @Halwart2004; aquaponics, @Rakocy2006) or biomass which can then serve as additional feed source for the primary livestock (nutritious pond concept, @Joffre2019; biofloc, @Avnimelech2015).
 
-If the nutrient-enriched water were to be disposed of, not only would the environment be polluted [@Sugiura2018], but the nutrients in solution would usually be irretrievably lost. However, integrated aquaculture systems allow to recapture parts of the nutrients *in situ*, and convert them into an additional commodity. This can be an additional feed source for the primary livestock (nutritious pond concept, @Joffre2019), or a secondary yield (fish-rice co-culture, @Halwart2004; aquaponics, @Rakocy2006). One of the factors that affects the total efficiency of such systems (*ergo*, the yield of all system outputs) is the availability of the most limiting nutrient in the system [@Nederlof2021]. 
+Recently, a framework was presented that can help with identifying bottlenecks that might limit the efficiency of existing IMTA. One of those limiting factors determining system efficiency was found to be the availability and stoichiometric ratios of nutrients [@Nederlof2021]. Imbalances in the nutrients were also found to be a limiting factor in aquaponic systems [@Goddek2015; @Bittzanszky2016].
 
-The usual control measure of choice is to formulate a dedicated feed. Aquafeeds are considered the most important nutrient input of nitrogen and phosphorus into aquaculture systems [@Sugiura2018]. Therefore, it appears plausible to increase the input of those nutrients by increasing its proportion in the feed or increasing its excretion by changing the raw material composition, as it has been achieved successfully [@Seawright1998; @Shaw2022a; @Shaw2022b; @Gebauer2023; @Shaw2024]. Studies comparing nutrient inputs from aquafeeds versus source water in aquaponics also found that aquafeeds are the dominant source of potassium, iron, manganese, copper, zinc, molybdenum [@Delaide2017], and calcium, magnesium, and sulfur [@Strauch2018]. However, these studies only stand for a specific combination of food and water and therefore cannot be considered representative. 
+Besides the reduction of dissolved and suspended wastes, there is an increasing number of studies targeting at the valorisation of solid waste, which is mainly produced in the form of sludge. Aquaculture sludge can be utilised for several biorefinery processes, such as biogas production [@Choudhury2022; @Lobanov2023]. It can also be used as fertiliser for plants [@Chiquito-Contreras2022], either after sludge reduction [@Monsees2017; @Delaide; @Goddek2018; @Lobanov2023] or via direct field application [@Yogev2020]. 
+
+However, as described for dissolved and suspended wastes, it was found that the composition of aquaculture sludge does not always allow efficient valorisation as there might be some deficiencies in certain nutrients [@Lunda2019]. Altering the nutrient input in such way that the valorisation potential of the residues is thus the next logical step. 
+
+Within this context, aquafeeds are considered the most important nutrient input into aquaculture systems. Therefore, it appears plausible to increase the input of nutrients by increasing their proportion in the feed, or their excretion by the fish. In the meantime, several studies in the field of aquaponics have shown that this idea can be successfully implemented [@Seawright1998; @Shaw2022a; @Shaw2022b; @Gebauer2023; @Shaw2024]. However, in \gls{imta}, also the makeup water provides nutrients.
+
+
+
+However, these studies cannot be considered representative as they are only valid in the a specific combination of food and water and do therefore not be considered representative. 
 
 It remains unclear whether the manipulation of nutrients via aquafeeds is a meaningful approach for the supply of nutrients other than 
 
@@ -79,13 +88,24 @@ This study therefore aims at mapping at least a partial spectrum of feedstuffs a
 If the aim is to provide optimum conditions for organisms that absorb dissolved nutrients, it is necessary not to neglect nutrient sources other than the feed, their contribution to the nutrient budget and also their variability. Otherwise, optimum values might be missed or even critical values could be reached if the total nutrient concentration is too high or too low in individual cases due to extreme values of another nutrient source.
 
 
-```{r include=FALSE, fig.cap="Crappy placeholder scheme to visualise Assumed nutrient flows in intensive aquaculture systems. Gas exchange of nutrients with the atmosphere is negligible in intensive systems.", out.width="100%"}
+```{r include=FALSE, fig.cap="Crappy placeholder scheme to visualise Assumed nutrient flows in intensive aquaculture systems. Gas exchange of nutrients with the atmosphere is negligible in intensive systems.", out.width="100%", eval=FALSE}
 
 knitr::include_graphics(here("latex", "scheme.png"))
 ```
 
-The objective of the present study was to assess the nutrient budget of closed and semi-open freshwater aquaculture systems in Europe, with a focus on estimating the expected contribution and variability of nutrients originating from aquafeeds, source water, and alkalinity supplements. Special attention was given to plant nutrients due to the fact that imbalances were reported in integrated systems such as aquaponics before [@Seawright1998; @Bittsanszky2016]. The focus on plant nutrients is expected to be valuable for  However, as animals and plants have considerable overlap in their respective essential nutrients, it is expected that the results of this study will be helpful for other fields targeting at valorising aquaculture residues or reducing emissions from aquaculture systems as well.
 
+This study aims at examining the nutrient budget of closed and semi-open freshwater aquaculture systems in Europe. 
+
+The aim was to estimate the expected contribution and variability of nutrients originating from aquafeeds, source water, and alkalinity supplements.
+
+Special attention was given to plant nutrients due to the fact that imbalances were reported in integrated systems such as aquaponics before [@Seawright1998; @Bittsanszky2016]. The focus on plant nutrients is expected to be valuable for  
+
+As animals and plants have considerable overlap in their respective essential nutrients, it is expected that the results of this study will be helpful for other fields targeting at valorising aquaculture residues or reducing emissions from aquaculture systems as well.
+
+
+
+The first step thus comprises assessing the average nutrient inclusion rates and their variabilities in the most important nutrient input routes, which are 1) the feed, 2) the water, and 3) alkalinity supplements for pH control. Gathered data is eventually utilised in a combination analysis that allows a probabilistic statement about the contribution of nutrient sources to the total nutrient inputs. 
+The results shall aid in the feasibility evaluation of aquafeed formulation for \gls{imta} in freshwater systems and 
 
 
 
@@ -114,13 +134,14 @@ In addition, `r results$n_observations_water_rain` rain water analyses were coll
 
 
 ## Contribution analysis
-The contribution analysis followed the initial assumption that a hypothetical integrated aquaculture facility can be built anywhere in Europe. While the water quality at the chosen location is likely to be subject to comparatively small fluctuations, the system operator can theoretically choose from any feed available on the market. This feed could be used to fatten a range of fish species which differ in the retention of the nutrients supplied. This results in $n$ combinations of water, aquafeeds, and the nutrient retention, given by $n = n_{\text{water}} \cdot n_{\text{feed}} \cdot n_{\text{retention}}$, as depicted in Figure \ref{fig:scheme_combinations}. 
+\label{sec:method_contribution}
+The contribution analysis followed the assumption that the water quality at the chosen location is likely to be subject to comparatively small fluctuations, while the system operator can theoretically choose from any feed available on the market. This feed could be used to fatten a range of fish species which differ in the retention of the nutrients supplied. This results in $n$ combinations of water, aquafeeds, and the nutrient retention, given by $n = n_{\text{water}} \cdot n_{\text{feed}} \cdot n_{\text{retention}}$, as depicted in Figure \ref{fig:scheme_combinations}. 
 
 ```{=tex}
-\begin{figure}
-  \includegraphics{../latex/permutations.png}
-  \caption{Schematic depiction of the generation of combinations for the contribution analysis.}
-\end{figure}
+%\begin{figure}
+%  \includegraphics{../latex/permutations.png}
+%  \caption{Schematic depiction of the generation of combinations for the %contribution analysis.}
+%\end{figure}
 ```
 
 Both water and aquafeed composition data was based on the metadata gathered as described above. Data from both commercial and experimental feeds was used. The feed input was standardised to $m_{f} = \SI{1}{\kg}$ and three make-up water levels ($V_{w} = $\SI{100}{\L\per\kg}, \SI{100}{\L\per\kg}, and \SI{100}{\L\per\kg} of feed input) was assumed. At a stocking density of $d = \SI{50}{\kg\per\cubicm}$ and a feeding rate of $r_{f} = \SI{2}{\p}$, the resulting system volume would equal to $\frac{m_{f}}{r_{f} \cdot d} \cdot 1000 \si{\L\per\cubicm} = \SI{1000}{\L}$ and the daily water exchange rates would correspond to \SI{1}{\p}, \SI{10}{\p}, and \SI{100}{\p}, respectively. This was assumed as representative for a wide range of fish species [@Dalsgaard2013; @Kloas2015; @Mota2015]. 
@@ -139,9 +160,9 @@ All calculations and analyses were done using R (v.4.3.2).
 
 
 
-# Nutrient inputs into semi-open and closed aquaculture systems
 
-## Essential nutrients for fish and plants
+
+# Essential nutrients for fish and plants
 
 ```{=tex}
 \label{sec:essential_nutrients}
@@ -171,9 +192,10 @@ Boron has been suggested to have several roles in metabolism, formation of cell 
 
 
 
+# Nutrient inputs into semi-open and closed intensive aquaculture systems
+
+
 ## Aquafeeds
-
-
 
 ### Nutrient composition and changes over the years
 The raw material composition of aquafeeds has changed substantially over time. For instance, the amount of fish meal has been reduced in favor of mostly plant-based ingredients [@MOWI2023]. It could thus be assumed that the inclusion rates of those nutrients that are not kept at constant levels during feed formulation changed as well. However, the most recent general overview study of mineral inclusion rates in aquafeeds dates back more than 40 years [@Tacon1983]. Figure \ref{fig:feedcomp} provides an overview of nutrient inclusion rates compiled from literature studies and feed manufacturer datasheets.
@@ -206,7 +228,7 @@ The authors highlight the lack of mineral composition data in the field of aquac
 
 
 
-### Variability through changing nutrient inclusion rates - Speciality feeds
+### Variability through changing nutrient inclusion - Speciality feeds
 The variability of the results presented can be attributed to various causative factors. The most obvious reason is the different nutritional requirements of the various fish species for which the respective feeds were formulated. Carnivorous fish such as pikeperch require a higher inclusion of \gls{cp}, which results in higher nitrogen inclusion rates. On the other hand, omnivorous fish are generally more tolerant against the replacement of fish meal and fish oil by alternative feed ingredients than carnivores [@OlivaTeles2015]. Considering that the replacement of marine feed ingredients in aquafeeds by novel protein sources such as plant- or insect-based feedstuffs is necessary in order to meet sustainability goals [@Hua2019; @Gasco2020], a shift in the feed composition is just a matter of time. A higher number of feed ingredients is also beneficial for fish feed producers as feed formulators need to react to fluctuations of market prices for raw materials and the natural variation in raw material composition. Thus, while past linear feed formulation approaches were based on a static recipe, current feed formulation approaches such as the **Biomar P 3.0 concept**, the **Aller Aqua Power 2 concept**, or the **Alltech Coppens Net Energy concept** are more flexible, assessing raw materials by the digestible fraction of their nutrients. However, the change and flexibility in the feed ingredient composition is also reflected by a different composition in macro- and microminerals. Figure \@ref{fig:feedstuffs} gives an overview of the variability of several substances in different feedstuffs relevant for aquafeed production (data originating from @IAFFD2021). 
 
 ```{r feedstuffs, include=TRUE, fig.cap="Logarithmic mass fractions of some nutrients in different feedstuffs. Dashed red line indicates average inclusion of respective nutrient in aquatic feedstuffs. Data outside of the 1.5 times interquartile range were removed. Data from IAFFD, 2021.", out.width="100%"}
@@ -243,7 +265,7 @@ At least three commercial aquaponics feeds are already on the market. However, a
 ### From gross to net feed input
 When discussing aquafeeds as nutrient input route into integrated systems, it has to be considered that the gross feed input that is provided is not what is available for the secondary organisms that are co-cultivated in an integrated system (see Figure \@ref{fig:metabolism. Instead, the retention of a fraction of nutrients by the livestock must be considered [@Robaina2019].
 
-```{r include=TRUE, fig.cap="Placeholder showing the metabolic pathways related to fish", out.width="100%"}
+```{r include=TRUE, fig.cap="Placeholder showing the metabolic pathways related to fish", out.width="100%", eval=FALSE}
 knitr::include_graphics(here("latex", "fish_metabolism.png"))
 ```
 
@@ -286,7 +308,7 @@ The quality of groundwater is largely dependent on geochemical processes such as
 
 A general overview of the composition of terrestrial waters is provided in Figure \ref{fig:waters}.
 
-```{r waters, include=TRUE, fig.cap="Cumulative frequency distribution of chemical compounds in terrestrial waters. X-axis: logarithmic concentration of compounds. 1 ppm = 1 mg/L. Y-axis: Percentage of sampling points (Stumm and Morgan, 1996)."}
+```{r waters, include=TRUE, fig.cap="Cumulative frequency distribution of chemical compounds in terrestrial waters. X-axis: logarithmic concentration of compounds. 1 ppm = 1 mg/L. Y-axis: Percentage of sampling points (Stumm and Morgan, 1996).", eval=FALSE}
 knitr::include_graphics(here("latex", "waters.png"))
 ```
 
@@ -307,7 +329,7 @@ knitr::kable(read_csv(here("output", "tables", "water_combined.csv")),
 
 
 
-## Sources and extent of variability
+### Sources and extent of variability
 Water can vary both spatially and temporally in its composition, depending on where it is sourced. Tap water can originate from natural springs, ground-, or surface water, where it was in contact with solids or gases for a prolonged period of time. 
 
 The spatial variation of water is caused, for instance, by the properties of the aquifer. An important process that affects the composition of spring- and groundwater is weathering of rock, ion exchange, and the buildup of biomass [@Stumm1996]. In regions where water originates from surface water such as rivers or lakes, gas exchange and resulting chemical reactions, for instance redox reactions with oxygen, are affecting the composition of the water. Temporal variation can be caused by weather events such as heavy rain, snow melting, floods, or anthropogenic inputs such as agricultural activity. 
@@ -321,38 +343,7 @@ In the European Union, the composition of tap water is regulated by the EU Drink
 
 
 
-
-
-
-
-
-
-
-# Drawing the big picture
-In the previous sections, it was analysed which quantities of substances of interest for integrated aquaculture can be expected in the most important inputs of an aquaculture facility and how variable they are. In order to be able to make a statement about how this affects the nutrient budget of an aquaculture facility, further considerations must be made. 
-
-## Contribution of the nutrient sources to the total nutrient mass flows
-The outcomes (see Figure \ref{fig:combinations}) clearly show differences in the share of the total nutrient input and also the variability of the share to be expected between water sources and nutrients. Nutrient contributions of rain water are comparably low in all cases, being below \SI{12}{\p} in all cases for nitrogen, zinc, magnesium, potassium, copper, and phosphorus and below \SI{37}{\p} for calcium, iron, and sulfur. However, in \SI{80}{\p} of the cases, the contribution for all nutrients is expected to be below approximately \SI{10}{\p}. 
-
-```{r combinations, include=TRUE, fig.cap="The graph shows the probability that the exchange water (provided in L per kg of feed fed) contributes a specified proportion of a nutrient in a closed or semi-open aquaculture system anywhere in Europe to the overall nutrient input. The corresponding contribution of feed can be calculated as follows: %Feed = 100% - %Water. Data (n = 5000) was generated by permutations of feed composition data (n between 2 and 70), three different nutrient retention levels per nutrient, and water composition data (n = 60).", out.width="100%"}
-knitr::include_graphics(here("output", "plots", "combination_combined_ridgeddensity_multiple.png"))
-```
-
-The median of the tap water contribution increased in the order phosphorus (\SI{0.034}{\p}) < zinc (\SI{2.391}{\p}) < iron (\SI{2.788}{\p}) < potassium (\SI{3.844}{\p}) < nitrogen (\SI{7.741}{\p}), copper (\SI{11.722}{\p}) < sulfur (\SI{16.750}{\p}) < calcium (\SI{34.514}{\p}) < magnesium (\SI{50.562}{\p}). 
-
-The high variability in the results is confirmed by other studies that have found, for example, a proportion of calcium, magnesium and sulphur in the water of around \SI{30}{\p} and more than \SI{70}{\p}, respectively [@Strauch2018; @Delaide2017].
-
-Figure \ref{fig:variability} clearly depicts that tap water is the predominant source of variability in the results.
-
-\begin{figure}
-  \includegraphics{output/plots/variability.png}
-  \caption{Coefficients of variability for the nutrient contributions of different nutrient sources.}
-  \label{fig:variability}
-\end{figure}
-
-
-
-# Alkalinity supplements as nutrient sources
+## Alkalinity supplements as nutrient sources
 Alkalinity supplements play a special role with regards to nutrient inputs. Thus, they will be treated separately.
 
 The term alkalinity supplements summarises several alkaline substances that are used to maintain a stable pH in the water. The pH in aquaculture systems decreases over time due to the activity of nitrifying bacteria in the biofilter. The conversion of ammonium to nitrate follows the overall simplified reaction equation \ref{eq:nitrification} [@Timmons2010].
@@ -377,6 +368,52 @@ with the molar mass $M(\ce{N}) = \SI{14.007}{\gmol}$. Sodium based substances su
 The mass of sodium, potassium or calcium can consequently be calculated by rearranging equation (2.4) and using the correct stoichiometric conversion factor. High sodium concentrations must be avoided in aquaponic systems due to its phytotoxicity [@Maathuis2014]. Sodium is therefore replaced with several other supplements based on potassium or calcium that come with the benefit of providing an additional source of nutrients besides increasing the pH.
 
 Thus, a stable pH has to be maintained to ensure both high nitrification performance and animal welfare. For this purpose, several Na-based substances such as sodium hydrogen carbonate (baking soda, \ce{NaHCO3}) are commonly used in aquaculture due to their high and rapid solubility at a comparably cheap price. However, high sodium concentrations must be avoided in aquaponic systems due to its phytotoxicity [@Maathuis2014]. Sodium is therefore replaced with several other supplements based on potassium or calcium that come with the benefit of providing an additional source of nutrients besides increasing the pH.
+
+
+
+
+
+
+
+
+
+
+
+# Drawing the big picture
+An integrated aquaculture facility can hypothetically be built anywhere in Europe. 
+While the nutrient concentration in the source water will likely only  fluctuate within certain limits, purchasing any feed that is available on the market is possible. 
+
+In the previous sections, it was analysed which quantities of substances of interest for integrated aquaculture can be expected in the most important inputs of an aquaculture facility and how variable they are. In order to be able to make a statement about how this affects the nutrient budget of an aquaculture facility, further considerations must be made. 
+
+
+
+## Contribution of nutrient sources to the total nutrient mass flows
+Following the rationale outlined in section \ref{sec:method_contribution}, the outcomes of the contribution analysis (see Figure \ref{fig:combinations}) clearly show differences in the share of the total nutrient input and also the variability of the share to be expected between water sources and nutrients. Nutrient contributions of rain water are comparably low in all cases, being below \SI{12}{\p} in all cases for nitrogen, zinc, magnesium, potassium, copper, and phosphorus and below \SI{37}{\p} for calcium, iron, and sulfur. However, in \SI{80}{\p} of the cases, the contribution for all nutrients is expected to be below approximately \SI{10}{\p}. 
+
+```{r combinations, include=TRUE, fig.cap="The graph shows the probability that the exchange water (provided in L per kg of feed fed) contributes a specified proportion of a nutrient in a closed or semi-open aquaculture system anywhere in Europe to the overall nutrient input. The corresponding contribution of feed can be calculated as follows: %Feed = 100% - %Water. Data (n = 5000) was generated by permutations of feed composition data (n between 2 and 70), three different nutrient retention levels per nutrient, and water composition data (n = 60).", out.width="100%"}
+knitr::include_graphics(here("output", "plots", "combination_combined_ridgeddensity_multiple.png"))
+```
+
+The median of the tap water contribution increased in the order phosphorus (\SI{0.034}{\p}) < zinc (\SI{2.391}{\p}) < iron (\SI{2.788}{\p}) < potassium (\SI{3.844}{\p}) < nitrogen (\SI{7.741}{\p}), copper (\SI{11.722}{\p}) < sulfur (\SI{16.750}{\p}) < calcium (\SI{34.514}{\p}) < magnesium (\SI{50.562}{\p}). 
+
+The high variability in the results is confirmed by other studies that have found, for example, a proportion of calcium, magnesium and sulphur in the water of around \SI{30}{\p} and more than \SI{70}{\p}, respectively [@Strauch2018; @Delaide2017].
+
+Figure \ref{fig:variability} clearly depicts that tap water is the predominant source of variability in the results. Except for iron, copper, and zinc in cases were rainwater is the sole water source, the variability found in the data was at least \SI{60}{\p} greater for the water than for the feed. The greatest differences between variabilities of feed and water were found for phophorus, potassium, magnesium, and copper in case of tap water and nitrogen, phosphorus, and potassium in case of rain water.
+
+```{r include=FALSE}
+knitr::include_graphics(here("output", "plots", "variability.png"))
+```
+
+
+\begin{figure}
+  \includegraphics{../output/plots/variability.png}
+  \caption{Coefficients of variability for the nutrient contributions of different nutrient sources.}
+  \label{fig:variability}
+\end{figure}
+
+
+
+
 
 
 

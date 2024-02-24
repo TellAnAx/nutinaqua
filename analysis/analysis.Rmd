@@ -1363,6 +1363,21 @@ data$variability <- data$variability_raw %>%
   write_rds(here("output", "interm", "cv.rds"))
 ```
 
+```{r}
+tables$variability <-  read_rds(here("output", "interm", "cv.rds")) %>% 
+  select(source, substance, cv) %>% 
+  pivot_wider(names_from = "source", values_from = "cv") %>% 
+  write_csv(here("output", "tables", "table_variability.csv"))
+```
+
+```{r}
+read_csv(here("output", "tables", "table_variability.csv")) %>% 
+  mutate(`rain:feed` = rain/feed,
+         `tap:feed` = tap/feed) %>% 
+knitr::kable(caption = "Coefficients of variability for the contribution of different nutrient sources to the total nutrient budget in integrated freshwater aquaculture systems.",
+             digits = 1)
+```
+
 
 
 ```{r plot_variability, include=TRUE}
