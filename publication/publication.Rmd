@@ -170,9 +170,22 @@ Plant nutrients that are not essential for fish comprise boron, nickel, molybden
 
 
 # Nutrient inputs into semi-open and closed intensive aquaculture systems
+Nutrients can enter aquaculture systems via feed input, water exchange, the addition of chemicals, gas exchange, and natural sources such as leaf litter.
+
+While feed is usually denoted as most important nutrient input, water is usually regarded as comparatively unimportant (see e.g., @Schmautz2016, @Sugiura2018). 
+
+- gas exchange of no importance for substances other than carbon, oxygen, and nitrogen.
+- input of biological nature is difficult to estimate. 
+
+
+
+The focus will be placed on feed, water, and alkalinity supplements in closed and semi-open freshwater systems.
 
 
 ## Aquafeeds
+- feed input depends on the biomass of fish in the system. 
+- between 1 and 2% of biomass is usual input
+
 
 ### Composition of commercial diets and changes over the years
 The raw material composition of aquafeeds has changed substantially over time. For instance, the amount of fish meal has been reduced in favor of mostly plant-based ingredients [@MOWI2023]. It could thus be assumed that the inclusion rates of those nutrients that are not kept at constant levels during feed formulation changed as well. However, the most recent general overview study of mineral inclusion rates in aquafeeds dates back more than 40 years [@Tacon1983]. Figure \ref{fig:feedcomp} provides an overview of nutrient inclusion rates compiled from literature studies and feed manufacturer datasheets.
@@ -249,7 +262,8 @@ Finfish species cultivated in aquaculture retain about \SI{19}{\p} of the nitrog
 
 
 ## Water as nutrient source
-Water is usually regarded as comparatively unimportant in terms of nutrient input in aquaculture systems, while the main focus is on feed (see e.g., @Schmautz2016, @Sugiura2018). While this assertion is valid from a water chemistry point of view for certain nutrients, it may not be universally valid for others and requires systematic investigation.
+
+
 The source water for aquaculture systems can originate from wells, surface water such as brooks or rivers, or the municipal tap. In addition, rainwater can cover a share of the water demand in some locations. \gls{ras} or integrated systems such as aquaponics might be especially suitable for water-scarce regions [@Joyce2019] or urban areas [@Junge2017], where restrictive water management by authorities can be expected. At these locations, tap water is likely the most important water source. Recent surveys corroborate this assumption for the field of aquaponics, as the results show that the proportion of aquaponic practicioners using municipal tap water in the USA and Europe is \SI{47}{\p} and \SI{71.7}{\p}, respectively [@Pattillo2022; @Raulier2023]. 
 
 Tap water is similar to groundwater in terms of its chemical composition. Approximately \SI{35}{\p} of the tap water worldwide originates from groundwater sources [@Doell2012]. 
@@ -296,9 +310,7 @@ In the European Union, the composition of tap water is regulated by the EU Drink
 
 
 ## Alkalinity supplements as nutrient sources
-Alkalinity supplements play a special role with regards to nutrient inputs. Thus, they will be treated separately.
-
-The term alkalinity supplements summarises several alkaline substances that are used to maintain a stable pH in the water. The pH in aquaculture systems decreases over time due to the activity of nitrifying bacteria in the biofilter. The conversion of ammonium to nitrate follows the overall simplified reaction equation \ref{eq:nitrification} [@Timmons2010].
+Alkalinity supplements play a special role with regards to nutrient inputs. The term alkalinity supplements summarises several alkaline substances that are used to maintain a stable pH in the water. The pH in aquaculture systems decreases over time due to the activity of nitrifying bacteria in the biofilter. The conversion of ammonium to nitrate follows the overall simplified reaction equation \ref{eq:nitrification} [@Timmons2010].
 
 \begin{align}
   \ce{NH4+} + 2\ce{O2} + \ce{H2O} -> \ce{NO3-} + 2{H3O+}
@@ -377,6 +389,11 @@ knitr::include_graphics(here("output", "plots", "variability.png"))
 # Implications for nutrient management
 
 ## Feeds
+The most important aspect for \gls{imta} is reproducibility. I must be sure that I can reproduce good results over time. I cannot do anything against spatial variability, but I can avoid temporal variability, because this is what makes continuous monitoring necessary, if the goal was maximum efficiency of the entire system and not only of the fish production.
+
+Temporal variability most likely originates from changes in the feed composition between batches. With regards to feed formulation approaches, it might be more reasonable to target a fixed raw material composition for \gls{imta} feeds. This would reduce temporal variability by ensuring that variability comes from the natural variability of raw materials alone and not, in addition, varying inclusion rates. However, the question is whether the variability originates from the raw materials or their inclusion rates.
+
+
 The production of a special feed for integrated aquaculture harbours potential for increasing the efficiency of these systems. However, it must be guaranteed in advance that this feed will achieve the desired result in the majority of applications. With regard to a targeted nutrient supply for secondary organisms, this means that the sum of nutrients from all sources must always be within certain limits so that nutrient deficiencies do not persist despite a potentially more expensive feed or an oversupply of nutrients does not cause toxicity.
 The present study shows that the manipulation of the assessed minerals (N, P, K, Ca, Mg, S, Fe, Cu, Zn) via feed is possible, if the main water source was rain water. Rain water is comparably poor in the mentioned compounds, contributing not more than \SI{10}{\p} of their total input into the system. An increase in the inclusion rate of a mineral in the feed by \SI{10}{\p} would thus result in an increase in the total input by \SI{9}{\p}.
 
@@ -395,9 +412,6 @@ Calcium is abundant in tap water and highly variable in its contribution; increa
 
 
 
-Feed formulation as being done for instance following 
-
-
 
 
 
@@ -409,9 +423,6 @@ Feed formulation as being done for instance following
 
 
 
-
-
-## Other implications
 
 
 # Conclusion
