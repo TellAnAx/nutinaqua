@@ -21,4 +21,8 @@ read_rds(here("output", "interm", "feedstuff_cleaned.rds")) %>%
        y = "") +
   scale_x_log10()
 
-ggsave(here::here("output", "plots", "feedstuff_composition.png"))
+ggsave(here::here("output", "plots", "feedstuff_composition.png"),
+       height = 10, width = 10, units = "cm")
+
+
+
