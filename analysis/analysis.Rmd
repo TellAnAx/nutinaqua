@@ -48,6 +48,8 @@ source(here("R", "plot_functions.R"))
 source(here("R", "helper_functions.R"))
 ```
 
+\newpage
+
 # Data import
 
 |File|Content|
@@ -865,7 +867,7 @@ data$permutation_feed_with_assumptions <- data$permutation_feed_with_digestibili
 ### Water
 
 ```{r}
-dailyFreshwater <- c(50, 100, 1000) # L
+dailyFreshwater <- c(10, 100, 1000) # L
 ```
 
 
@@ -1090,7 +1092,7 @@ ggsave(here("output", "plots", "permutation_tap_ecdf.png"))
 
 
 
-```{r include=TRUE, fig.cap="Distribution of the expected percentage contributions of fish feed and tap water to the total nutrient input in aquaculture facilities. Data were generated through permutation."}
+```{r include=FALSE, fig.cap="Distribution of the expected percentage contributions of fish feed and tap water to the total nutrient input in aquaculture facilities. Data were generated through permutation."}
 knitr::include_graphics(here("output", "plots", "permutation_tap.png"))
 ```
 
@@ -1297,7 +1299,7 @@ data$permutation_with_assumptions_combined <- data$permutation_water_combined_wi
 ```{r include=TRUE}
 read_rds(here("output", "interm", "permutation_combined.rds")) %>% 
   ungroup() %>% 
-  filter(source != "aquafeed" & !dailyFreshwater %in% c("10", "1000")) %>% 
+  filter(source != "aquafeed") %>% 
   mutate(dailyFreshwater = as.character(dailyFreshwater),
          dailyFreshwater = fct_recode(dailyFreshwater,
                                       `10 L/kg` = "10",
@@ -1321,7 +1323,8 @@ read_rds(here("output", "interm", "permutation_combined.rds")) %>%
   theme_bw() + 
   theme(legend.position = "top") +
   labs(x = "Share of total nutrient input (%)",
-       y = "")
+       y = "") %>% 
+  print()
 
 ggsave(here("output", "plots", "combination_combined_ridgeddensity_multiple.png"))
 ```
@@ -1403,7 +1406,7 @@ The highest variability in the data can be found in tap water with exception of 
 
 ```{r}
 tables$water_combined_quantiles_tap <- read_rds(here("output", "interm", "permutation_combined.rds")) %>% 
-  filter(source != "aquafeed" & dailyFreshwater != "1000") %>% 
+  filter(source != "aquafeed") %>% 
   group_by(substance, source2, dailyFreshwater) %>% 
   summarise(
     median = median(percentage),
@@ -1413,8 +1416,8 @@ tables$water_combined_quantiles_tap <- read_rds(here("output", "interm", "permut
     `60-80` = quantile(percentage, 0.8),
     `80-100` = quantile(percentage, 1)
   ) %>% 
-  filter(dailyFreshwater == 100 & source2 == "tap") %>% 
-    arrange(`80-100`) %>%
+  #filter(dailyFreshwater == 100 & source2 == "tap") %>% 
+  #arrange(`80-100`) %>%
   write_csv(here("output", "tables", "table_water_contribution_quantiles_tap.csv"))
 ```
 
