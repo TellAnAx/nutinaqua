@@ -115,7 +115,7 @@ In addition, `r results$n_observations_water_rain` rain water analyses were coll
 
 
 ### Alkalinity supplements
-
+The input of alkalinity supplements was estimated based on @Timmons2010, with an amount of \SI{250}{\g} sodium bicarbonate (\ce{NaHCO3}) being recommended per \si{\kg} of feed input. Given the molar mass of \ce{NaHCO3} of $M(\ce{NaHCO3}) = \SI{84.01}{\gmol}$, this would translate into $n = \frac{m}{M} = \frac{\SI{250}{\g}}{\SI{84.01}{\gmol}} = \SI{2.975}{\mol}$ of \ce{HCO3-}, because $n(\ce{HCO3-}) = n(\ce{NaHCO3})$.
 
 
 ## Contribution analysis
@@ -295,26 +295,21 @@ knitr::kable(read_csv(here("output", "tables", "water_combined.csv")),
 
 
 ## Alkalinity supplements as nutrient sources
-The term alkalinity supplements summarises several alkaline substances that are used to maintain a stable pH in the water. The pH in aquaculture systems decreases over time due to the activity of nitrifying bacteria in the biofilter. The conversion of ammonium to nitrate follows the overall simplified reaction equation \ref{eq:nitrification} [@Timmons2010].
+The term alkalinity supplements summarises several alkaline substances that are used to maintain a stable pH in the water of closed and semi-open aquaculture systems. Fishes excrete ammonia as a metabolic end product, which then forms ammonium after reaction with water. Ammonium is then converted to nitrate by nitrifying bacteria in the biofilter. The conversion of ammonium to nitrate follows the overall simplified reaction depicted in Equation \ref{eq:nitrification} [@Timmons2010].
 
 \begin{align}
   \ce{NH4+} + 2\ce{O2} + \ce{H2O} -> \ce{NO3-} + 2{H3O+}
   \label{eq:nitrification}
 \end{align}
 
-Ammonium is excreted by the fish as a metabolic end product. Per mole of converted ammonium, two moles of hydronium ions are released. This results in a steady drop of the pH towards areas in which the metabolic activity of the nitrifiers is inhibited [@Ward2011]. This development must therefore be counteracted. For this purpose, a range of alkalinity supplements is used (see Table \ref{tab:alkalinity}). 
+Per mole of converted ammonium, two moles of hydronium ions are released. This results in a steady drop of the pH towards regions in which the metabolic activity of the nitrifiers is inhibited [@Ward2011]. As countermeasure, a range of alkalinity supplements is used (see Table \ref{tab:alkalinity}). While sodium bicarbonate (\ce{NaHCO3}) is often used in \gls{ras}, liming with calcium carbonate (\ce{CaCO3}) is common practice in pond aquaculture [@Boyd2016].
 
 ```{=tex}
 \input{../latex/table_alkalinitysuppl.tex}
 ```
 
-It can be derived from equation \ref{eq:nitrification} that the amount of hydronium ions to be neutralised is proportional to the amount of feed. As a rule of thumb, approximately 
-
-
-Alkalinity supplements play a special role with regards to nutrient inputs. 
-
-- very high input of the cation, which is present in much lower amounts in the feed and the water
-- Variability negligible because pure substance is purchased
+It can be derived from equation \ref{eq:nitrification} that the amount of hydronium ions to be neutralised is proportional to the amount of nitrogen input from the feed. As a rule of thumb, \SI{4.7}{\g} of alkalinity as \ce{CaCO3} needs to be provided per \si{\g} of \gls{tan}. 
+Alkalinity supplements play a special role with regard to nutrient input, as they contribute only one nutrient to the system in addition to their function as alkalinity suppliers. The proportion of this nutrient is therefore very high compared to the contribution of the feed or water. The variability is negligible, as the added substances are of comparably high purity [@Boyd2016].
 
 
 
