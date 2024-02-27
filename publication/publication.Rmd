@@ -310,6 +310,7 @@ Ammonium is excreted by the fish as a metabolic end product. Per mole of convert
 
 It can be derived from equation \ref{eq:nitrification} that the amount of hydronium ions to be neutralised is proportional to the amount of feed. As a rule of thumb, approximately 
 
+
 Alkalinity supplements play a special role with regards to nutrient inputs. 
 
 - very high input of the cation, which is present in much lower amounts in the feed and the water
