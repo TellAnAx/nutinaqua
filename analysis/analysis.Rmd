@@ -1263,7 +1263,7 @@ ggsave(here("output", "plots", "permutation_rain_ridgeddensity_multiple.png"))
 
 ```{r}
 results$n_combinations_rain <- read_rds(here("output", "interm", "permutation_rain.rds")) %>% 
-  filter(source != "aquafeed" & dailyFreshwater == 100) %>% nrow() %>% print()
+  filter(source != "aquafeed") %>% nrow() %>% print()
 ```
 
 

@@ -4,23 +4,18 @@ author:
   - name: Anıl Axel Tellbüscher
     email: atellbuscher@frov.jcu.cz
     affiliation: USB
-    footnote: 1
   - name: Radek Gebauer
     email: rgebauer@frov.jcu.cz
     affiliation: USB
-    footnote: 2
   - name: Jan Mráz
     email: jmraz@frov.jcu.cz
     affiliation: USB
     correspondingauthor: true
 address:
   - code: USB
-    organization: "University of South Bohemia in České Budějovice, Faculty of Fisheries and Protection of Waters, South Bohemian Research Center of Aquaculture and Biodiversity of Hydrocenoses, Institute of Aquaculture and Protection of Waters"
-    addressline: Na Sádkach 1780
-    city: 37005 České Budějovice
-    country: Czech Republic
+    address: University of South Bohemia in Ceske Budejovice, Faculty of Fisheries and Protection of Waters, South Bohemian Research Center of Aquaculture and Biodiversity of Hydrocenoses, Institute of Aquaculture and Protection of Waters, Na Sadkach 1780, 37005 Ceske Budejovice, Czech Republic
 abstract: |
-  Understanding substance inputs into aquaculture systems and their variability on a global scale is necessary for their downstream management, for instance via integrated systems. This study reviews substance input routes with respect to their contribution to total substance flows. 
+  Understanding substance inputs into aquaculture systems and their variability is necessary for their successful downstream management, for instance via integrated systems. This study assesses substance input routes and examines their contribution to total substance inputs. 
 keywords: 
   - integrated aquaculture
   - nutrients
@@ -120,7 +115,7 @@ The input of alkalinity supplements was estimated based on @Timmons2010, with an
 
 ## Contribution analysis
 \label{sec:method_contribution}
-The contribution analysis followed the assumption that the water quality at the chosen location is likely to be subject to comparatively small fluctuations, while the system operator can theoretically choose from any feed available on the market. This feed could be used to fatten a range of fish species which differ in the retention of the nutrients supplied. This results in $n = n_{\text{water}} \cdot n_{\text{feed}} \cdot n_{\text{retention}}$ combinations of water, aquafeeds, and the nutrient retention, as depicted in Figure \ref{fig:scheme_combinations}. 
+The contribution analysis followed the assumption that the water quality at the chosen location is likely to be subject to comparatively small fluctuations, while the system operator can theoretically choose from any feed available on the market. Eventually, a range of fish species which differ in the retention of the nutrients supplied could be grown. This results in $n = n_{\text{water}} \cdot n_{\text{feed}} \cdot n_{\text{retention}}$ combinations of water, aquafeeds, and the nutrient retention, as depicted in Figure \ref{fig:scheme_combinations}. Furthermore, different amounts of makeup water could be used, depending on the technology level of the system. 
 
 ```{=tex}
 %\begin{figure}
@@ -129,7 +124,9 @@ The contribution analysis followed the assumption that the water quality at the 
 %\end{figure}
 ```
 
-Both water and aquafeed composition data was based on the metadata gathered as described above. Data from both commercial and experimental feeds was used. Only those substances for which data for both feed and water sources was present were used. The feed input was standardised to $m_{f} = \SI{1}{\kg}$ and three make-up water levels ($V_{w} =  \SI{10}{\L\per\kg}$, \SI{100}{\L\per\kg}, and \SI{1000}{\L\per\kg} of feed input) were used. This was assumed as representative for a wide range of fish species [@Dalsgaard2013; @Kloas2015; @Mota2015]. To illustrate the makeup water levels, at a stocking density of $d = \SI{50}{\kg\per\cubicm}$ and a feeding rate of $r_{f} = \SI{2}{\p}$, the resulting system volume would equal to $\frac{m_{f}}{r_{f} \cdot d} \cdot \SI{1000}{\L\per\cubicm} = \SI{1000}{\L}$ and the daily water exchange rates would correspond to \SI{1}{\p}, \SI{10}{\p}, and \SI{100}{\p}, respectively. 
+The dataset for the combination analysis was created by combining water and aquafeed composition metadata that was gathered as described above. Both commercial and experimental feed data was used. Only those nutrients that were present in both water and feed datasets were used. 
+
+The feed input was standardised to $m_{f} = \SI{1}{\kg}$ and three make-up water levels ($V_{w} =  \SI{10}{\L\per\kg}$, \SI{100}{\L\per\kg}, and \SI{1000}{\L\per\kg} of feed input) were used. This was assumed as representative for a wide range of fish species [@Dalsgaard2013; @Kloas2015; @Mota2015]. To illustrate the makeup water levels, at a stocking density of $d = \SI{50}{\kg\per\cubicm}$ and a feeding rate of $r_{f} = \SI{2}{\p}$, the resulting system volume would equal to $\frac{m_{f}}{r_{f} \cdot d} \cdot \SI{1000}{\L\per\cubicm} = \SI{1000}{\L}$ and the daily water exchange rates would correspond to \SI{1}{\p}, \SI{10}{\p}, and \SI{100}{\p}, respectively. 
 
 The absolute contributions of water ($a_{w}$) and feed ($a_{f}$) were calculated by multiplying the inputs of feed ($m_{f}$) and water ($V_{w}$) with the corresponding inclusion of each nutrient ($x$) in water ($c_{x}$) and in feed ($\gamma_{x}$). The latter was then multiplied with the possible excretion rates ($r_{e}$), which were computed from nutrient retention rates ($r_{r}$) as $r_{e} = 1 - r_{r}$. Three nutrient retention rates were used, with the mean based on literature data [@Sugiura2018; @Roy2022] and a deviation of $\pm\SI{5}{\p}$ to account for intra- and inter-species variability. Eventually, the absolute contribution of water or feed was converted to its percentage contribution to the total as $p_{(w \lor f)} = \frac{a_{(w \lor f)}}{a_{f} + a_{w}} \cdot \SI{100}{\p}$.
 
@@ -179,6 +176,7 @@ Nutrients can enter aquaculture systems via feed input, water exchange, the addi
 
 
 ## Aquafeeds
+\label{sec:feed}
 In order to achieve optimum growth of the cultivated species, a variety of aquafeeds has been developed, which is constantly increasing. The amount of feed depends on the biomass of the animals in the aquaculture facility. Typically, between one and two per cent of the total biomass is added daily in the form of feed.
 
 
@@ -311,30 +309,28 @@ Alkalinity supplements play a special role with regard to nutrient input, as the
 
 
 # Drawing the big picture
-In the previous sections, it was analysed which quantities of substances of interest for integrated aquaculture can be expected in the most important inputs of an aquaculture facility and how variable they are. However, the proportions of nutrients in the individual material flows do not yet allow any statement to be made about their relevance for the overall nutrient budget of the aquaculture systems under consideration. For this reason, the data collected is compared by contribution analysis.
+In the previous sections, it was analysed which quantities of substances of interest for integrated aquaculture can be expected in the most important inputs of an aquaculture facility and how variable they are. However, the proportions of nutrients in the individual material flows do not yet allow any statement to be made about their relevance for the overall nutrient budget of the aquaculture systems under consideration. For this reason, the data collected is compared via a contribution analysis.
 
 
 ## Contribution of nutrient sources to the total nutrient mass flows
-The outcomes of the contribution analysis (see Figure \ref{fig:combinations}) clearly show large differences in the share of the total nutrient input and also the variability of the share to be expected. Overall, it is not surprising to find that the proportion of nutrients supplied by the water increases with increasing amounts of supplementary water and that the proportion of nutrients is higher when tap water is used than when rainwater is used.
+The outcomes of the contribution analysis are shown in Figure \ref{fig:combinations}. Note that the diagrams show the respective empirical probabilities with which the percentage share of water in the total nutrient input of a nutrient lies within a given interval. Large differences in the share of the nutrient input and also in the variability of the expected share can be seen. Overall, it is not surprising to find that the proportion of nutrients supplied by the water increases with increasing amounts of supplementary water and that the proportion of nutrients is higher when tap water is used than when rainwater is used.
 
-It can be stated that the proportion of phosphorus added to the system via tap water is negligible. The highest contribution was found not to exceed \SI{5}{\p}, thus corroborating literature [@Sugiura2018]. In some cases, however, rainwater can certainly be responsible for comparatively large amounts of phosphorus input. In 40% of the scenarios created, between \SI{6}{\p} and up to \SI{57}{\p} of the phosphorus originated from rainwater. These unexpectedly high values could be due to air pollution and the comparably small sample size with regards to rain water reports included into the dataset. A high temporal variability of the phosphorus concentration in rainwater was described in other studies [@Migon1999].
+It can be stated that the proportion of phosphorus entering the system via tap water is negligible. The highest contribution was found not to exceed \SI{5}{\p}, thus corroborating literature [@Sugiura2018]. In some cases, however, rainwater can certainly be responsible for comparatively large amounts of phosphorus input. In \SI{40}{\p} of the scenarios, between \SI{6}{\p} and up to \SI{57}{\p} of the phosphorus originated from rainwater. These unexpectedly high values could be due to air pollution. A high temporal variability of the phosphorus concentration in rainwater was described in other studies [@Migon1999]. 
+
+The majority of nitrogen and potassium is also not originating from water at makeup water supply of up to \SI{100}{\L\per\kg} of feed, which is typical for \gls{ras}. Contributions did not exceed around \SI{14}{\p} of nitrogen in all cases or \SI{29}{\p} of potassium in all cases. The probability that the contribution of water to the potassium input would not exceed \SI{6}{\p} was found to be \SI{60}{\p}
 
 
 
 
-median of the tap water contribution increased in the order phosphorus (\SI[round-mode=places,round-precision=2]{0.034}{\p}) < zinc (\SI[round-mode=places,round-precision=1]{2.391}{\p}) < iron (\SI[round-mode=places,round-precision=1]{2.788}{\p}) < potassium (\SI[round-mode=places,round-precision=1]{3.844}{\p}) < nitrogen (\SI[round-mode=places,round-precision=1]{7.741}{\p}), copper (\SI[round-mode=places,round-precision=1]{11.722}{\p}) < sulfur (\SI[round-mode=places,round-precision=1]{16.750}{\p}) < calcium (\SI[round-mode=places,round-precision=1]{34.514}{\p}) < magnesium (\SI[round-mode=places,round-precision=1]{50.562}{\p}). 
-
-The high variability in the results is confirmed by other studies that have found, for example, a proportion of calcium, magnesium and sulphur in the water of around \SI{30}{\p} and more than \SI{70}{\p}, respectively [@Strauch2018; @Delaide2017].
 
 Nutrient contributions of rain water are comparably low in all cases, being below \SI{12}{\p} in all cases for nitrogen, zinc, magnesium, potassium, copper, and phosphorus and below \SI{37}{\p} for calcium, iron, and sulfur. However, in \SI{80}{\p} of the cases, the contribution for all nutrients is expected to be below approximately \SI{10}{\p}. 
 
-```{r combinations, include=TRUE, fig.cap="The graph shows the probability that the exchange water (provided in L per kg of feed fed) contributes a specified proportion of a nutrient in a closed or semi-open freshwater aquaculture system in Europe to the overall nutrient input. The corresponding contribution of feed can be calculated as follows: %Feed = 100% - %Water. Data (n = 5000) was generated by permutations of feed composition data (n between 2 and 70), three different nutrient retention levels per nutrient, and water composition data (n = 60).", out.width="100%"}
+```{r combinations, include=FALSE, fig.cap="Density plot depicting the empirical probability with which the percentage share of exchange water (in L per kg of feed fed) in the total input of a nutrient lies within a given interval. Calculations refer to closed or semi-open freshwater aquaculture systems in Europe. The corresponding contribution of feed can be calculated as follows: %Feed = 100% - %Water. Data (n = 66420) was generated by combintion of water composition data (n = 60) at three different exchange levels (10 L/kg, 100 L/kg, and 1000 L/kg of feed) with feed composition data (n between 2 and 70) at three different retention levels per nutrient.", out.width="100%"}
 knitr::include_graphics(here("output", "plots", "combination_combined_ridgeddensity_multiple.png"))
 ```
 
 
-
-Figure \ref{fig:variability} clearly depicts that tap water is the predominant source of variability in the results. Except for iron, copper, and zinc in cases were rainwater is the sole water source, the variability found in the data was at least \SI{60}{\p} greater for the water than for the feed. The greatest differences between variabilities of feed and water were found for phophorus, potassium, magnesium, and copper in case of tap water and nitrogen, phosphorus, and potassium in case of rain water.
+It can be seen from Figure \ref{fig:variability} that the variance for the respective nutrients is greater in the water than in the feed in almost all cases. Except for iron, copper, and zinc in scenarios were rainwater is the sole water source, the variability found in the data was at least \SI{60}{\p} greater for the water than for the feed. The greatest differences between variabilities of feed and water were found for phophorus, potassium, magnesium, and copper in case of tap water and nitrogen, phosphorus, and potassium in case of rain water. As described in \ref{sec:feed}, the low variance of nitrogen, phosphorus and calcium in the feed is likely due to set constraints during feed formulation.
 
 ```{r}
 knitr::include_graphics(here("output", "plots", "variability.png"))
