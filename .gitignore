@@ -27,3 +27,5 @@ output/plots/*
 *.rds
 *.png
 tests/
+latex/library_APO-SUB-2.bib.sav
+
