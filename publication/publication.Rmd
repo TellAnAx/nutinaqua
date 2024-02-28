@@ -312,30 +312,26 @@ Alkalinity supplements play a special role with regard to nutrient input, as the
 In the previous sections, it was analysed which quantities of substances of interest for integrated aquaculture can be expected in the most important inputs of an aquaculture facility and how variable they are. However, the proportions of nutrients in the individual material flows do not yet allow any statement to be made about their relevance for the overall nutrient budget of the aquaculture systems under consideration. For this reason, the data collected is compared via a contribution analysis.
 
 
-## Contribution of nutrient sources to the total nutrient mass flows
-The outcomes of the contribution analysis are shown in Figure \ref{fig:combinations}. Note that the diagrams show the respective empirical probabilities with which the percentage share of water in the total nutrient input of a nutrient lies within a given interval. Large differences in the share of the nutrient input and also in the variability of the expected share can be seen. Overall, it is not surprising to find that the proportion of nutrients supplied by the water increases with increasing amounts of supplementary water and that the proportion of nutrients is higher when tap water is used than when rainwater is used.
+## Contribution of water and feed to total nutrient mass flows
+The outcomes of the contribution analysis are shown in Figure \ref{fig:combinations}. Note that the diagrams show the respective empirical probabilities with which the percentage share of water in the total nutrient input of a nutrient lies within a given interval. Large differences in the share of the nutrient input and also in the variability of the expected share can be seen. An obvious finding is that the proportion of nutrients supplied by the water increases with increasing amounts of supplementary water. 
 
-It can be stated that the proportion of phosphorus entering the system via tap water is negligible. The highest contribution was found not to exceed \SI{5}{\p}, thus corroborating literature [@Sugiura2018]. In some cases, however, rainwater can certainly be responsible for comparatively large amounts of phosphorus input. In \SI{40}{\p} of the scenarios, between \SI{6}{\p} and up to \SI{57}{\p} of the phosphorus originated from rainwater. These unexpectedly high values could be due to air pollution. A high temporal variability of the phosphorus concentration in rainwater was described in other studies [@Migon1999]. 
+Overall, the proportion of phosphorus entering the system via tap water is negligible, which corroborates literature [@Sugiura2018]. Not more than \SI{5}{\p} of the total phosphorus input can be expected to enter the system via tap water under the examined conditions. At makeup (tap) water levels of \SI{1000}{\L\per\kg} of feed, on the other hand, which are described as representative for salmonids and sturgeons [@Dalsgaard2013], more than \SI{80}{\p} of the inputs of potassium, calcium, magnesium, sulfur, iron, zinc, and copper can originate from the water and values above \SI{50}{\p} can be expected in \SIrange{40}{80}{\p} of all cases. Under such conditions, the contribution to the nitrogen input can be expected to range between \SIrange{40}{60}{\p}. 
 
-The majority of nitrogen and potassium is also not originating from water at makeup water supply of up to \SI{100}{\L\per\kg} of feed, which is typical for \gls{ras}. Contributions did not exceed around \SI{14}{\p} of nitrogen in all cases or \SI{29}{\p} of potassium in all cases. The probability that the contribution of water to the potassium input would not exceed \SI{6}{\p} was found to be \SI{60}{\p}
+At lower makeup water supplies ($\approx \SI{100}{\L\per\kg}$ of feed), the possible contribution of the water to the total input of calcium, magnesium, sulfur, iron, and copper can exceed \SI{80}{\p}, and the probability that tap water contributes more than \SI{50}{\p} of the input was found to be between \SIrange{40}{60}{\p} (\SI{20}{\p} for sulfur). Contributions to the zinc input between \SIrange{18}{40}{\p} have a probability of about \SI{40}{\p}, while potassium has \SIrange{15}{30}{\p} input share with \SI{40}{\p} probability. In the case of nitrogen, a share of \SIrange{6}{15}{\p} to the total input can be expected for tap water in all cases.
 
+Makeup water levels as low as \SI{10}{\L\per\kg} of feed might be bearable for species such as African catfish. Here, tap water can still contribute between \SIrange{29}{50}{\p} of calcium, magnesium, sulfur, iron, and copper with a probability of \SI{20}{\p}. On the other hand, the contribution might be below \SI{5}{\p} with a probability of \SI{60}{\p} for sulfur, iron, and copper (\SI{40}{\p} for calcium, \SI{20}{\p} for magnesium). The contribution to the nitrogen, potassium, and zinc input is unlikely to exceed \SI{6}{\p}.
 
-
-
-
-Nutrient contributions of rain water are comparably low in all cases, being below \SI{12}{\p} in all cases for nitrogen, zinc, magnesium, potassium, copper, and phosphorus and below \SI{37}{\p} for calcium, iron, and sulfur. However, in \SI{80}{\p} of the cases, the contribution for all nutrients is expected to be below approximately \SI{10}{\p}. 
+As nutrient concentrations are generally lower in rain water, it is obvious that the proportion of nutrients originating from tap water is higher than that of rain water. However, the results show that rainwater can certainly be responsible for comparatively large amounts of phosphorus input in some cases. Although the input share can be expected to be below \SI{1.5}{\p} with a probability of \SI{60}{\p}, it might contribute between \SIrange{10}{60}{\p} of the total input in \SI{20}{\p} of the scenarios (\SIrange{100}{1000}{\L} makeup water per \si{\kg} of feed). These unexpectedly high values could be a result of air pollution at rainwater sampling sites. A high temporal variability of the phosphorus concentration in rainwater was described in other studies [@Migon1999]. 
 
 ```{r combinations, include=FALSE, fig.cap="Density plot depicting the empirical probability with which the percentage share of exchange water (in L per kg of feed fed) in the total input of a nutrient lies within a given interval. Calculations refer to closed or semi-open freshwater aquaculture systems in Europe. The corresponding contribution of feed can be calculated as follows: %Feed = 100% - %Water. Data (n = 66420) was generated by combintion of water composition data (n = 60) at three different exchange levels (10 L/kg, 100 L/kg, and 1000 L/kg of feed) with feed composition data (n between 2 and 70) at three different retention levels per nutrient.", out.width="100%"}
 knitr::include_graphics(here("output", "plots", "combination_combined_ridgeddensity_multiple.png"))
 ```
 
-
-It can be seen from Figure \ref{fig:variability} that the variance for the respective nutrients is greater in the water than in the feed in almost all cases. Except for iron, copper, and zinc in scenarios were rainwater is the sole water source, the variability found in the data was at least \SI{60}{\p} greater for the water than for the feed. The greatest differences between variabilities of feed and water were found for phophorus, potassium, magnesium, and copper in case of tap water and nitrogen, phosphorus, and potassium in case of rain water. As described in \ref{sec:feed}, the low variance of nitrogen, phosphorus and calcium in the feed is likely due to set constraints during feed formulation.
+An important aspect in the evaluation of the data is to identify the source of variability. Figure \ref{fig:variability} illustrates that the coefficients of variance for the respective nutrients are greater in the water than in the feed in almost all cases. Except for iron, copper, and zinc in scenarios were rainwater is the sole water source, the variability found in the data was at least \SI{60}{\p} greater for the water than for the feed. The most pronounced differences between variabilities of feed and water were found for phophorus, potassium, magnesium, and copper in case of tap water and nitrogen, phosphorus, and potassium in case of rain water. As described in \ref{sec:feed}, the low variance of nitrogen, phosphorus and calcium in the feed is likely due to set constraints during feed formulation.
 
 ```{r}
 knitr::include_graphics(here("output", "plots", "variability.png"))
 ```
-
 
 ```{=tex}
 \begin{figure}
@@ -346,6 +342,8 @@ knitr::include_graphics(here("output", "plots", "variability.png"))
 ```
 
 
+
+## The role of alkalinity supplements in nutrient mass flows
 
 
 

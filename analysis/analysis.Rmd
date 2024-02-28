@@ -921,7 +921,7 @@ data$permutation_water_rain_with_assumptions <- map_dfr(dailyFreshwater, ~{
 
 
 
-## Permutation analysis
+## Empirical probability analysis
 
 ### Without retention
 
@@ -1278,8 +1278,10 @@ data$permutation_water_combined_with_assumptions <- data$permutation_water_tap_w
          source2 = fct_recode(source2, tap = "1", rain = "2"))
 
 data$permutation_with_assumptions_combined <- data$permutation_water_combined_with_assumptions %>% 
-  left_join(data$permutation_feed_with_assumptions) %>%
-  
+  left_join(data$permutation_feed_with_assumptions) %>% 
+  write_rds(here("output", "interm", "permutation_combined_absolute.rds"))
+
+data$permutation_with_assumptions_combined %>%   
   mutate(
     sum = feed + water,
     prop_feed = feed/sum,
@@ -1293,11 +1295,11 @@ data$permutation_with_assumptions_combined <- data$permutation_water_combined_wi
   select(substance, unit, source, source2, percentage, dailyFreshwater) %>% 
   filter(substance %in% c("N", "P", "K", "Ca", "Mg", "S", "Fe", "Cu", "Zn")) %>% 
   mutate(source = fct_recode(source, aquafeed = "perc_feed", `water` = "perc_water")) %>%
-  write_rds(here("output", "interm", "permutation_combined.rds"))
+  write_rds(here("output", "interm", "permutation_combined_percentage.rds"))
 ```
 
 ```{r include=TRUE}
-read_rds(here("output", "interm", "permutation_combined.rds")) %>% 
+read_rds(here("output", "interm", "permutation_combined_percentage.rds")) %>% 
   ungroup() %>% 
   filter(source != "aquafeed") %>% 
   mutate(dailyFreshwater = as.character(dailyFreshwater),
@@ -1330,7 +1332,7 @@ ggsave(here("output", "plots", "combination_combined_ridgeddensity_multiple.png"
 ```
 
 ```{r}
-read_rds(here("output", "interm", "permutation_combined.rds")) %>% 
+read_rds(here("output", "interm", "permutation_combined_percentage.rds")) %>% 
   ungroup() %>% 
   filter(source != "aquafeed" & !dailyFreshwater %in% c("10", "1000")) %>% 
   mutate(dailyFreshwater = as.character(dailyFreshwater),
@@ -1405,7 +1407,7 @@ Feed was found to have the lowest variability (\gls{cv} < 0.5) of all nutrient s
 The highest variability in the data can be found in tap water with exception of phosphorus, which is more variable in rain
 
 ```{r}
-tables$water_combined_quantiles_tap <- read_rds(here("output", "interm", "permutation_combined.rds")) %>% 
+tables$water_combined_quantiles_tap <- read_rds(here("output", "interm", "permutation_combined_percentage.rds")) %>% 
   filter(source != "aquafeed") %>% 
   group_by(substance, source2, dailyFreshwater) %>% 
   summarise(
@@ -1427,7 +1429,7 @@ knitr::kable(tables$water_combined_quantiles_tap,
 ```
 
 ```{r}
-tables$water_combined_quantiles_rain <- read_rds(here("output", "interm", "permutation_combined.rds")) %>% 
+tables$water_combined_quantiles_rain <- read_rds(here("output", "interm", "permutation_combined_percentage.rds")) %>% 
   filter(source != "aquafeed" & dailyFreshwater != "1000") %>% 
   group_by(substance, source2, dailyFreshwater) %>% 
   summarise(
@@ -1447,6 +1449,21 @@ tables$water_combined_quantiles_rain <- read_rds(here("output", "interm", "permu
 knitr::kable(tables$water_combined_quantiles_rain,
              caption = "Quantiles of percentage contribution to the total nutrient input into an aquaculture system as shown in the figure before.")
 ```
+
+
+
+
+
+## Alkalinity supplements
+
+```{r}
+read_rds(here("output", "interm", "permutation_combined_absolute.rds")) %>% 
+  filter(dailyFreshwater == 100) %>% 
+  mutate(alkalinity = )
+```
+
+
+
 
 
 
