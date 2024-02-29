@@ -15,7 +15,7 @@ address:
   - code: USB
     address: University of South Bohemia in Ceske Budejovice, Faculty of Fisheries and Protection of Waters, South Bohemian Research Center of Aquaculture and Biodiversity of Hydrocenoses, Institute of Aquaculture and Protection of Waters, Na Sadkach 1780, 37005 Ceske Budejovice, Czech Republic
 abstract: |
-  Understanding substance inputs into aquaculture systems and their variability is necessary for their successful downstream management, for instance via integrated systems. This study assesses substance input routes and examines their contribution to total substance inputs. 
+  Integrated multitrophic aquaculture holds the potential to reduce nutrient emmissions while supplementing the overall system output  with another additional product but the efficiency of such systems is highly variable. Optimising substance inputs in a holistic way, into aquaculture systems and their variability is necessary for the efficient co-cultivation of "fed" aquaculture species together with nutrient extractors. However, the literature largely focusses on "fed" species. This study closer examines substance input routes and their contribution to the total substance inputs in closed and semi-open freshwater aquaculture systems.
 keywords: 
   - integrated aquaculture
   - nutrients
@@ -73,7 +73,7 @@ An important factor that affects the efficiency of \gls{imta} is the availabilit
 
 Knowing the sources of nutrients, their contribution to the total input and their geographical variability is necessary to find out which substances can actually be effectively controlled in terms of their quantity in the system by targeted input via the feed. For example, the greater the proportion of water in the total input, the greater the increase in the content of the same substance in the feed must be in order to produce a noticeable effect. If the aim is to have a certain amount of one substance or two or more substances present in the system in a certain ratio, this can only be guaranteed if the variability of the input of the same substances from other sources is low. Otherwise, it could be the case that the desired quantity or ratio is only achieved for a small proportion of users (e.g. in a certain geographical region) of the feed. In other places, however, an undersupply of the nutrient in question would still be observed, for example because the water is poorer in the substance. Toxicity could also potentially occur if an unexpected amount of the substance enters the system via other nutrient sources.
 
-The aim of this study is to characterise the nutrient input into closed and semi-open freshwater aquacultures in Europe.  To this end, the most important input routes (feed, water and buffers) are first analysed with regard to their average nutrient loads and variability. The various input routes are then compared with each other in a probabilistic manner and assessed in terms of their importance as input route for particular nutrients that are essential for animals and plants.
+The aim of this study is to characterise the nutrient input into closed and semi-open freshwater aquaculture systems in Europe.  To this end, the most important input routes (feed, water and buffers) are first analysed with regard to their average nutrient loads and variability. The various input routes are then compared with each other in a probabilistic manner and assessed in terms of their importance as input route for particular nutrients that are essential for animals and plants.
 The results of this study are an important building block for the development of feeds with which aquaculture can be better integrated into a circular economy. Knowledge about nutrient inputs into aquaculture systems will also be helpful for other fields targeting at valorising aquaculture residues or reducing emissions from aquaculture systems. 
 
 
@@ -92,7 +92,7 @@ knitr::include_graphics(here("latex", "scheme.png"))
 ## Data acquisition
 
 ### Aquafeeds
-Nutrient inclusion rates of commercial feeds (n = `r results$n_feeds_commercial`) for Common carp (\emph{Cyprinus carpio}), Pike-perch (\emph{Sander lucioperca}), Nile tilapia (\emph{Oreochromis niloticus}), African catfish (\emph{Clarias gariepinus}), and Rainbow trout (\emph{Oncorhynchus mykiss}) were compiled from feed manufacturer datasheets and `r results$n_feeds_commercial_literature` data records were collected from literature (studies using commercial feeds). In addition, `r results$n_feeds_experimental` records about experimental feeds were collected from literature. To find the mentioned literature studies, Scopus was used with the search terms *aquaculture*, *feed*, *aquaponics*, and *imta* in different combinations. Resulting studies were screened for information regarding the nutrient composition of utilised feeds.
+Nutrient inclusion rates of commercial feeds (n = `r results$n_feeds_commercial`) for Common carp (\emph{Cyprinus carpio}), Pike-perch (\emph{Sander lucioperca}), Nile tilapia (\emph{Oreochromis niloticus}), African catfish (\emph{Clarias gariepinus}), and Rainbow trout (\emph{Oncorhynchus mykiss}) were compiled from feed manufacturer datasheets and `r results$n_feeds_commercial_literature` data records were collected from literature (studies using commercial feeds). In addition, `r results$n_feeds_experimental` records about experimental feeds were collected from literature. To find the mentioned literature studies, Scopus was used with the search terms AQUACULTURE, FEED, AQUAPONIC*, and IMTA in different combinations. Resulting studies were screened for information regarding the nutrient composition of utilised feeds.
 
 
 ### Water
@@ -309,7 +309,7 @@ Alkalinity supplements play a special role with regard to nutrient input, as the
 
 
 # Drawing the big picture
-In the previous sections, it was analysed which quantities of substances of interest for integrated aquaculture can be expected in the most important inputs of an aquaculture facility and how variable they are. However, the proportions of nutrients in the individual material flows do not yet allow any statement to be made about their relevance for the overall nutrient budget of the aquaculture systems under consideration. For this reason, the data collected is compared via a contribution analysis.
+The previous sections assessed which quantities of substances of interest for \gls{imta} can be expected in the most important inputs of an aquaculture facility and how variable they are. However, the proportions of nutrients in the individual material flows do not yet allow any statement to be made about their relevance for the overall nutrient budget of the aquaculture systems under consideration. For this reason, the data collected is compared regarding its empirical probability.
 
 
 ## Contribution of water and feed to total nutrient mass flows
@@ -325,6 +325,14 @@ As nutrient concentrations are generally lower in rain water, it is obvious that
 
 ```{r combinations, include=FALSE, fig.cap="Density plot depicting the empirical probability with which the percentage share of exchange water (in L per kg of feed fed) in the total input of a nutrient lies within a given interval. Calculations refer to closed or semi-open freshwater aquaculture systems in Europe. The corresponding contribution of feed can be calculated as follows: %Feed = 100% - %Water. Data (n = 66420) was generated by combintion of water composition data (n = 60) at three different exchange levels (10 L/kg, 100 L/kg, and 1000 L/kg of feed) with feed composition data (n between 2 and 70) at three different retention levels per nutrient.", out.width="100%"}
 knitr::include_graphics(here("output", "plots", "combination_combined_ridgeddensity_multiple.png"))
+```
+
+```{=tex}
+\begin{figure}
+  \includegraphics{../output/plots/combination_combined_ridgeddensity_multiple.png}
+  \caption{Density plot depicting the empirical probability with which the percentage share of exchange water (in L per kg of feed fed) in the total input of a nutrient lies within a given interval. Calculations refer to closed or semi-open freshwater aquaculture systems in Europe. The corresponding contribution of feed can be calculated as follows: %Feed = 100% - %Water. Data (n = 66420) was generated by combintion of water composition data (n = 60) at three different exchange levels (10 L/kg, 100 L/kg, and 1000 L/kg of feed) with feed composition data (n between 2 and 70) at three different retention levels per nutrient.}
+  \label{fig:combinations}
+\end{figure}
 ```
 
 An important aspect in the evaluation of the data is to identify the source of variability. Figure \ref{fig:variability} illustrates that the coefficients of variance for the respective nutrients are greater in the water than in the feed in almost all cases. Except for iron, copper, and zinc in scenarios were rainwater is the sole water source, the variability found in the data was at least \SI{60}{\p} greater for the water than for the feed. The most pronounced differences between variabilities of feed and water were found for phophorus, potassium, magnesium, and copper in case of tap water and nitrogen, phosphorus, and potassium in case of rain water. As described in \ref{sec:feed}, the low variance of nitrogen, phosphorus and calcium in the feed is likely due to set constraints during feed formulation.
@@ -359,12 +367,15 @@ The results of the contribution analysis allow a number of conclusions to be dra
 
 
 ### Feeds
-The most important aspect for \gls{imta} is reproducibility. I must be sure that I can reproduce good results over time. I cannot do anything against spatial variability, but I can avoid temporal variability, because this is what makes continuous monitoring necessary, if the goal was maximum efficiency of the entire system and not only of the fish production.
+The most important criterion for assessing the usefulness of a product for solving a problem is the reproducibility of the positive results obtained. With regard to animal feed, reproducibility can be assessed by the reproducible growth of the animals. In \gls{imta}, a conceivable criterion could be the constant amount of nutrients available for the co-cultivated organisms, regardless of the production location. However, this goal can only be achieved if the contribution of other nutrient sources to the total nutrient input is low and their temporal or spatial variation do not strongly influence the total input. These conditions are met for nitrogen, phosphorus and potassium.
 
-Temporal variability most likely originates from changes in the feed composition between batches. With regards to feed formulation approaches, it might be more reasonable to target a fixed raw material composition for \gls{imta} feeds. This would reduce temporal variability by ensuring that variability comes from the natural variability of raw materials alone and not, in addition, varying inclusion rates. However, the question is whether the variability originates from the raw materials or their inclusion rates.
+
+
+With regards to feed formulation approaches, it might be more reasonable to target a fixed raw material composition for \gls{imta} feeds. This would reduce temporal variability by ensuring that variability comes from the natural variability of raw materials alone and not, in addition, varying inclusion rates. However, the question is whether the variability originates from the raw materials or their inclusion rates.
 
 
 The production of a special feed for integrated aquaculture harbours potential for increasing the efficiency of these systems. However, it must be guaranteed in advance that this feed will achieve the desired result in the majority of applications. With regard to a targeted nutrient supply for secondary organisms, this means that the sum of nutrients from all sources must always be within certain limits so that nutrient deficiencies do not persist despite a potentially more expensive feed or an oversupply of nutrients does not cause toxicity.
+
 The present study shows that the manipulation of the assessed minerals (N, P, K, Ca, Mg, S, Fe, Cu, Zn) via feed is possible, if the main water source was rain water. Rain water is comparably poor in the mentioned compounds, contributing not more than \SI{10}{\p} of their total input into the system. An increase in the inclusion rate of a mineral in the feed by \SI{10}{\p} would thus result in an increase in the total input by \SI{9}{\p}.
 
 If the main water source is tap water, the safest choice for feed manipulation would be to focus on nitrogen and phosphorus only. The contribution of the water source to the phosphorus budget has been found to be, overall, negligible (< \SI{0.5}{\p}). It can also not be expected that more than approximately \SI{10}{\p} of the total nitrogen input will originate from the water at this point.
