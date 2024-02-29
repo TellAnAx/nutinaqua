@@ -927,7 +927,7 @@ data$permutation_water_rain_with_assumptions <- map_dfr(dailyFreshwater, ~{
 
 ```{r without_digestibility_tap, eval=FALSE}
 data$permutation_feed %>% 
-    mutate(feed = feed,
+    mutate(feed = feed, # standardised to 1 kg feed
            unit = "mol") %>%
   left_join(data$permutation_water_tap_with_assumptions, 
             relationship = "many-to-many") %>% 
@@ -1457,11 +1457,53 @@ knitr::kable(tables$water_combined_quantiles_rain,
 ## Alkalinity supplements
 
 ```{r}
-read_rds(here("output", "interm", "permutation_combined_absolute.rds")) %>% 
-  filter(dailyFreshwater == 100) %>% 
-  mutate(alkalinity = )
+stuff_stats <- read_rds(here("output", "interm", "permutation_combined_absolute.rds")) %>% 
+  filter(source2 != "rain") %>% 
+  pivot_longer(c("water", "feed"), names_to = "source", values_to = "value") %>% 
+  #mutate(source = if_else(source == "water" & source2 =="tap", "tap", source),
+  #       source = if_else(source == "water" & source2 =="rain", "rain", source)) %>% 
+  group_by(source, substance, dailyFreshwater) %>% 
+  summarise(
+    #min = min(value),
+    mean = mean(value)
+    #max = max(value)
+    ) %>% 
+  drop_na()
+
+alk_stats <- read_rds(here("output", "interm", "permutation_combined_absolute.rds")) %>% 
+  filter(substance == "N") %>% 
+  distinct(feed, source2, water, dailyFreshwater) %>% 
+  ungroup() %>% 
+  select(-substance) %>% 
+  mutate(K = feed * 0.75,
+         Ca = feed * 0.375,
+         Mg = feed * 0.375) %>% 
+  pivot_longer(K:Mg, names_to = "substance", values_to = "value") %>% 
+  group_by(substance, dailyFreshwater) %>% 
+  summarise(
+    #min = min(value),
+    mean = mean(value)
+    #max = max(value)
+    ) %>% 
+  mutate(source = "alkalinity") %>% bind_rows(stuff_stats) %>%
+  pivot_wider(names_from = "source", values_from = c("mean"), values_fill = 0) %>% 
+  mutate(
+    sum = alkalinity + feed + water,
+    perc_alkalinity = alkalinity/sum * 100,
+    perc_feed = feed/sum * 100,
+    perc_water = water/sum * 100
+  ) %>% 
+  filter(substance %in% c("K", "Ca", "Mg")) %>% 
+  select(-c(alkalinity, feed, water, sum)) %>% 
+  arrange(dailyFreshwater) %>% 
+  rename(`Substance` = "substance", `Makeup water` = "dailyFreshwater", `Alkalinity suppl.` = "perc_alkalinity", Feed = "perc_feed", Water = "perc_water") %>%
+  write_csv(here("output", "tables", "alkalinity.csv"))
 ```
 
+```{r include=TRUE}
+knitr::kable(read_csv(here("output", "tables", "alkalinity.csv")),
+             caption = "Percentage contribution of selected alkalinity supplements to the nutrient budget at different levels of makeup water supplied to the system.")
+```
 
 
 
