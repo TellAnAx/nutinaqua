@@ -15,11 +15,11 @@ address:
   - code: USB
     address: University of South Bohemia in Ceske Budejovice, Faculty of Fisheries and Protection of Waters, South Bohemian Research Center of Aquaculture and Biodiversity of Hydrocenoses, Institute of Aquaculture and Protection of Waters, Na Sadkach 1780, 37005 Ceske Budejovice, Czech Republic
 abstract: |
-  Integrated multitrophic aquaculture holds the potential to reduce nutrient emmissions while supplementing the overall system output  with another additional product but the efficiency of such systems is highly variable. Optimising substance inputs in a holistic way, into aquaculture systems and their variability is necessary for the efficient co-cultivation of "fed" aquaculture species together with nutrient extractors. However, the literature largely focusses on "fed" species. This study closer examines substance input routes and their contribution to the total substance inputs in closed and semi-open freshwater aquaculture systems.
+  Integrated multitrophic aquaculture holds the potential to reduce nutrient emmissions while supplementing the overall system output  with another additional product but the efficiency of such systems is highly variable. Optimising substance inputs in a holistic way, into aquaculture systems and their variability is necessary for the efficient co-cultivation of "fed" aquaculture species together with nutrient extractors. However, the literature largely focusses on "fed" species. This study closer examines substance input routes and their contribution to the total substance inputs in closed and semi-open freshwater aquaculture systems. The results clearly show that nitrogen, phosphorus, potassium and zinc enter via the feed in closed aquaculture systems with low water exchange rates. The route of entry of other nutrients in turn depends on the location of the system and the water source available there. At this stage, it seems reasonable to focus on nitrogen, phosphorus, potassium and zinc in the development of a specific feed for IMTA. However, the formulation of a general all-purpose fish feed for integrated freshwater aquacultures seems unrealistic, as the geographical variations in water composition in Europe do not allow for a reproducible nutrient input regardless of location. Instead, individual solutions will continue to be necessary for each plant in the future. The use of potassium-based alkaline additives has proven to be extremely useful here. Despite the higher price, the supply of potassium can be ensured in a targeted manner. The outcomes of this study will contribute to the development of better nutrient management practices in integrated freshwater aquaculture and provide a new insight into substance flows in such systems.
 keywords: 
   - integrated aquaculture
   - nutrients
-  - substance flow
+  - substance flows
   - aquaponics
   - specialty feeds
 journal: "Reviews in Aquaculture"
@@ -69,7 +69,7 @@ Aquaculture is a biological system. For this reason, it is unavoidable that a ce
 
 Instead of, or in addition to, the dissolved and suspended substances, the solids that are deposited, for instance below cages, in ponds or raceway systems, or removed by mechanical filtration in \gls{ras} can also be utilised. Several studies investigated the suitability of these sludges for biorefinery processes such as the production of biogas [@Choudhury2022; @Lobanov2023], or volatile fatty acids [@Suhr2015]. The usability of sludges as fertiliser through direct field application [@Yogev2020] or after prior sludge reduction has also been tested [@Monsees2017; @Delaide2017; @Goddek2018; @Lobanov2023]. Saline sludges pose difficulties in this context, as the high salt content was found to inhibit biogas production in some cases [@Zhang2013] and direct land application can lead to soil salinisation [@Li2022].
 
-An important factor that affects the efficiency of \gls{imta} is the availability of nutrients in sufficient quantities and the right stoichiometric ratios [@Nederlof2021]. Studies have shown, for example, that the residues from aquaculture systems are deficient in various nutrients that are essential for plant growth [@Bittsanszky2016; @Lunda2019]. It is therefore worth considering to alter the nutrient input in such a way that the residues are available in quantities and ratios that allow their valorisation with the highest possible efficiency. An obvious approach to achieve this goal is to formulate a feed which, after a proportion of the feed was retained by the fish (or other fed species), provides the optimal conditions for extractive species or sludge utilisation. Aquafeeds are considered the most important source of nutrients, such as nitrogen and phosphorus [@Yang2021; @Sugiura2018] into aquaculture systems. This approach was therefore taken up by scholars in the field of aquaponics (the combination of tank-based aquaculture and hydroponics, @Baganz2021), who, by using alternative raw materials, have achieved an increase in the excretion of certain nutrients without jeopardising fish growth [@Seawright1998; @Shaw2022; @Shaw2022a; @Gebauer2023; @Shaw2024]. Interestingly, the claim that feed is the most important source of nutrients in aquaculture systems has never been substantiated to the best of the authors' knowledge. Although a few studies have looked at the contribution of different nutrient sources to the total input [@Delaide2017; @Strauch2018], the results are sometimes contradictory  and cannot be considered representative given the variability of the chemical composition of water. 
+An important factor that affects the efficiency of \gls{imta} is the availability of nutrients in sufficient quantities and the right stoichiometric ratios [@Nederlof2021]. Studies have shown, for example, that the residues from aquaculture systems are deficient in various nutrients that are essential for plant growth [@Bittsanszky2016; @Lunda2019]. It is therefore worth considering to alter the nutrient input in such a way that the residues are available in quantities and ratios that allow their valorisation with the highest possible efficiency. An obvious approach to achieve this goal is to formulate a feed which, after a proportion of the feed was retained by the fish (or other fed species), provides the optimal conditions for extractive species or sludge utilisation. Aquafeeds are considered the most important source of nutrients, such as nitrogen and phosphorus [@Yang2021; @Sugiura2018] into aquaculture systems. This approach was therefore taken up by scholars in the field of aquaponics (the combination of tank-based aquaculture and hydroponics, @Baganz2021), who, by using alternative raw materials, have achieved an increase in the excretion of certain nutrients without jeopardising fish growth [@Seawright1998; @Shaw2022; @Shaw2022a; @Gebauer2023; @Shaw2024]. Interestingly, the claim that feed is the most important source of nutrients in aquaculture systems has never been substantiated to the best of the authors' knowledge. Although a few studies have looked at the contribution of different nutrient sources to the total input [@Delaide2017; @Strauch2018], the results are sometimes contradictory  and cannot be considered representative, given the variability of the chemical composition of water. 
 
 Knowing the sources of nutrients, their contribution to the total input and their geographical variability is necessary to find out which substances can actually be effectively controlled in terms of their quantity in the system by targeted input via the feed. For example, the greater the proportion of water in the total input, the greater the increase in the content of the same substance in the feed must be in order to produce a noticeable effect. If the aim is to have a certain amount of one substance or two or more substances present in the system in a certain ratio, this can only be guaranteed if the variability of the input of the same substances from other sources is low. Otherwise, it could be the case that the desired quantity or ratio is only achieved for a small proportion of users (e.g. in a certain geographical region) of the feed. In other places, however, an undersupply of the nutrient in question would still be observed, for example because the water is poorer in the substance. Toxicity could also potentially occur if an unexpected amount of the substance enters the system via other nutrient sources.
 
@@ -330,7 +330,7 @@ knitr::include_graphics(here("output", "plots", "combination_combined_ridgeddens
 ```{=tex}
 \begin{figure}
   \includegraphics{../output/plots/combination_combined_ridgeddensity_multiple.png}
-  \caption{Density plot depicting the empirical probability with which the percentage share of exchange water (in L per kg of feed fed) in the total input of a nutrient lies within a given interval. Calculations refer to closed or semi-open freshwater aquaculture systems in Europe. The corresponding contribution of feed can be calculated as follows: Feed = 100 - Water. Data (n = 66420) was generated by combintion of water composition data (n = 60) at three different exchange levels (10 L/kg, 100 L/kg, and 1000 L/kg of feed) with feed composition data (n between 2 and 70) at three different retention levels per nutrient.}
+  \caption{Density plot depicting the empirical probability with which the percentage share of exchange water (in L per kg of feed fed) in the total input of a nutrient can be expected. Calculations refer to closed or semi-open freshwater aquaculture systems in Europe. The corresponding contribution of feed can be calculated as follows: \si{\p}Feed = 100 - \si{\p}Water. Data (n = 66420) was generated by combintion of water composition data (n = 60) at three different exchange levels (10 L/kg, 100 L/kg, and 1000 L/kg of feed) with feed composition data (n between 2 and 70) at three different retention levels per nutrient.}
   \label{fig:combinations}
 \end{figure}
 ```
@@ -352,8 +352,11 @@ knitr::include_graphics(here("output", "plots", "variability.png"))
 
 
 ## The role of alkalinity supplements in nutrient mass flows
+Alkalinity supplements play a special role with regard to nutrient input, as they consist of only one cation in addition to the carbonate, bicarbonate or hydroxide anion. In addition, alkalinity supplements can be freely selected by the system operator. There is therefore no permanent influence on the nutrient budget. However, it can be seen from Table \ref{tab:alkalinitycont} that the substance used to compensate for the loss of alkalinity caused by feeding and nitrification has a greater effect on the total nutrient input than the feed and water combined in almost all cases.
 
-
+```{r}
+knitr::kable(read_csv(here("output", "tables", "alkalinity.csv")))
+```
 
 
 ```{=tex}
@@ -365,52 +368,26 @@ knitr::include_graphics(here("output", "plots", "variability.png"))
 
 
 
-## Implications for nutrient management
-The results of the contribution analysis allow a number of conclusions to be drawn regarding the utilisation and further development of various nutrient input routes in aquaculture systems.
+# Implications for nutrient management
+The most important criterion for assessing the usefulness of a product for solving a problem is the reproducibility of the positive results obtained. In \gls{imta}, a conceivable criterion could be the constant amount of nutrients available for the co-cultivated organisms, regardless of the production location. However, this goal can only be achieved if one nutrient input clearly dominates the others regarding its contribution. 
 
 
-### Feeds
-The most important criterion for assessing the usefulness of a product for solving a problem is the reproducibility of the positive results obtained. With regard to animal feed, reproducibility can be assessed by the reproducible growth of the animals. In \gls{imta}, a conceivable criterion could be the constant amount of nutrients available for the co-cultivated organisms, regardless of the production location. However, this goal can only be achieved if the contribution of other nutrient sources to the total nutrient input is low and their temporal or spatial variation do not strongly influence the total input. These conditions are met for nitrogen, phosphorus and potassium.
+## Feeds
+The production of a special feed for integrated aquaculture harbours potential for increasing the efficiency of these systems. This study shows that in European freshwater aquaculture systems using less than \SI{100}{\L} makeup water per \si{\kg} of feed, feed dominates the input of nitrogen, phosphorus, potassium and zinc. In systems with lower water exchange rates or rainwater as sole water source, feed also dominates the input of all other nutrients investigated. However, this statement is not tenable at higher water exchange rates. It is also questionable whether the water requirements of an aquaculture system can be covered by rainwater. The geographical variability that is to be expected due to the different water compositions of groundwater and thus also tap water makes the usefulness of a "universally valid" feed formulation that leads to reproducible results everywhere appear doubtful, if nutrients other than nitrogen, phosphorus, potassium, and zinc are targeted.
+
+In addition to possibly non-reproducible results, increasing certain amounts of nutrients in the feed could have negative effects on the well-being of the fish. Increased dietary levels phosphorus, calcium and magnesium have been reported to cause nephrocalcinosis in a variety of freshwater fishes [@Takvam2023].
+
+Dietborne toxicity of copper and zinc has not been demonstrated in fishes [@Clearwater2011]. The supply of those nutrients via the feed could thus be considered safe. However, as copper was found to be variable both in water and feeds, attempts to increase its inclusion rate in feeds might result in toxicity, either for the fed livestock or for secondary organisms.
+
+With regards to feed formulation approaches, it might be more reasonable to target a fixed raw material composition for \gls{imta} feeds. This would reduce temporal fluctuations in the nutrient composition by ensuring that the variability depends on the natural variability of raw materials alone and not, in addition, on varying inclusion rates through the choice of raw materials. 
 
 
-
-With regards to feed formulation approaches, it might be more reasonable to target a fixed raw material composition for \gls{imta} feeds. This would reduce temporal variability by ensuring that variability comes from the natural variability of raw materials alone and not, in addition, varying inclusion rates. However, the question is whether the variability originates from the raw materials or their inclusion rates.
-
-
-The production of a special feed for integrated aquaculture harbours potential for increasing the efficiency of these systems. However, it must be guaranteed in advance that this feed will achieve the desired result in the majority of applications. With regard to a targeted nutrient supply for secondary organisms, this means that the sum of nutrients from all sources must always be within certain limits so that nutrient deficiencies do not persist despite a potentially more expensive feed or an oversupply of nutrients does not cause toxicity.
-
-The present study shows that the manipulation of the assessed minerals (N, P, K, Ca, Mg, S, Fe, Cu, Zn) via feed is possible, if the main water source was rain water. Rain water is comparably poor in the mentioned compounds, contributing not more than \SI{10}{\p} of their total input into the system. An increase in the inclusion rate of a mineral in the feed by \SI{10}{\p} would thus result in an increase in the total input by \SI{9}{\p}.
-
-If the main water source is tap water, the safest choice for feed manipulation would be to focus on nitrogen and phosphorus only. The contribution of the water source to the phosphorus budget has been found to be, overall, negligible (< \SI{0.5}{\p}). It can also not be expected that more than approximately \SI{10}{\p} of the total nitrogen input will originate from the water at this point.
-
-
-it is feasible in \SI{60}{\p} of the cases to alter the concentrations of N, P, K, Fe, Zn via feed.
-
-
-
-Copper was found to be highly variable both in water and feeds.  Attempts to increase the copper inclusion rate in feeds might result in toxicity, either for the fed livestock or for secondary organisms.
-
-Calcium is abundant in tap water and highly variable in its contribution; increase of Ca in feed might lead to precipitation
-
-
-
-
-
-
-
-
-### Alkalinity supplements
-- K salts suitable and required in comparably small doses
-- Ca salts also suitable in general, but interaction with phosphorus needs to be taken into account. 
-
-
-
-
-
+## Alkalinity supplements
+This study demonstrates that potassium, calcium and magnesium salts are generally suitable for controlling the entry of the respective substances into the system. Considering the large effect size of using such salts, it might be cost-efficient to supply potassium via alkalinity supplements instead of the feed. The disadvantage of such substances, on the other hand, could be induced phosphate precipitation, which in turn would reduce the phosphate content in the system.
 
 
 # Conclusion
-At this stage, the successful formulation of a general all-purpose fish feed for integrated freshwater aquaculture systems seems unrealistic. The variability in the chemical composition of the water among locations prohibits generalisations that reach beyond nitrogen, phosphorus, potassium, and zinc. 
+This study shows that nitrogen, phosphorus, potassium, and zinc enter closed aquaculture systems with low water exchange rates via the feed, while the input route of other nutrients is site-specific. At this stage, a special feed for \gls{imta} will have to be limited to nitrogen, phosphorus, potassium and zinc. Meanwhile, the formulation of a general all-purpose fish feed for integrated freshwater aquacultures seems unrealistic, as the spatial fluctuations in the water composition over Europe do not allow a reproducible nutrient input. Instead, individual solutions will continue to be necessary. The use of potassium-based alkalinity supplements has proven to be extremely useful here. Despite the higher price, the supply of potassium can be guaranteed in a targeted manner.
 
 
 
