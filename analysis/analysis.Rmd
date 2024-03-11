@@ -144,8 +144,8 @@ data$feed_cleaned <- data$feed[[1]] %>%
   # Unit conversion
   mutate(
     value = if_else(unit == "mgkg", value*1e-3, value), 
-    unit = if_else(unit == "mgkg", "gkg", unit),
-    molmass = map_dbl(convert_formula(substance), ~ sum(mass(.x)))
+    unit = if_else(unit == "mgkg", "gkg", unit)
+    #molmass = map_dbl(convert_formula(substance), ~ sum(mass(.x))),
     #value = value/molmass, # g/kg -> mol/kg
     #unit = "molkg",
     #value = value*1e3, # mol/kg -> mmol/kg
@@ -234,26 +234,51 @@ results$feed_comp_P <- data$feed_stat %>% filter(substance == "Ca") %>%
 - P: Aquaponics feeds are richer in P compared with commercial feeds and also compared with experimental diets (Tukey test: p < 0.05). The smallest difference was found between aquaponics and old diets. The difference between them is non-significant. 
 
 
+
+### Feed composition
+
+
 ```{r}
-read_rds(here("output", "interm", "feed_cleaned.rds")) %>% 
+data$plot <- read_rds(here("output", "interm", "feed_cleaned.rds")) %>% 
   mutate(
     substance = fct_relevel(substance, "N", "P", "K", "Ca", "Mg", "S", "Fe", "Cu", "Zn"),
     category = fct_relevel(cat2, "old", "commercial", "experimental", "aquaponic"),
-    category = fct_recode(category,  past = "old", present = "commercial", aquaponic = "aquaponic", experimental = "experimental")
-  ) %>% 
-  ggplot(aes(y = fct_rev(category), x = value, fill = category)) + 
+    category = fct_recode(category,  past = "old", present = "commercial", AP = "aquaponic", EXP = "experimental")
+  )
+
+
+data$plot_feed_labels <- read_csv(here("output", "tables", "feed_summary_long.csv")) %>% 
+  mutate(category = fct_recode(category,  past = "old", present = "commercial", AP = "aquaponic", EXP = "experimental"),
+         n = paste("n =", n),
+         x_axis = min + 0.1*max,
+         substance = as.factor(substance)) %>% 
+  #drop_na() %>% 
+  select(category, substance, n, x_axis)
+
+
+data$plot %>% 
+  ggplot(aes(y = fct_rev(category), x = value, 
+             fill = category)) + 
   geom_boxplot() +
   facet_wrap(facets = vars(substance), scales = "free") + 
-  scale_fill_manual(values = c("grey", "lightblue", "gold", "lightgreen")) +
+  scale_fill_colorblind() +
+  geom_label(
+    data = data$plot_feed_labels,
+    aes(x = Inf, y = category, label = n), alpha = 0.5, fill = "white", nudge_y = 0.3, hjust = 1) +
+  #scale_fill_manual(values = c("grey", "lightblue", "gold", "lightgreen")) +
   theme_bw() +
   theme(legend.position = "none",
-        axis.text.y = element_text(angle = 45, hjust = 1)) +
+        axis.text.y = element_text(angle = 45, 
+                                   hjust = 1,
+                                   size = 10),
+        strip.text = element_text(face = "bold")) +
   labs(y = "",
-       x = "Inclusion rate (mmol/kg)",
+       x = "Inclusion rate (g/kg)",
        fill = "class")
   
 ggsave(here("output", "plots", "feed.png"))
 ```
+
 
 ```{r include=TRUE}
 knitr::include_graphics(here("output", "plots", "feed.png"))
@@ -315,7 +340,7 @@ names(stat_results) <- substances
 
 
 
-### Feedstuffs
+### Feedstuff composition
 
 ```{r}
 data$feedstuff <- data$iaffd_overview[[1]] %>% 
@@ -445,6 +470,9 @@ data$feedstuff_stattest <- read_rds(here("output", "interm", "feedstuff_cleaned.
 #paircomp(bf.test(value ~ cat2, data$feedstuff_stattest))
 ```
 
+```{r}
+source(here("R", "plots", "feed_plots.R"))
+```
 
 ```{r include=TRUE}
 knitr::include_graphics(here("output", "plots", "feedstuff_composition.png"))
