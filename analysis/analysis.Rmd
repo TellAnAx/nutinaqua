@@ -825,7 +825,7 @@ Assumptions with regards to the digestibility of nutrients in the feeds are the 
 
 ```{r create_digestibility_data}
 data$permutation_feed_digestibility <- tibble(
-  N = seq(0.85, 0.95, 0.05), 
+  N = seq(0.85, 0.95, 0.05), # Roy et al., 2022
   P = seq(0.35, 0.45, 0.05), # Sugiura et al., 2018
   K = seq(0.45, 0.55, 0.05),
   Ca = seq(0.45, 0.55, 0.05),
