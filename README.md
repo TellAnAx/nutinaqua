@@ -11,27 +11,14 @@ of nutrients is being retained in the biomass before being available
 
 # TO DO
 
-### General
+### Introduction
 
-- **check whether Scopus AI finds a paper that is somehow similar to
-  this one!**
+- update intro
 
-### Aquafeeds
+### Methodology
 
-- **update table construction in Feeding as nutrient source**
-- make sketch with fish and excretory paths of nutrients
-
-### Alkalinity
-
-- **alkalinity data**
-
-### Nutrient budget
-
-- **Permutations**
-  - conduct statistical test to check whether contribution of water is
-    significantly greater than 0
-  - extract data so that probability can be calculated for occurrences
-    of xyz
+- add sentence regarding MLE
+- improve explanation for alkalinity supps
 
 # QUESTIONS
 
