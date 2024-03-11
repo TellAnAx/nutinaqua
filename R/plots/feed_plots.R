@@ -1,3 +1,5 @@
+source(here("R", "plot_functions.R"))
+
 # Feed composition----
 
 #plot_feed_comp()
@@ -16,13 +18,12 @@ read_rds(here("output", "interm", "feedstuff_cleaned.rds")) %>%
   plot_feedstuff_comp() +
   geom_vline(data = mean_aquatic, aes(xintercept = mean),
              linetype = "dashed", color = "red") +
-  labs(fill = "class",
+  labs(fill = "",
        x = expression(log[10]("inclusion")),
        y = "") +
   scale_x_log10()
 
-ggsave(here::here("output", "plots", "feedstuff_composition.png"),
-       height = 10, width = 10, units = "cm")
+ggsave(here::here("output", "plots", "feedstuff_composition.png"))
 
 
 

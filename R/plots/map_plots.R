@@ -1,3 +1,5 @@
+source(here("R", "plot_functions.R"))
+
 plot_google_map(data = gps_coordinates, 
                 longitude = gps_coordinates$longitude, 
                 latitude = gps_coordinates$latitude,

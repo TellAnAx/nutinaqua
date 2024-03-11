@@ -34,7 +34,8 @@ plot_google_map <- function(data,
     guides(fill = FALSE, alpha = FALSE, size = FALSE) +
     labs(x = "longitude", y = "latitude") +
     scale_x_continuous(limits = longitude_limits, expand = c(0,0)) +
-    scale_y_continuous(limits = latitude_limits, expand = c(0,0))
+    scale_y_continuous(limits = latitude_limits, expand = c(0,0)) +
+    theme(axis.text = element_text(size = 15))
 }
 
 
@@ -80,11 +81,16 @@ plot_feedstuff_comp <- function(x, ...) {
                x = value,
                fill = cat3)) +
     geom_boxplot() +
-    facet_wrap(facets = vars(analyte), scales = "free") +
-    theme_classic() +
+    facet_wrap(facets = vars(analyte), 
+               scales = "free") +
+    scale_fill_colorblind() +
+    theme_bw() +
     theme(
-      legend.position = "bottom",
-      axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)
+      legend.position = "top",
+      strip.text = element_text(face = "bold"),
+      axis.text.x = element_text(angle = 45, 
+                                 hjust = 1, 
+                                 vjust = 1)
     )
 }
 
