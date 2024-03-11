@@ -9,7 +9,7 @@
 
 \multirow{2}{*}{Nutrient}
 & \multicolumn{2}{c}{Requirement}
-& \multicolumn{2}{c}{Uptake site}
+& \multicolumn{2}{c}{Main uptake site}
 & \multicolumn{2}{c}{Constraint}
 \\
 
@@ -27,41 +27,45 @@
 P
 & M
 & M
-& feed\tnote{e}
-&
+& intestine \tnote{e}
+& roots\tnote{f}
 & \checkmark
 & -
 \\ %---------------------------------%
+
 K
 & M
 & M
-& water, feed\tnote{d}
-&
-&
-&
+& gills, skin, intestine\tnote{d}
+& roots\tnote{f}
+& -
+& -
 \\ %---------------------------------%
+
 Ca
 & M
 & M
-& water\tnote{e}
-&
+& gills, skin\tnote{e}
+& roots\tnote{f}
 & \checkmark
-&
+& -
 \\ %---------------------------------%
+
 Mg
 & M
 & M
-& feed\tnote{e}
-&
-&
-&
+& intestine\tnote{e}
+& roots\tnote{f}
+& -
+& -
 \\ %---------------------------------%
+
 S
 & M
 & M
 &
-&
-&
+& roots\tnote{f}
+& -
 & \SI{250}{\mgL} as \ce{SO4^2-}
 \\ %---------------------------------%
 
@@ -70,49 +74,54 @@ S
 N
 & $\mu$
 & $\mu$
-& feed
-&
+& intestine
+& roots\tnote{f}
 & \checkmark
 & \SI{50}{\mgL} as TIN
 \\ %---------------------------------%
+
 Fe
 & $\mu$
 & $\mu$
-& feed\tnote{e}
-&
-&
+& intestine\tnote{e}
+& roots, leaves\tnote{f}
+& -
 & \SI{200}{\ugL}
 \\ %---------------------------------%
+
 Mn
 & $\mu$
 & $\mu$
 &
-&
-&
+& roots, leaves\tnote{f}
+& -
 & \SI{50}{\ugL}
 \\ %---------------------------------%
+
 Cu
 & $\mu$
 & $\mu$
-& feed, water\tnote{e}
-&
-&
+& intestine, gills, skin\tnote{e}
+& roots\tnote{f}
+& -
 & \SI{2.0}{\mgL}
 \\ %---------------------------------%
+
 Zn
 & $\mu$
 & $\mu$
-& feed\tnote{e}
-&
+& intestine\tnote{e}
+& roots\tnote{f}
 & \checkmark
-&
+& -
 \\ %---------------------------------%
+
 Mo
 & $\mu$
 & $\mu$
-&
-&
-&
+& roots, leaves\tnote{f}
+& -
+& -
 \\ %---------------------------------%
 
 \addlinespace
@@ -120,41 +129,45 @@ Mo
 Na
 & M
 & -
-& water\tnote{d}
+& gills, skin\tnote{d}
 &
-&
+& -
 & \SI{200}{\mgL}
 \\ %---------------------------------%
+
 B
 & -
 & $\mu$
 &
-&
-&
+& roots, leaves\tnote{f}
+& -
 & \SI{1.5}{\mgL}
 \\ %---------------------------------%
+
 Ni
 & -
 & $\mu$
 &
 &
-&
+& -
 & \SI{20}{\ugL}
 \\ %---------------------------------%
+
 Cr
 & $\mu$
 & -
-& water\tnote{e}
-&
+& gills, skin\tnote{e}
 &
 & -
+& -
 \\ %---------------------------------%
+
 I
 & $\mu$
 & -
-& water\tnote{e}
+& gills, skin\tnote{e}
 &
-&
+& -
 & -
 \\ %---------------------------------%
 
@@ -167,6 +180,7 @@ I
       \item[c] according to EU Water Directive
       \item[d] according to Lall (2003)
       \item[e] according to Lall and Kaushik (2021)
+      \item[f] according to Mengel (2001)
     \end{tablenotes}
   \end{threeparttable}
 \end{table}
