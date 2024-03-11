@@ -30,6 +30,8 @@ linenumbers: true
 numbersections: true
 # Use a CSL with `citation_package = "default"`
 csl: ../latex/reviews_in_aquaculture.csl
+nocite: |
+  @Monsees2017
 output: 
   rticles::elsevier_article:
     includes:
@@ -63,11 +65,11 @@ source(here::here("R", "assumptions.R"))
 
 
 # Introduction
-The production of food inevitably contributes to drastic changes in our environment, such as global warming, pollution, and biodiversity loss [@Foley2005]. For this reason, the Farm-to-Fork strategy [@EU2020] was developed in Europe as part of the EU Green Deal [@EU2019]. One of its core aspects is the transition of food production towards a neutral or even positive environmental footprint. This also includes shortening supply chains in order to reduce the greenhouse gas emissions caused by food miles travelled. As Europe currently imports about 2.5 times more fish than it exports [@EU2024], this would mean that the European aquaculture industry will have to grow in the future to meet the demand for fish. However, this growth must be sustainable, as aquaculture is already making a noticeable contribution to environmental pollution as a result of its rapid growth over the past decades [@Beusen2016; @FAO2022].
+The production of food inevitably contributes to drastic changes in our environment, such as global warming, pollution, and biodiversity loss [@Foley2005]. For this reason, for instance, the Farm-to-Fork strategy [@EU2020] was developed in Europe as part of the EU Green Deal [@EU2019]. One of its core aspects is the transition of food production towards a neutral or even positive environmental footprint. This also includes shortening supply chains in order to reduce the greenhouse gas emissions caused by food miles travelled. As Europe currently imports about 2.5 times more fish than it exports [@EU2024], this would mean that the European aquaculture industry will have to grow in the future to meet the demand for fish. However, this growth must be sustainable, as aquaculture is already making a noticeable contribution to environmental pollution because of its rapid growth over the past decades [@Beusen2016; @FAO2022].
 
-Aquaculture is a biological system. For this reason, it is unavoidable that a certain proportion of the nutrients fed into the system are not fully utilised and accumulate as dissolved or solid residues. However, in the spirit of the Circular Economy Action Plan [@EU2020a], which was also presented as part of the EU Green Deal and aims to recycle waste instead of disposing of it, some of these residual materials can be reutilised. One possibility, for example, is the co-cultivation of two species of different trophic levels in the same system, also known as \gls{imta}. The extractive species absorbs dissolved or suspended residues *in situ* that are not fully utilised by the primary, "fed" species. The extractive species then either represents a further source of food for the primary species (nutritious pond concept, @Joffre2019; biofloc, @Avnimelech2015) or can be commercialised as an additional harvest (fish-rice co-culture, @Halwart2004; aquaponics, @Rakocy2006). \gls{imta} therefore has the potential to reduce the environmental impact of aquaculture while increasing its output [@Hughes2016; @Klinger2012]. 
+Aquaculture is a biological system. For this reason, it is inevitable that a certain proportion of the nutrients fed into the system are not fully utilised and might accumulate as dissolved or solid residues. However, in the spirit of the Circular Economy Action Plan [@EU2020a], which was also presented as part of the EU Green Deal and aims to recycle waste instead of disposing of it, some of these residual materials can be reutilised. One possibility, for example, is the co-cultivation of two or multiple species of different trophic levels in the same system, also known as \gls{imta}. The extractive species absorbs dissolved or suspended residues *in situ* that are not fully utilised by the primary, "fed" species. The extractive species then either represents a further source of food for the primary species (e.g., nutritious pond concept, @Joffre2019; biofloc, @Avnimelech2015) or can be commercialised as an additional harvest (e.g., fish-rice co-culture, @Halwart2004; aquaponics, @Rakocy2006). \gls{imta} therefore has the potential to reduce the environmental impact of aquaculture while increasing its output [@Klinger2012]. However, adoption in Europe is low [@Hughes2016].
 
-Instead of, or in addition to, the dissolved and suspended substances, the solids that are deposited, for instance below cages, in ponds or raceway systems, or removed by mechanical filtration in \gls{ras} can also be utilised. Several studies investigated the suitability of these sludges for biorefinery processes such as the production of biogas [@Choudhury2022; @Lobanov2023], or volatile fatty acids [@Suhr2015]. The usability of sludges as fertiliser through direct field application [@Yogev2020] or after prior sludge reduction has also been tested [@Monsees2017; @Delaide2017; @Goddek2018; @Lobanov2023]. Saline sludges pose difficulties in this context, as the high salt content was found to inhibit biogas production in some cases [@Zhang2013] and direct land application can lead to soil salinisation [@Li2022].
+Instead of, or in addition to, the dissolved and suspended substances, the solids that are deposited, for instance below cages, in ponds or raceway systems, or removed by mechanical filtration in \gls{ras} can also be utilised. Several studies investigated the suitability of these sludges for biorefinery processes such as the production of biogas [@Choudhury2022; @Lobanov2023], or volatile fatty acids [@Suhr2015]. The usability of sludges as fertiliser through direct field application [@Yogev2020] or usage of sludge digestate as plant nutrient solution has also been tested [@Monsees2017; @Delaide2017; @Goddek2018; @Lobanov2023]. 
 
 An important factor that affects the efficiency of \gls{imta} is the availability of nutrients in sufficient quantities and the right stoichiometric ratios [@Nederlof2021]. Studies have shown, for example, that the residues from aquaculture systems are deficient in various nutrients that are essential for plant growth [@Bittsanszky2016; @Lunda2019]. It is therefore worth considering to alter the nutrient input in such a way that the residues are available in quantities and ratios that allow their valorisation with the highest possible efficiency. An obvious approach to achieve this goal is to formulate a feed which, after a proportion of the feed was retained by the fish (or other fed species), provides the optimal conditions for extractive species or sludge utilisation. Aquafeeds are considered the most important source of nutrients, such as nitrogen and phosphorus [@Yang2021; @Sugiura2018] into aquaculture systems. This approach was therefore taken up by scholars in the field of aquaponics (the combination of tank-based aquaculture and hydroponics, @Baganz2021), who, by using alternative raw materials, have achieved an increase in the excretion of certain nutrients without jeopardising fish growth [@Seawright1998; @Shaw2022; @Shaw2022a; @Gebauer2023; @Shaw2024]. Interestingly, the claim that feed is the most important source of nutrients in aquaculture systems has never been substantiated to the best of the authors' knowledge. Although a few studies have looked at the contribution of different nutrient sources to the total input [@Delaide2017; @Strauch2018], the results are sometimes contradictory  and cannot be considered representative, given the variability of the chemical composition of water. 
 
@@ -92,7 +94,7 @@ knitr::include_graphics(here("latex", "scheme.png"))
 ## Data acquisition
 
 ### Aquafeeds
-Nutrient inclusion rates of commercial feeds (n = `r results$n_feeds_commercial`) for Common carp (\emph{Cyprinus carpio}), Pike-perch (\emph{Sander lucioperca}), Nile tilapia (\emph{Oreochromis niloticus}), African catfish (\emph{Clarias gariepinus}), and Rainbow trout (\emph{Oncorhynchus mykiss}) were compiled from feed manufacturer datasheets and `r results$n_feeds_commercial_literature` data records were collected from literature (studies using commercial feeds). In addition, `r results$n_feeds_experimental` records about experimental feeds were collected from literature. To find the mentioned literature studies, Scopus was used with the search terms AQUACULTURE, FEED, AQUAPONIC*, and IMTA in different combinations. Resulting studies were screened for information regarding the nutrient composition of utilised feeds.
+Nutrient inclusion rates of commercial feeds (n = `r results$n_feeds_commercial`) for Common carp (\emph{Cyprinus carpio}), Pike-perch (\emph{Sander lucioperca}), Nile tilapia (\emph{Oreochromis niloticus}), African catfish (\emph{Clarias gariepinus}), and Rainbow trout (\emph{Oncorhynchus mykiss}) were compiled from feed manufacturer datasheets and `r results$n_feeds_commercial_literature` data records were collected from literature (studies using commercial feeds). The mentioned species were chosen due to their cumulated share of $\approx \SI{23}{\p}$ of world freshwater fish production [@FAO2022]. In addition, `r results$n_feeds_experimental` records about experimental feeds were collected from literature. To find the mentioned literature studies, Scopus was used with the search terms AQUACULTURE, FEED, AQUAPONIC*, and IMTA in different combinations. Resulting studies were screened for information regarding the nutrient composition of utilised feeds.
 
 
 ### Water
@@ -102,7 +104,7 @@ In addition, `r results$n_observations_water_rain` rain water analyses were coll
 ```{=tex}
 \begin{figure}
 \centering
-  \includegraphics{../output/plots/map.png}
+  \includegraphics[width=0.5\columnwidth]{../output/plots/map.png}
   \caption{Geographical distribution of water analysis reports included in the source water dataset. Green: analysis of municipal tap water; Red: rainwater analysis.}
   \label{fig:map_water}
 \end{figure}
@@ -133,7 +135,7 @@ The absolute contributions of water ($a_{w}$) and feed ($a_{f}$) were calculated
 
 ## Statistics and software
 All calculations and analyses were done using R (v.4.3.2).
-Statistical analyses were conducted if $n > 5$. Pairwise comparisons of means were conducted with t-tests after testing for normality and variance homogeneity using Bartletts test and the Levene test, respectively. 
+Statistical analyses were conducted if $n>5$. Pairwise comparisons of means were conducted with t-tests after testing for normality and variance homogeneity using Bartletts test and the Levene test, respectively. 
 
 
 
@@ -183,18 +185,18 @@ In order to achieve optimum growth of the cultivated species, a variety of aquaf
 ### Composition of commercial diets and changes over the years
 The raw material composition of aquafeeds has changed substantially over time. For instance, the amount of fish meal has been reduced in favor of mostly plant-based ingredients [@MOWI2023]. It could thus be assumed that the inclusion rates of those nutrients that are not kept at constant levels during feed formulation changed as well. However, the most recent general overview study of mineral inclusion rates in aquafeeds dates back more than 40 years [@Tacon1983]. Figure \ref{fig:feedcomp} provides an overview of nutrient inclusion rates compiled from literature studies and feed manufacturer datasheets.
 
-```{r feedcomp, include=TRUE, fig.cap="Inclusion rates of some nutrients essential for fish or plants in different types of aquafeeds. The composition of past feeds is based on data from Tacon, 1983. Data about present aquafeeds was compiled from datasheets and scientific publications providing analyses of commercial aquafeeds for Rainbow trout (Oncorhynchus mykiss), Common carp (Cyprinus carpio), Pike-perch (Sander lucioperca), Nile tilapia (Oreochromis niloticus), and African catfish (Clarias gariepinnus). The dataset includes starter and grower feeds. Experimental feeds were those specifically formulated for studies related to aquaponics. Aquaponic feeds comprise commercially available feeds (n = 3) for aquaponic systems.", out.width="100%"}
+```{r feedcomp, include=FALSE, fig.cap="Inclusion rates of some nutrients essential for fish or plants in different types of aquafeeds. The composition of past feeds is based on data from Tacon, 1983. Data about present aquafeeds was compiled from datasheets and scientific publications providing analyses of commercial aquafeeds for Rainbow trout (Oncorhynchus mykiss), Common carp (Cyprinus carpio), Pike-perch (Sander lucioperca), Nile tilapia (Oreochromis niloticus), and African catfish (Clarias gariepinnus). The dataset includes starter and grower feeds. Experimental feeds were those specifically formulated for studies related to aquaponics. Aquaponic feeds comprise commercially available feeds (n = 3) for aquaponic systems.", out.width="100%"}
 knitr::include_graphics(here("output", "plots", "feed.png"))
 ```
 
 
 ```{=tex}
-%\begin{figure}
-%\centering
-%  \includegraphics{../output/plots/feed.png}
-%  \caption{Inclusion rates of some nutrients essential for fish or plants in different types of aquafeeds. The composition of "past" feeds is based on data from Tacon, 1983. Data about "present" aquafeeds was compiled from datasheets and scientific publications providing analyses of commercial aquafeeds for Rainbow trout (\emph{Oncorhynchus mykiss}), Common carp (\emph{Cyprinus carpio}), Pike-perch (\emph{Sander lucioperca}), Nile tilapia (\emph{Oreochromis niloticus}), and African catfish (\emph{Clarias gariepinnus}). The dataset includes starter and grower feeds. "Experimental" feeds were those specifically formulated for studies related to aquaponics. "Aquaponic" feeds comprise commercially available feeds (n = 3) for aquaponic systems.}
-%  \label{fig:feedcomp}
-%\end{figure}
+\begin{figure}
+\centering
+  \includegraphics{../output/plots/feed.png}
+  \caption{Inclusion rates of some nutrients essential for fish or plants in different types of aquafeeds. The composition of past feeds is based on data from Tacon, 1983. Data about present aquafeeds was compiled from datasheets and scientific publications providing analyses of commercial aquafeeds for Rainbow trout (\emph{Oncorhynchus mykiss}), Common carp (\emph{Cyprinus carpio}), Pike-perch (\emph{Sander lucioperca}), Nile tilapia (\emph{Oreochromis niloticus}), and African catfish (\emph{Clarias gariepinnus}). The dataset includes starter and grower feeds. Experimental feeds were those specifically formulated for studies related to aquaponics. Aquaponic feeds comprise commercially available feeds (n = 3) for aquaponic systems.}
+  \label{fig:feedcomp}
+\end{figure}
 ```
 
 Nitrogen and phosphorus are subject of continuous research in the field of fish nutrition because nitrogen in form of \gls{cp} is an important cost factor in feed production. Phosphorus, meanwhile, is problematic because it is present in poorly digestible form in some mostly plant-based raw materials. It is therefore excreted in comparatively large quantities and can, in dependence on the production system, lead to water eutrophication and algae blooms [@Sugiura2018].
@@ -205,13 +207,13 @@ In the case of phosphorus, average inclusion rates decreased by about `r round((
 Information about inclusion rates of other nutrients in commercial standard feeds was found in scientific studies (n = 5). The calcium content of aquafeeds in the collected data (n = 5) is on average `r round((1-22.676/17.56)*100)`\si{\p} lower in comparison with past values. This might be due to the close nutritional relation of calcium with phosphorus and the resulting necessity to maintain an optimum calcium-to-phosphorus ratio in the feeds [@Hossain2014]. As a result, the variability of the calcium inclusion is equal to that of phosphorus (\gls{cv} = \SI{21}{\p}).
 The magnesium and iron content of aquafeeds, meanwhile, might not have changed. The average magnesium content is \SI{2.2}{\gkg} (n = 3) in comparison with \SI{2.1}{\gkg} in past feeds. On average, \SI{200}{\mgkg} iron is found in aquafeeds (n = 4), even though highly variable (\gls{cv} = \SI{113}{\p}, range \SIrange{40}{544}{\mgkg}). Comparably high variability in iron was already noticed in the past [@Tacon1983].
 
-Nowadays, aquafeeds may contain more copper, zinc, and potassium. The average copper inclusion rate increased by `r round((1-15/20)*100)`\si{\p} (n = 4), with a variability comparable with iron (\gls{cv} = \SI{93}{\p}). In the case of zinc, average inclusion rates are `r round((1-90/207)*100)`\si{\p} higher (n = 4), while `r round((1-9.5/11.2)*100)`\si{\p} more potassium is present in modern commercial aquafeeds (n = 2). The variability is comparable with nitrogen and phosphorus (Zinc: \gls{cv} = \SI{61}{\p}; potassium: \gls{cv} = \SI{20}{\p}).
+Nowadays, aquafeeds may contain more copper, zinc, and potassium. The average copper inclusion rate increased by `r round((1-15/20)*100)`\si{\p} (n = 4), with a variability comparable with iron (\gls{cv} = \SI{93}{\p}). In the case of zinc, average inclusion rates are `r round((1-90/207)*100)`\si{\p} higher (n = 4), while `r round((1-9.5/11.2)*100)`\si{\p} more potassium is present in modern commercial aquafeeds (n = 2). The variability is comparable with nitrogen and phosphorus (zinc: \gls{cv} = \SI{61}{\p}; potassium: \gls{cv} = \SI{20}{\p}).
 
 The authors highlight the lack of mineral composition data in the field of aquaculture nutrition, making a statistically sound comparison between past and present values impossible.
 
 
 ### Speciality feeds
-The importance of aquafeeds as nutrient input is reflected by the development of several specialty feeds. For instance, low-pollution feeds have thus been developed that cause reduced nitrogen and phosphorus emissions from pond and cage aquaculture [@Pigott2003; @Millian-Sorribes2021]. \gls{ras} pose similar problems for the aquaculture industry due to high initial and operation costs for water purification systems. Reducing the need for water treatment through the development of aquafeeds with highly bioavailable nutrients or  therefore reduces costs on the long run. Feeds for \gls{imta}, in contrast, are supposed to increase the excretion of specific nutrients. As of now, at least three commercial aquaponics feeds are commercially available. However, according to the datasheets, two out of three feeds do not differ from standard feeds in their phosphorus content. Information with regards to potassium and calcium inclusion rates were reported only for one feed. Here, their inclusion rates were `r (1-20/11)*100`\si{\p} higher and `r (1-15/18)*100`\si{\p} lower than in standard feeds, respectively.
+The importance of aquafeeds as nutrient input is reflected by the development of several specialty feeds. For instance, low-pollution feeds have thus been developed that cause reduced nitrogen and phosphorus emissions from pond and cage aquaculture [@Pigott2003; @MilianSorribes2021]. \gls{ras} pose similar problems for the aquaculture industry due to high initial and operation costs for water purification systems. Reducing the need for water treatment through the development of aquafeeds with highly bioavailable nutrients or  therefore reduces costs on the long run. Feeds for \gls{imta}, in contrast, are supposed to increase the excretion of specific nutrients. As of now, at least three commercial aquaponics feeds are commercially available. However, according to the datasheets, two out of three feeds do not differ from standard feeds in their phosphorus content. Information with regards to potassium and calcium inclusion rates were reported only for one feed. Here, their inclusion rates were `r (1-20/11)*100`\si{\p} higher and `r (1-15/18)*100`\si{\p} lower than in standard feeds, respectively.
 
 
 ### Experimental feeds
@@ -225,9 +227,19 @@ Nowadays, however, an increasing proportion of fish meal and oil is being replac
 
 The dynamic and more varied composition of the raw materials also has an effect on the digestibility of the feed. Two feeds with an identical proximate composition but different raw material compositions can differ significantly in terms of nutrient digestibility and therefore the growth performance of the fish [@Glencross2020]. For this reason, feeds are no longer formulated on the basis of proximate composition, but on the basis of digestibility. This is the case for current feed formulation approaches such as the Aller Aqua Power2 and PowerRAS concept [@AllerAqua2017; @AllerAqua2019], the Alltech Coppens Net Energy concept [@AlltechCoppens2019], or the Biomar P 3.0 concept [@Biomar2019]. Focusing the feed formulation more closely on the target species thus reduces the predictability of the emissions of non-constrained substances. Considering that the proportion of marine feed components needs to be further reduced in order to achieve a sustainable growth of the aquaculture industry [@Hua2019], a further increasing proportion of alternative raw materials and, along with this, increased variability in other substances can be expected.
 
-```{r feedstuffs, include=TRUE, fig.cap="Logarithmic mass fractions of some nutrients in different feedstuffs. Dashed red line indicates average inclusion of respective nutrient in aquatic feedstuffs. Data outside of the 1.5 times interquartile range were removed. Data from IAFFD, 2021.", out.width="100%"}
+```{r feedstuffs, include=FALSE, fig.cap="Logarithmic mass fractions of some nutrients in different feedstuffs. Dashed red line indicates average inclusion of respective nutrient in aquatic feedstuffs. Data outside of the 1.5 times interquartile range were removed. Data from IAFFD, 2021.", out.width="100%"}
 knitr::include_graphics(here("output", "plots", "feedstuff_composition.png"))
 ```
+
+```{=tex}
+\begin{figure}
+\centering
+  \includegraphics{../output/plots/feedstuff_composition.png}
+  \caption{Logarithmic mass fractions of some nutrients in different feedstuffs. Dashed red line indicates average inclusion of respective nutrient in fishmeal. Data outside of the 1.5 times interquartile range were removed. Data from IAFFD (2021).}
+  \label{fig:feedstuffs}
+\end{figure}
+```
+
 
 
 
@@ -255,7 +267,7 @@ Finfish species cultivated in aquaculture retain about \SI{19}{\p} of the nitrog
 
 
 ## Water as nutrient source
-The source water of closed and semi-open aquaculture systems can originate from wells, the municipal tap, or surface water such as brooks or rivers [@Timmons2010; @Lawson1995]. In addition, rainwater might cover a share of the water demand in some locations (see e.g., @GallegoAlarcon2019). However, well or tap water is usually preferable as it is usually free of undesired pollutants and pathogens [@Lawson1995]. In the following, the focus is therefore on tap and rain water. 
+The source water of closed and semi-open aquaculture systems can originate from wells, the municipal tap, or surface water such as brooks or rivers [@Timmons2010; @Lawson1994]. In addition, rainwater might cover a share of the water demand in some locations (see e.g., @GallegoAlarcon2019). However, well or tap water is usually preferable as it is usually free of undesired pollutants and pathogens [@Lawson1994]. In the following, the focus is therefore on tap and rain water. 
 
 The amount of water added daily is proportional to the stocking density, the daily feed input, and how efficiently the water can be treated in the system. Usually between 10 and \SI{1000}{\L\per\kg} of feed are exchanged [@Dalsgaard2013].
 
@@ -377,7 +389,7 @@ The production of a special feed for integrated aquaculture harbours potential f
 
 In addition to possibly non-reproducible results, increasing certain amounts of nutrients in the feed could have negative effects on the well-being of the fish. Increased dietary levels phosphorus, calcium and magnesium have been reported to cause nephrocalcinosis in a variety of freshwater fishes [@Takvam2023].
 
-Dietborne toxicity of copper and zinc has not been demonstrated in fishes [@Clearwater2011]. The supply of those nutrients via the feed could thus be considered safe. However, as copper was found to be variable both in water and feeds, attempts to increase its inclusion rate in feeds might result in toxicity, either for the fed livestock or for secondary organisms.
+Dietborne toxicity of copper and zinc has not been demonstrated in fishes [@Clearwater2002]. The supply of those nutrients via the feed could thus be considered safe. However, as copper was found to be variable both in water and feeds, attempts to increase its inclusion rate in feeds might result in toxicity, either for the fed livestock or for secondary organisms.
 
 With regards to feed formulation approaches, it might be more reasonable to target a fixed raw material composition for \gls{imta} feeds. This would reduce temporal fluctuations in the nutrient composition by ensuring that the variability depends on the natural variability of raw materials alone and not, in addition, on varying inclusion rates through the choice of raw materials. 
 
