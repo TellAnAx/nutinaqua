@@ -144,8 +144,8 @@ data$feed_cleaned <- data$feed[[1]] %>%
   # Unit conversion
   mutate(
     value = if_else(unit == "mgkg", value*1e-3, value), 
-    unit = if_else(unit == "mgkg", "gkg", unit)
-    #molmass = map_dbl(convert_formula(substance), ~ sum(mass(.x))),
+    unit = if_else(unit == "mgkg", "gkg", unit),
+    molmass = map_dbl(convert_formula(substance), ~ sum(mass(.x)))
     #value = value/molmass, # g/kg -> mol/kg
     #unit = "molkg",
     #value = value*1e3, # mol/kg -> mmol/kg
