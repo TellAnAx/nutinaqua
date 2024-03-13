@@ -89,6 +89,10 @@ knitr::include_graphics(here("latex", "scheme.png"))
 
 # Methodology
 
+## Software
+All calculations and analyses were done using R (v.4.3.2).
+
+
 ## Data acquisition
 
 ### Aquafeeds
@@ -96,13 +100,15 @@ Nutrient inclusion rates of commercial feeds (n = `r results$n_feeds_commercial`
 
 
 ### Water
-Tap water analysis reports from locations all over Europe were collected from local authorities and water utilities in the corresponding municipalities. The collected `r results$n_wateranalysis` water analysis reports originated from a total of `r results$n_wateranalysis_countries` countries. It is common to report the value of the instrument detection limit instead of the measured value if the analyte concentration found was below the sensitivity of the measurement instrument [@ISO11843]. This practice is known as data censoring. Retaining these data points in the dataset would have led to an overestimation of plant nutrient concentrations within the tap water. Therefore, mean average nutrient concentrations in tap water were estimated by \gls{mle}, using the *cenmle()* function from the R package NADA [@Helsel2011]. 
-In addition, `r results$n_observations_water_rain` rain water analyses were collected from literature. The spatial distribution of the data is shown in Figure \ref{fig:map_water}.
+`r results$n_wateranalysis` tap water analysis reports from `r results$n_wateranalysis_countries` countries all over Europe were collected from local authorities and water utilities in the corresponding municipalities. In addition, `r results$n_observations_water_rain` rain water analyses were collected from literature. The spatial distribution of the data is shown in Figure \ref{fig:map_water}. 
+
+As it is common to report the value of the instrument detection limit instead of the measured value if the analyte concentration found was below the sensitivity of the measurement instrument [@ISO11843], mean average nutrient concentrations in tap water were estimated by \gls{mle}. Retaining the affected (censored) data in the dataset would have led to an overestimation of plant nutrient concentrations within the water. The estimation was done using the *cenmle()* function from the *NADA* package. Further information about the underlying algorithms can be found in the dedicated literature [@Helsel2011]. 
+
 
 ```{=tex}
 \begin{figure}
 \centering
-  \includegraphics[width=0.5\columnwidth]{../output/plots/map.png}
+  \includegraphics[width=0.6\columnwidth]{../output/plots/map.png}
   \caption{Geographical distribution of water analysis reports included in the source water dataset. Green: analysis of municipal tap water; Red: rainwater analysis.}
   \label{fig:map_water}
 \end{figure}
@@ -110,12 +116,19 @@ In addition, `r results$n_observations_water_rain` rain water analyses were coll
 
 
 ### Alkalinity supplements
-The input of alkalinity supplements was estimated based on @Timmons2010, with an amount of \SI{250}{\g} sodium bicarbonate (\ce{NaHCO3}) being recommended per \si{\kg} input of feed with a \gls{cp} content of \SI{35}{\p}. The \gls{cp} content can be converted to $\frac{\SI{350}{\gkg}}{6.25 \cdot M_{\ce{N}}} = \SI{4}{\mol\per\kg}$ of feed. Given the molar mass of \ce{NaHCO3} of $M(\ce{NaHCO3}) = \SI{84.01}{\gmol}$, considering that $n(\ce{HCO3-}) = n(\ce{NaHCO3})$ results in $n = \frac{m}{M} = \frac{\SI{250}{\g}}{\SI{84.01}{\gmol}} = \SI{2.975}{\mol}$ of \ce{HCO3-} and thus a molar input of $\frac{\SI{2.975}{\mol}}{\SI{4}{\mol\per\kg}} \approx \SI{0.75}{\mol\per\mol}$ of a single charged cation such as \ce{Na+} or \ce{K+}. This number has to be divided by 2 for double charged cations such as \ce{Ca^2+} and \ce{Mg^2+}.
+An amount of \SI{250}{\g} sodium bicarbonate (\ce{NaHCO3}) is recommended per \si{\kg} input of feed with \SI{350}{\g} \gls{cp} \si{\per\kg} on \gls{dm} basis [@Timmons2010]. The feed \gls{cp} content can be converted to its nitrogen content (= \SI{56}{\gkg}) via division by the Kjeldahl factor ($f_k = 6.25$). Division by the molar mass of nitrogen ($M(\ce{N}) = \SI{14.007}{\gmol}$) eventually yields the molar amount of nitrogen per \si{\kg} of feed (= \SI{4}{\mol\per\kg}).
+
+The amount of 
+
+Given the molar mass of \ce{NaHCO3} ($M(\ce{NaHCO3}) = \SI{84.01}{\gmol}$), and considering that $n(\ce{HCO3-}) = n(\ce{NaHCO3})$, the input of \ce{HCO3-} per \SI{250}{\g} of \ce{NaHCO3} can be calculated as $n(\ce{HCO3-}) = \frac{m(\ce{NaHCO3})}{M(\ce{NaHCO3})} = \frac{\SI{250}{\g}}{\SI{84.01}{\gmol}} = \SI{2.975}{\mol}$. 
+
+
+and thus a molar input of $\frac{\SI{2.975}{\mol}}{\SI{4}{\mol\per\kg}} \approx \SI{0.75}{\mol\per\mol}$ of a single charged cation such as \ce{Na+} or \ce{K+}. This number has to be divided by 2 for double charged cations such as \ce{Ca^2+} and \ce{Mg^2+}.
 
 
 ## Contribution analysis
 \label{sec:method_contribution}
-The contribution analysis followed the assumption that the water quality at the chosen location is likely to be subject to comparatively small fluctuations, while the system operator can theoretically choose from any feed available on the market. Eventually, a range of fish species which differ in the retention of the nutrients supplied could be grown. This results in $n = n_{\text{water}} \cdot n_{\text{feed}} \cdot n_{\text{retention}}$ combinations of water, aquafeeds, and the nutrient retention, as depicted in Figure \ref{fig:scheme_combinations}. Furthermore, different amounts of makeup water could be used, depending on the technology level of the system. 
+The contribution analysis followed the assumption that the water quality at a chosen location is likely to be subject to comparatively small fluctuations, while any feed available on the market could be chosen. Eventually, a range of fish species which differ in the retention of the nutrients supplied could be grown. This results in $n = n_{\text{water}} \cdot n_{\text{feed}} \cdot n_{\text{retention}}$ combinations of water, aquafeeds, and the nutrient retention, as depicted in Figure \ref{fig:scheme_combinations}. Furthermore, different amounts of makeup water could be used, depending on the technology level of the system. 
 
 ```{=tex}
 %\begin{figure}
@@ -129,11 +142,6 @@ The dataset for the combination analysis was created by combining water and aqua
 The feed input was standardised to $m_{f} = \SI{1}{\kg}$ and three make-up water levels ($V_{w} =  \SI{10}{\L\per\kg}$, \SI{100}{\L\per\kg}, and \SI{1000}{\L\per\kg} of feed input) were used. This was assumed as representative for a wide range of fish species [@Dalsgaard2013; @Kloas2015; @Mota2015]. To illustrate the makeup water levels, at a stocking density of $d = \SI{50}{\kg\per\cubicm}$ and a feeding rate of $r_{f} = \SI{2}{\p}$, the resulting system volume would equal to $\frac{m_{f}}{r_{f} \cdot d} \cdot \SI{1000}{\L\per\cubicm} = \SI{1000}{\L}$ and the daily water exchange rates would correspond to \SI{1}{\p}, \SI{10}{\p}, and \SI{100}{\p}, respectively. 
 
 The absolute contributions of water ($a_{w}$) and feed ($a_{f}$) were calculated by multiplying the inputs of feed ($m_{f}$) and water ($V_{w}$) with the corresponding inclusion of each nutrient ($x$) in water ($c_{x}$) and in feed ($\gamma_{x}$). The latter was then multiplied with the possible excretion rates ($r_{e}$), which were computed from nutrient retention rates ($r_{r}$) as $r_{e} = 1 - r_{r}$. Three nutrient retention rates were used, with the mean based on literature data [@Sugiura2018; @Roy2022] and a deviation of $\pm\SI{5}{\p}$ to account for intra- and inter-species variability. Eventually, the absolute contribution of water or feed was converted to its percentage contribution to the total as $p_{(w \lor f)} = \frac{a_{(w \lor f)}}{a_{f} + a_{w}} \cdot \SI{100}{\p}$.
-
-
-## Statistics and software
-All calculations and analyses were done using R (v.4.3.2).
-Statistical analyses were conducted if $n>5$. Pairwise comparisons of means were conducted with t-tests after testing for normality and variance homogeneity using Bartletts test and the Levene test, respectively. 
 
 
 
