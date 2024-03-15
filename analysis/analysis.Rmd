@@ -98,6 +98,8 @@ source(here("R", "plot_functions.R"))
 
 
 
+\newpage
+
 # Results
 
 ```{r}
@@ -157,13 +159,19 @@ data$feed_cleaned <- data$feed[[1]] %>%
 ```{r}
 data$feed <- data$feed[[1]]
 
-results$n_feeds_commercial <- data$feed %>% filter(cat1 == "commercial" & ref_id == "datasheet") %>% nrow()
+results$n_feeds_commercial <- data$feed %>% filter(cat1 == "commercial" & ref_id != "Tacon1983") %>% nrow()
+
+results$n_feeds_commercial_datasheet <- data$feed %>% filter(cat1 == "commercial" & ref_id == "datasheet") %>% nrow()
 
 results$n_feeds_commercial_literature <- data$feed %>% filter(cat1 == "commercial" & !ref_id %in% c("datasheet", "Tacon1983")) %>% nrow()
 
 results$n_feeds_experimental <- data$feed %>% filter(cat1 == "experimental") %>% nrow()
 ```
 
+- `r results$n_feeds_commercial` commercial feeds 
+- `r results$n_feeds_commercial_datasheet` commercial feeds with data from datasheets
+- `r results$n_feeds_commercial_literature` commercial feeds with data from literature
+- `r results$n_feeds_experimental` experimental feeds
 
 ```{r}
 tables$feed_summary_long <- read_rds(here("output", "interm", "feed_cleaned.rds")) %>% 
@@ -510,6 +518,8 @@ results$n_wateranalysis_countries <- length(unique(gps_coordinates$country))
 results$n_observations_water_tap <- filter(data$water_cleaned, source == "tap") %>% nrow()
 ```
 
+- `r results$n_observations_water_tap` tap water analysis reports
+
 ```{r tap}
 data$water_cleaned_tap <- read_rds(here("output", "interm", "water_cleaned.rds")) %>% 
   
@@ -602,8 +612,14 @@ knitr::kable(tables$water_tap,
 ```{r}
 results$n_observations_water_rain <- read_rds(here("output", "interm", "water_cleaned.rds")) %>% 
   filter(source == "rain") %>% nrow()
+
+results$n_studies_water_rain <- read_rds(here("output", "interm", "water_cleaned.rds")) %>% 
+  filter(source == "rain") %>% 
+  distinct(ref_id) %>% nrow()
 ```
 
+- `r results$n_observations_water_rain` rain water analyses from literature
+- `r results$n_studies_water_rain` studies from which the data was derived
 
 ```{r}
 data$water_cleaned_rain <- read_rds(here("output", "interm", "water_cleaned.rds")) %>% 
@@ -753,6 +769,7 @@ knitr::kable(tables$water_combined,
 
 
 
+\newpage
 
 # Nutrient contribution
 
@@ -813,7 +830,7 @@ data$permutation_feed <- data$feed_cleaned %>%
 
 
 
-#### Consideration of digestibility and retention
+#### Consideration of digestibility
 
 Assumptions with regards to the digestibility of nutrients in the feeds are the following:
 
@@ -844,6 +861,8 @@ data$permutation_feed_digestibility <- tibble(
 ```
 
 
+
+#### Consideration of retention
 
 **Retention** assumptions are based on [@Roy2022]. These were derived from Tilapia, though.
 
@@ -1120,7 +1139,7 @@ ggsave(here("output", "plots", "permutation_tap_ecdf.png"))
 
 
 
-```{r include=FALSE, fig.cap="Distribution of the expected percentage contributions of fish feed and tap water to the total nutrient input in aquaculture facilities. Data were generated through permutation."}
+```{r eval=FALSE, fig.cap="Distribution of the expected percentage contributions of fish feed and tap water to the total nutrient input in aquaculture facilities. Data were generated through permutation."}
 knitr::include_graphics(here("output", "plots", "permutation_tap.png"))
 ```
 
@@ -1377,6 +1396,10 @@ read_rds(here("output", "interm", "permutation_combined_percentage.rds")) %>%
   
 ```
 
+
+
+### Variability
+
 ```{r data_variability}
 data$variability_raw <- data$permutation_water_combined_with_assumptions %>% 
   left_join(data$permutation_feed_with_assumptions) %>%
@@ -1410,6 +1433,8 @@ read_csv(here("output", "tables", "table_variability.csv")) %>%
 knitr::kable(caption = "Coefficients of variability for the contribution of different nutrient sources to the total nutrient budget in integrated freshwater aquaculture systems.",
              digits = 1)
 ```
+
+
 
 
 
