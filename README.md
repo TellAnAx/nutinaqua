@@ -20,16 +20,29 @@ of nutrients is being retained in the biomass before being available
 - add sentence regarding MLE
 - improve explanation for alkalinity supps
 
-# QUESTIONS
+# REVIEW
 
-### Aquafeeds
+*italic:* already addressed
 
-- **does it make sense to include roots, tubers, and grains in the
-  feedstuff overview?**
-
-### Alkalinity
-
-### Nutrient budget
-
-- **Permutations**
-  - is the approach understandable?
+- *L125 typo DNA*
+- consider mentioning HCO as macronutrient for plants (but are omitted
+  in our study due to ….)
+- consider Si as “essential for plants in Chap3
+- Fig2 the N values are in some cases overlapping with the plots
+- L191, I would say that the improvements of aquafeeds have higher
+  effects than the protein sparing effect
+- *L192, decreased by 39%, not-39%*
+- *Fig3 - try to make it bigger, some of the plots are not visible (such
+  as plant with all the outliers)*
+- *L260 Figure??*
+- L262 will you then continue with the 19% N retention?;
+- L302 per TAN excreted or per g of N input?
+- L329 - I would need en explanations… it seems too high…;
+- *L376 somehow complicated sentence*
+- L381 - what if I use the denitrifictaion unit? in that case I can go
+  as low as 10L.kg-1 of feed input - maybe I would make some not in the
+  methodology that systems with denitrifictaion units are not taken into
+  account as the N is lost in atmoshpere - not compatible with
+  sustainability
+- L388 maybe I would alsi pointed out that 1000 L. kg-1 feed is somehow
+  extreme - something like flowtrough systems.;
