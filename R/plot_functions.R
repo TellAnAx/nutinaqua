@@ -77,20 +77,17 @@ plot_feed_comp <- function(x, ...) {
 plot_feedstuff_comp <- function(x, ...) {
 
   x %>%
-    ggplot(aes(y = cat2,
+    ggplot(aes(y = fct_rev(cat2),
                x = value,
                fill = cat3)) +
-    geom_boxplot() +
-    facet_wrap(facets = vars(analyte), 
-               scales = "free") +
+    geom_violin() +
+    facet_grid(cols = vars(analyte), scales = "free") +
     scale_fill_colorblind() +
     theme_bw() +
     theme(
-      legend.position = "top",
+      legend.position = "bottom",
       strip.text = element_text(face = "bold"),
-      axis.text.x = element_text(angle = 45, 
-                                 hjust = 1, 
-                                 vjust = 1)
+      axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)
     )
 }
 
