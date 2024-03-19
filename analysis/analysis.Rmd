@@ -1599,16 +1599,17 @@ read_rds(here("output", "interm", "permutation_combined_absolute.rds")) %>%
   select(substance, source, mean_, sd_) %>% 
   rename(mean = "mean_", sd = "sd_") %>%
   mutate(
-    substance = fct_relevel(substance, "N", "P", "K", "Ca", "Mg", "S", "Fe", "Cu", "Zn")) %>%
+    substance = fct_relevel(substance, "N", "P", "K", "Ca", "Mg", "S", "Fe", "Cu", "Zn"),
+    source = fct_relevel(source, "feed", "water", "alkalinity")) %>%
   
-  ggplot(aes(x = mean, y = fct_rev(substance), fill = source)) + 
+  ggplot(aes(x = mean, y = fct_rev(substance), fill = fct_rev(source))) + 
   geom_col(position = position_dodge()) +
   geom_errorbar(aes(y = substance, 
                     xmin = if_else(mean - sd <= 0, 0.001, mean - sd),
                     xmax = if_else(mean + sd >= 100, 99.999, mean + sd)),
                     position = position_dodge(width = 0.9), 
                 width = 0.5, alpha = 0.7) + 
-  scale_fill_manual(values = c("#707071", "#8A4F21", "#ADD3DD")) +
+  scale_fill_manual(values = c("#707071", "#ADD3DD", "#8A4F21")) +
   labs(y = "",
        x = "% contribution") +
   lims(x = c(0,100)) +
