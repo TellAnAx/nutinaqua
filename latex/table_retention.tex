@@ -5,22 +5,23 @@
   \caption{Retention of nutrients by some fish species.}
   \label{tab:retention}
   
-    \begin{tabularx}{\textwidth}{Xlccc}
+    \begin{tabularx}{\textwidth}{XlXXXc}
     
     \toprule
     
     \multirow{2}{*}{Substance}
     & \multicolumn{3}{c}{Literature}
-    & \multirow{2}{*}{Total loss}
+    & \multicolumn{2}{c}{Assumed}
     \\
     
-    \cmidrule(lr){2-4}
+    \cmidrule(lr){2-4} \cmidrule(lr){5-6}
     
     
     & Species
     & Digestibility
     & Retention
-    & 
+    & Digestibility
+    & Retention
     \\
     
     \midrule
@@ -29,27 +30,31 @@
     & Common carp
     & 
     & \SI{15}{\p}[@Fry2018]
-    &
+    & \multirow{4}{*}{\SIrange{85}{95}{\p}}
+    & \multirow{4}{*}{\SIrange{45}{55}{\p}}
     \\
     
     
     & Channel catfish
     &
-    & \SI{22}{\p}[@Fry2018] 
+    & \SI{22}{\p}[@Fry2018]
+    &
     &
     \\
     
     
     & Rainbow trout
-    &
+    & \SIrange{93.4}{97.7}{\p}[@Sugiura1998]
     & \SI{42.5}{\p}[@Morales2018]
+    &
     &
     \\
     
     
     & Tilapia
     &
-    & \SI{18}{\p}[@Fry2018]; \SI{48}{\p}\tnote{†}[@Roy2022]
+    & \SI{18}{\p}[@Fry2018]; \SI{48}{\p}[@Roy2022]
+    &
     &
     \\
     
@@ -57,24 +62,53 @@
     
     P
     & Rainbow trout
+    & \SIrange{8.5}{75.4}{\p}[@Sugiura1998]
+    & \SI{22}{\p}[@Morales2018]; \SIrange{42.6}{53.9}{\p}[@Sugiura2006]
+    & \multirow{2}{*}{\SIrange{35}{45}{\p}}
+    & \multirow{2}{*}{\SIrange{70}{80}{\p}}
+    \\
+  
+  
+    & Tilapia
+    & \SI{58.5}{\p}[@Roy2022]
+    & \SI{74}{\p}[@Roy2022]
+    & 
     &
-    & \SI{22}{\p}[@Morales2018]
-    &
+    \\
+    
+    \addlinespace
+    
+    K
+    & Rainbow trout
+    & \SIrange{98.4}{99.5}{\p}[@Sugiura1998]
+    & 
+    & \multirow{2}{*}{\SIrange{45}{55}{\p}}
+    & \multirow{2}{*}{\SIrange{45}{55}{\p}}
     \\
     
     
     & Tilapia
+    & \SI{47}{\p}\tnote{†}[@Roy2022]
+    & \SI{99}{\p}[@Roy2022]
     &
-    & \SI{26}{\p}[@Roy2022]
-    & 
+    &
     \\
     
     \addlinespace
     
     Ca
     & Rainbow trout
-    &
+    & \SIrange{0.8}{44.6}{\p}[@Sugiura1998]
     & \SI{64.7}{\p}[@Morales2018]
+    & \multirow{2}{*}{\SIrange{45}{55}{\p}}
+    & \multirow{2}{*}{\SIrange{45}{55}{\p}}
+    \\
+    
+    
+    & Tilapia
+    & \SI{33}{\p}[@Roy2022]
+    & \SI{99}{\p}[@Roy2022]
+    &
     &
     \\
     
@@ -82,8 +116,17 @@
     
     Mg
     & Tilapia
+    & \SI{47}{\p}\tnote{†}[@Roy2022]
+    & \SI{85}{\p}[@Roy2022]
+    & \multirow{2}{*}{\SIrange{45}{55}{\p}}
+    & \multirow{2}{*}{\SIrange{80}{90}{\p}}
+    \\
+    
+    
+    & Rainbow trout
+    & \SIrange{69}{95.7}{\p}[@Sugiura1998]
     &
-    & \SI{15}{\p}[@Roy2022]
+    &
     &
     \\
     
@@ -91,8 +134,17 @@
     
     Fe
     & Tilapia
-    &
+    & \SI{47}{\p}\tnote{†}[@Roy2022]
     & \SI{24}{\p}[@Roy2022]
+    & \multirow{2}{*}{\SIrange{45}{55}{\p}}
+    & \multirow{2}{*}{\SIrange{70}{80}{\p}}
+    \\
+    
+    
+    & Rainbow trout
+    & \SIrange{5.2}{51.0}{\p}[@Sugiura1998]
+    &
+    &
     &
     \\
     
@@ -100,8 +152,16 @@
     
     Mn
     & Tilapia
+    & \SI{47}{\p}\tnote{†}[@Roy2022]
+    & \SI{69}{\p}[@Roy2022]
+    & \multirow{2}{*}{\SIrange{45}{55}{\p}}
+    & \multirow{2}{*}{\SIrange{65}{75}{\p}}
+    \\
+    
+    & Rainbow trout
+    & \SIrange{4.2}{67.7}{\p}[@Sugiura1998]
     &
-    & \SI{31}{\p}[@Roy2022]
+    &
     &
     \\
     
@@ -109,8 +169,16 @@
     
     Cu
     & Tilapia
+    & \SI{47}{\p}\tnote{†}[@Roy2022]
+    & \SI{60}{\p}[@Roy2022]
+    & \multirow{2}{*}{\SIrange{45}{55}{\p}}
+    & \multirow{2}{*}{\SIrange{55}{65}{\p}}
+    \\
+    
+    & Rainbow trout
+    & \SIrange{55.5}{82.2}{\p}[@Sugiura1998]
     &
-    & \SI{40}{\p}[@Roy2022]
+    &
     &
     \\
     
@@ -118,8 +186,17 @@
     
     Zn
     & Tilapia
+    & \SI{47}{\p}\tnote{†}[@Roy2022]
+    & \SI{66}{\p}[@Roy2022]
+    & \multirow{2}{*}{\SIrange{45}{55}{\p}}
+    & \multirow{2}{*}{\SIrange{60}{70}{\p}}
+    \\
+    
+    
+    & Rainbow trout
+    & \SIrange{46.2}{79.6}{\p}[@Sugiura1998]
     &
-    & \SI{34}{\p}[@Roy2022]
+    &
     &
     \\
     
@@ -128,6 +205,7 @@
     \end{tabularx}
     \begin{tablenotes}
       \item[†] assumed based on ash digestibility
+      %\item[‡] excretion = 1 - digestibility * retention
     \end{tablenotes}
   \end{threeparttable}
 \end{table}

@@ -33,7 +33,7 @@ read_rds(here("output", "interm", "feedstuff_cleaned.rds")) %>%
                             "microbial")) %>% 
   plot_feedstuff_comp() +
   geom_vline(data = mean_aquatic, aes(xintercept = mean),
-             linetype = "dashed", color = "red") +
+             linetype = "dashed", color = "red", alpha = .7) +
   labs(fill = "",
        x = expression(log[10]("inclusion")),
        y = "") +
