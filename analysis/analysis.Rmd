@@ -88,7 +88,9 @@ source(here("R", "plot_functions.R"))
 
 ## Water
 
-- outliers for rain water were removed
+- **outliers for rain water were removed**
+- **only water analyses from Europe were considered**
+- **water analysis reports were matched with the closest bigger city and only one observation per bigger city was included into the dataset**
 
 
 
@@ -543,7 +545,7 @@ data$water_cleaned_tap <- read_rds(here("output", "interm", "water_cleaned.rds")
   names_pattern = "(.+)_(.+)*"
     ) %>% 
   
-  rename(conc = "mgL") %>% 
+  rename(conc = "mgL") %>%
   
   # convert units
   mutate(
@@ -1551,7 +1553,7 @@ knitr::kable(read_csv(here("output", "tables", "alkalinity.csv")),
 
 
 
-```{r}
+```{r eval=FALSE}
 stuff_stats <- read_rds(here("output", "interm", "permutation_combined_absolute.rds")) %>% 
   filter(source2 != "rain" & dailyFreshwater == 100) %>% 
   pivot_longer(c("water", "feed"), names_to = "source", values_to = "value") %>% 
