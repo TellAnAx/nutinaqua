@@ -533,7 +533,7 @@ data$water_cleaned_tap <- read_rds(here("output", "interm", "water_cleaned.rds")
   
   # convert concentrations
   mutate(
-    NO3_mgL = sum(c(NO3_mgL*0.23, NO2_mgL*0.3, NH4_mgL*0.7), na.rm = TRUE), # convert to elemental N (TN_dissolved)    
+    NO3_mgL = if_else(is.na(NO3_mgL),0,NO3_mgL*0.23) + if_else(is.na(NO2_mgL),0,NO2_mgL*0.3) + if_else(is.na(NH4_mgL),0,NH4_mgL*0.7), # convert to elemental N (TN_dissolved)
     SO4_mgL = SO4_mgL*0.3, # convert SO4 to elemental S
     PO4_mgL = PO4_mgL*0.33 # convert PO4 to elemental P
   ) %>% 
@@ -621,6 +621,25 @@ read_rds(here("output", "interm", "water_cleaned_tap_MLE.rds")) %>% select(-c(n,
   write_rds(here("output", "interm", "water_cleaned_tap.rds"))
 ```
 
+In the case of the **nitrogenous compounds**, \ce{NH4+} and \ce{NO2-} were removed from the dataset and \gls{TN} was assumed to be solely dependent on \ce{NO3-} as it would have the highest contribution of the mentioned compounds to the TN. 
+
+```{r}
+read_rds(here("output", "interm", "water_cleaned_tap_before_MLE.rds")) %>% 
+  filter(analyte == "NO3" & belowLimit == FALSE)
+```
+
+
+```{r plot_percentage_not_detectable_tap, include=TRUE}
+read_rds(here("output", "interm", "water_cleaned_tap_before_MLE.rds")) %>% 
+  group_by(analyte) %>% 
+  summarise(total = n(),
+            not_detectable = sum(belowLimit),
+            perc_not_detectable = not_detectable/total*100) %>% 
+  ggplot(aes(x = analyte, 
+             y = perc_not_detectable)) + 
+  geom_col() +
+  geom_hline(yintercept = 100)
+```
 
 
 
@@ -1037,7 +1056,7 @@ knitr::include_graphics(here("output", "plots", "permutation_no_digestibility.pn
 
 ### Retention - Tap water
 
-```{r}
+```{r create_data_combinations_with_retention_tap}
 data$permutation_with_assumptions_tap <- data$permutation_water_tap_with_assumptions %>% 
   left_join(data$permutation_feed_with_assumptions) %>% 
   
@@ -1086,7 +1105,7 @@ After consideration of nutrient digestibility, two scenarios occur:
 
 ### Retention - Rain water
 
-```{r}
+```{r create_data_combinations_with_retention_rain}
 data$permutation_with_assumptions_rain <- data$permutation_feed_with_assumptions %>% 
   left_join(data$permutation_water_rain_with_assumptions, 
             relationship = "many-to-many") %>% 
@@ -1233,7 +1252,7 @@ read_rds(here("output", "interm", "permutation_combined_percentage_wide.rds")) %
   write_rds(here("output", "interm", "permutation_combined_percentage.rds"))
 ```
 
-```{r}
+```{r plot_contribution_combined}
 read_rds(here("output", "interm", "permutation_combined_percentage.rds")) %>% 
   ungroup() %>% 
   filter(source != "aquafeed") %>% 
