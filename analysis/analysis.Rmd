@@ -1219,7 +1219,7 @@ data$permutation_with_assumptions_combined %>%
     perc_feed = prop_feed*100,
     perc_water = prop_water*100
     ) %>% 
-    write_rds(here("output", "interm", "permutation_combined_percentage_wide.rds")) %>% 
+    write_rds(here("output", "interm", "permutation_combined_percentage_wide.rds"))
 ```
 
 ```{r}
