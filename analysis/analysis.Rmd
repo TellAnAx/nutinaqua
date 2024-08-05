@@ -621,12 +621,6 @@ read_rds(here("output", "interm", "water_cleaned_tap_MLE.rds")) %>% select(-c(n,
   write_rds(here("output", "interm", "water_cleaned_tap.rds"))
 ```
 
-In the case of the **nitrogenous compounds**, \ce{NH4+} and \ce{NO2-} were removed from the dataset and \gls{TN} was assumed to be solely dependent on \ce{NO3-} as it would have the highest contribution of the mentioned compounds to the TN. 
-
-```{r}
-read_rds(here("output", "interm", "water_cleaned_tap_before_MLE.rds")) %>% 
-  filter(analyte == "NO3" & belowLimit == FALSE)
-```
 
 
 ```{r plot_percentage_not_detectable_tap, include=TRUE}
@@ -674,7 +668,7 @@ data$water_cleaned_rain <- read_rds(here("output", "interm", "water_cleaned.rds"
   rowwise() %>% 
     # convert concentrations
   mutate(
-    N_mgL = sum(c(NO3_mgL*0.23, NO2_mgL*0.3, NH4_mgL*0.7), na.rm = TRUE), # convert to elemental N (TN_dissolved)
+    N_mgL = if_else(is.na(NO3_mgL),0,NO3_mgL*0.23) + if_else(is.na(NO2_mgL),0,NO2_mgL*0.3) + if_else(is.na(NH4_mgL),0,NH4_mgL*0.7), # convert to elemental N (TN_dissolved)
     S_mgL = SO4_mgL*0.3, # convert SO4 to elemental S
     P_mgL = PO4_mgL*0.33 # convert PO4 to elemental P
   ) %>% 
@@ -1077,6 +1071,20 @@ data$permutation_with_assumptions_tap <- data$permutation_water_tap_with_assumpt
                               "Ca", "Mg", "S", 
                               "Fe", "Cu", "Zn")) %>%
   write_rds(here("output", "interm", "permutation_tap.rds"))
+```
+
+```{r}
+read_rds(here("output", "interm", "permutation_tap.rds")) %>% 
+  filter(dailyFreshwater == 100) %>% 
+  ggplot(aes(x = percentage, fill = source)) + 
+  geom_density(alpha = .5) + 
+  facet_wrap(facets = vars(substance), scales = "free") + 
+  theme_bw() + 
+  theme(legend.position = "none") +
+  labs(x = "Percentage contribution",
+       y = "Likelihood of observation")
+
+ggsave(here("output", "plots", "permutation_tap_density.png"))
 ```
 
 ```{r}
