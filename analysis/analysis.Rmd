@@ -578,10 +578,10 @@ read_rds(here("output" , "interm", "water_cleaned_tap_before_MLE.rds")) %>%
     conf.975 = mean(cenmle(conc, belowLimit, dist = 'gaussian'))[c(4)],
     max = max(conc, na.rm = TRUE)
     ) %>%
-  write_rds(here("output", "interm", "water_cleaned_tap_MLE.rds"))
+  write_rds(here("output", "interm", "water_cleaned_tap_MLE.rds")) %>% print() 
 ```
 
-```{r}
+```{r create_table_water_tap}
 tables$water_tap <- read_rds(here("output", "interm", "water_cleaned_tap_MLE.rds")) %>% 
   select(analyte, unit, n, min, meanconf, sd, cv, max) %>% 
   table_styler() %>% 
@@ -599,13 +599,10 @@ knitr::kable(tables$water_tap,
 In the next step, the mean MLE estimate is used as replacement for those values that were found to be below the detection limit.
 *Would it be better if only one of the means would remain in the dataset? Otherwise, those values would have a high weight in the resulting dataset.*
 
-```{r}
+```{r create_rds_water_cleaned_tap}
 read_rds(here("output", "interm", "water_cleaned_tap_MLE.rds")) %>% select(-c(n, min, conf.025, sd, cv, conf.975, max)) %>% 
   right_join(read_rds(here("output", "interm", "water_cleaned_tap_before_MLE.rds"))) %>% 
   mutate(conc2 = if_else(belowLimit == TRUE, meanconf, conc)) %>% 
-  #group_by(analyte, belowLimit) %>% count()
-  #distinct(conc2) %>% 
-  #group_by(analyte) %>% count()
 
   # rename after conversion
   mutate(analyte = if_else(analyte == "NO3", "N", analyte), 
@@ -629,10 +626,19 @@ read_rds(here("output", "interm", "water_cleaned_tap_before_MLE.rds")) %>%
   summarise(total = n(),
             not_detectable = sum(belowLimit),
             perc_not_detectable = not_detectable/total*100) %>% 
-  ggplot(aes(x = analyte, 
+  ggplot(aes(x = fct_rev(analyte), 
              y = perc_not_detectable)) + 
   geom_col() +
-  geom_hline(yintercept = 100)
+  geom_hline(yintercept = 100,
+             color = "red",
+             linetype = "dashed") +
+  coord_flip() +
+  theme_bw() + 
+  labs(x = "",
+       y = "Percentage not detectable")
+
+ggsave(here("output", "plots", "not_detectable_tap.png"),
+       width = 17, height = 10, units = "cm")
 ```
 
 
@@ -716,7 +722,8 @@ knitr::include_graphics(here("output", "plots", "water_rain.png"))
 
 ```{r}
 #
-results$n_observations_water_rain <- filter(data$water_cleaned, source == "rain") %>% nrow()
+results$n_observations_water_rain <- data$water_cleaned %>% 
+  filter(source == "rain") %>% nrow()
 
 # set threshold for minimum number of observations in the dataset
 # for being considered for further analysis
@@ -756,7 +763,7 @@ knitr::kable(tables$water_rain,
 ### Combined
 
 ```{r}
-data$water_combined_tap <- read_rds(here("output", "interm", "water_cleaned_tap_MLE.rds")) %>% 
+data$water_combined_tap <- read_rds(here("output", "interm", "water_cleaned_tap.rds")) %>% 
   select(analyte, unit, conf.025, meanconf, conf.975)
 
 data$water_combined_rain <- read_csv(here("output", "tables", "water_rain.csv")) %>% 
@@ -877,15 +884,15 @@ Assumptions with regards to the digestibility of nutrients in the feeds are the 
 data$permutation_feed_digestibility <- tibble(
   N = seq(0.85, 0.95, 0.05), # Roy et al., 2022
   P = seq(0.35, 0.45, 0.05), # Sugiura et al., 2018
-  K = seq(0.45, 0.55, 0.05),
-  Ca = seq(0.45, 0.55, 0.05),
-  Mg = seq(0.45, 0.55, 0.05),
-  S = seq(0.45, 0.55, 0.05),
-  B = seq(0.45, 0.55, 0.05),
-  Fe = seq(0.45, 0.55, 0.05),
-  Mn = seq(0.45, 0.55, 0.05),
-  Cu = seq(0.45, 0.55, 0.05),
-  Zn = seq(0.45, 0.55, 0.05)
+  K = seq(0.45, 0.55, 0.05), # Roy et al., 2022
+  Ca = seq(0.45, 0.55, 0.05), # Roy et al., 2022
+  Mg = seq(0.45, 0.55, 0.05), # Roy et al., 2022
+  S = seq(0.45, 0.55, 0.05), # Roy et al., 2022
+  B = seq(0.45, 0.55, 0.05), # Roy et al., 2022
+  Fe = seq(0.45, 0.55, 0.05), # Roy et al., 2022
+  Mn = seq(0.45, 0.55, 0.05), # Roy et al., 2022
+  Cu = seq(0.45, 0.55, 0.05), # Roy et al., 2022
+  Zn = seq(0.45, 0.55, 0.05) # Roy et al., 2022
 ) %>% 
   pivot_longer(everything(),
                names_to = "substance",
@@ -956,7 +963,7 @@ dailyFreshwater <- c(10, 100, 1000) # L
 
 ```{r}
 data$permutation_water_tap_with_assumptions <- map_dfr(dailyFreshwater, ~{
-  read_rds(here("output", "interm", "water_cleaned_tap_MLE.rds")) %>% 
+  read_rds(here("output", "interm", "water_cleaned_tap.rds")) %>% 
   #data$water_cleaned_tap %>% 
     pivot_longer(c(min, meanconf, max),
                  names_to = "name",
@@ -1193,7 +1200,8 @@ read_rds(here("output", "interm", "permutation_rain.rds")) %>%
          dailyFreshwater = fct_recode(dailyFreshwater,
                                       `10 L/kg` = "10",
                                       `100 L/kg` = "100",
-                                      `1 000 L/kg` = "1000")) %>% 
+                                      `1 000 L/kg` = "1000"))  %>%
+  
   ggplot(aes(x = percentage, y = substance, fill = stat(quantile))) + 
   stat_density_ridges(quantile_lines = FALSE,
                       calc_ecdf = TRUE,
