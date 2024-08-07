@@ -578,7 +578,11 @@ read_rds(here("output" , "interm", "water_cleaned_tap_before_MLE.rds")) %>%
     conf.975 = mean(cenmle(conc, belowLimit, dist = 'gaussian'))[c(4)],
     max = max(conc, na.rm = TRUE)
     ) %>%
-  write_rds(here("output", "interm", "water_cleaned_tap_MLE.rds")) %>% print() 
+    mutate(analyte = if_else(analyte == "NO3", "N", analyte), 
+         analyte = if_else(analyte == "SO4", "S", analyte),
+         analyte = if_else(analyte == "PO4", "P", analyte)) %>% 
+  filter(!analyte %in% c("NH4", "NO2")) %>% 
+  write_rds(here("output", "interm", "water_cleaned_tap_MLE.rds"))
 ```
 
 ```{r create_table_water_tap}
@@ -600,14 +604,11 @@ In the next step, the mean MLE estimate is used as replacement for those values 
 *Would it be better if only one of the means would remain in the dataset? Otherwise, those values would have a high weight in the resulting dataset.*
 
 ```{r create_rds_water_cleaned_tap}
-read_rds(here("output", "interm", "water_cleaned_tap_MLE.rds")) %>% select(-c(n, min, conf.025, sd, cv, conf.975, max)) %>% 
+read_rds(here("output", "interm", "water_cleaned_tap_MLE.rds")) %>%
+  select(-c(n, min, sd, cv, max)) %>% 
+  select(-c(conf.025, conf.975)) %>% 
   right_join(read_rds(here("output", "interm", "water_cleaned_tap_before_MLE.rds"))) %>% 
   mutate(conc2 = if_else(belowLimit == TRUE, meanconf, conc)) %>% 
-
-  # rename after conversion
-  mutate(analyte = if_else(analyte == "NO3", "N", analyte), 
-         analyte = if_else(analyte == "SO4", "S", analyte),
-         analyte = if_else(analyte == "PO4", "P", analyte)) %>% 
     
   # control number of digits
   #mutate(across(where(is.numeric), ~ num(., digits = 3))) %>% 
@@ -763,7 +764,7 @@ knitr::kable(tables$water_rain,
 ### Combined
 
 ```{r}
-data$water_combined_tap <- read_rds(here("output", "interm", "water_cleaned_tap.rds")) %>% 
+data$water_combined_tap <- read_rds(here("output", "interm", "water_cleaned_tap_MLE.rds")) %>% 
   select(analyte, unit, conf.025, meanconf, conf.975)
 
 data$water_combined_rain <- read_csv(here("output", "tables", "water_rain.csv")) %>% 
@@ -855,6 +856,8 @@ knitr::kable(tables$assumptions,
 
 
 To estimate the mass contribution of source water and feed to the total amount of nutrients that are entering the system, it is assumed that the RAS operator is using tap water as freshwater source and analysis results from water treatment plants are thus taken as data input. Furthermore, the average of the nutrient profile of a number of commercial fish feeds is used.
+
+
 
 ## Data preparation
 
@@ -963,7 +966,7 @@ dailyFreshwater <- c(10, 100, 1000) # L
 
 ```{r}
 data$permutation_water_tap_with_assumptions <- map_dfr(dailyFreshwater, ~{
-  read_rds(here("output", "interm", "water_cleaned_tap.rds")) %>% 
+  read_rds(here("output", "interm", "water_cleaned_tap_MLE.rds")) %>% 
   #data$water_cleaned_tap %>% 
     pivot_longer(c(min, meanconf, max),
                  names_to = "name",
