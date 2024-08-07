@@ -11,6 +11,7 @@ apo-sub-2.Rproj
 *.log
 *.aux
 *.out
+analysis/analysis.tex
 publication/publication.tex
 publication/publication.pdf
 publication/publication_files/
@@ -24,6 +25,7 @@ output/
 *.csv
 *.rds
 *.png
+*.pdf
 tests/
 latex/library_APO-SUB-2.bib.sav
 
