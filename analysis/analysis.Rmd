@@ -1281,7 +1281,7 @@ read_rds(here("output", "interm", "permutation_combined_percentage.rds")) %>%
                                       `100 L/kg` = "100",
                                       `1000 L/kg` = "1000"),
          substance = fct_relevel(substance, "N", "P", "K", 
-                                 "Ca", "Mg", "S", "Fe", "Cu", "Zn")) %>% 
+                                 "Ca", "Mg", "S", "Fe", "Cu", "Zn")) %>% write_rds(here("output", "interm", "permutation_combined_percentage_shiny.rds")) %>% 
   
   # Plot
   ggplot(aes(x = percentage, y = fct_rev(substance), fill = stat(quantile))) + 
