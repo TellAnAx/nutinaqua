@@ -3,6 +3,7 @@
 .RData
 .Ruserdata
 shiny_app.Rproj
+rsconnect/
 
 # MacOS
 .DS_Store
