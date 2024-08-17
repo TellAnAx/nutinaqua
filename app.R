@@ -151,9 +151,7 @@ ui <- fluidPage(
   
   tags$h3("Further information"),
   
-  tags$text("This app is supplementary material of the following publication:"),
-  tags$br(),
-  tags$br(),
+  tags$text("This app is supplementary material of the publication:"),
   tags$text("Tellbüscher, A.A., Gebauer, R., Mráz, J., 2024: Nutrients revisited:
             Review and meta-data analysis of nutrient inputs into freshwater 
             aquaculture systems. Aquaculture."),
@@ -163,8 +161,7 @@ ui <- fluidPage(
   tags$br(),
   
   
-  tags$text("The data used for this app is publicly available on Zenodo following 
-            the link below:"),
+  tags$text("The data used for this app is publicly available on Zenodo:"),
   tags$a(href = "https://zenodo.org/doi/10.5281/zenodo.10855065", 
          "https://zenodo.org/doi/10.5281/zenodo.10855065"),
   
