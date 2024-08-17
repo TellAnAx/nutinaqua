@@ -227,13 +227,18 @@ server <- function(input, output, session) {
                          limits = c(0,100)) +
       theme_bw() + 
       theme(
-        legend.position = "right",
+        legend.position = "top",
         text = element_text(size = 14),
         axis.title = element_text(size = 16),
         axis.text = element_text(size = 14),
         legend.title = element_text(size = 14),
-        legend.text = element_text(size = 12)
+        legend.text = element_text(size = 12),
+        legend.background = element_rect(linetype = "solid",
+                                         size = 0.5, 
+                                         colour = "grey")
       ) +
+      guides(fill = guide_legend(title.position = "top", 
+                                 title.hjust = 0.5)) +
       labs(x = "% share of water to total input",
            y = "")
   })
