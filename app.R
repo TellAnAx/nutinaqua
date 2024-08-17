@@ -38,8 +38,8 @@ ui <- fluidPage(
   sizes = "32x32", href = "logo_frov_small.png")),
   
   titlePanel(title = div(img(src="logo_frov_long.png",
-                             height = 100,
-                             width = 500)), 
+                             height = 80,
+                             width = 400)), 
     windowTitle = "Nutrient inputs into freshwater aquaculture"),
   
   tags$h1("Nutrient inputs into freshwater aquaculture systems"),
@@ -220,21 +220,21 @@ server <- function(input, output, session) {
                           calc_ecdf = TRUE,
                           geom = "density_ridges_gradient",
                           quantiles = c(0.25, 0.5, 0.75)) +
-      scale_fill_colorblind(name = "Prob. quantile",
+      scale_fill_colorblind(name = "% of observations",
                            labels = c("(0%, 25%]", "(25%, 50%]", "(50%, 75%]", "(75%, 100%]")) +
       scale_x_continuous(breaks = seq(0,100,10), 
                          labels = c("0","","20","","40","","60","", "80", "","100"),
                          limits = c(0,100)) +
       theme_bw() + 
       theme(
-        legend.position = "top",
+        legend.position = "right",
         text = element_text(size = 14),
         axis.title = element_text(size = 16),
         axis.text = element_text(size = 14),
         legend.title = element_text(size = 14),
         legend.text = element_text(size = 12)
       ) +
-      labs(x = "Share of total nutrient input (%)",
+      labs(x = "% share of water to total input",
            y = "")
   })
   
