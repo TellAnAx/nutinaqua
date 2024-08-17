@@ -221,7 +221,7 @@ server <- function(input, output, session) {
                           geom = "density_ridges_gradient",
                           quantiles = c(0.25, 0.5, 0.75)) +
       scale_fill_colorblind(name = "% of observations",
-                           labels = c("(0%, 25%]", "(25%, 50%]", "(50%, 75%]", "(75%, 100%]")) +
+                           labels = c("1-25%", "26-50%", "51-75%", "76-100%")) +
       scale_x_continuous(breaks = seq(0,100,10), 
                          labels = c("0","","20","","40","","60","", "80", "","100"),
                          limits = c(0,100)) +
@@ -230,12 +230,13 @@ server <- function(input, output, session) {
         legend.position = "top",
         text = element_text(size = 14),
         axis.title = element_text(size = 16),
+        axis.title.y = element_text(face = "bold"),
         axis.text = element_text(size = 14),
-        legend.title = element_text(size = 14),
-        legend.text = element_text(size = 12),
-        legend.background = element_rect(linetype = "solid",
-                                         size = 0.5, 
-                                         colour = "grey")
+        legend.title = element_text(size = 14, face = "bold"),
+        legend.text = element_text(size = 12)
+        # legend.background = element_rect(linetype = "solid",
+        #                                  size = 0.5, 
+        #                                  colour = "grey")
       ) +
       guides(fill = guide_legend(title.position = "top", 
                                  title.hjust = 0.5)) +
