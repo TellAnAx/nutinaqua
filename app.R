@@ -34,10 +34,15 @@ feed_data <- readRDS("./permutation_feed_with_assumptions.rds") %>%
 
 # Load UI----
 ui <- fluidPage(
-  titlePanel(title = div(img(src="logo_frov_small.png"), 
-    "Nutrient inputs into freshwater aquaculture systems"), 
+  tags$head(tags$link(rel = "icon", type = "image/png", 
+  sizes = "32x32", href = "logo_frov_small.png")),
+  
+  titlePanel(title = div(img(src="logo_frov_long.png",
+                             height = 100,
+                             width = 500)), 
     windowTitle = "Nutrient inputs into freshwater aquaculture"),
   
+  tags$h1("Nutrient inputs into freshwater aquaculture systems"),
   tags$h4("An interactive visualisation of the shares of water and feed to 
   the total nutrient input into (closed) freshwater aquaculture systems."),
   
@@ -210,7 +215,7 @@ server <- function(input, output, session) {
 
     ggplot(data, aes(x = percentage, 
                      y = fct_rev(analyte), 
-                     fill = stat(quantile))) + 
+                     fill = after_stat(quantile))) + 
       stat_density_ridges(quantile_lines = FALSE,
                           calc_ecdf = TRUE,
                           geom = "density_ridges_gradient",
